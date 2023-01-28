@@ -6,8 +6,11 @@ const { deprecate } = require('util');
 const app = express();
 const port = 3000;
 
-// const controller = require('./app/controllers')
 const route = require('./routes');
+const db = require('./config/db');
+
+//connect to db
+db.connect();
 
 app.use(express.static(path.join(__dirname, 'public')));
 
@@ -31,6 +34,4 @@ app.set('views', path.join(__dirname, 'resources', 'views'));
 //routes init
 route(app);
 
-app.listen(port, () =>
-    console.log('Example app listening at http://localhost:', port),
-);
+app.listen(port, () => console.log('App listening at http://localhost:', port));
