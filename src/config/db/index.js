@@ -1,14 +1,14 @@
-const mongoose = require('mongoose');
+const mysql = require('mysql');
 
-mongoose.set('strictQuery', false);
+const db = mysql.createConnection({
+    host: 'localhost',
+    user: 'root',
+    password: '',
+    database: 'website_fitness',
+});
 
-async function connect() {
-    try {
-        await mongoose.connect('mongodb://127.0.0.1/f8_education_dev');
-        console.log('connect successfully!!!');
-    } catch (error) {
-        console.log('connect failure!!!');
-    }
-}
-
-module.exports = { connect };
+db.connect(function (err) {
+    if (err) throw err;
+    console.log('Connected!');
+});
+module.exports = db;

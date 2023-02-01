@@ -513,7 +513,9 @@ h6 {
 //   .btn--green:hover {
 //     background: #4dae3c;
 //   }
-
+.register {
+    margin-top: 30px;
+}
 .btn--orange {
     background: var(--primary);
     color: var(--light);
@@ -718,7 +720,12 @@ input {
     position: relative;
     margin-bottom: 22px;
 }
-
+.date {
+    margin-bottom: 22px;
+}
+.gender {
+    margin-bottom: 22px;
+}
 .input-group-icon {
     position: relative;
 }

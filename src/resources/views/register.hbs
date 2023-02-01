@@ -1,28 +1,22 @@
-<div class="container">
+<div class="container register">
     <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
         <div class="wrapper wrapper--w680">
             <div class="card card-4">
                 <div class="card-body">
                     <h2 class="title">Đăng ký tài khoản</h2>
-                    <form method="POST">
+                    <form method="POST" action="/register">
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
-                                    <label class="label">Họ</label>
-                                    <input class="input--style-4" type="text" name="first_name">
-                                </div>
-                            </div>
-                            <div class="col-2">
-                                <div class="input-group">
-                                    <label class="label">Tên</label>
-                                    <input class="input--style-4" type="text" name="last_name">
+                                    <label class="label">Họ và tên</label>
+                                    <input class="input--style-4" type="text" name="name">
                                 </div>
                             </div>
                         </div>
                         <div class="row row-space">
                             <div class="col-2">
-                                <div class="input-group">
-                                    <label class="label">Ngày tháng năm sinh</label>
+                                <div class="date">
+                                    <label class="label">Năm sinh</label>
                                     <div class="input-group-icon">
                                         <input class="input--style-4 js-datepicker" type="text" name="birthday">
                                         <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
@@ -30,15 +24,15 @@
                                 </div>
                             </div>
                             <div class="col-2">
-                                <div class="input-group">
+                                <div class="gender">
                                     <label class="label">Giới tính</label>
                                     <div class="p-t-10">
-                                        <label class="radio-container m-r-45">Nam
-                                            <input type="radio" checked="checked" name="gender">
+                                        <label class="radio-container m-r-45"> Nam
+                                            <input type="radio" checked="checked" name="gender" value="nam">
                                             <span class="checkmark"></span>
                                         </label>
                                         <label class="radio-container">Nữ
-                                            <input type="radio" name="gender">
+                                            <input type="radio" name="gender" value="nu">
                                             <span class="checkmark"></span>
                                         </label>
                                     </div>
@@ -48,13 +42,16 @@
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
-                                    <label class="label" >Chiều cao</label>
-                                    <input class="input--style-4" type="text" name="first_name">
-                                    <label class="label">Cân nặng</label>
-                                    <input class="input--style-4" type="text" name="first_name">
+                                    <label class="label">Chiều cao (cm)</label>
+                                    <input class="input--style-4" type="text" name="height">
                                 </div>
                             </div>
-
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Cân nặng</label>
+                                    <input class="input--style-4" type="text" name="weight">
+                                </div>
+                            </div>
                         </div>
                         <div class="row row-space">
                             <div class="col-2">
@@ -66,13 +63,13 @@
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Số điện thoại</label>
-                                    <input class="input--style-4" type="text" name="phone">
+                                    <input class="input--style-4" type="text" name="phone_number">
                                 </div>
                             </div>
                         </div>
 
                         <div class="p-t-15">
-                            <button class="btn btn--radius-2 btn--orange" type="submit">Submit</button>
+                            <button class="btn btn--radius-2 btn--orange" type="submit">Đăng ký</button>
                         </div>
                     </form>
                 </div>

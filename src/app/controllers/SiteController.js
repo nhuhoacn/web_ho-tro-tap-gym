@@ -1,5 +1,7 @@
-const Course = require('../models/Course');
+const Student = require('../models/Student');
 const { mutipleMongooseToObject } = require('../../util/mongoose');
+const { mongooseToObject } = require('../../util/mongoose');
+const db = require('../../config/db');
 
 class SiteController {
     //[GET] /
@@ -11,7 +13,7 @@ class SiteController {
                 });
             })
             .catch(next);
-        // res.render('home');
+        res.render('home');
     }
 
     //[GET] /search
@@ -24,9 +26,35 @@ class SiteController {
         res.render('register');
     }
 
+    //[POST] /register
+    addUser(req, res, next) {
+        const student = new Student(req.body);
+        const values = [
+            student.name,
+            student.birthday,
+            student.gender,
+            student.height,
+            student.weight,
+            student.email,
+            student.phone_number,
+        ];
+        const sql =
+            'INSERT INTO student(name,birthday,gender,height,weight,email,phone_number) VALUES (?)';
+        db.query(sql, [values], function (err, data) {
+            if (err) throw err;
+            console.log('Student created');
+        });
+        res.render('home');
+    }
+
     //[GET] /login
     login(req, res) {
         res.render('login');
+    }
+
+    //[GET] /resetpass
+    resetpass(req, res) {
+        res.render('resetpass');
     }
 }
 
