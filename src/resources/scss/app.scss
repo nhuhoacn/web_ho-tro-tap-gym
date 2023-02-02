@@ -896,3 +896,8 @@ input {
         padding: 50px 40px;
     }
 }
+.form-group .label::after {
+    content: '*';
+    color: red;
+    font-size: 25px;
+}

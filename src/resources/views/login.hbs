@@ -4,15 +4,15 @@
             <div class="card card-4">
                 <div class="card-body">
                     <h2 class="title">Đăng nhập</h2>
-                    <form>
+                    <form method="POST" action="/login">
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Email</label>
                             <input type="email" class="form-control" id="exampleInputEmail1"
-                                aria-describedby="emailHelp">
+                                aria-describedby="emailHelp" name = "user_email">
                         </div>
                         <div class="mb-3">
                             <label for="exampleInputPassword1" class="form-label">Mật khẩu</label>
-                            <input type="password" class="form-control" id="exampleInputPassword1">
+                            <input type="password" class="form-control" id="exampleInputPassword1" name="user_password">
                             <div id="emailHelp" class="form-text">
                                 <a href="/resetpass" >Quên mật khẩu</a>
                             </div>

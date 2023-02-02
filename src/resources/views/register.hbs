@@ -6,10 +6,22 @@
                     <h2 class="title">Đăng ký tài khoản</h2>
                     <form method="POST" action="/register">
                         <div class="row row-space">
-                            <div class="col-2">
+                            <div class="col-2 form-group">
                                 <div class="input-group">
                                     <label class="label">Họ và tên</label>
-                                    <input class="input--style-4" type="text" name="name">
+                                    <input class="input--style-4" type="text" name="name" required="required">
+                                </div>
+                            </div>
+                            <div class="col-2 form-group">
+                                <div class="date">
+                                    <label class="label">Đăng ký với vai trò</label>
+                                    <div class="input-group-icon">
+                                        <select class="form-select" aria-label="Default select example">
+                                            <option selected> Chọn vai trò </option>
+                                            <option value="student">Học viên</option>
+                                            <option value="traner">Huấn luyện viên</option>
+                                        </select>
+                                    </div>
                                 </div>
                             </div>
                         </div>
@@ -56,18 +68,59 @@
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
+                                    <label class="label">Số điện thoại</label>
+                                    <input class="input--style-4" type="text" name="phone_number">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Trung tâm </label>
+                                    <input class="input--style-4" type="text" name="fitness_center">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Ảnh cá nhân</label>
+                                    <input class="input--style-4" type="" name="image">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Link facebook cá nhân</label>
+                                    <input class="input--style-4" type="fb_link" name="fb_link">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Link instagram cá nhân</label>
+                                    <input class="input--style-4" type="text" name="insta_link">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Link youtube của bạn</label>
+                                    <input class="input--style-4" type="yt_link" name="yt_link">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-2 form-group">
+                                <div class="input-group">
                                     <label class="label">Email</label>
                                     <input class="input--style-4" type="email" name="email">
                                 </div>
                             </div>
                             <div class="col-2">
-                                <div class="input-group">
-                                    <label class="label">Số điện thoại</label>
-                                    <input class="input--style-4" type="text" name="phone_number">
+                                <div class="input-group form-group">
+                                    <label class="label">Password</label>
+                                    <input class="input--style-4" type="password" name="password" required="required">
                                 </div>
                             </div>
                         </div>
-
                         <div class="p-t-15">
                             <button class="btn btn--radius-2 btn--orange" type="submit">Đăng ký</button>
                         </div>

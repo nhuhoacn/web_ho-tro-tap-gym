@@ -3,6 +3,7 @@ const morgan = require('morgan');
 const path = require('path');
 const handlebars = require('express-handlebars');
 const { deprecate } = require('util');
+const session = require('express-session');
 const app = express();
 const port = 3000;
 
@@ -12,6 +13,16 @@ const route = require('./routes');
 const db = require('./config/db');
 
 app.use(express.static(path.join(__dirname, 'public')));
+
+//session
+app.use(
+    session({
+        secret: 'codeworkrsecret',
+        resave: false,
+        saveUninitialized: true,
+        cookie: {},
+    }),
+);
 
 app.use(
     express.urlencoded({

@@ -1,12 +1,28 @@
+const db = require('../../config/db');
+
 class PtController {
     //[GET] /pt
     index(req, res) {
-        res.render('pt');
+        const search_user = 'select *from user where user_id = ?';
+        db.query(search_user, req.session.user_id, function (err, data) {
+            if (data) {
+                res.render('pt', { session: req.session, user: data[0] });
+            } else {
+                res.render('pt', { session: req.session });
+            }
+        });
     }
 
     //[GET] /pt/:slug
     show(req, res) {
-        res.send('ptdetal');
+        const search_user = 'select *from user where user_id = ?';
+        db.query(search_user, req.session.user_id, function (err, data) {
+            if (data) {
+                res.render('ptdetal', { session: req.session, user: data[0] });
+            } else {
+                res.render('ptdetal', { session: req.session });
+            }
+        });
     }
 }
 

@@ -4,7 +4,7 @@ const slug = require('mongoose-slug-generator');
 
 mongoose.plugin(slug);
 
-const Student = new Schema({
+const User = new Schema({
     name: { type: String },
     birthday: { type: String, required: true },
     gender: { type: String, required: true },
@@ -16,4 +16,4 @@ const Student = new Schema({
     exercises_id: { type: String },
 });
 
-module.exports = mongoose.model('Student', Student);
+module.exports = mongoose.model('user', User);
