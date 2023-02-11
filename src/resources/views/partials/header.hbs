@@ -49,8 +49,8 @@
                 </button>
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav mr-auto py-0">
-                        <a href="/" class="nav-item nav-link">Home</a>
-                        <a href="/class" class="nav-item nav-link">Classes</a>
+                        <a href="/" class="nav-item nav-link">Trang chủ</a>
+                        <a href="/class" class="nav-item nav-link">Lớp đào tạo</a>
                         <a href="/blog" class="nav-item nav-link">Blogs</a>
                         <a href="/pt" class="nav-item nav-link">PT</a>
                         <div class="nav-item dropdown">
@@ -61,13 +61,13 @@
                                 <a href="" class="dropdown-item">Testimonial</a>
                             </div>
                         </div>
-                        <a href="contact.html" class="nav-item nav-link">Contact</a>
+                        <a href="/exercises" class="nav-item nav-link">Bài tập</a>
                     </div>
                     <div>
                         {{#if session.user_id }}
-                        <a href="/infor" class="btn btn-primary py-md-3 px-md-5 d-none d-lg-block">Thông tin cá nhân</a>
+                        <a href="/user/infor" class="btn btn-primary py-md-3 px-md-5 d-none d-lg-block">Thông tin cá nhân</a>
                         {{else}}
-                        <a href="/login" class="btn btn-primary py-md-3 px-md-5 d-none d-lg-block">Đăng nhập</a>
+                        <a href="/user/login" class="btn btn-primary py-md-3 px-md-5 d-none d-lg-block">Đăng nhập</a>
                         {{/if}}
 
                     </div>

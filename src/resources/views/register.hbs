@@ -4,7 +4,7 @@
             <div class="card card-4">
                 <div class="card-body">
                     <h2 class="title">Đăng ký tài khoản</h2>
-                    <form method="POST" action="/register">
+                    <form method="POST" action="/user/register">
                         <div class="row row-space">
                             <div class="col-2 form-group">
                                 <div class="input-group">
@@ -16,10 +16,9 @@
                                 <div class="date">
                                     <label class="label">Đăng ký với vai trò</label>
                                     <div class="input-group-icon">
-                                        <select class="form-select" aria-label="Default select example">
-                                            <option selected> Chọn vai trò </option>
-                                            <option value="student">Học viên</option>
-                                            <option value="traner">Huấn luyện viên</option>
+                                        <select class="form-select" aria-label="Default select example" name="role">
+                                            <option value="1" >Học viên</option>
+                                            <option value="2" >Huấn luyện viên</option>
                                         </select>
                                     </div>
                                 </div>
@@ -28,9 +27,9 @@
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="date">
-                                    <label class="label">Năm sinh</label>
+                                    <label class="label">Ngày tháng năm sinh</label>
                                     <div class="input-group-icon">
-                                        <input class="input--style-4 js-datepicker" type="text" name="birthday">
+                                        <input class="input--style-4 js-datepicker" type="date" name="birthday">
                                         <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
                                     </div>
                                 </div>

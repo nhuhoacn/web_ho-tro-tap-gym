@@ -3,7 +3,10 @@ const morgan = require('morgan');
 const path = require('path');
 const handlebars = require('express-handlebars');
 const { deprecate } = require('util');
+const flash = require('connect-flash');
 const session = require('express-session');
+const cookieParser = require('cookie-parser');
+const toastr = require('express-toastr');
 const app = express();
 const port = 3000;
 
@@ -12,9 +15,9 @@ const route = require('./routes');
 //connect to db
 const db = require('./config/db');
 
-app.use(express.static(path.join(__dirname, 'public')));
-
+app.use('/public', express.static(path.join(__dirname, 'public')));
 //session
+app.use(cookieParser('secret'));
 app.use(
     session({
         secret: 'codeworkrsecret',
@@ -23,6 +26,10 @@ app.use(
         cookie: {},
     }),
 );
+
+//toastr
+app.use(flash());
+app.use(toastr());
 
 app.use(
     express.urlencoded({
