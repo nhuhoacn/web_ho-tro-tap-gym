@@ -1,7 +1,7 @@
 const express = require('express');
 const morgan = require('morgan');
 const path = require('path');
-const handlebars = require('express-handlebars');
+const exphbs = require('express-handlebars');
 const { deprecate } = require('util');
 const flash = require('connect-flash');
 const session = require('express-session');
@@ -38,11 +38,20 @@ app.use(
 );
 app.use(express.json());
 
-//template engine
 app.engine(
     'hbs',
-    handlebars.engine({
+    exphbs.engine({
         extname: '.hbs',
+        helpers: {
+            list: function (page, options) {
+                var out = '';
+                for (var i = 1; i <= page; i++) {
+                    // out = out + '<li class="page-item "><a class="page-link" href="' + i + '">' + options.fn(i) + '</a></li>'
+                    out = out + '<a href="' + i + '">' + options.fn(i) + '</a>';
+                }
+                return out;
+            },
+        },
     }),
 );
 app.set('view engine', 'hbs'); //set sử dụng view là engine handlebars

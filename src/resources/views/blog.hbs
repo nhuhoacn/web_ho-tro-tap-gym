@@ -10,159 +10,234 @@
 </div>
 <!-- Hero End -->
 
-<!-- Blog Start -->
-<div class="container-fluid p-5">
-    <div class="row g-5">
-        <!-- Blog list Start -->
-        <div class="col-lg-8">
-            <div class="row g-5">
+<!-- Blog Section Begin -->
+<section class="blog-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-8 p-0">
                 {{#each blog}}
-                <div class="col-md-6">
-                    <div class="blog-item">
-                        <div class="position-relative overflow-hidden rounded-top">
-                            <img class="img-fluid img-blog" src="{{this.image}}" alt="anh blog">
-                        </div>
-                        <div class="bg-dark d-flex align-items-center rounded-bottom p-4">
-                            <div class="flex-shrink-0 text-center text-secondary border-end border-secondary pe-3 me-3">
-                                <span>01</span>
-                                <h6 class="text-light text-uppercase mb-0">January</h6>
-                                <span>2045</span>
-                            </div>
-                            <a class="h5 text-uppercase text-light" href="">{{this.name}}</h4>
-                            </a>
-                        </div>
+                <div class="blog-item">
+                    <div class="bi-pic">
+                        <img src="{{this.image}}" alt="">
+                    </div>
+                    <div class="bi-text">
+                        <h5><a href="./blog-details.html">{{this.name}}</a></h5>
+                        <ul>
+                            <li>by Admin</li>
+                            <li>Aug,15, 2019</li>
+                            <li>20 Comment</li>
+                        </ul>
+                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incididunt ut
+                            labore et dolore magna aliqua accumsan lacus facilisis.</p>
                     </div>
                 </div>
                 {{/each}}
-
-                <div class="col-12">
-                    <nav aria-label="Page navigation">
-                        <ul class="pagination pagination-lg justify-content-center m-0">
-                            <li class="page-item disabled">
-                                <a class="page-link" href="#" aria-label="Previous">
-                                    <span aria-hidden="true"><i class="bi bi-arrow-left"></i></span>
-                                </a>
-                            </li>
-                            {{#times 10}}
-                            <li class="page-item active"><a class="page-link" href="#">{{this}}</a></li>
-                            {{/times}}
-                            <li class="page-item">
-                                <a class="page-link" href="#" aria-label="Next">
-                                    <span aria-hidden="true"><i class="bi bi-arrow-right"></i></span>
-                                </a>
-                            </li>
+                <div class="blog-pagination">
+                    {{#list numPage}}
+                    {{this}}
+                    {{/list}}
+                    <a href="/blog/{{pagenext}}">Next</a>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-8 p-0">
+                <div class="sidebar-option">
+                    <div class="so-categories">
+                        <h5 class="title">Categories</h5>
+                        <ul>
+                            <li><a href="#">Yoga <span>12</span></a></li>
+                            <li><a href="#">Runing <span>32</span></a></li>
+                            <li><a href="#">Weightloss <span>86</span></a></li>
+                            <li><a href="#">Cario <span>25</span></a></li>
+                            <li><a href="#">Body buiding <span>36</span></a></li>
+                            <li><a href="#">Nutrition <span>15</span></a></li>
                         </ul>
-                    </nav>
+                    </div>
+                    <div class="so-latest">
+                        <h5 class="title">Feature posts</h5>
+                        <div class="latest-large set-bg" data-setbg="img/letest-blog/latest-1.jpg">
+                            <div class="ll-text">
+                                <h5><a href="./blog-details.html">This Japanese Way of Making Iced Coffee Is a
+                                        Game...</a></h5>
+                                <ul>
+                                    <li>Aug 20, 2019</li>
+                                    <li>20 Comment</li>
+                                </ul>
+                            </div>
+                        </div>
+                        <div class="latest-item">
+                            <div class="li-pic">
+                                <img src="img/letest-blog/latest-2.jpg" alt="">
+                            </div>
+                            <div class="li-text">
+                                <h6><a href="./blog-details.html">Grilled Potato and Green Bean Salad</a></h6>
+                                <span class="li-time">Aug 15, 2019</span>
+                            </div>
+                        </div>
+                        <div class="latest-item">
+                            <div class="li-pic">
+                                <img src="img/letest-blog/latest-3.jpg" alt="">
+                            </div>
+                            <div class="li-text">
+                                <h6><a href="./blog-details.html">The $8 French Rosé I Buy in Bulk Every Summer</a></h6>
+                                <span class="li-time">Aug 15, 2019</span>
+                            </div>
+                        </div>
+                        <div class="latest-item">
+                            <div class="li-pic">
+                                <img src="img/letest-blog/latest-4.jpg" alt="">
+                            </div>
+                            <div class="li-text">
+                                <h6><a href="./blog-details.html">Ina Garten's Skillet-Roasted Lemon Chicken</a></h6>
+                                <span class="li-time">Aug 15, 2019</span>
+                            </div>
+                        </div>
+                        <div class="latest-item">
+                            <div class="li-pic">
+                                <img src="img/letest-blog/latest-5.jpg" alt="">
+                            </div>
+                            <div class="li-text">
+                                <h6><a href="./blog-details.html">The Best Weeknight Baked Potatoes, 3 Creative Ways</a>
+                                </h6>
+                                <span class="li-time">Aug 15, 2019</span>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="so-tags">
+                        <h5 class="title">Popular tags</h5>
+                        <a href="#">Gyming</a>
+                        <a href="#">Body buidling</a>
+                        <a href="#">Yoga</a>
+                        <a href="#">Weightloss</a>
+                        <a href="#">Proffeponal</a>
+                        <a href="#">Streching</a>
+                        <a href="#">Cardio</a>
+                        <a href="#">Karate</a>
+                    </div>
                 </div>
-
             </div>
         </div>
-        <!-- Blog list End -->
+    </div>
+</section>
+<!-- Blog Section End -->
 
-        <!-- Sidebar Start -->
-        <div class="col-lg-4">
-            <!-- Search Form Start -->
-            <div class="mb-5">
-                <div class="input-group">
-                    <input type="text" class="form-control p-3" placeholder="Keyword">
-                    <button class="btn btn-primary px-4"><i class="bi bi-search"></i></button>
+<!-- Get In Touch Section Begin -->
+<div class="gettouch-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="gt-text">
+                    <i class="fa fa-map-marker"></i>
+                    <p>333 Middle Winchendon Rd, Rindge,<br /> NH 03461</p>
                 </div>
             </div>
-            <!-- Search Form End -->
-
-            <!-- Category Start -->
-            <div class="mb-5">
-                <h3 class="text-uppercase mb-4">Categories</h3>
-                <div class="d-flex flex-column justify-content-start bg-dark rounded p-4">
-                    <a class="fs-5 fw-bold text-light text-uppercase mb-2" href="#"><i
-                            class="bi bi-arrow-right text-primary me-2"></i>Web Design</a>
-                    <a class="fs-5 fw-bold text-light text-uppercase mb-2" href="#"><i
-                            class="bi bi-arrow-right text-primary me-2"></i>Web Development</a>
-                    <a class="fs-5 fw-bold text-light text-uppercase mb-2" href="#"><i
-                            class="bi bi-arrow-right text-primary me-2"></i>Web Development</a>
-                    <a class="fs-5 fw-bold text-light text-uppercase mb-2" href="#"><i
-                            class="bi bi-arrow-right text-primary me-2"></i>Keyword Research</a>
-                    <a class="fs-5 fw-bold text-light text-uppercase" href="#"><i
-                            class="bi bi-arrow-right text-primary me-2"></i>Email Marketing</a>
+            <div class="col-md-4">
+                <div class="gt-text">
+                    <i class="fa fa-mobile"></i>
+                    <ul>
+                        <li>125-711-811</li>
+                        <li>125-668-886</li>
+                    </ul>
                 </div>
             </div>
-            <!-- Category End -->
-
-            <!-- Recent Post Start -->
-            <div class="mb-5">
-                <h3 class="text-uppercase mb-4">Recent Post</h3>
-                <div class="bg-dark rounded p-4">
-                    <div class="d-flex overflow-hidden mb-3">
-                        <img class="img-fluid flex-shrink-0 rounded-start" src="/public/img/blog-1.jpg"
-                            style="width: 75px;" alt="">
-                        <a href="" class="d-flex align-items-center bg-light rounded-end h5 text-uppercase p-3 mb-0">Sed
-                            amet tempor amet sit kasd sea lorem
-                        </a>
-                    </div>
-                    <div class="d-flex overflow-hidden mb-3">
-                        <img class="img-fluid flex-shrink-0 rounded-start" src="/public/img/blog-2.jpg"
-                            style="width: 75px;" alt="">
-                        <a href="" class="d-flex align-items-center bg-light rounded-end h5 text-uppercase p-3 mb-0">Sed
-                            amet tempor amet sit kasd sea lorem
-                        </a>
-                    </div>
-                    <div class="d-flex overflow-hidden mb-3">
-                        <img class="img-fluid flex-shrink-0 rounded-start" src="/public/img/blog-3.jpg"
-                            style="width: 75px;" alt="">
-                        <a href="" class="d-flex align-items-center bg-light rounded-end h5 text-uppercase p-3 mb-0">Sed
-                            amet tempor amet sit kasd sea lorem
-                        </a>
-                    </div>
-                    <div class="d-flex overflow-hidden mb-3">
-                        <img class="img-fluid flex-shrink-0 rounded-start" src="/public/img/blog-1.jpg"
-                            style="width: 75px;" alt="">
-                        <a href="" class="d-flex align-items-center bg-light rounded-end h5 text-uppercase p-3 mb-0">Sed
-                            amet tempor amet sit kasd sea lorem
-                        </a>
-                    </div>
-                    <div class="d-flex overflow-hidden">
-                        <img class="img-fluid flex-shrink-0 rounded-start" src="/public/img/blog-2.jpg"
-                            style="width: 75px;" alt="">
-                        <a href="" class="d-flex align-items-center bg-light rounded-end h5 text-uppercase p-3 mb-0">Sed
-                            amet tempor amet sit kasd sea lorem
-                        </a>
-                    </div>
+            <div class="col-md-4">
+                <div class="gt-text email">
+                    <i class="fa fa-envelope"></i>
+                    <p>Support.gymcenter@gmail.com</p>
                 </div>
             </div>
-            <!-- Recent Post End -->
-
-            <!-- Tags Start -->
-            <div class="mb-5">
-                <h3 class="text-uppercase mb-4">Tag Cloud</h3>
-                <div class="d-flex flex-wrap m-n1">
-                    <a href="" class="btn btn-dark m-1">Design</a>
-                    <a href="" class="btn btn-dark m-1">Development</a>
-                    <a href="" class="btn btn-dark m-1">Marketing</a>
-                    <a href="" class="btn btn-dark m-1">SEO</a>
-                    <a href="" class="btn btn-dark m-1">Writing</a>
-                    <a href="" class="btn btn-dark m-1">Consulting</a>
-                    <a href="" class="btn btn-dark m-1">Design</a>
-                    <a href="" class="btn btn-dark m-1">Development</a>
-                    <a href="" class="btn btn-dark m-1">Marketing</a>
-                    <a href="" class="btn btn-dark m-1">SEO</a>
-                    <a href="" class="btn btn-dark m-1">Writing</a>
-                    <a href="" class="btn btn-dark m-1">Consulting</a>
-                </div>
-            </div>
-            <!-- Tags End -->
-
-            <!-- Plain Text Start -->
-            <div>
-                <h3 class="text-uppercase mb-4">Plain Text</h3>
-                <div class="bg-dark rounded text-center text-light" style="padding: 30px;">
-                    <p>Vero sea et accusam justo dolor accusam lorem consetetur, dolores sit amet sit dolor clita kasd
-                        justo, diam accusam no sea ut tempor magna takimata, amet sit et diam dolor ipsum amet diam</p>
-                    <a href="" class="btn btn-primary py-2 px-4">Read More</a>
-                </div>
-            </div>
-            <!-- Plain Text End -->
         </div>
-        <!-- Sidebar End -->
     </div>
 </div>
-<!-- Blog End -->
+<!-- Get In Touch Section End -->
+
+<!-- Footer Section Begin -->
+<section class="footer-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="fs-about">
+                    <div class="fa-logo">
+                        <a href="#"><img src="img/logo.png" alt=""></a>
+                    </div>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore dolore magna aliqua endisse ultrices gravida lorem.</p>
+                    <div class="fa-social">
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-youtube-play"></i></a>
+                        <a href="#"><i class="fa fa-instagram"></i></a>
+                        <a href="#"><i class="fa  fa-envelope-o"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-sm-6">
+                <div class="fs-widget">
+                    <h4>Useful links</h4>
+                    <ul>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Classes</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-sm-6">
+                <div class="fs-widget">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Login</a></li>
+                        <li><a href="#">My account</a></li>
+                        <li><a href="#">Subscribe</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="fs-widget">
+                    <h4>Tips & Guides</h4>
+                    <div class="fw-recent">
+                        <h6><a href="./blog-details.html">Physical fitness may help prevent depression, anxiety</a></h6>
+                        <ul>
+                            <li>3 min read</li>
+                            <li>20 Comment</li>
+                        </ul>
+                    </div>
+                    <div class="fw-recent">
+                        <h6><a href="./blog-details.html">Fitness: The best exercise to lose belly fat and tone
+                                up...</a></h6>
+                        <ul>
+                            <li>3 min read</li>
+                            <li>20 Comment</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="copyright-text">
+                    <p>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy;
+                        <script>document.write(new Date().getFullYear());</script> All rights reserved | This template
+                        is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com"
+                            target="_blank">Colorlib</a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Footer Section End -->
+
+<!-- Search model Begin -->
+<div class="search-model">
+    <div class="h-100 d-flex align-items-center justify-content-center">
+        <div class="search-close-switch">+</div>
+        <form class="search-model-form">
+            <input type="text" id="search-input" placeholder="Search here.....">
+        </form>
+    </div>
+</div>
+<!-- Search model end -->

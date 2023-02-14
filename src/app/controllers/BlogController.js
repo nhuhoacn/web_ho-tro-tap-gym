@@ -4,7 +4,7 @@ const db = require('../../config/db');
 class BlogControlller {
     //[GET] blog/:page
     index(req, res) {
-        var numPerPage = 2;
+        var numPerPage = 4;
         var offset = 0;
         const count_blog = 'select count(*) as numRows from blog';
         const search_blog = 'select *from blog LIMIT ? OFFSET ?';
@@ -35,12 +35,14 @@ class BlogControlller {
                                             user: user[0],
                                             blog: blog,
                                             numPage: numPage,
+                                            pagenext: req.params.page + 1,
                                         });
                                     } else {
                                         res.render('blog', {
                                             session: req.session,
                                             blog: blog,
                                             numPage: numPage,
+                                            pagenext: req.params.page + 1,
                                         });
                                     }
                                 },
