@@ -6,25 +6,20 @@ class BlogControlller {
     index(req, res) {
         var numPerPage = 4;
         var offset = 0;
-        const count_blog = 'select count(*) as numRows from blog';
+        const all_blog = 'select *from blog';
         const search_blog = 'select *from blog LIMIT ? OFFSET ?';
         const search_user = 'select *from user where user_id = ?';
         //đếm có bao nhiêu hàng, tính số Page
-        db.query(count_blog, function (err, rows) {
-            if (err) {
-                console.log('error: ', err);
-                result(err, null);
-            } else {
-                var numPage = Math.ceil(rows[0].numRows / numPerPage);
+        db.query(all_blog, function (err, all_blog) {
+            if (all_blog) {
+                var numRows = all_blog.length;
+                var numPage = Math.ceil(numRows / numPerPage);
                 var offset = (req.params.page - 1) * numPerPage;
                 db.query(
                     search_blog,
                     [numPerPage, offset],
                     function (err, blog) {
-                        if (err) {
-                            console.log('error: ', err);
-                            result(err, null);
-                        } else {
+                        if (blog) {
                             db.query(
                                 search_user,
                                 req.session.user_id,
@@ -47,6 +42,9 @@ class BlogControlller {
                                     }
                                 },
                             );
+                        } else {
+                            console.log('error: ', err);
+                            result(err, null);
                         }
                     },
                 );
@@ -54,7 +52,7 @@ class BlogControlller {
         });
 
         // var promises1 = new Promise((resolve, reject) => {
-        //     db.query(count_blog, function (err, rows) {
+        //     db.query(all_blog, function (err, rows) {
         //         var numPage = Math.ceil(data[0].numRows / numPerPage)
         //         offset = (req.params.page - 1) * numPerPage
         //         console.log("hiển thị từ hàng thứ : ", offset)
