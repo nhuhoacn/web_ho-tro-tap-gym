@@ -5,7 +5,6 @@ class BlogControlller {
     //[GET] blog/:page
     index(req, res) {
         var numPerPage = 4;
-        var offset = 0;
         const all_blog = 'select *from blog';
         const search_blog = 'select *from blog LIMIT ? OFFSET ?';
         const search_user = 'select *from user where user_id = ?';
@@ -15,6 +14,7 @@ class BlogControlller {
                 var numRows = all_blog.length;
                 var numPage = Math.ceil(numRows / numPerPage);
                 var offset = (req.params.page - 1) * numPerPage;
+                var pagenext = Number(req.params.page) + 1;
                 db.query(
                     search_blog,
                     [numPerPage, offset],
@@ -30,14 +30,14 @@ class BlogControlller {
                                             user: user[0],
                                             blog: blog,
                                             numPage: numPage,
-                                            pagenext: req.params.page + 1,
+                                            pagenext: pagenext,
                                         });
                                     } else {
                                         res.render('blog', {
                                             session: req.session,
                                             blog: blog,
                                             numPage: numPage,
-                                            pagenext: req.params.page + 1,
+                                            pagenext: pagenext,
                                         });
                                     }
                                 },
@@ -51,45 +51,48 @@ class BlogControlller {
             }
         });
 
+        //đến số page
         // var promises1 = new Promise((resolve, reject) => {
-        //     db.query(all_blog, function (err, rows) {
-        //         var numPage = Math.ceil(data[0].numRows / numPerPage)
-        //         offset = (req.params.page - 1) * numPerPage
-        //         console.log("hiển thị từ hàng thứ : ", offset)
-        //         var values = [rows, numPage]
-        //         resolve(values)
+        //     db.query(all_blog, function (err, all_blog) {
+        //         var numPage = Math.ceil(all_blog.length / numPerPage)
+        //         resolve(numPage)
         //     })
         // })
+        // //tìm kiếm blog sẽ hiển thị
         // var promises2 = new Promise((resolve, reject) => {
+        //     var offset = (req.params.page - 1) * numPerPage
         //     db.query(search_blog, [numPerPage, offset], function (err, blog) {
-        //         var blog = data
         //         resolve(blog)
         //     })
         // })
+        // //ktra user đăng nhập chưa
         // var promises3 = new Promise((resolve, reject) => {
         //     db.query(search_user, req.session.user_id, function (err, user) {
-        //         if (data) {
-        //             res.render("blog", { session: req.session, user: data[0], blog: blog, numPage });
-        //         } else {
-        //             res.render("blog", { session: req.session, blog: blog, numPage });
-        //         }
         //         resolve(user)
         //     })
+
         // })
 
-        // promises1.then((data) => {
-        //     console.log(data.rows)
-        //     console.log(data.numPage)
+        // promises1.then((data1) => {
+        //     console.log("promises1: ", data1)
         //     return promises2
         // })
         //     .then((data) => {
-        //         console.log("blog : ", data)
-
+        //         console.log("promises2: ", data)
         //         return promises3
         //     })
         //     .then((data) => {
-        //         console.log("user: ", data)
-
+        //         var offset = (req.params.page - 1) * numPerPage
+        //         console.log("hiển thị từ hàng thứ : ", offset)
+        //         db.query(search_blog, [numPerPage, offset], function (err, blog) {
+        //             resolve(blog)
+        //         })
+        //         if (data) {
+        //             res.render("blog", { session: req.session, user: data[0], blog: data, numPage: data1 });
+        //         } else {
+        //             res.render("blog", { session: req.session, blog: data, numPage });
+        //         }
+        //         console.log("promises3: ", data)
         //     })
         //     .catch((err) => {
         //         console.log(err)

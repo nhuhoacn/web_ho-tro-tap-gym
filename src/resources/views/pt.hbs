@@ -21,7 +21,7 @@
         <div class="col-lg-4 col-md-6">
             <div class="team-item position-relative">
                 <div class="position-relative overflow-hidden rounded">
-                    <img class="img-fluid w-100" src="/public/img/team-2.jpg" alt="">
+                    <img class="img-fluid w-100 image-pt" src="{{this.image}}" alt="">
                     <div class="team-overlay">
                         <div class="d-flex align-items-center justify-content-start">
                             <a class="btn btn-light btn-square rounded-circle mx-1" href="{{this.yt_link}}"><i
@@ -41,6 +41,12 @@
             </div>
         </div>
         {{/each}}
+        <div class="blog-pagination">
+            {{#list numPage}}
+            {{this}}
+            {{/list}}
+            <a href="{{pagenext}}">Next</a>
+        </div>
     </div>
 </div>
 <!-- Team End -->

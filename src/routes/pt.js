@@ -1,8 +1,8 @@
 const express = require('express');
 const router = express.Router();
-const newsControlller = require('../app/controllers/PtController');
+const ptControlller = require('../app/controllers/PtController');
 
-router.get('/:slug', newsControlller.show);
-router.get('/', newsControlller.index);
+router.get('/id/:id', ptControlller.show);
+router.get('/page/:page', ptControlller.index);
 
 module.exports = router;
