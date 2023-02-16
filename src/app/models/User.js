@@ -22,6 +22,7 @@ const User = new Schema({
     exercises_id: { type: String },
     gymnasium_id: { type: String },
     password: { type: String },
+    authentication: { type: String },
 });
 
 module.exports = mongoose.model('user', User);

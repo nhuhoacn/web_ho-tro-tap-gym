@@ -6,7 +6,7 @@ const { deprecate } = require('util');
 const flash = require('connect-flash');
 const session = require('express-session');
 const cookieParser = require('cookie-parser');
-const toastr = require('express-toastr');
+const dotenv = require('dotenv').config({ path: __dirname + './util/.env' });
 const app = express();
 const port = 3000;
 
@@ -22,14 +22,14 @@ app.use(
     session({
         secret: 'codeworkrsecret',
         resave: false,
-        saveUninitialized: true,
+        saveUninitialized: false,
         cookie: {},
     }),
 );
 
-//toastr
-app.use(flash());
-app.use(toastr());
+// //toastr
+// app.use(flash());
+// app.use(toastr());
 
 app.use(
     express.urlencoded({
@@ -56,7 +56,6 @@ app.engine(
 );
 app.set('view engine', 'hbs'); //set sử dụng view là engine handlebars
 app.set('views', path.join(__dirname, 'resources', 'views'));
-
 //routes init
 route(app);
 
