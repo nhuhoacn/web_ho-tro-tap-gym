@@ -8,12 +8,14 @@ class BlogControlller {
         const all_blog = 'select *from blog';
         const search_blog = 'select *from blog LIMIT ? OFFSET ?';
         const search_user = 'select *from user where user_id = ?';
+
         // đếm số page
         var promises1 = new Promise((resolve, reject) => {
             db.query(all_blog, function (err, all_blog) {
                 var numPage = Math.ceil(all_blog.length / numPerPage);
                 resolve(numPage);
             });
+            return promises1;
         });
         //tìm kiếm blog sẽ hiển thị
         var promises2 = new Promise((resolve, reject) => {
@@ -28,43 +30,34 @@ class BlogControlller {
                 resolve(user);
             });
         });
-
-        promises1
-            .then((numPage) => {
-                console.log('promises1: ', numPage);
-                return promises2
-                    .then((blog) => {
-                        return promises3
-                            .then((user) => {
-                                var offset = (req.params.page - 1) * numPerPage;
-                                console.log('hiển thị từ hàng thứ : ', offset);
-                                if (user) {
-                                    res.render('blog', {
-                                        session: req.session,
-                                        user: user[0],
-                                        blog: blog,
-                                        numPage: numPage,
-                                    });
-                                } else {
-                                    res.render('blog', {
-                                        session: req.session,
-                                        blog: blog,
-                                        numPage: numPage,
-                                    });
-                                }
-                                console.log('promises3: ', user);
-                            })
-                            .catch((err) => {
-                                console.log(err);
-                            });
-                    })
-                    .catch((err) => {
-                        console.log(err);
+        const makeblog = async () => {
+            try {
+                var numPage = await promises1;
+                var blog = await promises2;
+                var user = await promises3;
+                var offset = (req.params.page - 1) * numPerPage;
+                console.log('số page ', numPage);
+                console.log('hiển thị từ hàng thứ : ', offset);
+                console.log('promises3: ', user);
+                if (user) {
+                    return res.render('blog', {
+                        session: req.session,
+                        user: user[0],
+                        blog: blog,
+                        numPage: numPage,
                     });
-            })
-            .catch((err) => {
+                } else {
+                    return res.render('blog', {
+                        session: req.session,
+                        blog: blog,
+                        numPage: numPage,
+                    });
+                }
+            } catch (err) {
                 console.log(err);
-            });
+            }
+        };
+        makeblog();
     }
     //[GET] /blog/:slug
     show(req, res) {
