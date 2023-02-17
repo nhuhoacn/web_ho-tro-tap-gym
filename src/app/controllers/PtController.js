@@ -34,14 +34,7 @@ class PtController {
 
     //[GET] /pt/:slug
     show(req, res) {
-        const search_user = 'select *from user where user_id = ?';
-        db.query(search_user, req.session.user_id, function (err, data) {
-            if (data) {
-                res.render('ptdetal', { session: req.session, user: data[0] });
-            } else {
-                res.render('ptdetal', { session: req.session });
-            }
-        });
+        res.render('ptdetal', { session: req.session });
     }
 }
 

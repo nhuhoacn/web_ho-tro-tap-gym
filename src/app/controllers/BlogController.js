@@ -64,25 +64,10 @@ class BlogControlller {
         const search_blog = 'select *from blog where blog_id = ?';
         db.query(search_blog, req.params.id, function (err, data) {
             if (data) {
-                const search_user = 'select *from user where user_id = ?';
-                db.query(
-                    search_user,
-                    req.session.user_id,
-                    function (err, user) {
-                        if (user) {
-                            res.render('detail_blog', {
-                                session: req.session,
-                                user: user[0],
-                                blog: data[0],
-                            });
-                        } else {
-                            res.render('detail_blog', {
-                                session: req.session,
-                                blog: data[0],
-                            });
-                        }
-                    },
-                );
+                res.render('detail_blog', {
+                    session: req.session,
+                    blog: data[0],
+                });
             } else {
                 res.sent('id blog chua khoi tao');
             }
@@ -91,16 +76,8 @@ class BlogControlller {
 
     //[GET] blog/create
     create(req, res) {
-        const search_user = 'select *from user where user_id = ?';
-        db.query(search_user, req.session.user_id, function (err, data) {
-            if (data) {
-                res.render('create_blog', {
-                    session: req.session,
-                    user: data[0],
-                });
-            } else {
-                res.render('create_blog', { session: req.session });
-            }
+        res.render('create_blog', {
+            session: req.session,
         });
     }
     //[POST] blog/create
@@ -121,18 +98,7 @@ class BlogControlller {
                 console.log('blog created');
             }
         });
-
-        const search_user = 'select *from user where user_id = ?';
-        db.query(search_user, req.session.user_id, function (err, data) {
-            if (data) {
-                res.render('create_blog', {
-                    session: req.session,
-                    user: data[0],
-                });
-            } else {
-                res.render('create_blog', { session: req.session });
-            }
-        });
+        res.render('create_blog', { session: req.session });
     }
 
     //[GET] /blog/topic/:topic_id

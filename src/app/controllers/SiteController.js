@@ -7,14 +7,7 @@ const { render } = require('ejs');
 class SiteController {
     //[GET] /
     index(req, res, next) {
-        const search_user = 'select *from user where user_id = ?';
-        db.query(search_user, req.session.user_id, function (err, data) {
-            if (data) {
-                res.render('home', { session: req.session, user: data[0] });
-            } else {
-                res.render('home', { session: req.session });
-            }
-        });
+        res.render('home', { session: req.session });
     }
 
     //[GET] /search
