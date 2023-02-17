@@ -6,6 +6,5 @@ router.get('/create', blogControlller.create);
 router.post('/create', blogControlller.insert_blog);
 router.get('/id/:id', blogControlller.show);
 router.get('/page/:page', blogControlller.index);
-router.get('/', blogControlller.index);
 
 module.exports = router;
