@@ -36,7 +36,12 @@
                     {{#list numPage}}
                     {{this}}
                     {{/list}}
-                    <a href="/blog/{{pagenext}}">Next</a>
+                    {{#if page_topic}}
+                        <a href="/blog/topic/{{page_topic}}/{{pagenext}}">Next</a>
+                    {{else}}
+                        <a href="/blog/page/{{pagenext}}">Next</a>
+                    {{/if}}
+
                 </div>
             </div>
             <div class="col-lg-4 col-md-8 p-0">
@@ -45,7 +50,8 @@
                         <h5 class="title">Danh mục</h5>
                         <ul>
                             {{#each topic}}
-                            <li><a href="/topic/{{this.topic_id}}" name="{{this.topic_id}} "> {{this.name}} <span>{{this.count}} </span></a></li>
+                            <li><a href="/blog/topic/{{this.topic_id}}/1" name="{{this.topic_id}} "> {{this.name}}
+                                    <span>{{this.count}} </span></a></li>
                             {{/each}}
                         </ul>
                     </div>
