@@ -143,10 +143,11 @@ class UserController {
                             console.log(user_password);
                             console.log(authentic);
                             if (authentic) {
-                                req.session.user_id = data[0].user_id;
-                                return res.render('home', {
-                                    session: req.session,
-                                    user: data[0],
+                                req.session.user = data[0];
+                                req.session.save(function (err) {
+                                    res.render('home', {
+                                        session: req.session,
+                                    });
                                 });
                             } else {
                                 // req.toastr.error('sai mat khau');

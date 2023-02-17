@@ -7,7 +7,6 @@ class PtController {
         var offset = 0;
         const count_pt = 'select count(*)as numPt from user where role = 2';
         const search_pt = 'select *from user where role = 2 LIMIT ? OFFSET ?';
-        const search_user = 'select *from user where user_id = ?';
         //đếm có bao nhiêu pt
         db.query(count_pt, function (err, rows) {
             if (rows) {
@@ -16,28 +15,12 @@ class PtController {
                 var pagenext = Number(req.params.page) + 1;
                 db.query(search_pt, [numPerPage, offset], function (err, pt) {
                     if (pt) {
-                        db.query(
-                            search_user,
-                            req.session.user_id,
-                            function (err, user) {
-                                if (user) {
-                                    res.render('pt', {
-                                        session: req.session,
-                                        user: user[0],
-                                        pt: pt,
-                                        numPage: numPage,
-                                        pagenext: pagenext,
-                                    });
-                                } else {
-                                    res.render('pt', {
-                                        session: req.session,
-                                        pt: pt,
-                                        numPage: numPage,
-                                        pagenext: pagenext,
-                                    });
-                                }
-                            },
-                        );
+                        res.render('pt', {
+                            session: req.session,
+                            pt: pt,
+                            numPage: numPage,
+                            pagenext: pagenext,
+                        });
                     } else {
                         console.log('error: ', err);
                         result(err, null);

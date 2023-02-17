@@ -9,14 +9,14 @@
         <div class="col-lg-9">
             <div class="row gx-0 bg-secondary d-none d-lg-flex">
                 <div class="col-lg-7 px-5 text-start">
-                    {{#if session.user_id }}
+                    {{#if session.user.user_id }}
                     <div class="h-100 d-inline-flex align-items-center py-2 me-4">
                         <i class="fa fa-envelope text-primary me-2"></i>
-                        <h6 class="mb-0">{{user.email}}</h6>
+                        <h6 class="mb-0">{{session.user.email}}</h6>
                     </div>
                     <div class="h-100 d-inline-flex align-items-center py-2">
                         <i class="fa fa-phone-alt text-primary me-2"></i>
-                        <h6 class="mb-0">{{user.phone_number}}</h6>
+                        <h6 class="mb-0">{{session.user.phone_number}}</h6>
                     </div>
                     {{/if}}
                 </div>
