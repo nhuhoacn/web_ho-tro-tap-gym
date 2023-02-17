@@ -8,95 +8,63 @@ class BlogControlller {
         const all_blog = 'select *from blog';
         const search_blog = 'select *from blog LIMIT ? OFFSET ?';
         const search_user = 'select *from user where user_id = ?';
-        //đếm có bao nhiêu hàng, tính số Page
-        db.query(all_blog, function (err, all_blog) {
-            if (all_blog) {
-                var numRows = all_blog.length;
-                var numPage = Math.ceil(numRows / numPerPage);
-                var offset = (req.params.page - 1) * numPerPage;
-                var pagenext = Number(req.params.page) + 1;
-                db.query(
-                    search_blog,
-                    [numPerPage, offset],
-                    function (err, blog) {
-                        if (blog) {
-                            db.query(
-                                search_user,
-                                req.session.user_id,
-                                function (err, user) {
-                                    if (user) {
-                                        res.render('blog', {
-                                            session: req.session,
-                                            user: user[0],
-                                            blog: blog,
-                                            numPage: numPage,
-                                            pagenext: pagenext,
-                                        });
-                                    } else {
-                                        res.render('blog', {
-                                            session: req.session,
-                                            blog: blog,
-                                            numPage: numPage,
-                                            pagenext: pagenext,
-                                        });
-                                    }
-                                },
-                            );
-                        } else {
-                            console.log('error: ', err);
-                            result(err, null);
-                        }
-                    },
-                );
-            }
+        // đếm số page
+        var promises1 = new Promise((resolve, reject) => {
+            db.query(all_blog, function (err, all_blog) {
+                var numPage = Math.ceil(all_blog.length / numPerPage);
+                resolve(numPage);
+            });
+        });
+        //tìm kiếm blog sẽ hiển thị
+        var promises2 = new Promise((resolve, reject) => {
+            var offset = (req.params.page - 1) * numPerPage;
+            db.query(search_blog, [numPerPage, offset], function (err, blog) {
+                resolve(blog);
+            });
+        });
+        //ktra user đăng nhập chưa
+        var promises3 = new Promise((resolve, reject) => {
+            db.query(search_user, req.session.user_id, function (err, user) {
+                resolve(user);
+            });
         });
 
-        //đến số page
-        // var promises1 = new Promise((resolve, reject) => {
-        //     db.query(all_blog, function (err, all_blog) {
-        //         var numPage = Math.ceil(all_blog.length / numPerPage)
-        //         resolve(numPage)
-        //     })
-        // })
-        // //tìm kiếm blog sẽ hiển thị
-        // var promises2 = new Promise((resolve, reject) => {
-        //     var offset = (req.params.page - 1) * numPerPage
-        //     db.query(search_blog, [numPerPage, offset], function (err, blog) {
-        //         resolve(blog)
-        //     })
-        // })
-        // //ktra user đăng nhập chưa
-        // var promises3 = new Promise((resolve, reject) => {
-        //     db.query(search_user, req.session.user_id, function (err, user) {
-        //         resolve(user)
-        //     })
-
-        // })
-
-        // promises1.then((data1) => {
-        //     console.log("promises1: ", data1)
-        //     return promises2
-        // })
-        //     .then((data) => {
-        //         console.log("promises2: ", data)
-        //         return promises3
-        //     })
-        //     .then((data) => {
-        //         var offset = (req.params.page - 1) * numPerPage
-        //         console.log("hiển thị từ hàng thứ : ", offset)
-        //         db.query(search_blog, [numPerPage, offset], function (err, blog) {
-        //             resolve(blog)
-        //         })
-        //         if (data) {
-        //             res.render("blog", { session: req.session, user: data[0], blog: data, numPage: data1 });
-        //         } else {
-        //             res.render("blog", { session: req.session, blog: data, numPage });
-        //         }
-        //         console.log("promises3: ", data)
-        //     })
-        //     .catch((err) => {
-        //         console.log(err)
-        //     })
+        promises1
+            .then((numPage) => {
+                console.log('promises1: ', numPage);
+                return promises2
+                    .then((blog) => {
+                        return promises3
+                            .then((user) => {
+                                var offset = (req.params.page - 1) * numPerPage;
+                                console.log('hiển thị từ hàng thứ : ', offset);
+                                if (user) {
+                                    res.render('blog', {
+                                        session: req.session,
+                                        user: user[0],
+                                        blog: blog,
+                                        numPage: numPage,
+                                    });
+                                } else {
+                                    res.render('blog', {
+                                        session: req.session,
+                                        blog: blog,
+                                        numPage: numPage,
+                                    });
+                                }
+                                console.log('promises3: ', user);
+                            })
+                            .catch((err) => {
+                                console.log(err);
+                            });
+                    })
+                    .catch((err) => {
+                        console.log(err);
+                    });
+            })
+            .catch((err) => {
+                console.log(err);
+            });
     }
     //[GET] /blog/:slug
     show(req, res) {
