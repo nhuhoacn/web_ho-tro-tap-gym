@@ -8,48 +8,66 @@ class BlogControlller {
         const all_blog = 'select *from blog';
         const search_blog = 'select *from blog LIMIT ? OFFSET ?';
         const search_user = 'select *from user where user_id = ?';
+        const all_topic = `SELECT topic.topic_id,topic.name, COUNT(*) as count FROM topic right JOIN blog ON blog.topic_id = topic.topic_id GROUP BY topic.topic_id`;
 
         // đếm số page
-        var promises1 = new Promise((resolve, reject) => {
+        var promises_num = new Promise((resolve, reject) => {
             db.query(all_blog, function (err, all_blog) {
                 var numPage = Math.ceil(all_blog.length / numPerPage);
                 resolve(numPage);
             });
-            return promises1;
         });
         //tìm kiếm blog sẽ hiển thị
-        var promises2 = new Promise((resolve, reject) => {
+        var promises_blog = new Promise((resolve, reject) => {
             var offset = (req.params.page - 1) * numPerPage;
             db.query(search_blog, [numPerPage, offset], function (err, blog) {
                 resolve(blog);
             });
         });
         //ktra user đăng nhập chưa
-        var promises3 = new Promise((resolve, reject) => {
+        var promises_user = new Promise((resolve, reject) => {
             db.query(search_user, req.session.user_id, function (err, user) {
                 resolve(user);
             });
         });
+        // đếm xem mỗi loại topic có bao nhiêu bài
+        var promises_all_topic = new Promise((resolve, reject) => {
+            db.query(all_topic, function (err, all_topic) {
+                if (err) {
+                    console.log(err);
+                }
+                resolve(all_topic);
+            });
+        });
+        var promises_blog_topic = new Promise((resolve, reject) => {
+            db.query(blog_topic, req.body.topic_id, function (err, blog) {
+                resolve(blog);
+            });
+        });
         const makeblog = async () => {
             try {
-                var numPage = await promises1;
-                var blog = await promises2;
-                var user = await promises3;
+                var numPage = await promises_num;
+                var blog = await promises_blog;
+                var user = await promises_user;
+                var topic = await promises_all_topic;
                 var offset = (req.params.page - 1) * numPerPage;
                 console.log('số page ', numPage);
                 console.log('hiển thị từ hàng thứ : ', offset);
-                console.log('promises3: ', user);
+                console.log('topic : ', topic);
+                console.log('user: ', user);
                 if (user) {
                     return res.render('blog', {
                         session: req.session,
                         user: user[0],
                         blog: blog,
+                        topic: topic,
                         numPage: numPage,
                     });
                 } else {
                     return res.render('blog', {
                         session: req.session,
                         blog: blog,
+                        topic: topic,
                         numPage: numPage,
                     });
                 }
@@ -133,6 +151,11 @@ class BlogControlller {
                 res.render('create_blog', { session: req.session });
             }
         });
+    }
+
+    //[GET] /blog/topic/:topic_id
+    blog_topic(req, res) {
+        const blog_topic = 'select *from blog where topic_id = topic_id';
     }
 }
 
