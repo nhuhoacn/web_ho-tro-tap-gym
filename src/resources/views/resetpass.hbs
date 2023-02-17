@@ -4,10 +4,10 @@
             <div class="card card-4">
                 <div class="card-body">
                     <h2 class="title"> Thay đổi mật khẩu </h2>
-                    <form>
+                    <form METHOD="POST" action="/user/resetpass">
                         <div class="mb-3">
                             <label for="exampleInputEmail1" class="form-label">Nhập địa chỉ email của bạn</label>
-                            <input type="email" class="form-control" id="exampleInputEmail1"
+                            <input type="email" class="form-control" id="exampleInputEmail1" name="email"
                                 aria-describedby="emailHelp">
                         </div>
                         <button type="submit" class="btn btn-primary">Gửi mã xác minh qua email</button>

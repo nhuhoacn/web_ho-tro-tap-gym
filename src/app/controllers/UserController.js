@@ -42,32 +42,23 @@ class UserController {
                             password: hash,
                             authentication: '',
                         });
-
+                        req.session.user = user;
                         // sendmail
-                        try {
-                            bcrypt.hash(
-                                req.body.email,
-                                saltRounds,
-                                function (err, hashemail) {
-                                    user.authentication = hashemail;
-                                    const to = req.body.email;
-                                    var html = `Cám ơn bạn đã đăng ký tài khoản <br>  <a href="http://localhost:3000/user/verify?email=${req.body.email}&token=${hashemail}" target="_blank"> CLick vào đây để xác nhận </a>`;
-                                    mailer.sendMail(to, html);
-                                    console.log(
-                                        `http://localhost:3000/user/verify?email=${req.body.email}&token=${hashemail}}`,
-                                    );
-                                    req.session.user = user;
-                                    console.log('session: ', req.session.user);
-                                    req.session.save(function (err) {
-                                        res.render('login', {
-                                            session: req.session,
-                                        });
+                        bcrypt.hash(
+                            req.body.email,
+                            saltRounds,
+                            function (err, hashemail) {
+                                const to = req.body.email;
+                                const html = `Cám ơn bạn đã đăng ký tài khoản <br>  
+                                    <a href="http://localhost:3000/user/verify?email=${req.body.email}&token=${hashemail}" target="_blank"> CLick vào đây để xác nhận </a>`;
+                                mailer.sendMail(to, html);
+                                req.session.save(function (err) {
+                                    res.render('login', {
+                                        session: req.session,
                                     });
-                                },
-                            );
-                        } catch (err) {
-                            res.send(err);
-                        }
+                                });
+                            },
+                        );
                     },
                 );
             }
@@ -99,7 +90,7 @@ class UserController {
                     req.session.user.yt_link,
                     req.session.user.fitness_center,
                     req.session.user.password,
-                    req.session.user.authentication,
+                    1,
                 ];
                 if (authentic) {
                     db.query(sql, [values], function (err, data) {
@@ -182,9 +173,58 @@ class UserController {
         res.render('home');
     }
 
-    //[GET] user/resetpass
-    resetpass(req, res) {
+    //[GET] /user/fogetpass
+    fogetpass(req, res) {
         res.render('resetpass');
+    }
+
+    //[POST] user/resetpass
+    resetpass(req, res) {
+        bcrypt.hash(req.body.email, saltRounds, function (err, hash) {
+            const to = req.body.email;
+            const html = `<a href="http://localhost:3000/user/changepass?email=${to}&token=${hash}"> Click vào đây để đổi mật khẩu </a>`;
+            mailer.sendMail(to, html);
+            console.log('html: ', html);
+        });
+        res.send('kiểm tra hòm thư của bạn');
+    }
+
+    //[GET] user/changepass
+    verify_changepass(req, res) {
+        bcrypt.compare(
+            req.query.email,
+            req.query.token,
+            function (err, authentic) {
+                if (authentic) {
+                    req.session.email = req.query.email;
+                    req.session.save(function (err) {
+                        res.render('changepass');
+                    });
+                } else {
+                    res.send('Khong thanh cong');
+                }
+            },
+        );
+    }
+    //[POST] user/changepass
+    changepasss(req, res) {
+        const changepass = `UPDATE user SET password=? WHERE user.email = '${req.session.email}'`;
+        bcrypt.hash(req.body.password1, saltRounds, function (err, hash) {
+            if (req.body.password1 == req.body.password2) {
+                console.log('pass : ', req.body.password1, req.body.password2);
+                console.log('email : ', req.session.email);
+                db.query(changepass, hash, function (err, data) {
+                    if (data) {
+                        res.send('đổi mật khẩu thành công');
+                    } else {
+                        console.log(err);
+                        res.send('đổi mật khẩu không thành công');
+                    }
+                });
+            } else {
+                res.send('2 lần nhập mật khẩu không giống nhau');
+            }
+        });
     }
 }
 module.exports = new UserController();
