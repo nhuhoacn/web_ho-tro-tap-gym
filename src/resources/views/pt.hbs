@@ -1,20 +1,21 @@
-<!-- Hero Start -->
-<div class="container-fluid bg-primary p-5 bg-hero mb-5">
-    <div class="row py-5">
-        <div class="col-12 text-center">
-            <h1 class="display-2 text-uppercase text-white mb-md-4">Huấn luyện viên</h1>
-            <a href="/" class="btn btn-primary py-md-3 px-md-5 me-3">trang chủ</a>
-            <a href="" class="btn btn-light py-md-3 px-md-5">Huấn luyện viên</a>
-        </div>
-    </div>
-</div>
-<!-- Hero End -->
-
 <!-- Team Start -->
-<div class="container-fluid p-5">
-    <div class="mb-5 text-center">
-        <h1 class="display-3 text-uppercase mb-0">Những chuyên gia</h1>
-        <h5 class="text-primary text-uppercase">của chúng tôi</h5>
+<div class="container-fluid p-5 ">
+    <div class="pt-row">
+        <div class="mb-5 text-center pt-title">
+            <h1 class="display-3 text-uppercase mb-0">Những chuyên gia</h1>
+            <h5 class="text-primary text-uppercase">của chúng tôi</h5>
+        </div>
+        <div class="search-pt">
+            <form>
+                <div class="mb-3">
+                    <label for="exampleInputEmail1" class="form-label">Tìm kiếm huấn luyện viên</label>
+                    <input type="text" class="form-control" name="search_pt">
+                </div>
+                <div>
+                    <button type="submit" class="btn btn-primary">Tìm kiếm</button>
+                </div>
+            </form>
+        </div>
     </div>
     <div class="row g-5">
         {{#each pt}}
@@ -41,12 +42,47 @@
             </div>
         </div>
         {{/each}}
-        <div class="blog-pagination">
-            {{#list numPage}}
-            {{this}}
-            {{/list}}
-            <a href="{{pagenext}}">Next</a>
+        <div class="row">
+            <!-- pagination -->
+            <div class="row">
+                <!-- hiển thị phân trang nếu có trang -->
+                {{#ifCond numPage '>' 0}}
+                <nav class="mx-auto">
+                    <ul class="pagination">
+                        <!-- FIRST ITEM -->
+                        {{#ifCond current '==' 1}}
+                            <li class="page-item disabled">
+                                <a class="page-link" href="#">First</a>
+                            </li>
+                        {{else}}
+                        <li class="page-item">
+                            <a class="page-link" href="/pt/page/1">First</a>
+                        </li>
+                        {{/ifCond}}
+
+                        <!-- ITEMS  -->
+                        {{#ifCond current '>' 3}}
+                        <li class="page-item disabled">
+                            <a class="page-link" href="#">...</a>
+                        </li>
+                        {{/ifCond}}
+                        {{#for current numPage}}
+                        {{this}}
+                        {{/for}}
+
+                                <!-- LAST ITEM -->
+                        {{#ifCond current '==' numPage}}
+                        <li class="page-item disabled">
+                        <a class="page-link" href="#">Last</a> </li>
+                        {{else}}
+                        <li class="page-item">
+                        <a class="page-link" href="/pt/page/{{numPage}}"> Last </a> </li>
+                        {{/ifCond}}
+                    </ul>
+                </nav>
+                {{/ifCond}}
+            </div>
+
         </div>
     </div>
-</div>
-<!-- Team End -->
+    <!-- Team End -->

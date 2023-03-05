@@ -1,12 +1,268 @@
-<div class="col-sm-6 col-lg-4">
-    <a href="/blog/{{blog.blog_id}}">
-        <div class="card">
-            <img src=" {{blog.image}}" class=" {{blog.name}}" alt="...">
-            <div class="card-body">
-                <h5 class="card-title"> {{blog.name}} </h5>
-                <p class="card-text"> {{blog.description}}</p>
-                <a href="#" class="btn btn-primary">chi tiet</a>
+<!-- Hero Start -->
+<div class="container-fluid bg-primary p-5 bg-hero mb-5">
+    <div class="row py-5">
+        <div class="col-12 text-center">
+            <h1 class="display-2 text-uppercase text-white mb-md-4">Blog Grid</h1>
+            <a href="" class="btn btn-primary py-md-3 px-md-5 me-3">Home</a>
+            <a href="" class="btn btn-light py-md-3 px-md-5">Blog</a>
+        </div>
+    </div>
+</div>
+<!-- Hero End -->
+
+<!-- Blog Section Begin -->
+<section class="blog-section spad">
+    <div class="container">
+        <div class="row">
+            <div class="">
+                <div class="mb-5">
+                    <img class="img-fluid w-100 rounded mb-5" src="{{blog.image}}" alt="">
+                    <h1 class="text-uppercase mb-4 blog_name">{{blog.name}}</h1>
+                    <p class="blog_description">{{blog.description}}</p>
+                </div>
+                {{#if session.user}}
+                <div class="mb-3">
+                    <form id="comment-form" method="post" action="/blog/id/{{blog.blog_id}}">
+                        <label for="" class="form-label">Viết bình luận</label>
+                        <input class="form-control mb-4" id="comment-new" name="comment_new"
+                            placeholder="Write something.." rows="3"></input>
+                        <div class="col-auto">
+                            <button type="submit" class="btn btn-primary mb-3" id="send-chat">Bình luận</button>
+                        </div>
+                    </form>
+                </div>
+                {{else}}
+                <a class="requirelogin" href="/user/login"> Hãy đăng nhập để viết bình luận </a>
+                {{/if}}
+
+                <!-- Comment List Start -->
+                <div class="mb-5">
+                    <h3 class="text-uppercase mb-4">{{comment.length}} Comments</h3>
+                    {{#each comment}}
+                    <div class="flex-comment">
+                        <ul id="comments"> </ul>
+                        {{#if this.id_rep_comment }}
+                        <div class="d-flex ms-5 mb-4">
+                            <img src="{{this.image}}" class="img-fluid rounded" style="width: 45px; height: 45px;">
+                        </div>
+                        <div class="ps-3">
+                            <h6><a href="">{{this.name}}</a> <small><i>{{this.date}}</i></small></h6>
+                            <p class="blog_description">{{this.description}}</p>
+                            <button class="btn btn-sm btn-secondary">Trả lời</button>
+                        </div>
+                        {{else}}
+                        <div class="d-flex mb-4">
+                            <img src="{{this.image}}" class="img-fluid rounded" style="width: 45px; height: 45px;">
+                        </div>
+                        <div class="ps-3">
+                            <h6><a href="">{{this.name}}</a> <small><i>{{this.date}}</i></small></h6>
+                            <p class="blog_description">{{this.description}}</p>
+                            <button class="btn btn-sm btn-secondary">Trả lời</button>
+                        </div>
+                        {{/if}}
+                    </div>
+                    {{/each}}
+                </div>
+                <!-- Comment List End -->
             </div>
         </div>
-    </a>
+        <div class="col-lg-4 col-md-8 p-0">
+            <div class="sidebar-option">
+                <div class="so-categories">
+                    <h5 class="title">Danh mục</h5>
+                    <ul>
+                        {{#each topic}}
+                        <li><a href="/blog/topic/{{this.topic_id}}/1" name="{{this.topic_id}} "> {{this.name}}
+                                <span>{{this.count}} </span></a></li>
+                        {{/each}}
+                    </ul>
+                </div>
+                <div class="so-latest">
+                    <h5 class="title">Feature posts</h5>
+                    <div class="latest-large set-bg" data-setbg="">
+                        <div class="ll-text">
+                            <h5><a href="./blog-details.html">This Japanese Way of Making Iced Coffee Is a
+                                    Game...</a></h5>
+                            <ul>
+                                <li>Aug 20, 2019</li>
+                                <li>20 Comment</li>
+                            </ul>
+                        </div>
+                    </div>
+                    <div class="latest-item">
+                        <div class="li-pic">
+                            <img src="" alt="">
+                        </div>
+                        <div class="li-text">
+                            <h6><a href="./blog-details.html">Grilled Potato and Green Bean Salad</a></h6>
+                            <span class="li-time">Aug 15, 2019</span>
+                        </div>
+                    </div>
+                    <div class="latest-item">
+                        <div class="li-pic">
+                            <img src="" alt="">
+
+                        </div>
+                        <div class="li-text">
+                            <h6><a href="./blog-details.html">The $8 French Rosé I Buy in Bulk Every Summer</a></h6>
+                            <span class="li-time">Aug 15, 2019</span>
+                        </div>
+                    </div>
+                    <div class="latest-item">
+                        <div class="li-pic">
+                            <img src="" alt="">
+                        </div>
+                        <div class="li-text">
+                            <h6><a href="./blog-details.html">Ina Garten's Skillet-Roasted Lemon Chicken</a></h6>
+                            <span class="li-time">Aug 15, 2019</span>
+                        </div>
+                    </div>
+                    <div class="latest-item">
+                        <div class="li-pic">
+                            <img src="" alt="">
+                        </div>
+                        <div class="li-text">
+                            <h6><a href="./blog-details.html">The Best Weeknight Baked Potatoes, 3 Creative Ways</a>
+                            </h6>
+                            <span class="li-time">Aug 15, 2019</span>
+                        </div>
+                    </div>
+                </div>
+                <div class="so-tags">
+                    <h5 class="title">Popular tags</h5>
+                    <a href="#">Gyming</a>
+                    <a href="#">Body buidling</a>
+                    <a href="#">Yoga</a>
+                    <a href="#">Weightloss</a>
+                    <a href="#">Proffeponal</a>
+                    <a href="#">Streching</a>
+                    <a href="#">Cardio</a>
+                    <a href="#">Karate</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Blog Section End -->
+
+<!-- Get In Touch Section Begin -->
+<div class="gettouch-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-4">
+                <div class="gt-text">
+                    <i class="fa fa-map-marker"></i>
+                    <p>333 Middle Winchendon Rd, Rindge,<br /> NH 03461</p>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="gt-text">
+                    <i class="fa fa-mobile"></i>
+                    <ul>
+                        <li>125-711-811</li>
+                        <li>125-668-886</li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-4">
+                <div class="gt-text email">
+                    <i class="fa fa-envelope"></i>
+                    <p>Support.gymcenter@gmail.com</p>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
+<!-- Get In Touch Section End -->
+
+<!-- Footer Section Begin -->
+<section class="footer-section">
+    <div class="container">
+        <div class="row">
+            <div class="col-lg-4">
+                <div class="fs-about">
+                    <div class="fa-logo">
+                        <a href="#"><img src="" alt=""></a>
+                    </div>
+                    <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
+                        labore dolore magna aliqua endisse ultrices gravida lorem.</p>
+                    <div class="fa-social">
+                        <a href="#"><i class="fa fa-facebook"></i></a>
+                        <a href="#"><i class="fa fa-twitter"></i></a>
+                        <a href="#"><i class="fa fa-youtube-play"></i></a>
+                        <a href="#"><i class="fa fa-instagram"></i></a>
+                        <a href="#"><i class="fa  fa-envelope-o"></i></a>
+                    </div>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-sm-6">
+                <div class="fs-widget">
+                    <h4>Useful links</h4>
+                    <ul>
+                        <li><a href="#">About</a></li>
+                        <li><a href="#">Blog</a></li>
+                        <li><a href="#">Classes</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-2 col-md-3 col-sm-6">
+                <div class="fs-widget">
+                    <h4>Support</h4>
+                    <ul>
+                        <li><a href="#">Login</a></li>
+                        <li><a href="#">My account</a></li>
+                        <li><a href="#">Subscribe</a></li>
+                        <li><a href="#">Contact</a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-lg-4 col-md-6">
+                <div class="fs-widget">
+                    <h4>Tips & Guides</h4>
+                    <div class="fw-recent">
+                        <h6><a href="./blog-details.html">Physical fitness may help prevent depression, anxiety</a></h6>
+                        <ul>
+                            <li>3 min read</li>
+                            <li>20 Comment</li>
+                        </ul>
+                    </div>
+                    <div class="fw-recent">
+                        <h6><a href="./blog-details.html">Fitness: The best exercise to lose belly fat and tone
+                                up...</a></h6>
+                        <ul>
+                            <li>3 min read</li>
+                            <li>20 Comment</li>
+                        </ul>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="row">
+            <div class="col-lg-12 text-center">
+                <div class="copyright-text">
+                    <p>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                        Copyright &copy;
+                        <script>document.write(new Date().getFullYear());</script> All rights reserved | This template
+                        is made with <i class="fa fa-heart" aria-hidden="true"></i> by <a href="https://colorlib.com"
+                            target="_blank">Colorlib</a>
+                        <!-- Link back to Colorlib can't be removed. Template is licensed under CC BY 3.0. -->
+                    </p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<!-- Footer Section End -->
+
+<!-- Search model Begin -->
+<div class="search-model">
+    <div class="h-100 d-flex align-items-center justify-content-center">
+        <div class="search-close-switch">+</div>
+        <form class="search-model-form">
+            <input type="text" id="search-input" placeholder="Search here.....">
+        </form>
+    </div>
+</div>
+<!-- Search model end -->

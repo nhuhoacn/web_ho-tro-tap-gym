@@ -9,7 +9,7 @@
         <div class="col-lg-9">
             <div class="row gx-0 bg-secondary d-none d-lg-flex">
                 <div class="col-lg-7 px-5 text-start">
-                    {{#if session.user.user_id }}
+                    {{#if session.user}}
                     <div class="h-100 d-inline-flex align-items-center py-2 me-4">
                         <i class="fa fa-envelope text-primary me-2"></i>
                         <h6 class="mb-0">{{session.user.email}}</h6>
@@ -50,7 +50,7 @@
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav mr-auto py-0">
                         <a href="/" class="nav-item nav-link">Trang chủ</a>
-                        <a href="/class" class="nav-item nav-link">Lớp đào tạo</a>
+                        <a href="/class" class="nav-item nav-link">Lớp học</a>
                         <a href="/blog/page/1" class="nav-item nav-link">Blogs</a>
                         <a href="/pt/page/1" class="nav-item nav-link">PT</a>
                         <div class="nav-item dropdown">
@@ -63,7 +63,7 @@
                         </div>
                     </div>
                     <div>
-                        {{#if session.user_id }}
+                        {{#if session.user }}
                         <a href="/user/infor" class="btn btn-primary py-md-3 px-md-5 d-none d-lg-block">Thông tin cá nhân</a>
                         {{else}}
                         <a href="/user/login" class="btn btn-primary py-md-3 px-md-5 d-none d-lg-block">Đăng nhập</a>

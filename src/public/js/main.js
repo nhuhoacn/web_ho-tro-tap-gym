@@ -1,26 +1,37 @@
-/*  ---------------------------------------------------
-  Template Name: Gym
-  Description:  Gym Fitness HTML Template
-  Author: Colorlib
-  Author URI: https://colorlib.com
-  Version: 1.0
-  Created: Colorlib
----------------------------------------------------------  */
-
 'use strict';
 
-(function ($) {
+/*------------------
+    Comment realtime
+--------------------*/
+var socket = io();
+var commentForm = document.getElementById('comment-form');
+var commentInput = document.getElementById('comment-new');
+var comments = document.getElementById('comments');
+
+commentForm.addEventListener('submit', (e) => {
+    e.preventDefault();
+    if (commentInput.value) {
+        socket.emit('new comment', commentInput.value);
+        commentInput = '';
+    }
+});
+
+socket.on('add comment', (comment) => {
+    var item = document.createElement('li');
+    item.textContent = comment;
+    comments.appendChild(item);
+})(function ($) {
     /*------------------
-        Preloader
-    --------------------*/
+            Preloader
+        --------------------*/
     $(window).on('load', function () {
         $('.loader').fadeOut();
         $('#preloder').delay(200).fadeOut('slow');
     });
 
     /*------------------
-        Background Set
-    --------------------*/
+            Background Set
+        --------------------*/
     $('.set-bg').each(function () {
         var bg = $(this).data('setbg');
         $(this).css('background-image', 'url(' + bg + ')');
@@ -49,23 +60,23 @@
     });
 
     //Masonary
-    $('.gallery').masonry({
-        itemSelector: '.gs-item',
-        columnWidth: '.grid-sizer',
-        gutter: 10,
-    });
+    // $('.gallery').masonry({
+    //     itemSelector: '.gs-item',
+    //     columnWidth: '.grid-sizer',
+    //     gutter: 10,
+    // });
 
     /*------------------
-		Navigation
-	--------------------*/
-    $('.mobile-menu').slicknav({
-        prependTo: '#mobile-menu-wrap',
-        allowParentLinks: true,
-    });
+            Navigation
+        --------------------*/
+    // $('.mobile-menu').slicknav({
+    //     prependTo: '#mobile-menu-wrap',
+    //     allowParentLinks: true,
+    // });
 
     /*------------------
-        Carousel Slider
-    --------------------*/
+            Carousel Slider
+        --------------------*/
     var hero_s = $('.hs-slider');
     hero_s.owlCarousel({
         loop: true,
@@ -85,8 +96,8 @@
     });
 
     /*------------------
-        Team Slider
-    --------------------*/
+            Team Slider
+        --------------------*/
     $('.ts-slider').owlCarousel({
         loop: true,
         margin: 0,
@@ -110,8 +121,8 @@
     });
 
     /*------------------
-        Testimonial Slider
-    --------------------*/
+            Testimonial Slider
+        --------------------*/
     $('.ts_slider').owlCarousel({
         loop: true,
         margin: 0,
@@ -128,22 +139,22 @@
     });
 
     /*------------------
-        Image Popup
-    --------------------*/
-    $('.image-popup').magnificPopup({
-        type: 'image',
-    });
+            Image Popup
+        --------------------*/
+    // $('.image-popup').magnificPopup({
+    //     type: 'image',
+    // });
 
     /*------------------
-        Video Popup
-    --------------------*/
-    $('.video-popup').magnificPopup({
-        type: 'iframe',
-    });
+            Video Popup
+        --------------------*/
+    // $('.video-popup').magnificPopup({
+    //     type: 'iframe',
+    // });
 
     /*------------------
-        Barfiller
-    --------------------*/
+            Barfiller
+        --------------------*/
     $('#bar1').barfiller({
         barColor: '#ffffff',
         duration: 2000,

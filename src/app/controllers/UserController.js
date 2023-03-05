@@ -140,7 +140,6 @@ class UserController {
                         data[0].password,
                         function (err, authentic) {
                             console.log(data[0].password);
-                            console.log(user_password);
                             console.log(authentic);
                             if (authentic) {
                                 req.session.user = data[0];
