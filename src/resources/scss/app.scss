@@ -1,5 +1,4 @@
 @import 'variables';
-
 /********** Template CSS **********/
 :root {
     --primary: #fb5b21;
@@ -2670,8 +2669,7 @@ ol {
 -----------------------*/
 
 .class-details-section {
-    background: #151515;
-    padding-bottom: 60px;
+    padding-bottom: 0px;
 }
 
 .class-details-text .cd-pic {
@@ -2687,14 +2685,13 @@ ol {
 }
 
 .class-details-text .cd-text .cd-single-item h3 {
-    color: #ffffff;
     font-weight: 600;
     text-transform: uppercase;
     margin-bottom: 28px;
 }
 
 .class-details-text .cd-text .cd-single-item p {
-    color: #c4c4c4;
+    color: #1a1a1d;
 }
 
 .class-details-text .cd-trainer .cd-trainer-pic img {
@@ -2710,7 +2707,7 @@ ol {
 }
 
 .class-details-text .cd-trainer .cd-trainer-text .trainer-title h4 {
-    color: #ffffff;
+    color: black;
     font-weight: 600;
     margin-bottom: 6px;
 }
@@ -2749,7 +2746,7 @@ ol {
 
 .class-details-text .cd-trainer .cd-trainer-text .trainer-info li {
     font-size: 14px;
-    color: #c4c4c4;
+    // color: red;
     list-style: none;
     padding-bottom: 8px;
     border-bottom: 1px solid #252525;
@@ -2763,7 +2760,7 @@ ol {
 }
 
 .class-details-text .cd-trainer .cd-trainer-text .trainer-info li span {
-    color: #ffffff;
+    color: black;
     font-weight: 700;
     width: 150px;
     display: inline-block;
@@ -4385,4 +4382,21 @@ ol {
 
 .requirelogin {
     font-size: 1.5rem;
+}
+
+.infor_user {
+    color: #000;
+}
+
+.trainer-header {
+    display: flex;
+}
+
+.class-timetable-section {
+    margin-left: 80px;
+    margin-right: 80px;
+}
+
+.history {
+    margin: 100 0 80 100;
 }

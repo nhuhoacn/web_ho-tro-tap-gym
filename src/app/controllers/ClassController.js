@@ -3,7 +3,7 @@ const db = require('../../config/db');
 class ClassControlller {
     //[GET] class/
     show(req, res) {
-        const fitness_class = `SELECT fitness_class.name, price, start_time, end_time, room_address, maximum, user.name as trainer
+        const fitness_class = `SELECT class_id,fitness_class.name, price, start_time, end_time, room_address, maximum, user.name as trainer
                         FROM fitness_class right JOIN user ON user.user_id = fitness_class.trainer_id
                         where days_of_the_week = ?`;
 
@@ -81,9 +81,13 @@ class ClassControlller {
                     fitness_class_7: fitness_class_7,
                     fitness_class_8: fitness_class_8,
                 };
+                if (req.session.user) {
+                    var user_id = Number(req.session.user.user_id);
+                }
                 res.render('class', {
                     class: value,
                     session: req.session,
+                    user_id: 1,
                 });
             } catch (error) {
                 console.log(err);
@@ -92,8 +96,20 @@ class ClassControlller {
         showclass();
     }
 
-    //[GET] class/:id
-    detail(req, res) {
+    //[POST] class/
+    register_class(req, res) {
+        const mysql =
+            'INSERT INTO user_join_fittness_class(student_id,course_id, registration_time) VALUES (?)';
+        var date = new Date();
+        console.log(date);
+        const value = [req.session.user.user_id, req.body.fitness_class, date];
+        db.query(mysql, [value], function (err, data) {
+            if (err) {
+                console.log(err);
+            } else {
+                console.log('Đăng ký thành công');
+            }
+        });
         res.render('class', { session: req.session });
     }
 }
