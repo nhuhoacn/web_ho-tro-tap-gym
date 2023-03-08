@@ -6,6 +6,7 @@ const saltRounds = 10;
 const mailer = require('../../util/mailer');
 const { TRUE } = require('node-sass');
 const { login } = require('./SiteController');
+const moment = require('moment');
 
 class UserController {
     //[GET] user/register
@@ -135,30 +136,35 @@ class UserController {
             const sql = 'Select * From user where email = ? ';
             db.query(sql, user_email, function (err, data) {
                 if (data.length > 0) {
-                    bcrypt.compare(
-                        user_password,
-                        data[0].password,
-                        function (err, authentic) {
-                            console.log(data[0].password);
-                            console.log(user_password);
-                            console.log(authentic);
-                            if (authentic) {
-                                req.session.user_id = data[0].user_id;
-                                return res.render('home', {
-                                    session: req.session,
-                                    user: data[0],
-                                });
-                            } else {
-                                // req.toastr.error('sai mat khau');
-                                // console.log(req.toastr.render);
-                                res.render('login', { req: req });
-                            }
-                        },
-                    );
+                    if (data[0].authentication == 1) {
+                        bcrypt.compare(
+                            user_password,
+                            data[0].password,
+                            function (err, authentic) {
+                                console.log(data[0].password);
+                                console.log(authentic);
+                                if (authentic) {
+                                    req.session.user = data[0];
+                                    req.session.save(function (err) {
+                                        res.render('home', {
+                                            session: req.session,
+                                        });
+                                    });
+                                } else {
+                                    // req.toastr.error('sai mat khau');
+                                    // console.log(req.toastr.render);
+                                    // res.render('login', { req: req });
+                                    return res.send('Sai mật khẩu');
+                                }
+                            },
+                        );
+                    } else {
+                        res.send('Chưa xác thực tài khoản');
+                    }
                 } else {
                     // req.toastr.error('Địa chỉ email không đúng');
-                    res.render('login', { req: req });
-                    // return res.send("Địa chỉ email không đúng");
+                    // res.render('login', { req: req });
+                    return res.send('Địa chỉ email không đúng');
                 }
             });
         } else {
@@ -225,6 +231,37 @@ class UserController {
                 res.send('2 lần nhập mật khẩu không giống nhau');
             }
         });
+    }
+
+    //[GET] /user/infor
+    infor(req, res) {
+        if (req.session.user) {
+            var history = `SELECT * FROM user_join_fittness_class 
+            Right JOIN fitness_class ON user_join_fittness_class.class_id = fitness_class.class_id
+            where user_join_fittness_class.user_id = ?`;
+            db.query(
+                history,
+                req.session.user.user_id,
+                function (err, history) {
+                    for (let i = 0; i < history.length; i++) {
+                        let date = moment
+                            .utc(history[i].registration_time)
+                            .format('MMM Do, YYYY');
+                        history[i].registration_time = date;
+                        date = moment
+                            .utc(history[i].cancellation_time)
+                            .format('MMM Do, YYYY');
+                        history[i].cancellation_time = date;
+                    }
+                    res.render('information', {
+                        session: req.session,
+                        history,
+                    });
+                },
+            );
+        } else {
+            res.render('login');
+        }
     }
 }
 module.exports = new UserController();

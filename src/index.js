@@ -5,11 +5,16 @@ const exphbs = require('express-handlebars');
 const { deprecate } = require('util');
 const flash = require('connect-flash');
 const session = require('express-session');
+const app = express();
+// socket
+const http = require('http');
+const server = http.createServer(app);
+const { Server } = require('socket.io');
+const io = new Server(server);
+
 const cookieParser = require('cookie-parser');
 const dotenv = require('dotenv').config({ path: __dirname + './util/.env' });
-const app = express();
 const port = 3000;
-
 const route = require('./routes');
 
 //connect to db
@@ -26,7 +31,6 @@ app.use(
         cookie: {},
     }),
 );
-
 // //toastr
 // app.use(flash());
 // app.use(toastr());
@@ -36,7 +40,20 @@ app.use(
         extended: true,
     }),
 );
+
 app.use(express.json());
+//socket.io
+io.on('connection', (socket) => {
+    console.log('a user connected');
+    socket.on('new comment', (comment) => {
+        console.log('comment: ', comment);
+        io.emit('add comment', comment);
+    });
+    socket.on('disconnect', () => {
+        console.log('user disconnected');
+    });
+    socket.broadcast.emit('hi');
+});
 
 app.engine(
     'hbs',
@@ -46,10 +63,87 @@ app.engine(
             list: function (page, options) {
                 var out = '';
                 for (var i = 1; i <= page; i++) {
-                    // out = out + '<li class="page-item "><a class="page-link" href="' + i + '">' + options.fn(i) + '</a></li>'
                     out = out + '<a href="' + i + '">' + options.fn(i) + '</a>';
                 }
                 return out;
+            },
+            for: function (current, numPage, options) {
+                var out = '';
+                for (
+                    let i = Number(current) - 2;
+                    i < Number(current) + 3 && i <= numPage;
+                    i++
+                ) {
+                    if (i > 0 && i == current) {
+                        out =
+                            out +
+                            '<li class="page-item active"> <a class="page-link" href="' +
+                            i +
+                            '">' +
+                            options.fn(i) +
+                            '</a> </li>';
+                    } else if (i > 0) {
+                        out =
+                            out +
+                            '<li class="page-item "> <a class="page-link" href="' +
+                            i +
+                            '">' +
+                            options.fn(i) +
+                            '</a> </li>';
+                    }
+                    if (i == Number(current) + 2 && i < numPage) {
+                        out =
+                            out +
+                            '<li class="page-item disabled"> <a class="page-link" href="#">...</a> </li>';
+                    }
+                }
+                return out;
+            },
+            ifCond: function (v1, operator, v2, options) {
+                switch (operator) {
+                    case '==':
+                        return v1 == v2
+                            ? options.fn(this)
+                            : options.inverse(this);
+                    case '===':
+                        return v1 === v2
+                            ? options.fn(this)
+                            : options.inverse(this);
+                    case '!=':
+                        return v1 != v2
+                            ? options.fn(this)
+                            : options.inverse(this);
+                    case '!==':
+                        return v1 !== v2
+                            ? options.fn(this)
+                            : options.inverse(this);
+                    case '<':
+                        return v1 < v2
+                            ? options.fn(this)
+                            : options.inverse(this);
+                    case '<=':
+                        return v1 <= v2
+                            ? options.fn(this)
+                            : options.inverse(this);
+                    case '>':
+                        return v1 > v2
+                            ? options.fn(this)
+                            : options.inverse(this);
+                    case '>=':
+                        return v1 >= v2
+                            ? options.fn(this)
+                            : options.inverse(this);
+                    case '&&':
+                        return v1 && v2
+                            ? options.fn(this)
+                            : options.inverse(this);
+                    case '||':
+                        return v1 || v2
+                            ? options.fn(this)
+                            : options.inverse(this);
+                    default:
+                        return options.inverse(this);
+                }
             },
         },
     }),
@@ -59,4 +153,6 @@ app.set('views', path.join(__dirname, 'resources', 'views'));
 //routes init
 route(app);
 
-app.listen(port, () => console.log('App listening at http://localhost:', port));
+server.listen(port, () =>
+    console.log('App listening at http://localhost:', port),
+);

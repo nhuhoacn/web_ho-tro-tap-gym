@@ -21,14 +21,13 @@
                         <img src="{{this.image}}" alt="">
                     </div>
                     <div class="bi-text">
-                        <h5><a href="./blog-details.html">{{this.name}}</a></h5>
+                        <h5><a href="/blog/id/{{this.blog_id}}">{{this.name}}</a></h5>
                         <ul>
-                            <li>by Admin</li>
-                            <li>Aug,15, 2019</li>
+                            <li>{{this.author}}</li>
+                            <li>{{this.date_create_blog}}</li>
                             <li>20 Comment</li>
                         </ul>
-                        <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed eiusmod tempor incididunt ut
-                            labore et dolore magna aliqua accumsan lacus facilisis.</p>
+                        <p>Bài viết chia sẻ kiến thức về topic thứ {{this.topic_id}}</p>
                     </div>
                 </div>
                 {{/each}}
@@ -36,25 +35,28 @@
                     {{#list numPage}}
                     {{this}}
                     {{/list}}
-                    <a href="/blog/{{pagenext}}">Next</a>
+                    {{#if page_topic}}
+                        <a href="/blog/topic/{{page_topic}}/{{pagenext}}">Next</a>
+                    {{else}}
+                        <a href="/blog/page/{{pagenext}}">Next</a>
+                    {{/if}}
+
                 </div>
             </div>
             <div class="col-lg-4 col-md-8 p-0">
                 <div class="sidebar-option">
                     <div class="so-categories">
-                        <h5 class="title">Categories</h5>
+                        <h5 class="title">Danh mục</h5>
                         <ul>
-                            <li><a href="#">Yoga <span>12</span></a></li>
-                            <li><a href="#">Runing <span>32</span></a></li>
-                            <li><a href="#">Weightloss <span>86</span></a></li>
-                            <li><a href="#">Cario <span>25</span></a></li>
-                            <li><a href="#">Body buiding <span>36</span></a></li>
-                            <li><a href="#">Nutrition <span>15</span></a></li>
+                            {{#each topic}}
+                            <li><a href="/blog/topic/{{this.topic_id}}/1" name="{{this.topic_id}} "> {{this.name}}
+                                    <span>{{this.count}} </span></a></li>
+                            {{/each}}
                         </ul>
                     </div>
                     <div class="so-latest">
                         <h5 class="title">Feature posts</h5>
-                        <div class="latest-large set-bg" data-setbg="img/letest-blog/latest-1.jpg">
+                        <div class="latest-large set-bg" data-setbg="">
                             <div class="ll-text">
                                 <h5><a href="./blog-details.html">This Japanese Way of Making Iced Coffee Is a
                                         Game...</a></h5>
@@ -66,7 +68,7 @@
                         </div>
                         <div class="latest-item">
                             <div class="li-pic">
-                                <img src="img/letest-blog/latest-2.jpg" alt="">
+                                <img src="" alt="">
                             </div>
                             <div class="li-text">
                                 <h6><a href="./blog-details.html">Grilled Potato and Green Bean Salad</a></h6>
@@ -75,7 +77,7 @@
                         </div>
                         <div class="latest-item">
                             <div class="li-pic">
-                                <img src="img/letest-blog/latest-3.jpg" alt="">
+                                <img src="" alt="">
                             </div>
                             <div class="li-text">
                                 <h6><a href="./blog-details.html">The $8 French Rosé I Buy in Bulk Every Summer</a></h6>
@@ -84,7 +86,7 @@
                         </div>
                         <div class="latest-item">
                             <div class="li-pic">
-                                <img src="img/letest-blog/latest-4.jpg" alt="">
+                                <img src="" alt="">
                             </div>
                             <div class="li-text">
                                 <h6><a href="./blog-details.html">Ina Garten's Skillet-Roasted Lemon Chicken</a></h6>
@@ -93,7 +95,7 @@
                         </div>
                         <div class="latest-item">
                             <div class="li-pic">
-                                <img src="img/letest-blog/latest-5.jpg" alt="">
+                                <img src="" alt="">
                             </div>
                             <div class="li-text">
                                 <h6><a href="./blog-details.html">The Best Weeknight Baked Potatoes, 3 Creative Ways</a>
@@ -157,7 +159,7 @@
             <div class="col-lg-4">
                 <div class="fs-about">
                     <div class="fa-logo">
-                        <a href="#"><img src="img/logo.png" alt=""></a>
+                        <a href="#"><img src="" alt=""></a>
                     </div>
                     <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut
                         labore dolore magna aliqua endisse ultrices gravida lorem.</p>

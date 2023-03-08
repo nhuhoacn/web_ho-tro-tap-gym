@@ -34,9 +34,11 @@
     "express-paginate": "^1.0.2",
     "express-session": "^1.17.3",
     "express-toastr": "^1.1.0",
+    "moment": "^2.29.4",
     "mongoose": "^6.8.3",
     "mongoose-slug-generator": "^1.0.4",
     "nodemailer": "^6.9.1",
+    "socket.io": "^4.6.1",
     "toastr": "^2.1.4"
   },
   "devDependencies": {
