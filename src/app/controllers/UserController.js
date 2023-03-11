@@ -39,7 +39,6 @@ class UserController {
                             fb_link: req.body.fb_link,
                             insta_link: req.body.insta_link,
                             yt_link: req.body.yt_link,
-                            fitness_center: req.body.fitness_center,
                             password: hash,
                             authentication: '',
                         });
@@ -69,7 +68,7 @@ class UserController {
     //[GET] /user/verify
     verify(req, res) {
         const sql = `INSERT INTO user(name,birthday,gender,height,weight,role,address,
-            email,phone_number,image,fb_link,insta_link,yt_link,fitness_center,password,authentication) VALUES (?)`;
+            email,phone_number,image,fb_link,insta_link,yt_link,password,authentication) VALUES (?)`;
         bcrypt.compare(
             req.query.email,
             req.query.token,
@@ -89,7 +88,6 @@ class UserController {
                     req.session.user.fb_link,
                     req.session.user.insta_link,
                     req.session.user.yt_link,
-                    req.session.user.fitness_center,
                     req.session.user.password,
                     1,
                 ];
@@ -131,9 +129,9 @@ class UserController {
     rememberUser(req, res, next) {
         const user_email = req.body.user_email;
         const user_password = req.body.user_password;
+        const sql = 'Select * From user where email = ? ';
         var user = false;
         if (user_email && user_password) {
-            const sql = 'Select * From user where email = ? ';
             db.query(sql, user_email, function (err, data) {
                 if (data.length > 0) {
                     if (data[0].authentication == 1) {
@@ -144,12 +142,23 @@ class UserController {
                                 console.log(data[0].password);
                                 console.log(authentic);
                                 if (authentic) {
-                                    req.session.user = data[0];
-                                    req.session.save(function (err) {
-                                        res.render('home', {
-                                            session: req.session,
+                                    if (data[0].role == 3) {
+                                        req.session.user = data[0];
+                                        var admin = 1;
+                                        req.session.save(function (err) {
+                                            res.render('admin_index', {
+                                                session: req.session,
+                                                admin,
+                                            });
                                         });
-                                    });
+                                    } else {
+                                        req.session.user = data[0];
+                                        req.session.save(function (err) {
+                                            res.render('home', {
+                                                session: req.session,
+                                            });
+                                        });
+                                    }
                                 } else {
                                     // req.toastr.error('sai mat khau');
                                     // console.log(req.toastr.render);
@@ -239,6 +248,12 @@ class UserController {
             var history = `SELECT * FROM user_join_fittness_class 
             Right JOIN fitness_class ON user_join_fittness_class.class_id = fitness_class.class_id
             where user_join_fittness_class.user_id = ?`;
+            var bmi =
+                Math.round(
+                    (req.session.user.weight /
+                        (req.session.user.height * req.session.user.height)) *
+                        1000000,
+                ) / 100;
             db.query(
                 history,
                 req.session.user.user_id,
@@ -253,15 +268,44 @@ class UserController {
                             .format('MMM Do, YYYY');
                         history[i].cancellation_time = date;
                     }
+                    let date = moment
+                        .utc(req.session.user.birthday)
+                        .format('MMM Do, YYYY');
+                    req.session.user.birthday = date;
                     res.render('information', {
                         session: req.session,
                         history,
+                        bmi,
                     });
                 },
             );
         } else {
             res.render('login');
         }
+    }
+
+    //[GET] user/change_info
+    changeinfo(req, res) {
+        res.render('change_info', { session: req.session });
+    }
+
+    //[POST] user/change_info
+    savechangeinfo(req, res) {
+        var user = req.body;
+        user.user_id = req.session.user.user_id;
+        const sql = `UPDATE user SET 
+        name="${user.name}", role="${user.role}", birthday="${user.birthday}", gender="${user.gender}", height=${user.height},weight=${user.weight},
+        phone_number="${user.phone_number}", address="${user.address}", image="${user.image}", fb_link="${user.fb_link}",
+        insta_link="${user.insta_link}", yt_link="${user.yt_link}" WHERE user_id = ${user.user_id};`;
+        db.query(sql, function (err, data) {
+            if (data) {
+                console.log('thay doi thong tin thanh cong');
+                req.session.user = user;
+                res.render('information', { session: req.session });
+            } else {
+                console.log(err);
+            }
+        });
     }
 }
 module.exports = new UserController();

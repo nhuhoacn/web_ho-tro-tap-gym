@@ -3,7 +3,7 @@ const db = require('../../config/db');
 class ClassControlller {
     //[GET] class/
     show(req, res) {
-        const fitness_class = `SELECT class_id,fitness_class.name, price, start_time, end_time, room_address, maximum, user.name as trainer
+        const fitness_class = `SELECT class_id,fitness_class.name, start_time, end_time, room_address, maximum, user.name as trainer
                         FROM fitness_class right JOIN user ON user.user_id = fitness_class.trainer_id
                         where days_of_the_week = ?`;
 

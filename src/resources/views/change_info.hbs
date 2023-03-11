@@ -3,13 +3,13 @@
         <div class="wrapper wrapper--w680">
             <div class="card card-4">
                 <div class="card-body">
-                    <h2 class="title">Đăng ký tài khoản</h2>
-                    <form method="POST" action="/user/register">
+                    <h2 class="title">Chỉnh sửa thông tin</h2>
+                    <form method="POST" action="/user/change_info">
                         <div class="row row-space">
                             <div class="col-2 form-group">
                                 <div class="input-group">
                                     <label class="label">Họ và tên</label>
-                                    <input class="input--style-4" type="text" name="name" required="required">
+                                    <input class="input--style-4" type="text" name="name" value="{{session.user.name}}">
                                 </div>
                             </div>
                             <div class="col-2 form-group">
@@ -17,8 +17,17 @@
                                     <label class="label">Đăng ký với vai trò</label>
                                     <div class="input-group-icon">
                                         <select class="form-select" aria-label="Default select example" name="role">
-                                            <option value="1" >Học viên</option>
-                                            <option value="2" >Huấn luyện viên</option>
+                                            {{#ifCond session.user.role '==' 3}}
+                                            <option value="">Quản trị viên </option>
+                                            <option value="2">Huấn luyện viên</option>
+                                            <option value="1">Học viên</option>
+                                            {{else ifCond session.user.role '==' 2}}
+                                            <option value="2">Huấn luyện viên</option>
+                                            <option value="1">Học viên</option>
+                                            {{else}}
+                                            <option value="1">Học viên</option>
+                                            <option value="2">Huấn luyện viên</option>
+                                            {{/ifCond}}
                                         </select>
                                     </div>
                                 </div>
@@ -29,7 +38,8 @@
                                 <div class="date">
                                     <label class="label">Ngày tháng năm sinh</label>
                                     <div class="input-group-icon">
-                                        <input class="input--style-4 js-datepicker" type="date" name="birthday">
+                                        <input class="input--style-4 js-datepicker" type="date" name="birthday"
+                                            value="{{session.user.birthday}}">
                                         <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
                                     </div>
                                 </div>
@@ -38,6 +48,16 @@
                                 <div class="gender">
                                     <label class="label">Giới tính</label>
                                     <div class="p-t-10">
+                                        {{#ifCond session.user.gender '==' 'nu'}}
+                                        <label class="radio-container m-r-45"> Nam
+                                            <input type="radio" name="gender" value="nam">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        <label class="radio-container">Nữ
+                                            <input type="radio" checked="checked" name="gender" value="nu">
+                                            <span class="checkmark"></span>
+                                        </label>
+                                        {{else}}
                                         <label class="radio-container m-r-45"> Nam
                                             <input type="radio" checked="checked" name="gender" value="nam">
                                             <span class="checkmark"></span>
@@ -46,6 +66,7 @@
                                             <input type="radio" name="gender" value="nu">
                                             <span class="checkmark"></span>
                                         </label>
+                                        {{/ifCond}}
                                     </div>
                                 </div>
                             </div>
@@ -54,13 +75,13 @@
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Chiều cao (cm)</label>
-                                    <input class="input--style-4" type="text" name="height">
+                                    <input class="input--style-4" type="text" name="height" value="{{session.user.height}}">
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Cân nặng</label>
-                                    <input class="input--style-4" type="text" name="weight">
+                                    <input class="input--style-4" type="text" name="weight"  value="{{session.user.weight}}">
                                 </div>
                             </div>
                         </div>
@@ -68,27 +89,27 @@
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Số điện thoại</label>
-                                    <input class="input--style-4" type="text" name="phone_number">
+                                    <input class="input--style-4" type="text" name="phone_number" value="{{session.user.phone_number}}">
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
-                                    <label class="label">Địa chỉ(Thành phố)</label>
-                                    <input class="input--style-4" type="text" name="address">
+                                    <label class="label">Địa chỉ </label>
+                                    <input class="input--style-4" type="text" name="address" value="{{session.user.address}}">
                                 </div>
                             </div>
                         </div>
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
-                                    <label class="label">Ảnh cá nhân</label>
-                                    <input class="input--style-4" type="" name="image">
+                                    <label class="label">Link ảnh cá nhân</label>
+                                    <input class="input--style-4" type="" name="image" value="{{session.user.image}}">
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Link facebook cá nhân</label>
-                                    <input class="input--style-4" type="fb_link" name="fb_link">
+                                    <input class="input--style-4" type="fb_link" name="fb_link" value="{{session.user.fb_link}}">
                                 </div>
                             </div>
                         </div>
@@ -96,32 +117,26 @@
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Link instagram cá nhân</label>
-                                    <input class="input--style-4" type="text" name="insta_link">
+                                    <input class="input--style-4" type="text" name="insta_link" value="{{session.user.insta_link}}">
                                 </div>
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Link youtube của bạn</label>
-                                    <input class="input--style-4" type="yt_link" name="yt_link">
+                                    <input class="input--style-4" type="yt_link" name="yt_link" value="{{session.user.yt_link}}">
                                 </div>
                             </div>
                         </div>
                         <div class="row row-space">
                             <div class="col-2 form-group">
                                 <div class="input-group">
-                                    <label class="label">Email</label>
-                                    <input class="input--style-4" type="email" name="email">
-                                </div>
-                            </div>
-                            <div class="col-2">
-                                <div class="input-group form-group">
-                                    <label class="label">Password</label>
-                                    <input class="input--style-4" type="password" name="password" required="required">
+                                    <label class="label">Email(Không thể thay đổi)</label>
+                                    <input class="input--style-4" type="email" name="email" readonly="False" value="{{session.user.email}}">
                                 </div>
                             </div>
                         </div>
                         <div class="p-t-15">
-                            <button class="btn btn--radius-2 btn--orange" type="submit">Đăng ký</button>
+                            <button class="btn btn--radius-2 btn--orange" type="submit">Lưu thông tin</button>
                         </div>
                     </form>
                 </div>

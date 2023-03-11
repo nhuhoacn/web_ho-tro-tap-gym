@@ -13,6 +13,8 @@ router.get('/fogetpass', userController.fogetpass);
 router.post('/resetpass', userController.resetpass);
 router.get('/changepass', userController.verify_changepass);
 router.post('/changepass', userController.changepasss);
+router.get('/change_info', userController.changeinfo);
+router.post('/change_info', userController.savechangeinfo);
 router.get('/infor', userController.infor);
 
 module.exports = router;

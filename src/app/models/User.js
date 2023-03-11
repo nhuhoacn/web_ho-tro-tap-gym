@@ -18,7 +18,6 @@ const User = new Schema({
     fb_link: { type: String },
     insta_link: { type: String },
     yt_link: { type: String },
-    fitness_center: { type: String },
     exercises_id: { type: String },
     gymnasium_id: { type: String },
     password: { type: String },
