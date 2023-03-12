@@ -3,9 +3,9 @@ const db = require('../../config/db');
 class ClassControlller {
     //[GET] class/
     show(req, res) {
-        const fitness_class = `SELECT class_id,fitness_class.name, start_time, end_time, room_address, maximum, user.name as trainer
+        const fitness_class = `SELECT class_id,fitness_class.name, start_time, end_time, room_address, maximum,days_of_the_week, user.name as trainer
                         FROM fitness_class right JOIN user ON user.user_id = fitness_class.trainer_id
-                        where days_of_the_week = ?`;
+                        where days_of_the_week = ? ORDER BY start_time`;
 
         var promises_class_mon = new Promise((resolve, reject) => {
             db.query(fitness_class, 2, function (err, fitness_class_2) {
@@ -63,6 +63,18 @@ class ClassControlller {
                 resolve(fitness_class_8);
             });
         });
+        const class_all = `SELECT class_id,fitness_class.name, start_time, end_time, room_address, maximum, user.name as trainer
+                        FROM fitness_class right JOIN user ON user.user_id = fitness_class.trainer_id
+                        ORDER BY start_time`;
+
+        var promises_class_all = new Promise((resolve, reject) => {
+            db.query(class_all, function (err, class_all) {
+                if (err) {
+                    console.log(err);
+                }
+                resolve(class_all);
+            });
+        });
         const showclass = async () => {
             try {
                 var fitness_class_2 = await promises_class_mon;
@@ -72,6 +84,7 @@ class ClassControlller {
                 var fitness_class_6 = await promises_class_fri;
                 var fitness_class_7 = await promises_class_sat;
                 var fitness_class_8 = await promises_class_sun;
+                var class_all = await promises_class_all;
                 var value = {
                     fitness_class_2: fitness_class_2,
                     fitness_class_3: fitness_class_3,
@@ -88,6 +101,7 @@ class ClassControlller {
                     class: value,
                     session: req.session,
                     user_id: 1,
+                    class_all,
                 });
             } catch (error) {
                 console.log(err);

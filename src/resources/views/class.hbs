@@ -32,107 +32,326 @@
                             </thead>
                             <tbody>
                                 <tr>
-                                    <td class="class-time">6.00am - 8.00am</td>
+                                    <td class="class-time">6.00am - 7.30am</td>
                                     <td class="dark-bg hover-dp ts-meta" data-tsmeta="workout">
-                                        <div class="dropdown">
-                                            <h5 class="dropbtn">WEIGHT LOOSE</h5>
-                                            <span >Oanh Võ</span>
+                                        {{#each class.fitness_class_2}}
+                                        {{#ifCond this.start_time '<' "07:30:00" }} <div class="dropdown">
+                                            <h5 class="dropbtn {{this.class_id}}">{{this.name}}</h5>
+                                            <span>{{this.trainer}}</span>
                                             <div class="dropdown-content">
-                                                <div class="">
-                                                    <div class=" ">
-                                                        <h6 class="time">6h30 -    7h30</h6>
-                                                        <h2 class="title_class">Giảm cân </h2>
-                                                        <h6 class="name_trainer"> Giảng viên Hoa</h6>
-                                                        <p class="space"> Còn trống 20/25 học viên
-                                                          </p>
-                                                        <p class="room"> Phòng 102 </p>
-                                                        <button class="register_class" type="submit">Đăng
-                                                            ký khoá học</button>
+                                                <div class=" rounded text-center py-2 px-3">
+                                                    <h5 class="text-uppercase text-primary">
+                                                        {{this.name}}({{this.start_time}} -
+                                                        {{this.end_time}}) </h5>
+                                                    <h6 class="text-uppercase text-dark ">Ngày 11/03/2023, thứ
+                                                        {{this.days_of_the_week}} </h6>
+                                                    giáo viên hướng dẫn:
+                                                    <h5 class="text-capitalize text-primary gv">GV {{this.trainer}}</h5>
+                                                    <div class="chitiet">
+                                                        <p class="room text-dark "> phòng {{this.room_address}}</p>
+                                                        <p class="text-secondary mb-0 hv text-dark ">10/{{this.maximum}}
+                                                            học viên
+                                                        </p>
                                                     </div>
+                                                    <button class="btn btn--radius-2 btn--orange" type="submit">Đăng
+                                                        ký khoá học</button>
                                                 </div>
                                             </div>
-                                        </div>
-                                        <hr width="100%" size="5px" align="center" />
+                                            <hr width="100%" size="5px" align="center" />
+                                            {{/ifCond}}
+                                            {{/each}}
+                                    </td>
+
+                                    <td class="hover-dp ts-meta" data-tsmeta="fitness">
+                                        {{#each class.fitness_class_3}}
+                                        {{#ifCond this.start_time '<' "07:30:00" }} <div class="dropdown">
+                                            <h5 class="dropbtn {{this.class_id}}">{{this.name}}</h5>
+                                            <span>{{this.trainer}}</span>
+                                            <div class="dropdown-content">
+                                                <div class=" rounded text-center py-2 px-3">
+                                                    <h5 class="text-uppercase text-primary">
+                                                        {{this.name}}({{this.start_time}} -
+                                                        {{this.end_time}}) </h5>
+                                                    <h6 class="text-uppercase text-dark ">Ngày 11/03/2023, thứ
+                                                        {{this.days_of_the_week}} </h6>
+                                                    giáo viên hướng dẫn:
+                                                    <h5 class="text-capitalize text-primary gv">GV {{this.trainer}}</h5>
+                                                    <div class="chitiet">
+                                                        <p class="room text-dark "> phòng {{this.room_address}}</p>
+                                                        <p class="text-secondary mb-0 hv text-dark ">10/{{this.maximum}}
+                                                            học viên
+                                                        </p>
+                                                    </div>
+                                                    <button class="btn btn--radius-2 btn--orange" type="submit">Đăng
+                                                        ký khoá học</button>
+                                                </div>
+                                            </div>
+                                            <hr width="100%" size="5px" align="center" />
+                                            {{/ifCond}}
+                                            {{/each}}
+                                    </td>
+                                    <td class="hover-dp ts-meta" data-tsmeta="fitness">
+                                        {{#each class.fitness_class_3}}
+                                        {{#ifCond this.start_time '<' "07:30:00" }} <div class="dropdown">
+                                            <h5 class="dropbtn {{this.class_id}}">{{this.name}}</h5>
+                                            <span>{{this.trainer}}</span>
+                                            <div class="dropdown-content">
+                                                <div class=" rounded text-center py-2 px-3">
+                                                    <h5 class="text-uppercase text-primary">
+                                                        {{this.name}}({{this.start_time}} -
+                                                        {{this.end_time}}) </h5>
+                                                    <h6 class="text-uppercase text-dark ">Ngày 11/03/2023, thứ
+                                                        {{this.days_of_the_week}} </h6>
+                                                    giáo viên hướng dẫn:
+                                                    <h5 class="text-capitalize text-primary gv">GV {{this.trainer}}</h5>
+                                                    <div class="chitiet">
+                                                        <p class="room text-dark "> phòng {{this.room_address}}</p>
+                                                        <p class="text-secondary mb-0 hv text-dark ">10/{{this.maximum}}
+                                                            học viên
+                                                        </p>
+                                                    </div>
+                                                    <button class="btn btn--radius-2 btn--orange" type="submit">Đăng
+                                                        ký khoá học</button>
+                                                </div>
+                                            </div>
+                                            <hr width="100%" size="5px" align="center" />
+                                            {{/ifCond}}
+                                            {{/each}}
+                                    </td>
+                                    <td class="hover-dp ts-meta" data-tsmeta="fitness">
+                                        {{#each class.fitness_class_4}}
+                                        {{#ifCond this.start_time '<' "07:30:00" }} <div class="dropdown">
+                                            <h5 class="dropbtn {{this.class_id}}">{{this.name}}</h5>
+                                            <span>{{this.trainer}}</span>
+                                            <div class="dropdown-content">
+                                                <div class=" rounded text-center py-2 px-3">
+                                                    <h5 class="text-uppercase text-primary">
+                                                        {{this.name}}({{this.start_time}} -
+                                                        {{this.end_time}}) </h5>
+                                                    <h6 class="text-uppercase text-dark ">Ngày 11/03/2023, thứ
+                                                        {{this.days_of_the_week}} </h6>
+                                                    giáo viên hướng dẫn:
+                                                    <h5 class="text-capitalize text-primary gv">GV {{this.trainer}}</h5>
+                                                    <div class="chitiet">
+                                                        <p class="room text-dark "> phòng {{this.room_address}}</p>
+                                                        <p class="text-secondary mb-0 hv text-dark ">10/{{this.maximum}}
+                                                            học viên
+                                                        </p>
+                                                    </div>
+                                                    <button class="btn btn--radius-2 btn--orange" type="submit">Đăng
+                                                        ký khoá học</button>
+                                                </div>
+                                            </div>
+                                            <hr width="100%" size="5px" align="center" />
+                                            {{/ifCond}}
+                                            {{/each}}
+                                    </td>
+                                    <td class="hover-dp ts-meta" data-tsmeta="fitness">
+                                        {{#each class.fitness_class_3}}
+                                        {{#ifCond this.start_time '<' "07:30:00" }} <div class="dropdown">
+                                            <h5 class="dropbtn {{this.class_id}}">{{this.name}}</h5>
+                                            <span>{{this.trainer}}</span>
+                                            <div class="dropdown-content">
+                                                <div class=" rounded text-center py-2 px-3">
+                                                    <h5 class="text-uppercase text-primary">
+                                                        {{this.name}}({{this.start_time}} -
+                                                        {{this.end_time}}) </h5>
+                                                    <h6 class="text-uppercase text-dark ">Ngày 11/03/2023, thứ
+                                                        {{this.days_of_the_week}} </h6>
+                                                    giáo viên hướng dẫn:
+                                                    <h5 class="text-capitalize text-primary gv">GV {{this.trainer}}</h5>
+                                                    <div class="chitiet">
+                                                        <p class="room text-dark "> phòng {{this.room_address}}</p>
+                                                        <p class="text-secondary mb-0 hv text-dark ">10/{{this.maximum}}
+                                                            học viên
+                                                        </p>
+                                                    </div>
+                                                    <button class="btn btn--radius-2 btn--orange" type="submit">Đăng
+                                                        ký khoá học</button>
+                                                </div>
+                                            </div>
+                                            <hr width="100%" size="5px" align="center" />
+                                            {{/ifCond}}
+                                            {{/each}}
+                                    </td>
+                                    <td class="hover-dp ts-meta" data-tsmeta="fitness">
+                                        {{#each class.fitness_class_3}}
+                                        {{#ifCond this.start_time '<' "07:30:00" }} <div class="dropdown">
+                                            <h5 class="dropbtn {{this.class_id}}">{{this.name}}</h5>
+                                            <span>{{this.trainer}}</span>
+                                            <div class="dropdown-content">
+                                                <div class=" rounded text-center py-2 px-3">
+                                                    <h5 class="text-uppercase text-primary">
+                                                        {{this.name}}({{this.start_time}} -
+                                                        {{this.end_time}}) </h5>
+                                                    <h6 class="text-uppercase text-dark ">Ngày 11/03/2023, thứ
+                                                        {{this.days_of_the_week}} </h6>
+                                                    giáo viên hướng dẫn:
+                                                    <h5 class="text-capitalize text-primary gv">GV {{this.trainer}}</h5>
+                                                    <div class="chitiet">
+                                                        <p class="room text-dark "> phòng {{this.room_address}}</p>
+                                                        <p class="text-secondary mb-0 hv text-dark ">10/{{this.maximum}}
+                                                            học viên
+                                                        </p>
+                                                    </div>
+                                                    <button class="btn btn--radius-2 btn--orange" type="submit">Đăng
+                                                        ký khoá học</button>
+                                                </div>
+                                            </div>
+                                            <hr width="100%" size="5px" align="center" />
+                                            {{/ifCond}}
+                                            {{/each}}
+                                    </td>
+                                    <td class="hover-dp ts-meta" data-tsmeta="fitness">
+                                        {{#each class.fitness_class_3}}
+                                        {{#ifCond this.start_time '<' "07:30:00" }} <div class="dropdown">
+                                            <h5 class="dropbtn {{this.class_id}}">{{this.name}}</h5>
+                                            <span>{{this.trainer}}</span>
+                                            <div class="dropdown-content">
+                                                <div class=" rounded text-center py-2 px-3">
+                                                    <h5 class="text-uppercase text-primary">
+                                                        {{this.name}}({{this.start_time}} -
+                                                        {{this.end_time}}) </h5>
+                                                    <h6 class="text-uppercase text-dark ">Ngày 11/03/2023, thứ
+                                                        {{this.days_of_the_week}} </h6>
+                                                    giáo viên hướng dẫn:
+                                                    <h5 class="text-capitalize text-primary gv">GV {{this.trainer}}</h5>
+                                                    <div class="chitiet">
+                                                        <p class="room text-dark "> phòng {{this.room_address}}</p>
+                                                        <p class="text-secondary mb-0 hv text-dark ">10/{{this.maximum}}
+                                                            học viên
+                                                        </p>
+                                                    </div>
+                                                    <button class="btn btn--radius-2 btn--orange" type="submit">Đăng
+                                                        ký khoá học</button>
+                                                </div>
+                                            </div>
+                                            <hr width="100%" size="5px" align="center" />
+                                            {{/ifCond}}
+                                            {{/each}}
+                                    </td>
+                                    
+                                </tr>
+                                <tr>
+                                    <td class="class-time">7.30am - 9.00am</td>
+                                    <td class="blank-td"></td>
+                                    <td class="dark-bg hover-dp ts-meta" data-tsmeta="fitness">
+                                        <h5>Fitness</h5>
+                                        <span>Kimberly Stone</span>
+                                    </td>
+                                    <td class="hover-dp ts-meta" data-tsmeta="workout">
                                         <h5>WEIGHT LOOSE</h5>
                                         <span>RLefew D. Loee</span>
                                     </td>
-                                    <td class="hover-dp ts-meta" data-tsmeta="fitness">
+                                    <td class="dark-bg hover-dp ts-meta" data-tsmeta="motivation">
                                         <h5>Cardio</h5>
                                         <span>RLefew D. Loee</span>
                                     </td>
+                                    <td class="hover-dp ts-meta" data-tsmeta="workout">
+                                        <h5>Body Building</h5>
+                                        <span>Robert Cage</span>
+                                    </td>
+                                    <td class="dark-bg hover-dp ts-meta" data-tsmeta="motivation">
+                                        <h5>Karate</h5>
+                                        <span>Donald Grey</span>
+                                    </td>
+                                    <td class="blank-td"></td>
+                                </tr>
+                                <tr>
+                                    <td class="class-time">9.00pm - 11.00pm</td>
+                                    <td class="dark-bg hover-dp ts-meta" data-tsmeta="fitness">
+                                        <h5>Boxing</h5>
+                                        <span>Rachel Adam</span>
+                                    </td>
+                                    <td class="hover-dp ts-meta" data-tsmeta="motivation">
+                                        <h5>Karate</h5>
+                                        <span>Donald Grey</span>
+                                    </td>
+                                    <td class="dark-bg hover-dp ts-meta" data-tsmeta="workout">
+                                        <h5>Body Building</h5>
+                                        <span>Robert Cage</span>
+                                    </td>
+                                    <td class="blank-td"></td>
                                     <td class="dark-bg hover-dp ts-meta" data-tsmeta="workout">
                                         <h5>Yoga</h5>
                                         <span>Keaf Shen</span>
                                     </td>
-                                    <td class="hover-dp ts-meta" data-tsmeta="fitness">
+                                    <td class="hover-dp ts-meta" data-tsmeta="motivation">
+                                        <h5>Cardio</h5>
+                                        <span>RLefew D. Loee</span>
+                                    </td>
+                                    <td class="dark-bg hover-dp ts-meta" data-tsmeta="fitness">
                                         <h5>Fitness</h5>
                                         <span>Kimberly Stone</span>
+                                    </td>
+                                </tr>
+                                <tr>
+                                    <td class="class-time">14.00pm - 15.00pm</td>
+                                    <td class="hover-dp ts-meta" data-tsmeta="motivation">
+                                        <h5>Cardio</h5>
+                                        <span>RLefew D. Loee</span>
                                     </td>
                                     <td class="dark-bg blank-td"></td>
-                                    <td class="hover-dp ts-meta" data-tsmeta="motivation">
+                                    <td class="hover-dp ts-meta" data-tsmeta="fitness">
                                         <h5>Boxing</h5>
                                         <span>Rachel Adam</span>
                                     </td>
-                                    <td class="dark-bg hover-dp ts-meta" data-tsmeta="workout">
-                                        <h5>Body Building</h5>
-                                        <span>Robert Cage</span>
-                                    </td>
+
                                 </tr>
                                 <tr>
-                                    <td class="class-time">10.00am - 12.00am</td>
-                                    <td class="blank-td"></td>
-                                    <td class="dark-bg hover-dp ts-meta" data-tsmeta="fitness">
-                                        <h5>Fitness</h5>
-                                        <span>Kimberly Stone</span>
-                                    </td>
-                                    <td class="hover-dp ts-meta" data-tsmeta="workout">
-                                        <h5>WEIGHT LOOSE</h5>
-                                        <span>RLefew D. Loee</span>
-                                    </td>
-                                    <td class="dark-bg hover-dp ts-meta" data-tsmeta="motivation">
-                                        <h5>Cardio</h5>
-                                        <span>RLefew D. Loee</span>
-                                    </td>
-                                    <td class="hover-dp ts-meta" data-tsmeta="workout">
-                                        <h5>Body Building</h5>
-                                        <span>Robert Cage</span>
-                                    </td>
-                                    <td class="dark-bg hover-dp ts-meta" data-tsmeta="motivation">
-                                        <h5>Karate</h5>
-                                        <span>Donald Grey</span>
-                                    </td>
-                                    <td class="blank-td"></td>
-                                </tr>
-                                <tr>
-                                    <td class="class-time">5.00pm - 7.00pm</td>
-                                    <td class="dark-bg hover-dp ts-meta" data-tsmeta="fitness">
-                                        <h5>Boxing</h5>
-                                        <span>Rachel Adam</span>
-                                    </td>
-                                    <td class="hover-dp ts-meta" data-tsmeta="motivation">
-                                        <h5>Karate</h5>
-                                        <span>Donald Grey</span>
-                                    </td>
-                                    <td class="dark-bg hover-dp ts-meta" data-tsmeta="workout">
-                                        <h5>Body Building</h5>
-                                        <span>Robert Cage</span>
-                                    </td>
-                                    <td class="blank-td"></td>
-                                    <td class="dark-bg hover-dp ts-meta" data-tsmeta="workout">
-                                        <h5>Yoga</h5>
-                                        <span>Keaf Shen</span>
-                                    </td>
+                                    <td class="class-time">15.00pm - 16.30pm</td>
                                     <td class="hover-dp ts-meta" data-tsmeta="motivation">
                                         <h5>Cardio</h5>
                                         <span>RLefew D. Loee</span>
                                     </td>
-                                    <td class="dark-bg hover-dp ts-meta" data-tsmeta="fitness">
-                                        <h5>Fitness</h5>
-                                        <span>Kimberly Stone</span>
+                                    <td class="dark-bg blank-td"></td>
+                                    <td class="hover-dp ts-meta" data-tsmeta="fitness">
+                                        <h5>Boxing</h5>
+                                        <span>Rachel Adam</span>
                                     </td>
+
                                 </tr>
                                 <tr>
-                                    <td class="class-time">7.00pm - 9.00pm</td>
+                                    <td class="class-time">16.30pm - 17.00pm</td>
+                                    <td class="hover-dp ts-meta" data-tsmeta="motivation">
+                                        <h5>Cardio</h5>
+                                        <span>RLefew D. Loee</span>
+                                    </td>
+                                    <td class="dark-bg blank-td"></td>
+                                    <td class="hover-dp ts-meta" data-tsmeta="fitness">
+                                        <h5>Boxing</h5>
+                                        <span>Rachel Adam</span>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td class="class-time">17.00pm - 18.00pm</td>
+                                    <td class="hover-dp ts-meta" data-tsmeta="motivation">
+                                        <h5>Cardio</h5>
+                                        <span>RLefew D. Loee</span>
+                                    </td>
+                                    <td class="dark-bg blank-td"></td>
+                                    <td class="hover-dp ts-meta" data-tsmeta="fitness">
+                                        <h5>Boxing</h5>
+                                        <span>Rachel Adam</span>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td class="class-time">18.00pm - 20.00pm</td>
+                                    <td class="hover-dp ts-meta" data-tsmeta="motivation">
+                                        <h5>Cardio</h5>
+                                        <span>RLefew D. Loee</span>
+                                    </td>
+                                    <td class="dark-bg blank-td"></td>
+                                    <td class="hover-dp ts-meta" data-tsmeta="fitness">
+                                        <h5>Boxing</h5>
+                                        <span>Rachel Adam</span>
+                                    </td>
+
+                                </tr>
+                                <tr>
+                                    <td class="class-time">14.00pm - 16.00pm</td>
                                     <td class="hover-dp ts-meta" data-tsmeta="motivation">
                                         <h5>Cardio</h5>
                                         <span>RLefew D. Loee</span>
@@ -208,11 +427,11 @@
                     <div class="col-lg-3 col-md-4 col-sm-6">
                         <div class="bg-dark rounded text-center py-4 px-3">
                             <h6 class="text-uppercase text-light mb-3">{{this.start_time}} - {{this.end_time}}</h6>
-                            <h5 class="text-uppercase text-primary">{{this.name}} thứ 3 </h5>
+                            <h5 class="text-uppercase text-primary">{{this.name}} </h5>
                             giáo viên hướng dẫn:
                             <h5 class="text-capitalize text-primary">{{this.trainer}}</h5>
                             <p class="text-secondary mb-0">{{this.maximum}} học viên - phòng {{this.room_address}}</p>
-                            <button class="btn btn--radius-2 btn--orange" type="submit">Đăng ký khoá học</button>
+                            <button class="btn btn--radius-2 btn--orange" type="submit">Tham gia khoá học</button>
                         </div>
                     </div>
                     {{/each}}

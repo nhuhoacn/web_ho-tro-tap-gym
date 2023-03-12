@@ -67,6 +67,7 @@ app.engine(
                 }
                 return out;
             },
+            ifEach: function (value, number, option) {},
             for: function (current, numPage, options) {
                 var out = '';
                 for (

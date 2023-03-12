@@ -4674,10 +4674,10 @@ ol {
 }
 
 .dropdown-content {
-    // display: none;
+    display: none;
     position: absolute;
     z-index: 1;
-    width: 371px;
+    width: 270px;
     height: 197px;
     left: 60px;
     top: 29px;
@@ -4703,81 +4703,12 @@ ol {
     color: #fb5b21;
 }
 
-.name_trainer {
-    position: absolute;
-    width: 262px;
-    height: 17px;
-    top: 43px;
-    left: 44px;
-    font-family: 'Inter';
-    font-size: 12px;
-    text-align: center;
-
-    color: #000000;
+.chitiet {
+    display: flex;
+    justify-content: space-evenly;
+    height: 30px;
 }
 
-.time {
-    position: absolute;
-    width: 432px;
-    height: 32px;
-    top: 30px;
-    left: -35px;
-    font-size: 26px;
-    line-height: 89px;
-    text-align: center;
-    color: #000000;
-}
-
-.space {
-    position: absolute;
-    width: 230px;
-    height: 23px;
-
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 300;
-    font-size: 15px;
-    line-height: 18px;
-    text-align: center;
-
-    color: #000000;
-}
-
-.room {
-    position: absolute;
-    width: 118px;
-    height: 19px;
-    left: 493px;
-    top: 325px;
-
-    font-family: 'Inter';
-    font-style: normal;
-    font-weight: 300;
-    font-size: 15px;
-    line-height: 18px;
-    /* identical to box height */
-
-    text-align: center;
-
-    color: #000000;
-}
-
-.register_class {
-    position: absolute;
-    width: 208px;
-    height: 36px;
-    left: 541px;
-    top: 348px;
-
-    background: #fb5b21;
-    border-radius: 22px;
-}
-
-.title_class {
-    width: 354px;
-    height: 59px;
-    font-size: 25px;
-    line-height: 48px;
-    text-align: center;
-    color: #fb5b21;
+.gv {
+    height: 15px;
 }
