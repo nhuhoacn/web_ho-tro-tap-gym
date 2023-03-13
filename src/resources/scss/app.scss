@@ -397,10 +397,6 @@ h4 {
     font-size: 18px;
 }
 
-h5 {
-    font-size: 15px;
-}
-
 h6 {
     font-size: 13px;
 }
@@ -1033,7 +1029,7 @@ h4 {
 }
 
 h5 {
-    font-size: 18px;
+    font-size: 15px;
 }
 
 h6 {
@@ -2484,6 +2480,8 @@ ol {
 
 .class-details-timetable_title {
     margin-bottom: 35px;
+    display: flex;
+    justify-content: space-between;
 }
 
 .class-details-timetable_title h5 {
@@ -2602,7 +2600,7 @@ ol {
 
 .class-timetable table tbody tr td {
     width: 146px;
-    padding: 35px 0;
+    padding: 5px 0;
 }
 
 .class-timetable table tbody tr td.class-time {
@@ -2648,7 +2646,7 @@ ol {
     color: #ffffff;
     font-weight: 600;
     text-transform: uppercase;
-    margin-bottom: 10px;
+    margin-bottom: 2px;
 }
 
 .class-timetable table tbody tr td span {
@@ -4695,20 +4693,18 @@ ol {
 }
 
 /* Change the background color of the dropdown button when the dropdown content is shown */
-.dropdown:hover .dropbtn {
+.hover-dp:hover .dropbtn {
     background-color: var(--primary);
 }
 
-.dropbtn {
-    color: #fb5b21;
+.hover-dp hr {
+    width: 100%;
+    size: 5px;
+    align: center;
+    margin: 5px;
 }
-
-.chitiet {
+.tabletime {
     display: flex;
-    justify-content: space-evenly;
-    height: 30px;
-}
-
-.gv {
-    height: 15px;
+    justify-content: space-around;
+    margin: 30px;
 }

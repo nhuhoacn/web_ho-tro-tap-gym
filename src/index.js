@@ -100,6 +100,33 @@ app.engine(
                 }
                 return out;
             },
+            ifManyCond: function (
+                v1,
+                operator1,
+                v2,
+                v3,
+                operator2,
+                v4,
+                options,
+            ) {
+                if (operator1 == '>=' && operator2 == '>=') {
+                    return v1 >= v2 && v3 >= v4
+                        ? options.fn(this)
+                        : options.inverse(this);
+                } else if (operator1 == '>=' && operator2 == '<=') {
+                    return v1 >= v2 && v3 <= v4
+                        ? options.fn(this)
+                        : options.inverse(this);
+                } else if (operator1 == '<=' && operator2 == '>=') {
+                    return v1 <= v2 && v3 >= v4
+                        ? options.fn(this)
+                        : options.inverse(this);
+                } else if (operator1 == '<=' && operator2 == '<=') {
+                    return v1 <= v2 && v3 <= v4
+                        ? options.fn(this)
+                        : options.inverse(this);
+                }
+            },
             ifCond: function (v1, operator, v2, options) {
                 switch (operator) {
                     case '==':
