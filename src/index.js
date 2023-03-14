@@ -28,7 +28,9 @@ app.use(
         secret: 'codeworkrsecret',
         resave: false,
         saveUninitialized: false,
-        cookie: {},
+        cookie: {
+            SameSite: null,
+        },
     }),
 );
 // //toastr
@@ -67,7 +69,9 @@ app.engine(
                 }
                 return out;
             },
-            ifEach: function (value, number, option) {},
+            component: function (array, i, option) {
+                return array[i];
+            },
             for: function (current, numPage, options) {
                 var out = '';
                 for (

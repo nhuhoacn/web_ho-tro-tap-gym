@@ -7,9 +7,12 @@ class ClassControlller {
         const all_class = `SELECT class_id,fitness_class.name, start_time, end_time, room_address, maximum, weekday, user.name as trainer
                         FROM fitness_class LEFT JOIN user ON user.user_id = fitness_class.trainer_id
                         ORDER BY start_time`;
-        const mysql_count_hv = `SELECT class_id, Count(*) as count FROM user_join_fittness_class WHERE join_date >= "?" GROUP BY class_id`;
-        const now = moment().format('YYYY-MM-DD');
-        var count_hv = {};
+        const mysql_count_hv = `SELECT class_id, Count(*) as count FROM user_join_fittness_class WHERE join_date >= ? GROUP BY class_id`;
+        const weekdaynow = moment().isoWeekday() + 1;
+        var monday = moment()
+            .subtract(weekdaynow - 2, 'days')
+            .format('DD/MM/YYYY');
+        var days = [0, 0, monday];
 
         var promise_allclass = new Promise((resolve, reject) => {
             db.query(all_class, function (err, all_class) {
@@ -21,7 +24,10 @@ class ClassControlller {
             });
         });
         var promise_search_count = new Promise((resolve, reject) => {
-            db.query(mysql_count_hv, now, function (err, hv) {
+            let day = moment()
+                .subtract(weekdaynow - 2, 'days')
+                .format('YYYY/MM/DD');
+            db.query(mysql_count_hv, day, function (err, hv) {
                 if (err) {
                     console.log(err);
                 } else {
@@ -37,6 +43,7 @@ class ClassControlller {
                 if (req.session.user) {
                     for (let i = 0; i < all_class.length; i++) {
                         all_class[i].user_id = req.session.user.user_id;
+                        all_class[i].weekdaynow = weekdaynow;
                     }
                 }
                 for (let j = 0; j < all_class.length; j++) {
@@ -49,14 +56,6 @@ class ClassControlller {
                         }
                     }
                 }
-                const weekday = moment().isoWeekday();
-                const monday = moment()
-                    .subtract(weekday - 1, 'days')
-                    .format('DD/MM/YYYY');
-                const sunday = moment()
-                    .add(7 - weekday - 2, 'days')
-                    .format('DD/MM/YYYY');
-                var days = [monday];
                 for (let i = 1; i < 7; i++) {
                     let nextday = moment(days[days.length - 1], 'DD/MM/YYYY')
                         .add(1, 'days')
@@ -67,10 +66,8 @@ class ClassControlller {
                     session: req.session,
                     user_id: 1,
                     all_class,
-                    monday,
-                    sunday,
                     days,
-                    weekday,
+                    weekdaynow,
                 });
             } catch (err) {
                 console.log(err);

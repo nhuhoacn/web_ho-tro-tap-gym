@@ -11,8 +11,7 @@
                 <div class="col-lg-12">
                     <div class="class-details-timetable_title">
                         <h5> Thời khoá biểu tập luyện</h5>
-                        <h5> ngày {{monday}} đến {{sunday}}</h5>
-
+                        <h5> ngày {{#component days 2}}{{/component}} đến {{#component days 8}}{{/component}} </h5>
                     </div>
                 </div>
             </div>
@@ -917,10 +916,11 @@
         </div>
     </section>
     <!-- Class Timetable Section End -->
-    <h2 class="tabletime">Lịch chi tiết({{monday}} - {{sunday}})</h2>
+    <h2 class="tabletime">Lịch chi tiết( {{#component days 2}}{{/component}} - {{#component days 8}}{{/component}} )
+    </h2>
 
     <div class="tab-class text-center">
-        <ul class="nav nav-pills d-inline-flex justify-content-center bg-dark text-uppercase rounded-pill mb-5">
+        <ul class="nav nav-pills d-inline-flex justify-content-center bg-dark text-uppercase rounded-pill mb-3">
             <li class="nav-item">
                 <a class="nav-link rounded-pill text-white active" data-bs-toggle="pill" href="#tab-1">Thứ hai</a>
             </li>
@@ -945,6 +945,7 @@
         </ul>
         <div class="tab-content">
             <div id="tab-1" class="tab-pane fade show p-0 active">
+                <h4 class="datenow">Thứ hai ngày {{#component days 2}}{{/component}} </h4>
                 <div class="row g-5">
                     {{#each all_class}}
                     {{#ifCond this.weekday '==' 2}}
@@ -954,14 +955,23 @@
                             <h5 class="text-uppercase text-primary">{{name}} </h5>
                             giáo viên hướng dẫn:
                             <h5 class="text-capitalize text-primary">{{trainer}}</h5>
-                            <p class="text-secondary mb-0">{{count_hv}}/{{maximum}} học viên - phòng {{room_address}}</p>
+                            <p class="text-secondary mb-0">{{count_hv}}/{{maximum}} học viên - phòng {{room_address}}
+                            </p>
                             {{#if user_id}}
                             <form method="post" action="/class">
+                                {{#ifCond weekdaynow '>' 2}}
+                                <button class="btn btn--radius-2 btn--orange">Tham gia vào tuần sau</button>
+                                <h5 class="end_class">Buổi học tuần này đã kết thúc</h5>
+                                {{else ifCond count_hv '=='  maximum}}
+                                 <button class="btn btn--radius-2 btn--orange">Tham gia vào tuần sau</button>
+                                <h5 class="end_class">Đã đầy học viên</h5>
+                                {{else}}
                                 <input type="hidden" name="weekday" value="{{weekday}}">
                                 <input type="hidden" name="class_id" value="{{class_id}}">
                                 <input type="hidden" name="start_time" value="{{start_time}} ">
                                 <input type="hidden" name="end_time" value="{{end_time}}">
                                 <button class="btn btn--radius-2 btn--orange">Tham gia buổi học</button>
+                                {{/ifCond}}
                             </form>
                             {{else}}
                             <a href="/user/login/">
@@ -975,6 +985,7 @@
                 </div>
             </div>
             <div id="tab-2" class="tab-pane fade p-0 ">
+                <h4 class="datenow">Thứ ba ngày {{#component days 3}}{{/component}} </h4>
                 <div class="row g-5">
                     {{#each all_class}}
                     {{#ifCond this.weekday '==' 3}}
@@ -984,18 +995,21 @@
                             <h5 class="text-uppercase text-primary">{{name}} </h5>
                             giáo viên hướng dẫn:
                             <h5 class="text-capitalize text-primary">{{trainer}}</h5>
-                            <p class="text-secondary mb-0">{{count_hv}}/{{maximum}} học viên - phòng {{room_address}}</p>
-                            {{#if user_id}}
-                            <form method="post" action="/class">
+                            <p class="text-secondary mb-0">{{count_hv}}/{{maximum}} học viên - phòng {{room_address}}
+                            </p>
+                             {{#ifCond weekdaynow '>' 3}}
+                                <button class="btn btn--radius-2 btn--orange">Tham gia vào tuần sau</button>
+                                <h5 class="end_class">Buổi học tuần này đã kết thúc</h5>
+                                {{else ifCond count_hv '=='  maximum}}
+                                 <button class="btn btn--radius-2 btn--orange">Tham gia vào tuần sau</button>
+                                <h5 class="end_class">Đã đầy học viên</h5>
+                                {{else}}
                                 <input type="hidden" name="weekday" value="{{weekday}}">
                                 <input type="hidden" name="class_id" value="{{class_id}}">
+                                <input type="hidden" name="start_time" value="{{start_time}} ">
+                                <input type="hidden" name="end_time" value="{{end_time}}">
                                 <button class="btn btn--radius-2 btn--orange">Tham gia buổi học</button>
-                            </form>
-                            {{else}}
-                            <a href="/user/login/">
-                                <button class="btn btn--radius-2 btn--orange"> Đăng nhập </button>
-                            </a>
-                            {{/if}}
+                                {{/ifCond}}
                         </div>
                     </div>
                     {{/ifCond}}
@@ -1012,7 +1026,8 @@
                             <h5 class="text-uppercase text-primary">{{name}} </h5>
                             giáo viên hướng dẫn:
                             <h5 class="text-capitalize text-primary">{{trainer}}</h5>
-                            <p class="text-secondary mb-0">{{count_hv}}/{{maximum}} học viên - phòng {{room_address}}</p>
+                            <p class="text-secondary mb-0">{{count_hv}}/{{maximum}} học viên - phòng {{room_address}}
+                            </p>
                             {{#if user_id}}
                             <form method="post" action="/class">
                                 <input type="hidden" name="weekday" value="{{weekday}}">
@@ -1040,7 +1055,8 @@
                             <h5 class="text-uppercase text-primary">{{name}} </h5>
                             giáo viên hướng dẫn:
                             <h5 class="text-capitalize text-primary">{{trainer}}</h5>
-                            <p class="text-secondary mb-0">{{count_hv}}/{{maximum}} học viên - phòng {{room_address}}</p>
+                            <p class="text-secondary mb-0">{{count_hv}}/{{maximum}} học viên - phòng {{room_address}}
+                            </p>
                             {{#if user_id}}
                             <form method="post" action="/class">
                                 <input type="hidden" name="weekday" value="{{weekday}}">
@@ -1068,7 +1084,8 @@
                             <h5 class="text-uppercase text-primary">{{name}} </h5>
                             giáo viên hướng dẫn:
                             <h5 class="text-capitalize text-primary">{{trainer}}</h5>
-                            <p class="text-secondary mb-0">{{count_hv}}/{{maximum}} học viên - phòng {{room_address}}</p>
+                            <p class="text-secondary mb-0">{{count_hv}}/{{maximum}} học viên - phòng {{room_address}}
+                            </p>
                             {{#if user_id}}
                             <form method="post" action="/class">
                                 <input type="hidden" name="weekday" value="{{weekday}}">
@@ -1096,7 +1113,8 @@
                             <h5 class="text-uppercase text-primary">{{name}} </h5>
                             giáo viên hướng dẫn:
                             <h5 class="text-capitalize text-primary">{{trainer}}</h5>
-                            <p class="text-secondary mb-0">{{count_hv}}/{{maximum}} học viên - phòng {{room_address}}</p>
+                            <p class="text-secondary mb-0">{{count_hv}}/{{maximum}} học viên - phòng {{room_address}}
+                            </p>
                             {{#if user_id}}
                             <form method="post" action="/class">
                                 <input type="hidden" name="weekday" value="{{weekday}}">
@@ -1124,7 +1142,8 @@
                             <h5 class="text-uppercase text-primary">{{name}} </h5>
                             giáo viên hướng dẫn:
                             <h5 class="text-capitalize text-primary">{{trainer}}</h5>
-                            <p class="text-secondary mb-0">{{count_hv}}/{{maximum}} học viên - phòng {{room_address}}</p>
+                            <p class="text-secondary mb-0">{{count_hv}}/{{maximum}} học viên - phòng {{room_address}}
+                            </p>
                             {{#if user_id}}
                             <form method="post" action="/class">
                                 <input type="hidden" name="weekday" value="{{weekday}}">
