@@ -1,6 +1,5 @@
 const db = require('../../config/db');
 const moment = require('moment');
-const { resolve } = require('chart.js/dist/helpers/helpers.options');
 
 class ClassControlller {
     //[GET] class/
@@ -8,72 +7,76 @@ class ClassControlller {
         const all_class = `SELECT class_id,fitness_class.name, start_time, end_time, room_address, maximum, weekday, user.name as trainer
                         FROM fitness_class LEFT JOIN user ON user.user_id = fitness_class.trainer_id
                         ORDER BY start_time`;
-        const count_hv = `SELECT class_id, Count(*) as count FROM user_join_fittness_class WHERE class_id = ? and join_date >= "?"`;
+        const mysql_count_hv = `SELECT class_id, Count(*) as count FROM user_join_fittness_class WHERE join_date >= "?" GROUP BY class_id`;
+        const now = moment().format('YYYY-MM-DD');
+        var count_hv = {};
 
-        db.query(all_class, function (err, all_class) {
-            if (err) {
-                console.log(err);
-            } else {
-                const now = moment().format('YYYY-MM-DD');
+        var promise_allclass = new Promise((resolve, reject) => {
+            db.query(all_class, function (err, all_class) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    resolve(all_class);
+                }
+            });
+        });
+        var promise_search_count = new Promise((resolve, reject) => {
+            db.query(mysql_count_hv, now, function (err, hv) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    resolve(hv);
+                }
+            });
+        });
+
+        const function_count_hv = async () => {
+            try {
+                var all_class = await promise_allclass;
+                var count_hv = await promise_search_count;
                 if (req.session.user) {
                     for (let i = 0; i < all_class.length; i++) {
-                        all_class[i].user_id = Number(req.session.user.user_id);
+                        all_class[i].user_id = req.session.user.user_id;
                     }
                 }
-                var promises1 = new Promise((resolve, reject) => {
-                    for (let i = 0; i < all_class.length; i++) {
-                        db.query(
-                            count_hv,
-                            [all_class[i].class_id, now],
-                            function (err, hv) {
-                                if (err) {
-                                    console.log(err);
-                                } else {
-                                    all_class[i].count_hv = Number(hv[0].count);
-                                    resolve(hv);
-                                }
-                            },
-                        );
-                    }
-                });
-                const function_count_hv = async () => {
-                    try {
-                        var hv = await promises1;
-
-                        console.log('tong hv ', hv);
-                        const weekday = moment().isoWeekday();
-                        const monday = moment()
-                            .subtract(weekday - 1, 'days')
-                            .format('DD/MM/YYYY');
-                        const sunday = moment()
-                            .add(7 - weekday - 2, 'days')
-                            .format('DD/MM/YYYY');
-                        var days = [monday];
-                        for (let i = 1; i < 7; i++) {
-                            let nextday = moment(
-                                days[days.length - 1],
-                                'DD/MM/YYYY',
-                            )
-                                .add(1, 'days')
-                                .format('DD/MM/YYYY');
-                            days.push(nextday);
+                for (let j = 0; j < all_class.length; j++) {
+                    for (let i = 0; i < count_hv.length; i++) {
+                        if (all_class[j].class_id == count_hv[i].class_id) {
+                            all_class[j].count_hv = count_hv[i].count;
                         }
-                        res.render('class', {
-                            session: req.session,
-                            user_id: 1,
-                            all_class,
-                            monday,
-                            sunday,
-                            days,
-                            weekday,
-                        });
-                    } catch (err) {
-                        console.log(err);
+                        if (!all_class[j].count_hv) {
+                            all_class[j].count_hv = 0;
+                        }
                     }
-                };
-                function_count_hv();
+                }
+                const weekday = moment().isoWeekday();
+                const monday = moment()
+                    .subtract(weekday - 1, 'days')
+                    .format('DD/MM/YYYY');
+                const sunday = moment()
+                    .add(7 - weekday - 2, 'days')
+                    .format('DD/MM/YYYY');
+                var days = [monday];
+                for (let i = 1; i < 7; i++) {
+                    let nextday = moment(days[days.length - 1], 'DD/MM/YYYY')
+                        .add(1, 'days')
+                        .format('DD/MM/YYYY');
+                    days.push(nextday);
+                }
+                res.render('class', {
+                    session: req.session,
+                    user_id: 1,
+                    all_class,
+                    monday,
+                    sunday,
+                    days,
+                    weekday,
+                });
+            } catch (err) {
+                console.log(err);
             }
-        });
+        };
+        function_count_hv();
     }
 
     //[POST] class/
