@@ -242,48 +242,6 @@ class UserController {
         });
     }
 
-    //[GET] /user/infor
-    infor(req, res) {
-        if (req.session.user) {
-            var history = `SELECT * FROM user_join_fittness_class 
-            Right JOIN fitness_class ON user_join_fittness_class.class_id = fitness_class.class_id
-            where user_join_fittness_class.user_id = ?`;
-            var bmi =
-                Math.round(
-                    (req.session.user.weight /
-                        (req.session.user.height * req.session.user.height)) *
-                        1000000,
-                ) / 100;
-            db.query(
-                history,
-                req.session.user.user_id,
-                function (err, history) {
-                    for (let i = 0; i < history.length; i++) {
-                        let date = moment
-                            .utc(history[i].registration_time)
-                            .format('MMM Do, YYYY');
-                        history[i].registration_time = date;
-                        date = moment
-                            .utc(history[i].cancellation_time)
-                            .format('MMM Do, YYYY');
-                        history[i].cancellation_time = date;
-                    }
-                    let date = moment
-                        .utc(req.session.user.birthday)
-                        .format('MMM Do, YYYY');
-                    req.session.user.birthday = date;
-                    res.render('information', {
-                        session: req.session,
-                        history,
-                        bmi,
-                    });
-                },
-            );
-        } else {
-            res.render('login');
-        }
-    }
-
     //[GET] user/change_info
     changeinfo(req, res) {
         res.render('change_info', { session: req.session });

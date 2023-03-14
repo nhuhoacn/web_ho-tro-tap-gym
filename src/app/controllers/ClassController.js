@@ -1,184 +1,149 @@
 const db = require('../../config/db');
 const moment = require('moment');
+const { resolve } = require('chart.js/dist/helpers/helpers.options');
 
 class ClassControlller {
     //[GET] class/
     show(req, res) {
-        const fitness_class = `SELECT class_id,fitness_class.name, start_time, end_time, room_address, maximum,weekday , user.name as trainer
-                        FROM fitness_class right JOIN user ON user.user_id = fitness_class.trainer_id
-                        where weekday  = ? ORDER BY start_time`;
-
-        var promises_class_mon = new Promise((resolve, reject) => {
-            db.query(fitness_class, 2, function (err, fitness_class_2) {
-                if (err) {
-                    console.log(err);
-                }
-                resolve(fitness_class_2);
-            });
-        });
-        var promises_class_tues = new Promise((resolve, reject) => {
-            db.query(fitness_class, 3, function (err, fitness_class_3) {
-                if (err) {
-                    console.log(err);
-                }
-                resolve(fitness_class_3);
-            });
-        });
-        var promises_class_wed = new Promise((resolve, reject) => {
-            db.query(fitness_class, 4, function (err, fitness_class_4) {
-                if (err) {
-                    console.log(err);
-                }
-                resolve(fitness_class_4);
-            });
-        });
-        var promises_class_thurs = new Promise((resolve, reject) => {
-            db.query(fitness_class, 5, function (err, fitness_class_5) {
-                if (err) {
-                    console.log(err);
-                }
-                resolve(fitness_class_5);
-            });
-        });
-        var promises_class_fri = new Promise((resolve, reject) => {
-            db.query(fitness_class, 6, function (err, fitness_class_6) {
-                if (err) {
-                    console.log(err);
-                }
-                resolve(fitness_class_6);
-            });
-        });
-        var promises_class_sat = new Promise((resolve, reject) => {
-            db.query(fitness_class, 7, function (err, fitness_class_7) {
-                if (err) {
-                    console.log(err);
-                }
-                resolve(fitness_class_7);
-            });
-        });
-        var promises_class_sun = new Promise((resolve, reject) => {
-            db.query(fitness_class, 8, function (err, fitness_class_8) {
-                if (err) {
-                    console.log(err);
-                }
-                resolve(fitness_class_8);
-            });
-        });
-        const class_all = `SELECT class_id,fitness_class.name, start_time, end_time, room_address, maximum, user.name as trainer
-                        FROM fitness_class right JOIN user ON user.user_id = fitness_class.trainer_id
+        const all_class = `SELECT class_id,fitness_class.name, start_time, end_time, room_address, maximum, weekday, user.name as trainer
+                        FROM fitness_class LEFT JOIN user ON user.user_id = fitness_class.trainer_id
                         ORDER BY start_time`;
+        const count_hv = `SELECT class_id, Count(*) as count FROM user_join_fittness_class WHERE class_id = ? and join_date >= "?"`;
 
-        var promises_class_all = new Promise((resolve, reject) => {
-            db.query(class_all, function (err, class_all) {
-                if (err) {
-                    console.log(err);
-                }
-                resolve(class_all);
-            });
-        });
-        const showclass = async () => {
-            try {
-                var fitness_class_2 = await promises_class_mon;
-                var fitness_class_3 = await promises_class_tues;
-                var fitness_class_4 = await promises_class_wed;
-                var fitness_class_5 = await promises_class_thurs;
-                var fitness_class_6 = await promises_class_fri;
-                var fitness_class_7 = await promises_class_sat;
-                var fitness_class_8 = await promises_class_sun;
-                var class_all = await promises_class_all;
+        db.query(all_class, function (err, all_class) {
+            if (err) {
+                console.log(err);
+            } else {
+                const now = moment().format('YYYY-MM-DD');
                 if (req.session.user) {
-                    for (let i = 0; i < fitness_class_2.length; i++) {
-                        fitness_class_2[i].user_id = Number(
-                            req.session.user.user_id,
-                        );
-                    }
-                    for (let i = 0; i < fitness_class_3.length; i++) {
-                        fitness_class_3[i].user_id = Number(
-                            req.session.user.user_id,
-                        );
-                    }
-                    for (let i = 0; i < fitness_class_4.length; i++) {
-                        fitness_class_4[i].user_id = Number(
-                            req.session.user.user_id,
-                        );
-                    }
-                    for (let i = 0; i < fitness_class_5.length; i++) {
-                        fitness_class_5[i].user_id = Number(
-                            req.session.user.user_id,
-                        );
-                    }
-                    for (let i = 0; i < fitness_class_6.length; i++) {
-                        fitness_class_6[i].user_id = Number(
-                            req.session.user.user_id,
-                        );
-                    }
-                    for (let i = 0; i < fitness_class_7.length; i++) {
-                        fitness_class_7[i].user_id = Number(
-                            req.session.user.user_id,
-                        );
-                    }
-                    for (let i = 0; i < fitness_class_8.length; i++) {
-                        fitness_class_8[i].user_id = Number(
-                            req.session.user.user_id,
-                        );
+                    for (let i = 0; i < all_class.length; i++) {
+                        all_class[i].user_id = Number(req.session.user.user_id);
                     }
                 }
-                var value = {
-                    fitness_class_2: fitness_class_2,
-                    fitness_class_3: fitness_class_3,
-                    fitness_class_4: fitness_class_4,
-                    fitness_class_5: fitness_class_5,
-                    fitness_class_6: fitness_class_6,
-                    fitness_class_7: fitness_class_7,
-                    fitness_class_8: fitness_class_8,
-                };
-
-                const weekday = moment().isoWeekday() - 1;
-                const monday = moment()
-                    .subtract(weekday, 'days')
-                    .format('DD/MM/YYYY');
-                const sunday = moment()
-                    .add(7 - weekday - 1, 'days')
-                    .format('DD/MM/YYYY');
-                var days = [monday];
-                console.log(days);
-                for (let i = 1; i < 7; i++) {
-                    let nextday = moment(days[days.length - 1], 'DD/MM/YYYY')
-                        .add(1, 'days')
-                        .format('DD/MM/YYYY');
-                    days.push(nextday);
-                }
-                res.render('class', {
-                    class: value,
-                    session: req.session,
-                    user_id: 1,
-                    class_all,
-                    monday,
-                    sunday,
-                    days,
+                var promises1 = new Promise((resolve, reject) => {
+                    for (let i = 0; i < all_class.length; i++) {
+                        db.query(
+                            count_hv,
+                            [all_class[i].class_id, now],
+                            function (err, hv) {
+                                if (err) {
+                                    console.log(err);
+                                } else {
+                                    all_class[i].count_hv = Number(hv[0].count);
+                                    resolve(hv);
+                                }
+                            },
+                        );
+                    }
                 });
-            } catch (error) {
-                console.log(error);
+                const function_count_hv = async () => {
+                    try {
+                        var hv = await promises1;
+
+                        console.log('tong hv ', hv);
+                        const weekday = moment().isoWeekday();
+                        const monday = moment()
+                            .subtract(weekday - 1, 'days')
+                            .format('DD/MM/YYYY');
+                        const sunday = moment()
+                            .add(7 - weekday - 2, 'days')
+                            .format('DD/MM/YYYY');
+                        var days = [monday];
+                        for (let i = 1; i < 7; i++) {
+                            let nextday = moment(
+                                days[days.length - 1],
+                                'DD/MM/YYYY',
+                            )
+                                .add(1, 'days')
+                                .format('DD/MM/YYYY');
+                            days.push(nextday);
+                        }
+                        res.render('class', {
+                            session: req.session,
+                            user_id: 1,
+                            all_class,
+                            monday,
+                            sunday,
+                            days,
+                            weekday,
+                        });
+                    } catch (err) {
+                        console.log(err);
+                    }
+                };
+                function_count_hv();
             }
-        };
-        showclass();
+        });
     }
 
     //[POST] class/
     register_class(req, res) {
-        const mysql =
-            'INSERT INTO user_join_fittness_class(user_id,class_id, registration_time,date) VALUES (?)';
-        var date = new Date();
-        console.log(date);
-        const value = [req.session.user.user_id, req.body.fitness_class, date];
-        db.query(mysql, [value], function (err, data) {
-            if (err) {
-                console.log(err);
-            } else {
-                console.log('Đăng ký thành công');
+        const sql = `SELECT * FROM user_join_fittness_class LEFT JOIN fitness_class 
+            ON user_join_fittness_class.class_id = fitness_class.class_id
+            WHERE user_id = ?`;
+        const insert_table =
+            'INSERT INTO user_join_fittness_class(user_id,class_id, registration_time,join_date) VALUES (?)';
+        var join = 0;
+        var start_time = req.body.start_time;
+        var end_time = req.body.end_time;
+        var datetime = new Date();
+        var weekdaynow = moment().isoWeekday() + 1;
+        var weekday = req.body.weekday;
+        if (weekdaynow > weekday) {
+            var join_date = moment(datetime)
+                .add(weekday - weekdaynow + 7, 'days')
+                .format('YYYY-MM-DD');
+        } else {
+            var join_date = moment(datetime)
+                .add(weekday - weekdaynow, 'days')
+                .format('YYYY-MM-DD');
+        }
+        db.query(sql, req.session.user.user_id, function (err, class_user) {
+            if (class_user) {
+                for (let i = 0; i < class_user.length; i++) {
+                    var date = moment(class_user[i].join_date).format(
+                        'YYYY-MM-DD',
+                    );
+                    if (
+                        class_user[i].class_id == req.body.class_id &&
+                        date == join_date
+                    ) {
+                        join = 1;
+                    }
+                    if (
+                        (date == join_date &&
+                            start_time <= class_user[i].start_time &&
+                            class_user[i].start_time <= end_time) ||
+                        (start_time <= class_user[i].end_time &&
+                            class_user[i].end_time <= end_time)
+                    ) {
+                        join = -1;
+                    }
+                }
+            }
+            if (join == 0) {
+                const value = [
+                    req.session.user.user_id,
+                    req.body.class_id,
+                    datetime,
+                    join_date,
+                ];
+                db.query(insert_table, [value], function (err, data) {
+                    if (err) {
+                        console.log(err);
+                    } else {
+                        console.log('Đăng ký thành công');
+                    }
+                });
+                res.redirect('/class');
+            } else if (join == 1) {
+                res.send('Bạn đã đăng ký buổi học này rồi');
+                console.log('Bạn đã đăng ký buổi học này rồi');
+            } else if (join == -1) {
+                res.send('Bạn bị trùng lịch học rồi');
+                console.log('Bạn bị trùng lịch học rồi');
             }
         });
-        res.render('class', { session: req.session });
     }
 }
 

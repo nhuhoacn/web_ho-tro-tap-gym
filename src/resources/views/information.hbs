@@ -92,9 +92,10 @@
             <thead>
                 <tr>
                     <th scope="col">Lớp</th>
+                    <th scope="col">Ngày diễn ra buổi học</th>
+                    <th scope="col">Giờ diễn ra buổi học</th>
                     <th scope="col">Checkin</th>
                     <th scope="col">Checkout</th>
-                    <th scope="col">Giá tập</th>
                     <th scope="col">Phòng tập</th>
                     <th scope="col">Trạng thái</th>
                 </tr>
@@ -102,15 +103,16 @@
             <tbody>
                 {{#each history}}
                 <tr>
-                    <th scope="row">{{this.name}}</th>
-                    <td>{{this.registration_time}}</td>
-                    {{#ifCond this.cancellation_time "!=" "Invalid date"}}
-                    <td>{{this.cancellation_time}}</td>
+                    <th scope="row">{{name}}</th>
+                    <td>{{join_date}}</td>
+                    <td>{{start_time}} - {{end_time}}</td>
+                    <td>{{registration_time}}</td>
+                    {{#ifCond cancellation_time "!=" "Invalid date"}}
+                    <td>{{cancellation_time}}</td>
                     {{else}}
                     <td>Tham gia</td>
                     {{/ifCond}}
-                    <td>{{this.price}}</td>
-                    <td>phòng {{this.room_adress}}</td>
+                    <td>phòng {{room_address}}</td>
                     <td><button> Huỷ lớp</button></td>
                 </tr>
                 {{/each}}
