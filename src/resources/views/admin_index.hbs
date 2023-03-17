@@ -3,8 +3,8 @@
     <!-- Sidebar Start -->
     <div class="sidebar pe-4 pb-3">
         <nav class="navbar bg-light navbar-light">
-            <a href="index.html" class="navbar-brand mx-4 mb-3">
-                <h3 class="text-primary"><i class="fa fa-hashtag me-2"></i>{{session.user.name}}</h3>
+            <a href="/admin" class="navbar-brand mx-4 mb-3">
+                <h3 class="text-primary"><i class="fa  me-2"></i>{{session.user.name}}</h3>
             </a>
             <div class="d-flex align-items-center ms-4 mb-4">
                 <div class="position-relative">
@@ -144,7 +144,7 @@
                 </div>
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                        
+
                         <img class="rounded-circle me-lg-2" src="{{session.user.image}}" alt=""
                             style="width: 40px; height: 40px;">
                         <span class="d-none d-lg-inline-flex">John Doe</span>
@@ -203,25 +203,24 @@
         </div>
         <!-- Sale & Revenue End -->
 
+        <input id="so_luong_dk" value="{{so_luong_dk}}">
+        <input id="class_name" value="{{class_name}}">
 
         <!-- Sales Chart Start -->
         <div class="container-fluid pt-4 px-4">
             <div class="row g-4">
                 <div class="col-sm-12 col-xl-6">
-                        <div class="bg-light rounded h-100 p-4">
-                            <h6 class="mb-4">Pie Chart</h6>
-                            <canvas id="pie-chart"></canvas>
-                        </div>
+                    <div class="bg-light rounded h-100 p-4">
+                        <h6 class="mb-4">Pie Chart</h6>
+                        <canvas id="myChart" width="500" height="500"></canvas>
                     </div>
+                </div>
                 <div class="col-sm-12 col-xl-6">
                     <div class="bg-light text-center rounded p-4">
                         <div class="d-flex align-items-center justify-content-between mb-4">
                             <h6 class="mb-0">Salse & Revenue</h6>
                             <a href="">Show All</a>
                         </div>
-                        <canvas id="salse-revenue">
-
-                        </canvas>
                     </div>
                 </div>
             </div>

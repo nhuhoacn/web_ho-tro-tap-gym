@@ -51,6 +51,10 @@ io.on('connection', (socket) => {
         console.log('comment: ', comment);
         io.emit('add comment', comment);
     });
+    setInterval(function () {
+        let date = new Date().toLocaleTimeString();
+        socket.send(date);
+    }, 1000);
     socket.on('disconnect', () => {
         console.log('user disconnected');
     });

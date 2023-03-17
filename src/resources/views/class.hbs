@@ -916,7 +916,7 @@
         </div>
     </section>
     <!-- Class Timetable Section End -->
-    <h2 class="tabletime">Lịch chi tiết( {{#component days 2}}{{/component}} - {{#component days 8}}{{/component}} )
+    <h2 class="tabletime">Lịch chi tiết
     </h2>
 
     <div class="tab-class text-center">
@@ -943,225 +943,249 @@
                 <a class="nav-link rounded-pill text-white" data-bs-toggle="pill" href="#tab-7">Chủ nhật</a>
             </li>
         </ul>
-        <div class="tab-content">
-            <div id="tab-1" class="tab-pane fade show p-0 active">
-                <h4 class="datenow">Thứ hai ngày {{#component days 2}}{{/component}} </h4>
-                <div class="row g-5">
-                    {{#each all_class}}
-                    {{#ifCond this.weekday '==' 2}}
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="bg-dark rounded text-center py-4 px-1">
-                            <h6 class="text-uppercase text-light mb-3">{{start_time}} - {{end_time}}</h6>
-                            <h5 class="text-uppercase text-primary">{{name}} </h5>
-                            giáo viên hướng dẫn:
-                            <h5 class="text-capitalize text-primary">{{trainer}}</h5>
-                            <p class="text-secondary mb-0">{{count_hv}}/{{maximum}} học viên - phòng {{room_address}}
-                            </p>
-                            {{#if user_id}}
-                            <form method="post" action="/class">
-                                {{#ifCond weekdaynow '>' 2}}
-                                <button class="btn btn--radius-2 btn--orange">Tham gia vào tuần sau</button>
-                                <h5 class="end_class">Buổi học tuần này đã kết thúc</h5>
-                                {{else ifCond count_hv '=='  maximum}}
-                                 <button class="btn btn--radius-2 btn--orange">Tham gia vào tuần sau</button>
-                                <h5 class="end_class">Đã đầy học viên</h5>
-                                {{else}}
-                                <input type="hidden" name="weekday" value="{{weekday}}">
-                                <input type="hidden" name="class_id" value="{{class_id}}">
-                                <input type="hidden" name="start_time" value="{{start_time}} ">
-                                <input type="hidden" name="end_time" value="{{end_time}}">
-                                <button class="btn btn--radius-2 btn--orange">Tham gia buổi học</button>
-                                {{/ifCond}}
-                            </form>
+
+        <div id="current-time"><i class="fas fa-clock"></i> <span id='time'></span></div>
+    </div>
+    <div class="tab-content">
+        <div id="tab-1" class="tab-pane fade show p-0 active">
+            <h4 class="datenow">Thứ hai ngày {{#component days 2}}{{/component}} </h4>
+            <div class="row g-5">
+                {{#each all_class}}
+                {{#ifCond this.weekday '==' 2}}
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="bg-dark rounded text-center py-4 px-1">
+                        <h6 class="text-uppercase text-light mb-3">{{start_time}} - {{end_time}}</h6>
+                        <h5 class="text-uppercase text-primary">{{name}} </h5>
+                        giáo viên hướng dẫn:
+                        <h5 class="text-capitalize text-primary">{{trainer}}</h5>
+                        <p class="text-secondary mb-0">{{count_hv}}/{{maximum}} học viên - phòng {{room_address}}
+                        </p>
+                        {{#if user_id}}
+                        <form method="post" action="/class">
+                            <input type="hidden" name="count_hv" value="{{count_hv}}">
+                            <input type="hidden" name="maximum" value="{{maximum}}">
+                            <input type="hidden" name="weekday" value="{{weekday}}">
+                            <input type="hidden" name="class_id" value="{{class_id}}">
+                            <input type="hidden" name="start_time" value="{{start_time}} ">
+                            <input type="hidden" name="end_time" value="{{end_time}}">
+                            {{#ifCond weekdaynow '>' 2}}
+                            <button class="btn btn--radius-2 btn--orange">Tham gia vào tuần sau</button>
+                            <h5 class="end_class">Buổi học tuần này đã kết thúc</h5>
+                            {{else ifCond count_hv '==' maximum}}
+                            <button class="btn btn--radius-2 btn--orange">Tham gia vào tuần sau</button>
+                            <h5 class="end_class">Đã đầy học viên</h5>
                             {{else}}
-                            <a href="/user/login/">
-                                <button class="btn btn--radius-2 btn--orange"> Đăng nhập </button>
-                            </a>
-                            {{/if}}
-                        </div>
+                            <button class="btn btn--radius-2 btn--orange">Tham gia buổi học</button>
+                            {{/ifCond}}
+                        </form>
+                        {{else}}
+                        <a href="/user/login/">
+                            <button class="btn btn--radius-2 btn--orange"> Đăng nhập </button>
+                        </a>
+                        {{/if}}
                     </div>
-                    {{/ifCond}}
-                    {{/each}}
                 </div>
+                {{/ifCond}}
+                {{/each}}
             </div>
-            <div id="tab-2" class="tab-pane fade p-0 ">
-                <h4 class="datenow">Thứ ba ngày {{#component days 3}}{{/component}} </h4>
-                <div class="row g-5">
-                    {{#each all_class}}
-                    {{#ifCond this.weekday '==' 3}}
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="bg-dark rounded text-center py-4 px-1">
-                            <h6 class="text-uppercase text-light mb-3">{{start_time}} - {{end_time}}</h6>
-                            <h5 class="text-uppercase text-primary">{{name}} </h5>
-                            giáo viên hướng dẫn:
-                            <h5 class="text-capitalize text-primary">{{trainer}}</h5>
-                            <p class="text-secondary mb-0">{{count_hv}}/{{maximum}} học viên - phòng {{room_address}}
-                            </p>
-                             {{#ifCond weekdaynow '>' 3}}
-                                <button class="btn btn--radius-2 btn--orange">Tham gia vào tuần sau</button>
-                                <h5 class="end_class">Buổi học tuần này đã kết thúc</h5>
-                                {{else ifCond count_hv '=='  maximum}}
-                                 <button class="btn btn--radius-2 btn--orange">Tham gia vào tuần sau</button>
-                                <h5 class="end_class">Đã đầy học viên</h5>
-                                {{else}}
-                                <input type="hidden" name="weekday" value="{{weekday}}">
-                                <input type="hidden" name="class_id" value="{{class_id}}">
-                                <input type="hidden" name="start_time" value="{{start_time}} ">
-                                <input type="hidden" name="end_time" value="{{end_time}}">
-                                <button class="btn btn--radius-2 btn--orange">Tham gia buổi học</button>
-                                {{/ifCond}}
-                        </div>
-                    </div>
-                    {{/ifCond}}
-                    {{/each}}
-                </div>
-            </div>
-            <div id="tab-3" class="tab-pane p-0 ">
-                <div class="row g-5">
-                    {{#each all_class}}
-                    {{#ifCond this.weekday '==' 4}}
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="bg-dark rounded text-center py-4 px-1">
-                            <h6 class="text-uppercase text-light mb-3">{{start_time}} - {{end_time}}</h6>
-                            <h5 class="text-uppercase text-primary">{{name}} </h5>
-                            giáo viên hướng dẫn:
-                            <h5 class="text-capitalize text-primary">{{trainer}}</h5>
-                            <p class="text-secondary mb-0">{{count_hv}}/{{maximum}} học viên - phòng {{room_address}}
-                            </p>
-                            {{#if user_id}}
-                            <form method="post" action="/class">
-                                <input type="hidden" name="weekday" value="{{weekday}}">
-                                <input type="hidden" name="class_id" value="{{class_id}}">
-                                <button class="btn btn--radius-2 btn--orange">Tham gia buổi học</button>
-                            </form>
+        </div>
+        <div id="tab-2" class="tab-pane fade p-0 ">
+            <h4 class="datenow">Thứ ba ngày {{#component days 3}}{{/component}} </h4>
+            <div class="row g-5">
+                {{#each all_class}}
+                {{#ifCond this.weekday '==' 3}}
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="bg-dark rounded text-center py-4 px-1">
+                        <h6 class="text-uppercase text-light mb-3">{{start_time}} - {{end_time}}</h6>
+                        <h5 class="text-uppercase text-primary">{{name}} </h5>
+                        giáo viên hướng dẫn:
+                        <h5 class="text-capitalize text-primary">{{trainer}}</h5>
+                        <p class="text-secondary mb-0">{{count_hv}}/{{maximum}} học viên - phòng {{room_address}}
+                        </p>
+                        {{#if user_id}}
+                        <form method="post" action="/class">
+                            {{#ifCond weekdaynow '>' 3}}
+                            <button class="btn btn--radius-2 btn--orange">Tham gia vào tuần sau</button>
+                            <h5 class="end_class">Buổi học tuần này đã kết thúc</h5>
+                            {{else ifCond count_hv '==' maximum}}
+                            <button class="btn btn--radius-2 btn--orange">Tham gia vào tuần sau</button>
+                            <h5 class="end_class">Đã đầy học viên</h5>
                             {{else}}
-                            <a href="/user/login/">
-                                <button class="btn btn--radius-2 btn--orange"> Đăng nhập </button>
-                            </a>
-                            {{/if}}
-                        </div>
+                            <input type="hidden" name="weekday" value="{{weekday}}">
+                            <input type="hidden" name="class_id" value="{{class_id}}">
+                            <input type="hidden" name="start_time" value="{{start_time}} ">
+                            <input type="hidden" name="end_time" value="{{end_time}}">
+                            <button class="btn btn--radius-2 btn--orange">Tham gia buổi học</button>
+                            {{/ifCond}}
+                        </form>
+                        {{else}}
+                        <a href="/user/login/">
+                            <button class="btn btn--radius-2 btn--orange"> Đăng nhập </button>
+                        </a>
+                        {{/if}}
                     </div>
-                    {{/ifCond}}
-                    {{/each}}
                 </div>
+                {{/ifCond}}
+                {{/each}}
             </div>
-            <div id="tab-4" class="tab-pane p-0 ">
-                <div class="row g-5">
-                    {{#each all_class}}
-                    {{#ifCond this.weekday '==' 5}}
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="bg-dark rounded text-center py-4 px-1">
-                            <h6 class="text-uppercase text-light mb-3">{{start_time}} - {{end_time}}</h6>
-                            <h5 class="text-uppercase text-primary">{{name}} </h5>
-                            giáo viên hướng dẫn:
-                            <h5 class="text-capitalize text-primary">{{trainer}}</h5>
-                            <p class="text-secondary mb-0">{{count_hv}}/{{maximum}} học viên - phòng {{room_address}}
-                            </p>
-                            {{#if user_id}}
-                            <form method="post" action="/class">
-                                <input type="hidden" name="weekday" value="{{weekday}}">
-                                <input type="hidden" name="class_id" value="{{class_id}}">
-                                <button class="btn btn--radius-2 btn--orange">Tham gia buổi học</button>
-                            </form>
+        </div>
+        <div id="tab-3" class="tab-pane p-0 ">
+            <h4 class="datenow">Thứ tư ngày {{#component days 4}}{{/component}} </h4>
+            <div class="row g-5">
+                {{#each all_class}}
+                {{#ifCond this.weekday '==' 4}}
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="bg-dark rounded text-center py-4 px-1">
+                        <h6 class="text-uppercase text-light mb-3">{{start_time}} - {{end_time}}</h6>
+                        <h5 class="text-uppercase text-primary">{{name}} </h5>
+                        giáo viên hướng dẫn:
+                        <h5 class="text-capitalize text-primary">{{trainer}}</h5>
+                        <p class="text-secondary mb-0">{{count_hv}}/{{maximum}} học viên - phòng {{room_address}}
+                        </p>
+                        {{#if user_id}}
+                        <form method="post" action="/class">
+                            {{#ifCond weekdaynow '>' 4}}
+                            <button class="btn btn--radius-2 btn--orange">Tham gia vào tuần sau</button>
+                            <h5 class="end_class">Buổi học tuần này đã kết thúc</h5>
+                            {{else ifCond count_hv '==' maximum}}
+                            <button class="btn btn--radius-2 btn--orange">Tham gia vào tuần sau</button>
+                            <h5 class="end_class">Đã đầy học viên</h5>
                             {{else}}
-                            <a href="/user/login/">
-                                <button class="btn btn--radius-2 btn--orange"> Đăng nhập </button>
-                            </a>
-                            {{/if}}
-                        </div>
+                            <input type="hidden" name="weekday" value="{{weekday}}">
+                            <input type="hidden" name="class_id" value="{{class_id}}">
+                            <input type="hidden" name="start_time" value="{{start_time}} ">
+                            <input type="hidden" name="end_time" value="{{end_time}}">
+                            <button class="btn btn--radius-2 btn--orange">Tham gia buổi học</button>
+                            {{/ifCond}}
+                        </form>
+                        {{else}}
+                        <a href="/user/login/">
+                            <button class="btn btn--radius-2 btn--orange"> Đăng nhập </button>
+                        </a>
+                        {{/if}}
                     </div>
-                    {{/ifCond}}
-                    {{/each}}
                 </div>
+                {{/ifCond}}
+                {{/each}}
             </div>
-            <div id="tab-5" class="tab-pane p-0 ">
-                <div class="row g-5">
-                    {{#each all_class}}
-                    {{#ifCond this.weekday '==' 6}}
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="bg-dark rounded text-center py-4 px-1">
-                            <h6 class="text-uppercase text-light mb-3">{{start_time}} - {{end_time}}</h6>
-                            <h5 class="text-uppercase text-primary">{{name}} </h5>
-                            giáo viên hướng dẫn:
-                            <h5 class="text-capitalize text-primary">{{trainer}}</h5>
-                            <p class="text-secondary mb-0">{{count_hv}}/{{maximum}} học viên - phòng {{room_address}}
-                            </p>
-                            {{#if user_id}}
-                            <form method="post" action="/class">
-                                <input type="hidden" name="weekday" value="{{weekday}}">
-                                <input type="hidden" name="class_id" value="{{class_id}}">
-                                <button class="btn btn--radius-2 btn--orange">Tham gia buổi học</button>
-                            </form>
-                            {{else}}
-                            <a href="/user/login/">
-                                <button class="btn btn--radius-2 btn--orange"> Đăng nhập </button>
-                            </a>
-                            {{/if}}
-                        </div>
+        </div>
+        <div id="tab-4" class="tab-pane p-0 ">
+            <div class="row g-5">
+                {{#each all_class}}
+                {{#ifCond this.weekday '==' 5}}
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="bg-dark rounded text-center py-4 px-1">
+                        <h6 class="text-uppercase text-light mb-3">{{start_time}} - {{end_time}}</h6>
+                        <h5 class="text-uppercase text-primary">{{name}} </h5>
+                        giáo viên hướng dẫn:
+                        <h5 class="text-capitalize text-primary">{{trainer}}</h5>
+                        <p class="text-secondary mb-0">{{count_hv}}/{{maximum}} học viên - phòng {{room_address}}
+                        </p>
+                        {{#if user_id}}
+                        <form method="post" action="/class">
+                            <input type="hidden" name="weekday" value="{{weekday}}">
+                            <input type="hidden" name="class_id" value="{{class_id}}">
+                            <button class="btn btn--radius-2 btn--orange">Tham gia buổi học</button>
+                        </form>
+                        {{else}}
+                        <a href="/user/login/">
+                            <button class="btn btn--radius-2 btn--orange"> Đăng nhập </button>
+                        </a>
+                        {{/if}}
                     </div>
-                    {{/ifCond}}
-                    {{/each}}
                 </div>
+                {{/ifCond}}
+                {{/each}}
             </div>
-            <div id="tab-6" class="tab-pane p-0 ">
-                <div class="row g-5">
-                    {{#each all_class}}
-                    {{#ifCond this.weekday '==' 7}}
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="bg-dark rounded text-center py-4 px-1">
-                            <h6 class="text-uppercase text-light mb-3">{{start_time}} - {{end_time}}</h6>
-                            <h5 class="text-uppercase text-primary">{{name}} </h5>
-                            giáo viên hướng dẫn:
-                            <h5 class="text-capitalize text-primary">{{trainer}}</h5>
-                            <p class="text-secondary mb-0">{{count_hv}}/{{maximum}} học viên - phòng {{room_address}}
-                            </p>
-                            {{#if user_id}}
-                            <form method="post" action="/class">
-                                <input type="hidden" name="weekday" value="{{weekday}}">
-                                <input type="hidden" name="class_id" value="{{class_id}}">
-                                <button class="btn btn--radius-2 btn--orange">Tham gia buổi học</button>
-                            </form>
-                            {{else}}
-                            <a href="/user/login/">
-                                <button class="btn btn--radius-2 btn--orange"> Đăng nhập </button>
-                            </a>
-                            {{/if}}
-                        </div>
+        </div>
+        <div id="tab-5" class="tab-pane p-0 ">
+            <div class="row g-5">
+                {{#each all_class}}
+                {{#ifCond this.weekday '==' 6}}
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="bg-dark rounded text-center py-4 px-1">
+                        <h6 class="text-uppercase text-light mb-3">{{start_time}} - {{end_time}}</h6>
+                        <h5 class="text-uppercase text-primary">{{name}} </h5>
+                        giáo viên hướng dẫn:
+                        <h5 class="text-capitalize text-primary">{{trainer}}</h5>
+                        <p class="text-secondary mb-0">{{count_hv}}/{{maximum}} học viên - phòng {{room_address}}
+                        </p>
+                        {{#if user_id}}
+                        <form method="post" action="/class">
+                            <input type="hidden" name="weekday" value="{{weekday}}">
+                            <input type="hidden" name="class_id" value="{{class_id}}">
+                            <button class="btn btn--radius-2 btn--orange">Tham gia buổi học</button>
+                        </form>
+                        {{else}}
+                        <a href="/user/login/">
+                            <button class="btn btn--radius-2 btn--orange"> Đăng nhập </button>
+                        </a>
+                        {{/if}}
                     </div>
-                    {{/ifCond}}
-                    {{/each}}
                 </div>
+                {{/ifCond}}
+                {{/each}}
             </div>
-            <div id="tab-7" class="tab-pane p-0 ">
-                <div class="row g-5">
-                    {{#each all_class}}
-                    {{#ifCond this.weekday '==' 8}}
-                    <div class="col-lg-3 col-md-4 col-sm-6">
-                        <div class="bg-dark rounded text-center py-4 px-1">
-                            <h6 class="text-uppercase text-light mb-3">{{start_time}} - {{end_time}}</h6>
-                            <h5 class="text-uppercase text-primary">{{name}} </h5>
-                            giáo viên hướng dẫn:
-                            <h5 class="text-capitalize text-primary">{{trainer}}</h5>
-                            <p class="text-secondary mb-0">{{count_hv}}/{{maximum}} học viên - phòng {{room_address}}
-                            </p>
-                            {{#if user_id}}
-                            <form method="post" action="/class">
-                                <input type="hidden" name="weekday" value="{{weekday}}">
-                                <input type="hidden" name="class_id" value="{{class_id}}">
-                                <button class="btn btn--radius-2 btn--orange">Tham gia buổi học</button>
-                            </form>
-                            {{else}}
-                            <a href="/user/login/">
-                                <button class="btn btn--radius-2 btn--orange"> Đăng nhập </button>
-                            </a>
-                            {{/if}}
-                        </div>
+        </div>
+        <div id="tab-6" class="tab-pane p-0 ">
+            <div class="row g-5">
+                {{#each all_class}}
+                {{#ifCond this.weekday '==' 7}}
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="bg-dark rounded text-center py-4 px-1">
+                        <h6 class="text-uppercase text-light mb-3">{{start_time}} - {{end_time}}</h6>
+                        <h5 class="text-uppercase text-primary">{{name}} </h5>
+                        giáo viên hướng dẫn:
+                        <h5 class="text-capitalize text-primary">{{trainer}}</h5>
+                        <p class="text-secondary mb-0">{{count_hv}}/{{maximum}} học viên - phòng {{room_address}}
+                        </p>
+                        {{#if user_id}}
+                        <form method="post" action="/class">
+                            <input type="hidden" name="weekday" value="{{weekday}}">
+                            <input type="hidden" name="class_id" value="{{class_id}}">
+                            <button class="btn btn--radius-2 btn--orange">Tham gia buổi học</button>
+                        </form>
+                        {{else}}
+                        <a href="/user/login/">
+                            <button class="btn btn--radius-2 btn--orange"> Đăng nhập </button>
+                        </a>
+                        {{/if}}
                     </div>
-                    {{/ifCond}}
-                    {{/each}}
                 </div>
+                {{/ifCond}}
+                {{/each}}
+            </div>
+        </div>
+        <div id="tab-7" class="tab-pane p-0 ">
+            <div class="row g-5">
+                {{#each all_class}}
+                {{#ifCond this.weekday '==' 8}}
+                <div class="col-lg-3 col-md-4 col-sm-6">
+                    <div class="bg-dark rounded text-center py-4 px-1">
+                        <h6 class="text-uppercase text-light mb-3">{{start_time}} - {{end_time}}</h6>
+                        <h5 class="text-uppercase text-primary">{{name}} </h5>
+                        giáo viên hướng dẫn:
+                        <h5 class="text-capitalize text-primary">{{trainer}}</h5>
+                        <p class="text-secondary mb-0">{{count_hv}}/{{maximum}} học viên - phòng {{room_address}}
+                        </p>
+                        {{#if user_id}}
+                        <form method="post" action="/class">
+                            <input type="hidden" name="weekday" value="{{weekday}}">
+                            <input type="hidden" name="class_id" value="{{class_id}}">
+                            <button class="btn btn--radius-2 btn--orange">Tham gia buổi học</button>
+                        </form>
+                        {{else}}
+                        <a href="/user/login/">
+                            <button class="btn btn--radius-2 btn--orange"> Đăng nhập </button>
+                        </a>
+                        {{/if}}
+                    </div>
+                </div>
+                {{/ifCond}}
+                {{/each}}
             </div>
         </div>
     </div>
+</div>
 </div>
 <!-- Class Timetable Start -->

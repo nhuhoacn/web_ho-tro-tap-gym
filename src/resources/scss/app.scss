@@ -4711,8 +4711,23 @@ ol {
 
 .datenow {
     margin-bottom: 50px;
+    text-align: center;
 }
 
 .end_class {
     color: #ff856c;
+}
+#current-time {
+    color: black;
+    text-align: center;
+    font-size: 2.1rem;
+    font-weight: 500;
+    font-family: cursive;
+    margin: 0 0 0px 30px;
+}
+
+.tab-class {
+    display: flex;
+    justify-content: flex-end;
+    text-align: center;
 }

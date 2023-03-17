@@ -7,13 +7,12 @@ class ClassControlller {
         const all_class = `SELECT class_id,fitness_class.name, start_time, end_time, room_address, maximum, weekday, user.name as trainer
                         FROM fitness_class LEFT JOIN user ON user.user_id = fitness_class.trainer_id
                         ORDER BY start_time`;
-        const mysql_count_hv = `SELECT class_id, Count(*) as count FROM user_join_fittness_class WHERE join_date >= ? GROUP BY class_id`;
+        const mysql_count_hv = `SELECT class_id, Count(*) as count FROM user_join_fitness_class WHERE join_date >= ? GROUP BY class_id`;
         const weekdaynow = moment().isoWeekday() + 1;
         var monday = moment()
             .subtract(weekdaynow - 2, 'days')
             .format('DD/MM/YYYY');
         var days = [0, 0, monday];
-
         var promise_allclass = new Promise((resolve, reject) => {
             db.query(all_class, function (err, all_class) {
                 if (err) {
@@ -78,17 +77,20 @@ class ClassControlller {
 
     //[POST] class/
     register_class(req, res) {
-        const sql = `SELECT * FROM user_join_fittness_class LEFT JOIN fitness_class 
-            ON user_join_fittness_class.class_id = fitness_class.class_id
+        const sql = `SELECT * FROM user_join_fitness_class LEFT JOIN fitness_class 
+            ON user_join_fitness_class.class_id = fitness_class.class_id
             WHERE user_id = ?`;
+        const all_class = 'SELECT * FROM `fitness_class`';
         const insert_table =
-            'INSERT INTO user_join_fittness_class(user_id,class_id, registration_time,join_date) VALUES (?)';
-        var join = 0;
+            'INSERT INTO user_join_fitness_class(user_id,class_id, registration_time,join_date) VALUES (?)';
         var start_time = req.body.start_time;
         var end_time = req.body.end_time;
         var datetime = new Date();
         var weekdaynow = moment().isoWeekday() + 1;
         var weekday = req.body.weekday;
+        var timenow_add_30 = moment().add(30, 'minutes').format('kk:mm:ss');
+
+        //ngày sẽ tham gia lớp học
         if (weekdaynow > weekday) {
             var join_date = moment(datetime)
                 .add(weekday - weekdaynow + 7, 'days')
@@ -98,26 +100,47 @@ class ClassControlller {
                 .add(weekday - weekdaynow, 'days')
                 .format('YYYY-MM-DD');
         }
+        if (weekday == weekdaynow && timenow_add_30 >= start_time) {
+            var join = 3;
+        } else if (count_hv == maximum) {
+            var join = 4;
+        } else {
+            var join = 0;
+        }
         db.query(sql, req.session.user.user_id, function (err, class_user) {
             if (class_user) {
                 for (let i = 0; i < class_user.length; i++) {
                     var date = moment(class_user[i].join_date).format(
                         'YYYY-MM-DD',
                     );
+                    // kiểm tra đã đăng ký tham gia lớp học chưa
                     if (
                         class_user[i].class_id == req.body.class_id &&
                         date == join_date
                     ) {
                         join = 1;
-                    }
-                    if (
-                        (date == join_date &&
-                            start_time <= class_user[i].start_time &&
+                    } else if (
+                        date == join_date &&
+                        ((start_time <= class_user[i].start_time &&
                             class_user[i].start_time <= end_time) ||
-                        (start_time <= class_user[i].end_time &&
-                            class_user[i].end_time <= end_time)
+                            (start_time <= class_user[i].end_time &&
+                                class_user[i].end_time <= end_time))
                     ) {
-                        join = -1;
+                        join = 2;
+                    }
+
+                    if (date == join_date) {
+                        console.log(date);
+
+                        console.log('Ngày tham gia buổi học:', date, join_date);
+                        console.log(
+                            'giờ bắt đầu và kết thúc:',
+                            start_time,
+                            class_user[i].start_time,
+                            ':',
+                            end_time,
+                            class_user[i].end_time,
+                        );
                     }
                 }
             }
@@ -132,16 +155,22 @@ class ClassControlller {
                     if (err) {
                         console.log(err);
                     } else {
-                        console.log('Đăng ký thành công');
+                        console.log('Đăng ký tham gia thành công');
                     }
                 });
                 res.redirect('/class');
             } else if (join == 1) {
-                res.send('Bạn đã đăng ký buổi học này rồi');
-                console.log('Bạn đã đăng ký buổi học này rồi');
-            } else if (join == -1) {
-                res.send('Bạn bị trùng lịch học rồi');
-                console.log('Bạn bị trùng lịch học rồi');
+                res.send('Bạn đã đăng ký tham gia buổi học này rồi');
+                console.log('Bạn đã đăng ký tham gia buổi học này rồi');
+            } else if (join == 2) {
+                res.send('Bạn bị trùng lịch rồi');
+                console.log('Bạn bị trùng lịch rồi');
+            } else if (join == 3) {
+                res.send('Hãy đăng ký tham gia 30p trước buổi học');
+                console.log('Hãy đăng ký tham gia 30p trước buổi học');
+            } else if (join == 4) {
+                res.send('Đã đầy học viên');
+                console.log('Đã đầy học viên');
             }
         });
     }

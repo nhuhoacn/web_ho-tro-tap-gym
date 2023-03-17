@@ -6,9 +6,9 @@ class InformationControlller {
     //[GET] /info
     index(req, res) {
         if (req.session.user) {
-            var history = `SELECT * FROM user_join_fittness_class 
-            Right JOIN fitness_class ON user_join_fittness_class.class_id = fitness_class.class_id
-            where user_join_fittness_class.user_id = ?`;
+            var history = `SELECT * FROM user_join_fitness_class 
+            Right JOIN fitness_class ON user_join_fitness_class.class_id = fitness_class.class_id
+            where user_join_fitness_class.user_id = ?`;
             var bmi =
                 Math.round(
                     (req.session.user.weight /
