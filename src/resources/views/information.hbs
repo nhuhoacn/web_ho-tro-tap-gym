@@ -7,7 +7,7 @@
                         <div class="cd-text">
                             <div class="cd-single-item">
                                 <div class="cd-single-item">
-                                    <h3>{{session.user.name}}</h3>
+                                    <h3 >{{session.user.name}}</h3>
                                 </div>
                             </div>
                             <div class="cd-trainer">
@@ -28,13 +28,12 @@
                                         <div class="cd-trainer-text">
                                             <div class="trainer-header">
                                                 <div class="trainer-title">
-                                                    <h4>{{session.user.name}}</h4>
                                                     {{#ifCond session.user.role "==" "3"}}
-                                                    <span>Quản trị viên</span>
+                                                    <h4>Quản trị viên</h4>
                                                     {{else ifCond session.user.role "==" "2"}}
-                                                    <span>Huấn luyện viên</span>
+                                                    <h4>Huấn luyện viên</h4>
                                                     {{else}}
-                                                    <span>Học viên</span>
+                                                    <h4>Học viên</h4>
                                                     {{/ifCond}}
                                                 </div>
                                                 <div class="col-lg-5 px-5 text-end ">
@@ -70,12 +69,11 @@
                                                 {{/if}}
                                                 <li><span>Địa chỉ</span>{{session.user.address}}</li>
                                                 <li>
-                                                    <a href="/user/change_info"
+                                                    <a href="info/change_info"
                                                         class="btn btn-primary py-md-3 px-md-5 d-lg-block">Chỉnh sửa
                                                         thông tin</a>
                                                 </li>
                                             </ul>
-
                                             <p></p>
                                         </div>
                                     </div>
@@ -103,17 +101,34 @@
             <tbody>
                 {{#each history}}
                 <tr>
-                    <th scope="row">{{name}}</th>
+                    <th scope="row">{{name}} - {{class_id}}</th>
                     <td>{{join_date}}</td>
                     <td>{{start_time}} - {{end_time}}</td>
                     <td>{{registration_time}}</td>
                     {{#ifCond cancellation_time "!=" "Invalid date"}}
                     <td>{{cancellation_time}}</td>
-                    {{else}}
+                    {{else }}
                     <td>Tham gia</td>
                     {{/ifCond}}
                     <td>phòng {{room_address}}</td>
-                    <td><button> Huỷ lớp</button></td>
+                    <form method="POST" action="/class/cancel_class">
+                        {{#ifCond cancellation_time "!=" "Invalid date" }}
+                        <td class="canceled">Đã huỷ</td>
+                        {{else ifCond join_date "==" datenow }}
+                            {{#ifCond timenow_add_30 ">=" start_time}}
+                            <td class="took_place">Còn 30p</td>
+                            {{/ifCond}}
+                        {{else ifCond join_date "<" datenow}} 
+                            <td class="took_place">Đã diễn ra</td>
+                        {{else}}
+                            <input hidden="hidden" name="class_id" value="{{class_id}}">
+                            <input hidden="hidden" name="join_date" value="{{join_date}}">
+                            <input hidden="hidden" name="start_time" value="{{start_time}}">
+                            <td><button id="cancel_class"> Huỷ lớp</button>
+                            Huy lop
+                            </td>
+                        {{/ifCond}}
+                    </form>
                 </tr>
                 {{/each}}
             </tbody>

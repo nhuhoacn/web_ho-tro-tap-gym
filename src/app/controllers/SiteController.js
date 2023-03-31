@@ -8,11 +8,39 @@ const moment = require('moment');
 class SiteController {
     //[GET] /
     index(req, res, next) {
-        res.render('home', { session: req.session });
+        const search_blog = 'select *from blog order BY blog_id DESC LIMIT 3;';
+        const pt = 'select *from user where role = 2 LIMIT 3';
 
-        const a = moment('2017-07-25');
-        const b = moment('2017-07-10');
-        console.log(b.diff(a, 'hours'));
+        db.query(search_blog, function (err, blog) {
+            db.query(pt, function (err, pt) {
+                for (let i = 0; i < 3; i++) {
+                    let date = moment(
+                        blog[i].date_create_blog,
+                        'YYYY-MM-DD',
+                    ).get('date');
+                    let month = moment(
+                        blog[i].date_create_blog,
+                        'YYYY-MM-DD',
+                    ).format('MMMM');
+                    let year = moment(
+                        blog[i].date_create_blog,
+                        'YYYY-MM-DD',
+                    ).get('year');
+                    blog[i].date = date;
+                    blog[i].month = month;
+                    blog[i].year = year;
+
+                    if (blog[i].author == null) {
+                        blog[i].author = 'Admin';
+                    }
+                }
+                res.render('home', {
+                    session: req.session,
+                    blog_home: blog,
+                    pt_home: pt,
+                });
+            });
+        });
     }
 
     //[GET] /search

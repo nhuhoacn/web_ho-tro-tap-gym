@@ -1,32 +1,58 @@
 <div class="container">
     {{!-- {{{ req.toastr.render }}} --}}
-        <div class="page-wrapper bg-gra-02 p-t-30 p-b-100 font-poppins">
-            <div class="wrapper wrapper--w680">
-                <div class="card card-4">
-                    <div class="card-body">
-                        <h2 class="title">Đăng nhập</h2>
-                        <form method="POST" action="/user/login">
-                            <div class="mb-3">
-                                <label for="exampleInputEmail1" class="form-label">Email</label>
-                                <input type="email" class="form-control" id="exampleInputEmail1"
-                                    aria-describedby="emailHelp" name="user_email" required="required">
+    <div class="page-wrapper bg-gra-02 p-t-30 p-b-100 font-poppins">
+        <div class="wrapper wrapper--w680">
+            <div class="card card-4">
+                <div class="card-body">
+                    <h2 class="title">Đăng nhập</h2>
+                    <form method="POST" action="/user/login">
+                        <div class="mb-3">
+                            <label for="Email1" class="form-label">Email</label>
+                            <input type="email" class="form-control" id="Email1"
+                                aria-describedby="emailHelp" name="user_email" required="required">
+                        </div>
+                        <div class="mb-3 pass">
+                            <label for="Password1" class="form-label" >Mật khẩu</label>
+                            <input type="password" class="form-control" id="password" name="user_password"
+                                required="required">
+                            <span class="show-btn eye"><i id="pass_eye" class="fas fa-eye"></i></span>
+                            <div id="emailHelp" class="form-text ">
+                                <a href="/user/fogetpass" class="nav-link">Quên mật khẩu</a>
                             </div>
-                            <div class="mb-3">
-                                <label for="exampleInputPassword1" class="form-label">Mật khẩu</label>
-                                <input type="password" class="form-control" id="exampleInputPassword1"
-                                    name="user_password" required="required">
-                                <div id="emailHelp" class="form-text">
-                                    <a href="/user/fogetpass">Quên mật khẩu</a>
-                                </div>
-                            </div>
-                            <div class="mb-3 form-check">
-                                <input type="checkbox" class="form-check-input" id="exampleCheck1">
-                                <label class="form-check-label" for="exampleCheck1">Lưu đăng nhập</label>
-                            </div>
-                            <button type="submit" class="btn btn-primary" id="liveToastBtn">Đăng nhập</button>
-                        </form>
-                        <a href="/user/register" class="nav-link">Bạn chưa có tài khoản? Đăng ký ngay!!!</a>
-                    </div>
+                        </div>
+                        <button type="submit" class="btn btn-primary" id="liveToastBtn">Đăng nhập</button>
+                    </form>
+                    <a href="/user/register" class="nav-link">Bạn chưa có tài khoản? Đăng ký ngay!!!</a>
                 </div>
             </div>
         </div>
+    </div>
+</div>
+{{#if success}}
+<iframe hidden="hidden" id="success" src="/default.asp"></iframe>
+<input  hidden="hidden" id="success_heading" value="Đăng ký tài khoản thành công">
+<input  hidden="hidden" id="success_text" value="Hãy kiểm tra email để xác thực tài khoản">
+{{/if}}
+{{#ifCond user "==" false}}
+<iframe hidden="hidden" id="error_login" src="/default.asp"></iframe>
+{{/ifCond}}
+{{#if changepass }}
+<iframe hidden="hidden" id="success" src="/default.asp"></iframe>
+<input  hidden="hidden" id="success_heading" value="Thay đổi mật khẩu thành công">
+<input  hidden="hidden" id="success_text" value="Hãy đăng nhập lại">
+{{/if}}
+{{#if mail_false}}
+<iframe hidden="hidden" id="error" src="/default.asp"></iframe>
+<input  hidden="hidden" id="error_heading" value="Bạn đã xác minh tài khoản rồi">
+<input  hidden="hidden" id="error_text" value="Hãy đăng nhập lại">
+{{/if}}
+{{#if pass_false}}
+<iframe hidden="hidden" id="error" src="/default.asp"></iframe>
+<input  hidden="hidden" id="error_heading" value="Sai mật khẩu">
+<input  hidden="hidden" id="error_text" value="Hãy đăng nhập lại">
+{{/if}}
+{{#ifCond user_login "==" false}}
+<iframe hidden="hidden" id="error" src="/default.asp"></iframe>
+<input  hidden="hidden" id="error_heading" value="Email chưa đăng ký tài khoản">
+<input  hidden="hidden" id="error_text" value="Hãy đăng ký tài khoản">
+{{/ifCond}}

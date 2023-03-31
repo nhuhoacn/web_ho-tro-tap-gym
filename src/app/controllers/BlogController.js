@@ -7,7 +7,8 @@ class BlogControlller {
     index(req, res) {
         var numPerPage = 4;
         const all_blog = 'select *from blog';
-        const search_blog = 'select *from blog LIMIT ? OFFSET ?';
+        const search_blog =
+            'select *from blog order BY blog_id DESC LIMIT ? OFFSET ?';
         const all_topic = `SELECT topic.topic_id,topic.name, COUNT(*) as count FROM topic right JOIN blog ON blog.topic_id = topic.topic_id GROUP BY topic.topic_id`;
         // const sumcomment = 'select count(*) as sumComment from comment where blog_id = ?';
 
@@ -151,6 +152,7 @@ class BlogControlller {
     //[GET] /blog/topic/:topic_id
     blog_topic(req, res) {
         var numPerPage = 4;
+        var topic_id = Number(req.params.topic);
         const all_blog_topic = 'select *from blog where topic_id = ?';
         const search_blog = `select *from blog  where topic_id= ? LIMIT ? OFFSET ?`;
         const all_topic = `SELECT topic.topic_id,topic.name, COUNT(*) as count FROM topic right JOIN blog ON blog.topic_id = topic.topic_id GROUP BY topic.topic_id`;
@@ -172,7 +174,6 @@ class BlogControlller {
         //tìm kiếm blog sẽ hiển thị
         var promises_blog = new Promise((resolve, reject) => {
             var offset = (req.params.page - 1) * numPerPage;
-            var topic_id = Number(req.params.topic);
             db.query(
                 search_blog,
                 [topic_id, numPerPage, offset],
@@ -209,6 +210,7 @@ class BlogControlller {
                 var numPage = await promises_num;
                 var blog = await promises_blog;
                 var topic = await promises_all_topic;
+                topic[topic_id - 1].active = 1;
                 var offset = (req.params.page - 1) * numPerPage;
                 var pagenext = Number(req.params.page) + 1;
                 console.log('hiển thị từ hàng thứ : ', offset);

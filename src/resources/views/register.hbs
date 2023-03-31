@@ -17,8 +17,8 @@
                                     <label class="label">Đăng ký với vai trò</label>
                                     <div class="input-group-icon">
                                         <select class="form-select" aria-label="Default select example" name="role">
-                                            <option value="1" >Học viên</option>
-                                            <option value="2" >Huấn luyện viên</option>
+                                            <option value="1">Học viên</option>
+                                            <option value="2">Huấn luyện viên</option>
                                         </select>
                                     </div>
                                 </div>
@@ -82,6 +82,7 @@
                             <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Ảnh cá nhân</label>
+                                    {{!-- <input type="file" name="image" accept='image/*'> --}}
                                     <input class="input--style-4" type="" name="image">
                                 </div>
                             </div>
@@ -110,18 +111,20 @@
                             <div class="col-2 form-group">
                                 <div class="input-group">
                                     <label class="label">Email</label>
-                                    <input class="input--style-4" type="email" name="email">
+                                    <input class="input--style-4" type="email" name="email" required="required">
                                 </div>
                             </div>
                             <div class="col-2">
-                                <div class="input-group form-group">
+                                <div class="input-group form-group pass">
                                     <label class="label">Password</label>
-                                    <input class="input--style-4" type="password" name="password" required="required">
+                                    <input id="password" class="input--style-4" type="password" name="password" required="required" placeholder="Mật khẩu nên có từ 6 ký tự trở lên">
+                                    <span class="show-btn eye2"><i id="pass_eye" class="fas fa-eye"></i></span>
                                 </div>
                             </div>
                         </div>
+
                         <div class="p-t-15">
-                            <button class="btn btn--radius-2 btn--orange" type="submit">Đăng ký</button>
+                            <button id="register" class="btn btn--radius-2 btn--orange" type="submit">Đăng ký</button>
                         </div>
                     </form>
                 </div>
@@ -129,3 +132,13 @@
         </div>
     </div>
 </div>
+{{#if register_false}}
+<iframe hidden="hidden" id="error" src="/default.asp"></iframe>
+<input hidden="hidden" id="error_heading" value="Email đã được đăng ký">
+<input hidden="hidden" id="error_text" value="Hãy đăng ký lại!">
+{{/if}}
+{{#if mail_or_pass_blank}}
+<iframe hidden="hidden" id="error" src="/default.asp"></iframe>
+<input hidden="hidden" id="error_heading" value="Bạn chưa nhập đủ thông tin">
+<input hidden="hidden" id="error_text" value="Vui lòng không thể để trống các trường bắt buộc">
+{{/if}}

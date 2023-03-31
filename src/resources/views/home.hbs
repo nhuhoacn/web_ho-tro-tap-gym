@@ -8,8 +8,8 @@
                     <div class="p-3" style="max-width: 900px;">
                         <h5 class="text-white text-uppercase">Best Gym Center</h5>
                         <h1 class="display-2 text-white text-uppercase mb-md-4">Xây Dựng Cơ Thể Mạnh Mẽ Với Fitness</h1>
-                        <a href="" class="btn btn-primary py-md-3 px-md-5 me-3">Tham gia</a>
-                        <a href="" class="btn btn-light py-md-3 px-md-5">Liên hệ</a>
+                        <a href="/user/register" class="btn btn-primary py-md-3 px-md-5 me-3">Tham gia</a>
+                        <a href="#footer" class="btn btn-light py-md-3 px-md-5">Liên hệ</a>
                     </div>
                 </div>
             </div>
@@ -94,29 +94,29 @@
             <div class="bg-light rounded text-center p-5">
                 <i class="flaticon-six-pack display-1 text-primary"></i>
                 <h3 class="text-uppercase my-4">Xây dựng cơ bắp</h3>
-                <p>Nắm được các kỹ thuật, động tác tập thể hình đúng kỹ thuật</p>
-                <a class="text-uppercase" href="">Đọc thêm<i class="bi bi-arrow-right"></i></a>
+                <p>Các blog cung cấp các kỹ thuật, động tác tập thể hình đúng kỹ thuật</p>
+                <a class="text-uppercase" href="/blog/topic/1/1">Đọc thêm<i class="bi bi-arrow-right"></i></a>
             </div>
         </div>
         <div class="col-lg-4 col-md-6">
             <div class="bg-light rounded text-center p-5">
                 <i class="flaticon-barbell display-1 text-primary"></i>
                 <h3 class="text-uppercase my-4">Đốt mỡ</h3>
-                <p>Các bài tập từ cơ bản đến nâng cao phù hợp với những người mới bắt đầu tập luyện</p>
-                <a class="text-uppercase" href="">Đọc thêm<i class="bi bi-arrow-right"></i></a>
+                <p>Các blog cơ bản đến nâng cao phù hợp với những người mới bắt đầu tập luyện</p>
+                <a class="text-uppercase" href="/blog/topic/2/1">Đọc thêm<i class="bi bi-arrow-right"></i></a>
             </div>
         </div>
         <div class="col-lg-4 col-md-6">
             <div class="bg-light rounded text-center p-5">
                 <i class="flaticon-bodybuilding display-1 text-primary"></i>
                 <h3 class="text-uppercase my-4">Nâng cao sức khoẻ</h3>
-                <p>Các bài tập từ cơ bản đến nâng cao phù hợp với những người mới bắt đầu tập luyện</p>
-                <a class="text-uppercase" href="">Đọc thêm<i class="bi bi-arrow-right"></i></a>
+                <p>Các blog uy tín, cung cấp các thông tin mới nhất về chủ đề nâng cao sức khoẻ</p>
+                <a class="text-uppercase" href="/blog/topic/3/1">Đọc thêm<i class="bi bi-arrow-right"></i></a>
             </div>
         </div>
         <div class="col-lg-12 col-md-6 text-center">
             <h1 class="text-uppercase text-light mb-4">Giảm 15% cho học viên mới</h1>
-            <a href="" class="btn btn-primary py-3 px-5">Đăng ký ngay</a>
+            <a href="user/register" class="btn btn-primary py-3 px-5">Đăng ký ngay</a>
         </div>
     </div>
 </div>
@@ -126,8 +126,8 @@
 <!-- Class Timetable Start -->
 <div class="container-fluid p-5">
     <div class="mb-5 text-center">
-        <h5 class="text-primary text-uppercase">Thời khoá biểu các lớp</h5>
-        <h1 class="display-3 text-uppercase mb-0">Tập theo giờ</h1>
+        <h5 class="text-primary text-uppercase">Cung cấp</h5>
+        <h1 class="display-3 text-uppercase mb-0">Các buổi học chất lượng nhất</h1>
     </div>
     <div class="tab-class text-center">
         <ul class="nav nav-pills d-inline-flex justify-content-center bg-dark text-uppercase rounded-pill mb-5">
@@ -580,7 +580,7 @@
 <!-- Class Timetable Start -->
 
 
-<!-- Facts Start -->
+{{!-- <!-- Facts Start -->
 <div class="container-fluid bg-dark facts p-5 my-5">
     <div class="row gx-5 gy-4 py-5">
         <div class="col-lg-3 col-md-6">
@@ -633,82 +633,40 @@
         </div>
     </div>
 </div>
-<!-- Facts End -->
+<!-- Facts End --> --}}
 
 
 <!-- Team Start -->
 <div class="container-fluid p-5">
     <div class="mb-5 text-center">
         <h5 class="text-primary text-uppercase">Đội ngũ</h5>
-        <h1 class="display-3 text-uppercase mb-0">Huấn luyện viên</h1>
+        <h1 class="display-3 text-uppercase mb-0">Huấn luyện viên chuyên nghiệp nhất</h1>
     </div>
     <div class="row g-5">
+        {{#each pt_home}}
         <div class="col-lg-4 col-md-6">
             <div class="team-item position-relative">
                 <div class="position-relative overflow-hidden rounded">
-                    <img class="img-fluid w-100" src="/public/img/team-1.jpg" alt="">
+                    <img class="img_home img-fluid w-100" src="{{image}}" alt="">
                     <div class="team-overlay">
                         <div class="d-flex align-items-center justify-content-start">
-                            <a class="btn btn-light btn-square rounded-circle mx-1" href="#"><i
-                                    class="fab fa-twitter"></i></a>
-                            <a class="btn btn-light btn-square rounded-circle mx-1" href="#"><i
+                            <a class="btn btn-light btn-square rounded-circle mx-1" href="{{yt_link}}"><i
+                                    class="fab fa-youtube"></i></a>
+                            <a class="btn btn-light btn-square rounded-circle mx-1" href="{{fb_link}}"><i
                                     class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-light btn-square rounded-circle mx-1" href="#"><i
+                            <a class="btn btn-light btn-square rounded-circle mx-1" href="{{insta_link}}"><i
                                     class="fab fa-linkedin-in"></i></a>
                         </div>
                     </div>
                 </div>
                 <div class="position-absolute start-0 bottom-0 w-100 rounded-bottom text-center p-4"
                     style="background: rgba(34, 36, 41, .9);">
-                    <h5 class="text-uppercase text-light">John Deo</h5>
-                    <p class="text-uppercase text-secondary m-0">Trainer</p>
+                    <h5 class="text-uppercase text-light">{{name}}</h5>
+                    <p class="text-uppercase text-secondary m-0">Huấn luyện viên</p>
                 </div>
             </div>
         </div>
-        <div class="col-lg-4 col-md-6">
-            <div class="team-item position-relative">
-                <div class="position-relative overflow-hidden rounded">
-                    <img class="img-fluid w-100" src="/public/img/team-2.jpg" alt="">
-                    <div class="team-overlay">
-                        <div class="d-flex align-items-center justify-content-start">
-                            <a class="btn btn-light btn-square rounded-circle mx-1" href="#"><i
-                                    class="fab fa-twitter"></i></a>
-                            <a class="btn btn-light btn-square rounded-circle mx-1" href="#"><i
-                                    class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-light btn-square rounded-circle mx-1" href="#"><i
-                                    class="fab fa-linkedin-in"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="position-absolute start-0 bottom-0 w-100 rounded-bottom text-center p-4"
-                    style="background: rgba(34, 36, 41, .9);">
-                    <h5 class="text-uppercase text-light">James Taylor</h5>
-                    <p class="text-uppercase text-secondary m-0">Trainer</p>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4 col-md-6">
-            <div class="team-item position-relative">
-                <div class="position-relative overflow-hidden rounded">
-                    <img class="img-fluid w-100" src="/public/img/team-3.jpg" alt="">
-                    <div class="team-overlay">
-                        <div class="d-flex align-items-center justify-content-start">
-                            <a class="btn btn-light btn-square rounded-circle mx-1" href="#"><i
-                                    class="fab fa-twitter"></i></a>
-                            <a class="btn btn-light btn-square rounded-circle mx-1" href="#"><i
-                                    class="fab fa-facebook-f"></i></a>
-                            <a class="btn btn-light btn-square rounded-circle mx-1" href="#"><i
-                                    class="fab fa-linkedin-in"></i></a>
-                        </div>
-                    </div>
-                </div>
-                <div class="position-absolute start-0 bottom-0 w-100 rounded-bottom text-center p-4"
-                    style="background: rgba(34, 36, 41, .9);">
-                    <h5 class="text-uppercase text-light">Adam Phillips</h5>
-                    <p class="text-uppercase text-secondary m-0">Trainer</p>
-                </div>
-            </div>
-        </div>
+        {{/each}}
     </div>
 </div>
 <!-- Team End -->
@@ -719,36 +677,38 @@
     <div class="row g-0">
         <div class="col-lg-6" style="min-height: 500px;">
             <div class="position-relative h-100">
-                <img class="position-absolute w-100 h-100" src="/public/img/testimonial.jpg" style="object-fit: cover;">
+                <img class="position-absolute w-100 h-100" src="/public/img/thanhcong.jpg" style="object-fit: cover;">
             </div>
         </div>
         <div class="col-lg-6 bg-dark p-5">
             <div class="mb-5">
                 <h5 class="text-primary text-uppercase">Testimonial</h5>
-                <h1 class="display-3 text-uppercase text-light mb-0">Our Client Say</h1>
+                <h1 class="display-3 text-uppercase text-light mb-0">Nhận xét từ khách hàng</h1>
             </div>
             <div class="owl-carousel testimonial-carousel">
                 <div class="testimonial-item">
-                    <p class="fs-4 fw-normal text-light mb-4"><i class="fa fa-quote-left text-primary me-3"></i>Dolores
-                        sed duo clita tempor justo dolor et stet lorem kasd labore dolore lorem ipsum. At lorem lorem
-                        magna ut et, nonumy et labore et tempor diam tempor erat dolor rebum sit ipsum.</p>
+                    <p class="fs-4 fw-normal text-light mb-4"><i class="fa fa-quote-left text-primary me-3"></i>Fitness đã và đang giúp tôi
+                     thay đổi ngoạn mục. Chỉ trong vòng 3 tháng, tôi đã giảm được 8kg mỡ với một sức khoẻ
+                     và thể hình đẹp. Tôi đã nhận được rất nhiều lời khen từ bạn bè, người thân, đó là động lực rất
+                     lớn đến bản thân tôi và những người xung quanh</p>
                     <div class="d-flex align-items-center">
-                        <img class="img-fluid rounded-circle" src="/public/img/testimonial-1.jpg" alt="">
+                        <img class="img-fluid rounded-circle" src="/public/img/giamcan.jpg" alt="">
                         <div class="ps-4">
-                            <h5 class="text-uppercase text-light">Client Name</h5>
-                            <span class="text-uppercase text-secondary">Profession</span>
+                            <h5 class="text-uppercase text-light">Hạ Mây</h5>
+                            <span class="text-uppercase text-secondary">Cô gái đã thay đổi sau 3 tháng</span>
                         </div>
                     </div>
                 </div>
                 <div class="testimonial-item">
-                    <p class="fs-4 fw-normal text-light mb-4"><i class="fa fa-quote-left text-primary me-3"></i>Dolores
-                        sed duo clita tempor justo dolor et stet lorem kasd labore dolore lorem ipsum. At lorem lorem
-                        magna ut et, nonumy et labore et tempor diam tempor erat dolor rebum sit ipsum.</p>
+                    <p class="fs-4 fw-normal text-light mb-4"><i class="fa fa-quote-left text-primary me-3"></i>Fitness đã và đang giúp tôi
+                     thay đổi ngoạn mục. Chỉ trong vòng 3 tháng, tôi đã giảm được 8kg mỡ với một sức khoẻ
+                     và thể hình đẹp. Tôi đã nhận được rất nhiều lời khen từ bạn bè, người thân, đó là động lực rất
+                     lớn đến bản thân tôi và những người xung quanh</p>
                     <div class="d-flex align-items-center">
-                        <img class="img-fluid rounded-circle" src="/public/img/testimonial-2.jpg" alt="">
+                        <img class="img-fluid rounded-circle" src="/public/img/giamcan.jpg" alt="">
                         <div class="ps-4">
-                            <h5 class="text-uppercase text-light">Client Name</h5>
-                            <span class="text-uppercase text-secondary">Profession</span>
+                            <h5 class="text-uppercase text-light">Hạ Mây</h5>
+                            <span class="text-uppercase text-secondary">Cô gái đã thay đổi sau 3 tháng</span>
                         </div>
                     </div>
                 </div>
@@ -762,55 +722,37 @@
 <!-- Blog Start -->
 <div class="container-fluid p-5">
     <div class="mb-5 text-center">
-        <h5 class="text-primary text-uppercase">Các bài viết</h5>
+        <h5 class="text-primary text-uppercase">Blog</h5>
         <h1 class="display-3 text-uppercase mb-0">Các bài viết mới nhất</h1>
     </div>
     <div class="row g-5">
-        <div class="col-lg-4">
+        {{#each blog_home}}
+        <div class="col-lg-4" >
             <div class="blog-item">
                 <div class="position-relative overflow-hidden rounded-top">
-                    <img class="img-fluid" src="/public/img/blog-1.jpg" alt="">
+                    <img class="img-fluid img_blog_home" src="{{this.image}}" alt="anh_blog" >
                 </div>
                 <div class="bg-dark d-flex align-items-center rounded-bottom p-4">
                     <div class="flex-shrink-0 text-center text-secondary border-end border-secondary pe-3 me-3">
-                        <span>01</span>
-                        <h6 class="text-light text-uppercase mb-0">January</h6>
-                        <span>2045</span>
+                        <span>{{this.date}}</span>
+                        <h6 class="text-light text-uppercase mb-0">{{month}}</h6>
+                        <span>{{year}}</span>
                     </div>
-                    <a class="h5 text-uppercase text-light" href="">Sed amet tempor amet sit kasd sea lorem</h4></a>
+                    <a class="h5 text-uppercase text-light" href="/blog/id/{{this.blog_id}}">{{this.name}}</h4></a>
                 </div>
             </div>
         </div>
-        <div class="col-lg-4">
-            <div class="blog-item">
-                <div class="position-relative overflow-hidden rounded-top">
-                    <img class="img-fluid" src="/public/img/blog-2.jpg" alt="">
-                </div>
-                <div class="bg-dark d-flex align-items-center rounded-bottom p-4">
-                    <div class="flex-shrink-0 text-center text-secondary border-end border-secondary pe-3 me-3">
-                        <span>01</span>
-                        <h6 class="text-light text-uppercase mb-0">January</h6>
-                        <span>2045</span>
-                    </div>
-                    <a class="h5 text-uppercase text-light" href="">Sed amet tempor amet sit kasd sea lorem</h4></a>
-                </div>
-            </div>
-        </div>
-        <div class="col-lg-4">
-            <div class="blog-item">
-                <div class="position-relative overflow-hidden rounded-top">
-                    <img class="img-fluid" src="/public/img/blog-3.jpg" alt="">
-                </div>
-                <div class="bg-dark d-flex align-items-center rounded-bottom p-4">
-                    <div class="flex-shrink-0 text-center text-secondary border-end border-secondary pe-3 me-3">
-                        <span>01</span>
-                        <h6 class="text-light text-uppercase mb-0">January</h6>
-                        <span>2045</span>
-                    </div>
-                    <a class="h5 text-uppercase text-light" href="">Sed amet tempor amet sit kasd sea lorem</h4></a>
-                </div>
-            </div>
-        </div>
+        {{/each}}
     </div>
 </div>
 <!-- Blog End -->
+{{#if reset_pass}}
+<iframe  id="success" src="/default.asp"></iframe>
+<input  hidden="hidden" id="success_heading" value="Đã gửi yêu cầu thay đổi mật khẩu">
+<input  hidden="hidden" id="success_text" value="Hãy kiểm tra email">
+{{/if}}
+{{#if signin}}
+<iframe  id="success" src="/default.asp"></iframe>
+<input  hidden="hidden" id="success_heading" value="Đăng nhập thành công">
+<input  hidden="hidden" id="success_heading" value="Chào mừng bạn đến với Fitness">
+{{/if}}

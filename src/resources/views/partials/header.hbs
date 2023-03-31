@@ -1,16 +1,16 @@
-{{#unless admin}}
+{{#unless session.admin}}
 <!-- Header Start -->
 <div class="container-fluid bg-dark px-0">
     <div class="row gx-0">
         <div class="col-lg-3 bg-dark d-none d-lg-block">
             <a href="/" class="navbar-brand w-100 h-100 m-0 p-0 d-flex align-items-center justify-content-center">
-                <h1 class="m-0 display-4 text-primary text-uppercase">Gymster</h1>
+                <h1 class="m-0 display-4 text-primary text-uppercase">Fitness</h1>
             </a>
         </div>
         <div class="col-lg-9">
             <div class="row gx-0 bg-secondary d-none d-lg-flex">
                 <div class="col-lg-7 px-5 text-start">
-                    {{#if session.user}}
+                    {{#if session.user.user_id }}
                     <div class="h-100 d-inline-flex align-items-center py-2 me-4">
                         <i class="fa fa-envelope text-primary me-2"></i>
                         <h6 class="mb-0">{{session.user.email}}</h6>
@@ -50,26 +50,39 @@
                 </button>
                 <div class="collapse navbar-collapse justify-content-between" id="navbarCollapse">
                     <div class="navbar-nav mr-auto py-0">
+                        {{#if pt_home}}
+                        <a href="/" class="nav-item nav-link" id="active">Trang chủ</a>
+                        {{else}}
                         <a href="/" class="nav-item nav-link">Trang chủ</a>
-                        <a href="/class" class="nav-item nav-link">Lớp học</a>
+                        {{/if}}
+                        {{#if all_class}}
+                        <a href="/class" class="nav-item nav-link " id="active">Lớp học</a>
+                        {{else}}
+                        <a href="/class" class="nav-item nav-link ">Lớp học</a>
+                        {{/if}}
+                        {{#if blog}}
+                        <a href="/blog/page/1" class="nav-item nav-link" id="active">Blogs</a>
+                        {{else}}
                         <a href="/blog/page/1" class="nav-item nav-link">Blogs</a>
-                        <a href="/pt/page/1" class="nav-item nav-link">PT</a>
-                        <div class="nav-item dropdown">
-                            <a href="#" class="nav-link dropdown-toggle " data-bs-toggle="dropdown">Pages</a>
-                            <div class="dropdown-menu rounded-0 m-0">
-                                <a href="/blog/page/1" class="dropdown-item ">Blog Grid</a>
-                                <a href="/detail" class="dropdown-item">Blog Detail</a>
-                                <a href="" class="dropdown-item">Testimonial</a>
-                            </div>
-                        </div>
+                        {{/if}}
+                        {{#if pt}}
+                        <a href="/pt/page/1" class="nav-item nav-link active" id="active">PT</a>
+                        {{else}}
+                        <a href="/pt/page/1" class="nav-item nav-link active">PT</a>
+                        {{/if}}
                     </div>
                     <div>
-                        {{#if session.user }}
-                        <a href="/info" class="btn btn-primary py-md-3 px-md-5 d-none d-lg-block">Thông tin cá nhân</a>
+                        {{#if session.user.user_id }}
+                        <div class="info_signout">
+                            <a href="/info" class="btn btn-primary py-md-3 px-md-5 d-none d-lg-block">Thông tin cá
+                                nhân</a>
+                            <a class="logout" href="/user/logout">
+                                <i class="fas fa-sign-out-alt"></i>
+                            </a>
+                        </div>
                         {{else}}
                         <a href="/user/login" class="btn btn-primary py-md-3 px-md-5 d-none d-lg-block">Đăng nhập</a>
                         {{/if}}
-
                     </div>
                 </div>
             </nav>
@@ -77,4 +90,50 @@
     </div>
 </div>
 <!-- Header End -->
+{{else}}
+    <!-- Sidebar Start -->
+    <div class="sidebar pe-4 pb-3">
+        <nav class="navbar bg-light navbar-light">
+            <a href="/admin" class="navbar-brand mx-4 mb-3">
+                <h3 class="text-primary"><i class="fa  me-2"></i>{{session.user.name}}</h3>
+            </a>
+            <div class="d-flex align-items-center ms-4 mb-4">
+                <div class="position-relative">
+                    {{#if session.user.image}}
+                    <img class="rounded-circle" src="{{session.user.image}}" alt="" style="width: 40px; height: 40px;">
+                    {{else}}
+                    <img src="/public/img/Avatar-trang.png" alt="">
+                    {{/if}}
+                    <div
+                        class="bg-success rounded-circle border border-2 border-white position-absolute end-0 bottom-0 p-1">
+                    </div>
+                </div>
+                <div class="ms-3">
+                    <h6 class="mb-0">{{session.user.image}}</h6>
+                    <span>Admin</span>
+                </div>
+            </div>
+            <div class="navbar-nav w-100">
+                <a href="/admin" class="nav-item nav-link active"><i class="fa fa-chart-bar me-2"></i>Trang chủ</a>
+                <a href="/admin/manage_user" class="nav-item nav-link"><i class="fa fa-laptop me-2"></i>Quản lý Người
+                    dùng</a>
+                <a href="/admin/manage_class" class="nav-item nav-link"><i class="fa fa-table me-2"></i>Quản lý lớp
+                    học</a>
+                <a href="/admin/manage_blog" class="nav-item nav-link"><i class="fa fa-file-alt me-2"></i>Quản lý
+                    blog</a>
+                {{!-- <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Charts</a> --}}
+                <div class="nav-item dropdown">
+                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown"><i
+                            class="far fa-file-alt me-2"></i>Pages</a>
+                    <div class="dropdown-menu bg-transparent border-0">
+                        <a href="signin.html" class="dropdown-item">Sign In</a>
+                        <a href="signup.html" class="dropdown-item">Sign Up</a>
+                        <a href="404.html" class="dropdown-item">404 Error</a>
+                        <a href="blank.html" class="dropdown-item">Blank Page</a>
+                    </div>
+                </div>
+            </div>
+        </nav>
+    </div>
+    <!-- Sidebar End -->
 {{/unless}}

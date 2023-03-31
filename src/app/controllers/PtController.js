@@ -3,7 +3,7 @@ const db = require('../../config/db');
 class PtController {
     //[GET] /pt/page/:page
     index(req, res) {
-        var numPerPage = 3;
+        var numPerPage = 9;
         var offset = 0;
         const count_pt = 'select count(*)as numPt from user where role = 2';
         const all_pt = 'select *from user where role = 2 LIMIT ? OFFSET ?';

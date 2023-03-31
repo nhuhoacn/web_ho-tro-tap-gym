@@ -102,7 +102,7 @@ class ClassControlller {
         }
         if (weekday == weekdaynow && timenow_add_30 >= start_time) {
             var join = 3;
-        } else if (count_hv == maximum) {
+        } else if (req.body.count_hv == req.body.maximum) {
             var join = 4;
         } else {
             var join = 0;
@@ -158,6 +158,7 @@ class ClassControlller {
                         console.log('Đăng ký tham gia thành công');
                     }
                 });
+
                 res.redirect('/class');
             } else if (join == 1) {
                 res.send('Bạn đã đăng ký tham gia buổi học này rồi');
@@ -173,6 +174,35 @@ class ClassControlller {
                 console.log('Đã đầy học viên');
             }
         });
+    }
+
+    //[POSt] /info/cancel_class/:class_id
+    cancel_class(req, res) {
+        var now = moment().format('YYYY-MM-DD HH:mm:ss');
+        var join_date = moment(req.body.join_date, 'DD-MM-YYYY').format(
+            'YYYY-MM-DD',
+        );
+        console.log(now, join_date);
+        const sql = `UPDATE user_join_fitness_class SET cancellation_time= '${now}'
+        where class_id = ${req.body.class_id} and join_date= '${join_date}' and user_id=${req.session.user.user_id}`;
+        var timenow_add_30 = moment().add(30, 'minutes').format('kk:mm:ss');
+        var datenow = moment().format('DD-MM-YYYY');
+        if (
+            req.body.join_date < datenow ||
+            (req.body.join_date == datenow && timenow_add_30 >= start_time)
+        ) {
+            res.send(
+                'Không thể huỷ buổi học vì buổi học đã diễn ra hoặc còn dưới 30p nữa buổi học sẽ diễn ra',
+            );
+        } else {
+            db.query(sql, function (err, data) {
+                if (data) {
+                    res.redirect('/info');
+                } else {
+                    console.log(err);
+                }
+            });
+        }
     }
 }
 

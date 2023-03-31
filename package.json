@@ -41,12 +41,14 @@
     "moment": "^2.29.4",
     "mongoose": "^6.8.3",
     "mongoose-slug-generator": "^1.0.4",
+    "multer": "^1.4.5-lts.1",
     "nodemailer": "^6.9.1",
     "socket.io": "^4.6.1",
     "socket.io-client": "^4.6.1",
     "toastr": "^2.1.4"
   },
   "devDependencies": {
+    "handlebars": "^4.5.0",
     "husky": "^8.0.3",
     "lint-staged": "^13.1.0",
     "morgan": "^1.10.0",

@@ -1,0 +1,41 @@
+<div class="container">
+    <div class="page-wrapper bg-gra-02 p-t-30 p-b-100 font-poppins">
+        <div class="wrapper wrapper--w680">
+            <div class="card card-4">
+                <div class="card-body">
+                    <h2 class="title"> Thay đổi mật khẩu </h2>
+                    <form METHOD="POST" action="/user/fogetpass">
+                        <div class="mb-3">
+                            <label for="exampleInputEmail1" class="form-label">Nhập địa chỉ email của bạn</label>
+                            <input type="email" class="form-control" id="exampleInputEmail1" name="email"
+                                required="" >
+                        </div>
+                        <button type="submit" class="btn btn-primary ">Gửi mã xác minh qua email</button>
+                    </form>
+                    <a href="/user/register" class="nav-link">Tạo một tài khoản mới</a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+{{#if mail_false}}
+<iframe hidden="hidden"  id="mail_false" src="/default.asp"></iframe>
+<input  hidden="hidden" id="error_heading" value="Bạn chưa nhập email">
+<input  hidden="hidden" id="error_text" value="Vui lòng nhập email">
+{{/if}}
+{{#if mail_not_exist}}
+<iframe hidden="hidden" id="error" src="/default.asp"></iframe>
+<input  hidden="hidden" id="error_heading" value="Email chưa được đăng ký">
+<input  hidden="hidden" id="error_text" value="Vui lòng đăng nhập lại hoặc đăng ký tài khoản">
+{{/if}}
+{{#if changepass_false}}
+<iframe hidden="hidden" id="error" src="/default.asp"></iframe>
+<input  hidden="hidden" id="error_heading" value="Bạn không được để trống mật khẩu">
+<input  hidden="hidden" id="error_text" value="Hãy gửi lại yêu cầu">
+{{/if}}
+{{#if pass_not_match}}
+<iframe hidden="hidden" id="error" src="/default.asp"></iframe>
+<input  hidden="hidden" id="error_heading" value="2 lần nhập mật khẩu không giống nhau">
+<input  hidden="hidden" id="error_text" value="Hãy vào lại đường link trong mail">
+{{/if}}
+

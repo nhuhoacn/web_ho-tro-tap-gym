@@ -4,7 +4,7 @@
             <div class="card card-4">
                 <div class="card-body">
                     <h2 class="title">Chỉnh sửa thông tin</h2>
-                    <form method="POST" action="/user/change_info">
+                    <form method="POST" action="/info/change_info" enctype="multipart/form-data">
                         <div class="row row-space">
                             <div class="col-2 form-group">
                                 <div class="input-group">
@@ -102,8 +102,9 @@
                         <div class="row row-space">
                             <div class="col-2">
                                 <div class="input-group">
-                                    <label class="label">Link ảnh cá nhân</label>
-                                    <input class="input--style-4" type="" name="image" value="{{session.user.image}}">
+                                    <label class="label">Ảnh cá nhân</label>
+                                    <input type="file" name="image"  accept='image/*' value="{{session.user.image}}">
+                                    {{!-- <input class="input--style-4" type="" name="image" > --}}
                                 </div>
                             </div>
                             <div class="col-2">
