@@ -2,6 +2,7 @@ const { render } = require('ejs');
 const db = require('../../config/db');
 const moment = require('moment');
 var multer = require('multer');
+const session = require('express-session');
 
 class InformationControlller {
     //[GET] /info
@@ -59,7 +60,23 @@ class InformationControlller {
 
     //[GET] info/change_info
     changeinfo(req, res) {
-        res.render('change_info', { session: req.session });
+        //Nhớ xoá sau khi sửa dữ liệu
+        if (req.query.user_id) {
+            var doi_tt = `select *from user where user_id = ${req.query.user_id}`;
+            db.query(doi_tt, function (err, data) {
+                if (!err) {
+                    console.log(data);
+                    req.session.user = data[0];
+                    res.render('change_info', {
+                        session: req.session,
+                    });
+                } else {
+                    console.log(err);
+                }
+            });
+        }
+        // res.render('change_info', {
+        //     session: req.session });
     }
 
     //[POST] info/change_info

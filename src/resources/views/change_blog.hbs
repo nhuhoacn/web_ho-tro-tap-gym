@@ -1,0 +1,82 @@
+<div class="container register">
+    <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
+        <div class="wrapper wrapper--w680">
+            <div class="card card-4">
+                <div class="card-body">
+                    <h2 class="title">Tạo blog</h2>
+                    <form method="POST" action="/blog/create">
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="date">
+                                    <label class="label">Tên blog</label>
+                                    <div class="input-group-icon">
+                                        <input class="input--style-4 js-datepicker" type="text" name="blog_name">
+                                        <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="date">
+                                    <label class="label">Tác giả</label>
+                                    <div class="input-group-icon">
+                                        <input class="input--style-4 js-datepicker" type="text" name="blog_author">
+                                        <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Link ảnh blog</label>
+                                    <input class="input--style-4" type="text" name="blog_image">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Nội dung</label>
+                                    <input class="input--style-4" type="text" name="blog_desciption">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-2 form-group">
+                                <div class="date">
+                                    <label class="label">Blog mang nội dung về</label>
+                                    <div class="input-group-icon">
+                                        <select class="form-select" aria-label="Default select example" name="blog_topic">
+                                            <option value="1">Xây dựng cơ bắp</option>
+                                            <option value="2">Đốt mỡ</option>
+                                            <option value="3">Nâng cao sức khoẻ</option>
+                                            <option value="4">yoga</option>
+                                            <option value="5">bụng</option>
+                                            <option value="6">mông</option>
+                                            <option value="7">Chân</option>
+                                            <option value="8">Toàn thân</option>
+                                            <option value="9">Đùi</option>
+                                            <option value="10">Tăng cân</option>
+                                        </select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="date">
+                                    <label class="label">Ngày tạo blog</label>
+                                    <div class="input-group-icon">
+                                        <input class="input--style-4 js-datepicker" type="date" name="blog_date_create">
+                                        <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
+                                    </div>
+                                </div>
+                            </div
+                        </div>
+                        <div class="p-t-15">
+                            <button class="btn btn--radius-2 btn--orange" type="submit">Đăng ký</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

@@ -133,6 +133,10 @@ app.engine(
                     return v1 <= v2 && v3 <= v4
                         ? options.fn(this)
                         : options.inverse(this);
+                } else if (operator1 == '!=' && operator2 == '!=') {
+                    return v1 != v2 && v3 != v4
+                        ? options.fn(this)
+                        : options.inverse(this);
                 }
             },
             ifCond: function (v1, operator, v2, options) {

@@ -243,7 +243,7 @@
         });
     }
 
-    const ctx2 = document.getElementById('char_join_date');
+    var ctx2 = document.getElementById('char_join_date');
     var xValues1 = document.getElementById('join_date');
     var yValues1 = document.getElementById('sl_theongay');
     if (

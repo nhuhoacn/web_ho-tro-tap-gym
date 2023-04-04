@@ -8,11 +8,9 @@ class PtController {
         const count_pt = 'select count(*)as numPt from user where role = 2';
         const all_pt = 'select *from user where role = 2 LIMIT ? OFFSET ?';
         const search_pt = `select *from user where role = 2 AND name LIKE '%${req.query.search_pt}%'`;
-        //đếm có bao nhiêu pt
+
         if (req.query.search_pt) {
-            db.query(search_pt, req.query.search_pt, function (err, pt) {
-                console.log(req.query.search_pt);
-                console.log(pt);
+            db.query(search_pt, function (err, pt) {
                 res.render('pt', {
                     session: req.session,
                     pt: pt,

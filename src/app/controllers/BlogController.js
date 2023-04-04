@@ -248,6 +248,10 @@ class BlogControlller {
         });
         res.render('detail_blog');
     }
+    //[GET] /blog/change_blog
+    change_blog(req, res) {}
+    //[POST] blog/change_blog
+    save_change(req, res) {}
 }
 
 module.exports = new BlogControlller();
