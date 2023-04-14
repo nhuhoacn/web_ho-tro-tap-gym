@@ -8,7 +8,8 @@ const moment = require('moment');
 class SiteController {
     //[GET] /
     index(req, res, next) {
-        const search_blog = 'select *from blog order BY blog_id DESC LIMIT 3;';
+        const search_blog =
+            'select *from blog order BY date_create_blog DESC LIMIT 3;';
         const pt = 'select *from user where role = 2 LIMIT 3';
 
         db.query(search_blog, function (err, blog) {

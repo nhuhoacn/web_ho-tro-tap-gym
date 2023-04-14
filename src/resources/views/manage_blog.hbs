@@ -131,28 +131,28 @@
                                 <td>{{stt}}</td>
                                 <td>{{name}}</td>
                                 <td>{{author}}</td>
-                                {{#ifCond topic_id "==" 3}}
-                                <td>Admin</td>
-                                {{else ifCond topic_id "==" 3 }}
-                                <td>Huấn luyện viên</td>
-                                {{else }}
-                                <td>Học viên</td>
+                                {{#ifCond topic_id "==" 1}}<td>Xây dựng cơ bắp</td>
+                                {{else ifCond topic_id "==" 2 }} <td>Đốt mỡ</td>
+                                {{else ifCond topic_id "==" 3 }} <td>Nâng cao sức khoẻ</td>
+                                {{else ifCond topic_id "==" 4 }} <td>Yoga</td>
+                                {{else ifCond topic_id "==" 8 }} <td>Toàn thân</td>
+                                {{else ifCond topic_id "==" 10 }} <td>Tăng cân</td>
                                 {{/ifCond}}
                                 <td>{{date_create_blog}}</td>
                                 <td>
-                                    <form method="POST" action="/admin/delete_blog"
+                                    <form method="POST" action="/blog/delete_blog"
                                         class="manage_user btn btn-sm btn-primary">
-                                        <input hidden="hidden" name="user_id" value="{{user_id}}">
+                                        <input hidden="hidden" name="blog_id" value="{{blog_id}}">
                                         <button class="btn-primary">Xoá</button>
                                     </form>
-                                    <form action="/info/change_info" class="btn btn-sm btn-primary">
-                                        <input hidden="hidden" name="user_id" value="{{user_id}}">
+                                    <form action="/blog/change_blog" class="btn btn-sm btn-primary">
+                                        <input hidden="hidden" name="blog_id" value="{{blog_id}}">
                                         <button class="btn-primary">Chỉnh sửa</button>
                                     </form>
                                 </td>
                             </tr>
                             {{/each}}
-                        </tbody>s
+                        </tbody>
                     </table>
                 </div>
             </div>

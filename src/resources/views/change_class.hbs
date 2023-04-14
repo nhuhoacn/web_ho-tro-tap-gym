@@ -1,0 +1,79 @@
+<div class="container register">
+    <div class="page-wrapper bg-gra-02 p-t-130 p-b-100 font-poppins">
+        <div class="wrapper wrapper--w680">
+            <div class="card card-4">
+                <div class="card-body">
+                    <h2 class="title">Chỉnh sửa class</h2>
+                    <form method="POST" action="/class/change_class">
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="date">
+                                    <label class="label">Tên class</label>
+                                    <div class="input-group-icon">
+                                        <input class="input--style-4 js-datepicker" type="text" name="name" value="{{class.name}}">
+                                        <input hidden="hidden" type="text" name="class_id" value="{{class.class_id}}">
+                                        <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Thứ</label>
+                                    <input class="input--style-4" type="text" name="weekday" value="{{class.weekday}}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="date">
+                                    <label class="label">Thời gian bắt đầu</label>
+                                    <div class="input-group-icon">
+                                        <input class="input--style-4 js-datepicker" type="text" name="start_time" value="{{class.start_time}}">
+                                        <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Thời gian kết thúc</label>
+                                    <input class="input--style-4" type="text" name="end_time" value="{{class.end_time}}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Phòng tập</label>
+                                    <input class="input--style-4" type="text" name="room_address" value="{{class.room_address}}">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Giới hạn học viên</label>
+                                    <input class="input--style-4" type="text" name="maximum" value="{{class.maximum}}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="row row-space">
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">PT</label>
+                                    <input class="input--style-4" type="text" name="trainer_id" value="{{class.trainer_id}}">
+                                </div>
+                            </div>
+                            <div class="col-2">
+                                <div class="input-group">
+                                    <label class="label">Tên của pt</label>
+                                    <input class="input--style-4" type="text" name="" value="{{class.trainer}}">
+                                </div>
+                            </div>
+                        </div>
+                        <div class="p-t-15">
+                            <button class="btn btn--radius-2 btn--orange" type="submit">Lưu lại</button>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

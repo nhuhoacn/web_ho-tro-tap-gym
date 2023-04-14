@@ -1,5 +1,5 @@
 const express = require('express');
-const morgan = require('morgan');
+const multer = require('multer');
 const path = require('path');
 const exphbs = require('express-handlebars');
 const { deprecate } = require('util');
@@ -34,7 +34,7 @@ app.use(
     }),
 );
 // //toastr
-// app.use(flash());
+app.use(flash());
 // app.use(toastr());
 
 app.use(
@@ -66,10 +66,26 @@ app.engine(
     exphbs.engine({
         extname: '.hbs',
         helpers: {
-            list: function (page, options) {
+            list: function (page, number_page, options) {
                 var out = '';
                 for (var i = 1; i <= page; i++) {
-                    out = out + '<a href="' + i + '">' + options.fn(i) + '</a>';
+                    if (i == number_page) {
+                        out =
+                            out +
+                            '<a href="' +
+                            i +
+                            '" id="active">' +
+                            options.fn(i) +
+                            '</a>';
+                    } else {
+                        out =
+                            out +
+                            '<a href="' +
+                            i +
+                            '">' +
+                            options.fn(i) +
+                            '</a>';
+                    }
                 }
                 return out;
             },
@@ -190,6 +206,18 @@ app.engine(
 );
 app.set('view engine', 'hbs'); //set sử dụng view là engine handlebars
 app.set('views', path.join(__dirname, 'resources', 'views'));
+
+// SET STORAGE
+var storage = multer.diskStorage({
+    destination: function (req, file, cb) {
+        cb(null, 'uploads');
+    },
+    filename: function (req, file, cb) {
+        cb(null, file.fieldname + '-' + Date.now());
+    },
+});
+
+var upload = multer({ storage: storage });
 //routes init
 route(app);
 

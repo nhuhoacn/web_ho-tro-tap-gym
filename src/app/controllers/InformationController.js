@@ -24,7 +24,6 @@ class InformationControlller {
                 req.session.user.user_id,
                 function (err, history) {
                     for (let i = 0; i < history.length; i++) {
-                        history[i].datenow = datenow;
                         history[i].timenow_add_30 = timenow_add_30;
                         let date = moment(history[i].registration_time).format(
                             'DD/MM/YYYY',
@@ -40,12 +39,18 @@ class InformationControlller {
                             'YYYY-MM-DD',
                         ).format('DD-MM-YYYY');
                         history[i].join_date = date;
+                        history[i].timenow = moment().format('kk:mm:ss');
+                        history[i].status = moment(datenow, 'DD-MM-YYYY').diff(
+                            moment(date, 'DD-MM-YYYY'),
+                        );
                     }
-                    let date = moment(
-                        req.session.user.birthday,
-                        'YYYY-MM-DD',
-                    ).format('DD/MM/YYYY');
-                    req.session.user.birthday = date;
+                    if (req.session.user.birthday) {
+                        let date = moment(
+                            req.session.user.birthday,
+                            'YYYY-MM-DD',
+                        ).format('DD/MM/YYYY');
+                        req.session.user.birthday = date;
+                    }
                     res.render('information', {
                         session: req.session,
                         history,
@@ -74,9 +79,11 @@ class InformationControlller {
                     console.log(err);
                 }
             });
+        } else {
+            res.render('change_info', {
+                session: req.session,
+            });
         }
-        // res.render('change_info', {
-        //     session: req.session });
     }
 
     //[POST] info/change_info
@@ -94,9 +101,7 @@ class InformationControlller {
             filename: function (req, file, callback) {
                 var temp_file_arr = file.originalname.split('.');
                 var temp_file_name = temp_file_arr[0];
-
                 var temp_file_extension = temp_file_arr[1];
-
                 callback(
                     null,
                     temp_file_name +

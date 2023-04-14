@@ -1,3 +1,4 @@
+{{message}} 
 <div class="container">
     {{!-- {{{ req.toastr.render }}} --}}
     <div class="page-wrapper bg-gra-02 p-t-30 p-b-100 font-poppins">
@@ -56,3 +57,8 @@
 <input  hidden="hidden" id="error_heading" value="Email chưa đăng ký tài khoản">
 <input  hidden="hidden" id="error_text" value="Hãy đăng ký tài khoản">
 {{/ifCond}}
+{{#if authentic}}
+<iframe hidden="hidden" id="error" src="/default.asp"></iframe>
+<input  hidden="hidden" id="error_heading" value="Tài khoản đã bị chặn">
+<input  hidden="hidden" id="error_text" value="Không thể đăng nhập">
+{{/if}}

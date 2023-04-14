@@ -1,4 +1,4 @@
-<!-- Hero Start -->
+{{!-- <!-- Hero Start -->
 <div class="container-fluid bg-primary p-5 bg-hero mb-5">
     <div class="row py-5">
         <div class="col-12 text-center">
@@ -8,7 +8,7 @@
         </div>
     </div>
 </div>
-<!-- Hero End -->
+<!-- Hero End --> --}}
 
 <!-- Blog Section Begin -->
 <section class="blog-section spad">
@@ -32,7 +32,7 @@
                 </div>
                 {{/each}}
                 <div class="blog-pagination">
-                    {{#list numPage}}
+                    {{#list numPage number_page}}
                     {{this}}
                     {{/list}}
                     {{#if page_topic}}
@@ -60,54 +60,28 @@
                         </ul>
                     </div>
                     <div class="so-latest">
-                        <h5 class="title">Feature posts</h5>
-                        <div class="latest-large set-bg" data-setbg="">
+                        <h5 class="title">Những bài viết mới</h5>
+                        {{#each new_blog}}
+                        <div class="latest-large set-bg" data-setbg="{{image}}">
                             <div class="ll-text">
-                                <h5><a href="./blog-details.html">This Japanese Way of Making Iced Coffee Is a
-                                        Game...</a></h5>
+                                <h5><a href="/blog/{{blog_id}}">{{name}}</a></h5>
                                 <ul>
-                                    <li>Aug 20, 2019</li>
-                                    <li>20 Comment</li>
+                                    <li>{{date_create_blog}}</li>
                                 </ul>
                             </div>
                         </div>
+                        {{/each}}
+                        {{#each new_blogs}}
                         <div class="latest-item">
                             <div class="li-pic">
-                                <img src="" alt="">
+                                <img class="img-newblog" src="{{image}}" alt="">
                             </div>
                             <div class="li-text">
-                                <h6><a href="./blog-details.html">Grilled Potato and Green Bean Salad</a></h6>
-                                <span class="li-time">Aug 15, 2019</span>
+                                <h6><a href="/blog/{{blog_id}}">{{name}}</a></h6>
+                                <span class="li-time">{{date_create_blog}}</span>
                             </div>
                         </div>
-                        <div class="latest-item">
-                            <div class="li-pic">
-                                <img src="" alt="">
-                            </div>
-                            <div class="li-text">
-                                <h6><a href="./blog-details.html">The $8 French Rosé I Buy in Bulk Every Summer</a></h6>
-                                <span class="li-time">Aug 15, 2019</span>
-                            </div>
-                        </div>
-                        <div class="latest-item">
-                            <div class="li-pic">
-                                <img src="" alt="">
-                            </div>
-                            <div class="li-text">
-                                <h6><a href="./blog-details.html">Ina Garten's Skillet-Roasted Lemon Chicken</a></h6>
-                                <span class="li-time">Aug 15, 2019</span>
-                            </div>
-                        </div>
-                        <div class="latest-item">
-                            <div class="li-pic">
-                                <img src="" alt="">
-                            </div>
-                            <div class="li-text">
-                                <h6><a href="./blog-details.html">The Best Weeknight Baked Potatoes, 3 Creative Ways</a>
-                                </h6>
-                                <span class="li-time">Aug 15, 2019</span>
-                            </div>
-                        </div>
+                        {{/each}}
                     </div>
                     <div class="so-tags">
                         <h5 class="title">Popular tags</h5>

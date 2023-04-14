@@ -1,6 +1,7 @@
 const { render } = require('ejs');
 const db = require('../../config/db');
 const moment = require('moment');
+const { now } = require('mongoose');
 
 class BlogControlller {
     //[GET] blog/:page
@@ -10,6 +11,8 @@ class BlogControlller {
         const search_blog =
             'select *from blog order BY blog_id DESC LIMIT ? OFFSET ?';
         const all_topic = `SELECT topic.topic_id,topic.name, COUNT(*) as count FROM topic right JOIN blog ON blog.topic_id = topic.topic_id GROUP BY topic.topic_id`;
+        const sql_new_blogs = `SELECT *from blog order BY date_create_blog DESC LIMIT 4 OFFSET 1`;
+        const sql_new_blog = `SELECT *from blog order BY date_create_blog DESC LIMIT 1`;
         // const sumcomment = 'select count(*) as sumComment from comment where blog_id = ?';
 
         // đếm số page
@@ -46,11 +49,50 @@ class BlogControlller {
                 resolve(all_topic);
             });
         });
+        //new blog
+        var promises_new_blog = new Promise((resolve, reject) => {
+            db.query(sql_new_blog, function (err, new_blog) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    var date = moment(
+                        new_blog[0].date_create_blog,
+                        'YYYY-MM-DD',
+                    ).format('MMM Do, YYYY');
+                    new_blog[0].date_create_blog = date;
+                    if (new_blog[0].author == null) {
+                        new_blog[0].author = 'Admin';
+                    }
+                }
+                resolve(new_blog);
+            });
+        });
+        //new blogs
+        var promises_new_blogs = new Promise((resolve, reject) => {
+            db.query(sql_new_blogs, function (err, new_blogs) {
+                if (err) {
+                    console.log(err);
+                } else {
+                    for (let i = 0; i < new_blogs.length; i++) {
+                        var date = moment(new_blogs[i].date_create_blog).format(
+                            'MMM Do, YYYY',
+                        );
+                        new_blogs[i].date_create_blog = date;
+                        if (new_blogs[i].author == null) {
+                            new_blogs[i].author = 'Admin';
+                        }
+                    }
+                }
+                resolve(new_blogs);
+            });
+        });
         const showblog = async () => {
             try {
                 var numPage = await promises_num;
                 var blog = await promises_blog;
                 var topic = await promises_all_topic;
+                var new_blogs = await promises_new_blogs;
+                var new_blog = await promises_new_blog;
                 var offset = (req.params.page - 1) * numPerPage;
                 var pagenext = Number(req.params.page) + 1;
                 console.log('số page ', numPage);
@@ -61,6 +103,9 @@ class BlogControlller {
                     numPage: numPage,
                     pagenext: pagenext,
                     session: req.session,
+                    new_blogs,
+                    new_blog,
+                    number_page: req.params.page,
                 });
             } catch (err) {
                 console.log(err);
@@ -125,29 +170,44 @@ class BlogControlller {
 
     //[GET] blog/create
     create(req, res) {
-        res.render('create_blog');
+        res.render('create_image');
     }
     //[POST] blog/create
     insert_blog(req, res) {
-        const sql =
-            'INSERT INTO blog(name,author,image,desciption,topic,date_create_blog) VALUES (?)';
-        const values = [
-            req.body.blog_name,
-            req.body.blog_author,
-            req.body.blog_image,
-            req.body.blog_desciption,
-            req.body.blog_topic,
-            req.body.blog_date_create,
-        ];
-        db.query(sql, [values], function (err, data) {
-            if (err) {
-                throw err;
-            } else {
-                console.log('blog created');
-            }
-        });
-        res.render('create_blog');
+        var img = fs.readFileSync(req.file.path);
+        var encode_image = img.toString('base64');
+        var finalImg = {
+            contentType: req.file.mimetype,
+            image: new Buffer(encode_image, 'base64'),
+        };
+        if (!file) {
+            const error = new Error('Please upload a file');
+            error.httpStatusCode = 400;
+            console.log(err);
+        }
+        res.send(file);
     }
+    //[POST] blog/create
+    // insert_blog(req, res) {
+    //     const sql =
+    //         'INSERT INTO blog(name,author,image,description,topic,date_create_blog) VALUES (?)';
+    //     const values = [
+    //         req.body.blog_name,
+    //         req.body.blog_author,
+    //         req.body.blog_image,
+    //         req.body.blog_description,
+    //         req.body.blog_topic,
+    //         req.body.blog_date_create,
+    //     ];
+    //     db.query(sql, [values], function (err, data) {
+    //         if (err) {
+    //             throw err;
+    //         } else {
+    //             console.log('blog created');
+    //         }
+    //     });
+    //     res.render('create_blog');
+    // }
 
     //[GET] /blog/topic/:topic_id
     blog_topic(req, res) {
@@ -249,9 +309,58 @@ class BlogControlller {
         res.render('detail_blog');
     }
     //[GET] /blog/change_blog
-    change_blog(req, res) {}
+    change_blog(req, res) {
+        // if (req.session.user != null && req.session.user.role == 3) {
+        var search_blog = `select *from blog where blog_id = ${req.query.blog_id}`;
+        if (req.query.blog_id) {
+            var now = moment().format();
+            db.query(search_blog, function (err, data) {
+                if (!err) {
+                    res.render('change_blog', {
+                        blog: data[0],
+                    });
+                } else {
+                    console.log(err);
+                }
+            });
+        }
+        // } else {
+        //     res.redirect('/');
+        // }
+    }
     //[POST] blog/change_blog
-    save_change(req, res) {}
+    save_change(req, res) {
+        // if (req.session.user != null && req.session.user.role == 3) {
+        var blog = req.body;
+        var save_blog = `UPDATE blog SET 
+        name="${blog.name}", author="${blog.author}", image="${blog.image}", description="${blog.description}",
+        topic_id="${blog.topic_id}", date_create_blog="${blog.date_create_blog}" WHERE blog_id = ${blog.blog_id};`;
+        db.query(save_blog, function (err, data) {
+            if (!err) {
+                console.log(blog.date_create_blog);
+                res.redirect('/admin/manage_blog');
+            } else {
+                console.log(err);
+            }
+        });
+        // } else {
+        //     res.redirect('/');
+        // }
+    }
+
+    //[POST] /blog/delete_blog
+    delete_blog(req, res, next) {
+        if (req.body.blog_id) {
+            var delete_blog = `DELETE from blog where blog_id = ${req.body.blog_id}`;
+            db.query(delete_blog, function (err, data) {
+                if (!err) {
+                    res.redirect('/admin/manage_blog');
+                } else {
+                    console.log(err);
+                }
+            });
+        }
+    }
 }
 
 module.exports = new BlogControlller();

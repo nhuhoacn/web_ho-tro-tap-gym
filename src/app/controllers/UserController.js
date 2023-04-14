@@ -146,6 +146,7 @@ class UserController {
 
     //[GET] user/login
     login(req, res) {
+        req.flash('message', 'Welcome to Blog');
         res.render('login', { session: req.session });
     }
 
@@ -165,19 +166,15 @@ class UserController {
                                 console.log(data[0].password);
                                 console.log(authentic);
                                 if (authentic) {
+                                    req.session.user = data[0];
+                                    req.session.signin = true;
                                     if (data[0].role == 3) {
-                                        req.session.user = data[0];
-                                        var admin = 1;
                                         req.session.save(function (err) {
                                             res.redirect('/admin');
                                         });
                                     } else {
-                                        req.session.user = data[0];
                                         req.session.save(function (err) {
-                                            res.render('home', {
-                                                session: req.session,
-                                                signin: true,
-                                            });
+                                            res.redirect('/');
                                         });
                                     }
                                 } else {
@@ -187,6 +184,10 @@ class UserController {
                                 }
                             },
                         );
+                    } else {
+                        res.render('login', {
+                            authentic: true,
+                        });
                     }
                 } else {
                     res.render('login', {
@@ -294,6 +295,74 @@ class UserController {
         } else {
             res.render('fogetpass', {
                 changepass_false: true,
+            });
+        }
+    }
+
+    //[POST] /user/delete_user
+    delete_user(req, res, next) {
+        if (req.body.user_id) {
+            var delete_user = `DELETE from user where user_id = ${req.body.user_id}`;
+            db.query(delete_user, function (err, data) {
+                if (!err) {
+                    res.redirect('/admin/manage_user');
+                } else {
+                    console.log(err);
+                }
+            });
+        }
+    }
+
+    //[POST] /user/block_user
+    block_user(req, res, next) {
+        if (req.body.user_id) {
+            var block_user = `UPDATE user SET authentication = 0 where user_id = ${req.body.user_id}`;
+            db.query(block_user, function (err, data) {
+                if (!err) {
+                    res.redirect('/admin/manage_user');
+                } else {
+                    console.log(err);
+                }
+            });
+        }
+    }
+
+    //[POST] /user/unblock_user
+    unblock_user(req, res, next) {
+        if (req.body.user_id) {
+            var unblock_user = `UPDATE user SET authentication = 1 where user_id = ${req.body.user_id}`;
+            db.query(unblock_user, function (err, data) {
+                if (!err) {
+                    res.redirect('/admin/manage_user');
+                } else {
+                    console.log(err);
+                }
+            });
+        }
+    }
+    //[POST] /user/cancel_admin
+    cancel_admin(req, res, next) {
+        if (req.body.user_id) {
+            var cancel_admin = `UPDATE user SET role = 1 where user_id = ${req.body.user_id}`;
+            db.query(cancel_admin, function (err, data) {
+                if (!err) {
+                    res.redirect('/admin/manage_user');
+                } else {
+                    console.log(err);
+                }
+            });
+        }
+    }
+    //[POST] /user/add_admin
+    add_admin(req, res, next) {
+        if (req.body.user_id) {
+            var add_admin = `UPDATE user SET role = 3 where user_id = ${req.body.user_id}`;
+            db.query(add_admin, function (err, data) {
+                if (!err) {
+                    res.redirect('/admin/manage_user');
+                } else {
+                    console.log(err);
+                }
             });
         }
     }

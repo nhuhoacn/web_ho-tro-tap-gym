@@ -2594,10 +2594,6 @@ ol {
     width: 237px;
     height: 1px;
     background: #363636;
-    content: '';
-    -webkit-transform: rotate(-40deg);
-    -ms-transform: rotate(-40deg);
-    transform: rotate(-40deg);
 }
 
 .class-timetable table tbody tr td h5 {
@@ -4627,6 +4623,7 @@ ol {
 .dropdown {
     // position: relative;
     display: inline-block;
+    content: center;
 }
 
 .dropdown-content {
@@ -4656,10 +4653,11 @@ ol {
 }
 
 .hover-dp hr {
-    width: 100%;
-    size: 5px;
+    width: 1px;
+    height: 25px;
     align: center;
     margin: 5px;
+    size: 500;
 }
 
 .tabletime {
@@ -4706,6 +4704,7 @@ ol {
 
 .time-table-class {
     display: flex;
+    justify-content: center;
 }
 
 .jq-toast-wrap,
@@ -4930,4 +4929,13 @@ ol {
     .manage_user {
         margin: 5px 0px;
     }
+}
+@media (max-width: 900px) {
+    .class-timetable {
+        padding: 0px;
+    }
+}
+.img-newblog {
+    width: 105px;
+    height: 70px;
 }

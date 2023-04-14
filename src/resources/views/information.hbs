@@ -62,11 +62,11 @@
                                                 <li><span>Cân nặng</span>{{session.user.weight}}</li>
                                                 <li><span>Chiều cao</span>{{session.user.height}}</li>
                                                 <li><span>Chỉ số BMI</span>{{bmi}}</li>
-                                                {{#if session.user.birthday }}
+                                                {{#ifCond session.user.birthday "==" "Invalid date"}}
                                                 <li><span>Năm sinh</span>{{session.user.birthday}}</li>
                                                 {{else}}
                                                 <li><span>Năm sinh</span>00/00/0000 </li>
-                                                {{/if}}
+                                                {{/ifCond}}
                                                 <li><span>Địa chỉ</span>{{session.user.address}}</li>
                                                 <li>
                                                     <a href="info/change_info"
@@ -85,7 +85,7 @@
             </div>
     </section>
     <div class="history">
-        <h6 class="mb-4">lịch sử tập luyện</h6>
+        <h6 class="mb-4">Lịch sử tập luyện</h6>
         <table class="table table-dark">
             <thead>
                 <tr>
@@ -112,19 +112,24 @@
                     {{/ifCond}}
                     <td>phòng {{room_address}}</td>
                     <form method="POST" action="/class/cancel_class">
-                        {{#ifCond cancellation_time "!=" "Invalid date" }}
-                        <td class="canceled">Đã huỷ</td>
-                        {{else ifCond join_date "==" datenow }}
-                            {{#ifCond timenow_add_30 ">=" start_time}}
-                            <td class="took_place">Còn 30p</td>
-                            {{/ifCond}}
-                        {{else ifCond join_date "<" datenow}} 
-                            <td class="took_place">Đã diễn ra</td>
-                        {{else}}
-                            <input hidden="hidden" name="class_id" value="{{class_id}}">
+                    <input hidden="hidden" name="class_id" value="{{class_id}}">
                             <input hidden="hidden" name="join_date" value="{{join_date}}">
                             <input hidden="hidden" name="start_time" value="{{start_time}}">
+                        {{#ifCond cancellation_time "!=" "Invalid date" }}
+                        <td class="canceled">Đã huỷ</td>
+                        {{else ifCond status "==" 0 }}
+                            {{#ifCond timenow ">=" start_time}}
+                            <td class="took_place">Đã diễn ra</td>
+                            {{else ifCond timenow_add_30 ">=" start_time}}
+                            <td class="took_place">Còn 30p</td>
+                            {{else}}
                             <td><button id="cancel_class"> Huỷ lớp</button>
+                            </td>
+                            {{/ifCond}}
+                        {{else ifCond status ">" 0}} 
+                            <td class="took_place">Đã diễn ra</td>
+                        {{else}}
+                            <td><button id="cancel_class">Huỷ lớp</button>
                             </td>
                         {{/ifCond}}
                     </form>

@@ -229,6 +229,8 @@
                             'rgba(251,91,33, .7)',
                             'rgba(251,91,33, .6)',
                             'rgba(251,91,33, .5)',
+                            'rgba(251,91,33, .4)',
+                            'rgba(251,91,33, .3)',
                         ],
                         data: yValues,
                     },
@@ -702,6 +704,17 @@
             } else {
                 passField.type = 'password';
                 showBtn.classList.remove('hide-btn');
+            }
+        };
+    }
+    const register_class = document.getElementById('register');
+    if (register_class != null) {
+        register_class.onclick = function () {
+            var check = confirm('Are you sure you want to leave?');
+            if (check == true) {
+                return true;
+            } else {
+                return false;
             }
         };
     }

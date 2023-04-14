@@ -11,7 +11,7 @@
                 <div class="col-lg-12">
                     <div class="class-details-timetable_title">
                         <h5> Thời khoá biểu tập luyện</h5>
-                        <h5> ngày {{#component days 2}}{{/component}} đến {{#component days 8}}{{/component}} </h5>
+                        <h5>Ngày {{#component days 2}}{{/component}} đến {{#component days 8}}{{/component}} </h5>
                     </div>
                 </div>
             </div>
@@ -38,10 +38,12 @@
                                         <div class="time-table-class">
                                             {{#each all_class}}
                                             {{#ifCond this.weekday '==' 2}}
-                                            {{#ifCond this.start_time '==' "06:00:00" }} <div class="dropdown">
+                                            {{#ifCond this.start_time '==' "06:00:00" }}
+                                            <div class="dropdown">
                                                 <h5 class="dropbtn">{{this.name}}</h5>
                                                 <span>{{this.trainer}}</span>
                                             </div>
+                                            <hr>
                                             {{/ifCond}}
                                             {{/ifCond}}
                                             {{/each}}
@@ -55,6 +57,7 @@
                                                 <h5 class="dropbtn">{{this.name}}</h5>
                                                 <span>{{this.trainer}}</span>
                                             </div>
+                                            <hr>
                                             {{/ifCond}}
                                             {{/ifCond}}
                                             {{/each}}
@@ -68,54 +71,68 @@
                                                 <h5 class="dropbtn {{this.class_id}}">{{this.name}}</h5>
                                                 <span>{{this.trainer}}</span>
                                             </div>
+                                            <hr>
                                             {{/ifCond}}
                                             {{/ifCond}}
                                             {{/each}}
                                         </div>
                                     </td>
                                     <td class="hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 5}}
-                                        {{#ifCond this.start_time '==' "06:00:00" }} <div class="dropdown">
-                                            <h5 class="dropbtn {{this.class_id}}">{{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
+                                        <div class="time-table-class">
+                                            {{#each all_class}}
+                                            {{#ifCond this.weekday '==' 5}}
+                                            {{#ifCond this.start_time '==' "06:00:00" }} <div class="dropdown">
+                                                <h5 class="dropbtn {{this.class_id}}">{{this.name}}</h5>
+                                                <span>{{this.trainer}}</span>
+
+                                            </div>
+                                            <hr>
                                             {{/ifCond}}
                                             {{/ifCond}}
                                             {{/each}}
+                                        </div>
                                     </td>
                                     <td class="dark-bg hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 6}}
-                                        {{#ifCond this.start_time '==' "06:00:00" }} <div class="dropdown">
-                                            <h5 class="dropbtn {{this.class_id}}">{{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
+                                        <div class="time-table-class">
+                                            {{#each all_class}}
+                                            {{#ifCond this.weekday '==' 6}}
+                                            {{#ifCond this.start_time '==' "06:00:00" }} <div class="dropdown">
+                                                <h5 class="dropbtn {{this.class_id}}">{{this.name}}</h5>
+                                                <span>{{this.trainer}}</span>
+                                            </div>
+                                            <hr>
                                             {{/ifCond}}
                                             {{/ifCond}}
                                             {{/each}}
+                                        </div>
                                     </td>
                                     <td class="hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 7}}
-                                        {{#ifCond this.start_time '==' "06:00:00" }} <div class="dropdown">
-                                            <h5 class="dropbtn {{this.class_id}}">{{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
+                                        <div class="time-table-class">
+                                            {{#each all_class}}
+                                            {{#ifCond this.weekday '==' 7}}
+                                            {{#ifCond this.start_time '==' "06:00:00" }} <div class="dropdown">
+                                                <h5 class="dropbtn {{this.class_id}}">{{this.name}}</h5>
+                                                <span>{{this.trainer}}</span>
+                                            </div>
+                                            <hr>
                                             {{/ifCond}}
                                             {{/ifCond}}
                                             {{/each}}
+                                        </div>
                                     </td>
                                     <td class=" dark-bg hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 8}}
-                                        {{#ifCond this.start_time '==' "06:00:00" }} <div class="dropdown">
-                                            <h5 class="dropbtn {{this.class_id}}">{{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
+                                        <div class="time-table-class">
+                                            {{#each all_class}}
+                                            {{#ifCond this.weekday '==' 8}}
+                                            {{#ifCond this.start_time '==' "06:00:00" }} <div class="dropdown">
+                                                <h5 class="dropbtn {{this.class_id}}">{{this.name}}</h5>
+                                                <span>{{this.trainer}}</span>
+                                            </div>
+                                            <hr>
                                             {{/ifCond}}
                                             {{/ifCond}}
                                             {{/each}}
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
@@ -128,262 +145,301 @@
                                                 <h5 class="dropbtn">{{this.name}}</h5>
                                                 <span>{{this.trainer}}</span>
                                             </div>
+                                            <hr>
                                             {{/ifCond}}
                                             {{/ifCond}}
                                             {{/each}}
                                         </div>
                                     </td>
                                     <td class="dark-bg hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 3}}
-                                        {{#ifManyCond this.start_time '>=' "07:00:00" this.start_time '<=' "08:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
+                                        <div class="time-table-class">
+                                            {{#each all_class}}
+                                            {{#ifCond this.weekday '==' 3}}
+                                            {{#ifCond this.start_time '==' "07:00:00" }} <div class="dropdown">
+                                                <h5 class="dropbtn">{{this.name}}</h5>
+                                                <span>{{this.trainer}}</span>
+                                            </div>
+                                            <hr>
+                                            {{/ifCond}}
                                             {{/ifCond}}
                                             {{/each}}
+                                        </div>
                                     </td>
                                     <td class="hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 4}}
-                                        {{#ifManyCond this.start_time '>=' "07:00:00" this.start_time '<=' "08:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
+                                        <div class="time-table-class">
+                                            {{#each all_class}}
+                                            {{#ifCond this.weekday '==' 4}}
+                                            {{#ifCond this.start_time '==' "07:00:00" }} <div class="dropdown">
+                                                <h5 class="dropbtn">{{this.name}}</h5>
+                                                <span>{{this.trainer}}</span>
+                                            </div>
+                                            <hr>
+                                            {{/ifCond}}
                                             {{/ifCond}}
                                             {{/each}}
+                                        </div>
                                     </td>
                                     <td class="dark-bg hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 5}}
-                                        {{#ifManyCond this.start_time '>=' "07:00:00" this.start_time '<=' "08:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
+                                        <div class="time-table-class">
+                                            {{#each all_class}}
+                                            {{#ifCond this.weekday '==' 5}}
+                                            {{#ifCond this.start_time '==' "07:00:00" }} <div class="dropdown">
+                                                <h5 class="dropbtn">{{this.name}}</h5>
+                                                <span>{{this.trainer}}</span>
+                                            </div>
+                                            <hr>
+                                            {{/ifCond}}
                                             {{/ifCond}}
                                             {{/each}}
+                                        </div>
                                     </td>
                                     <td class="hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 6}}
-                                        {{#ifManyCond this.start_time '>=' "07:00:00" this.start_time '<=' "08:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
+                                        <div class="time-table-class">
+                                            {{#each all_class}}
+                                            {{#ifCond this.weekday '==' 6}}
+                                            {{#ifCond this.start_time '==' "07:00:00" }} <div class="dropdown">
+                                                <h5 class="dropbtn">{{this.name}}</h5>
+                                                <span>{{this.trainer}}</span>
+                                            </div>
+                                            <hr>
+                                            {{/ifCond}}
                                             {{/ifCond}}
                                             {{/each}}
+                                        </div>
                                     </td>
                                     <td class="dark-bg hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 7}}
-                                        {{#ifManyCond this.start_time '>=' "07:00:00" this.start_time '<=' "08:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
+                                        <div class="time-table-class">
+                                            {{#each all_class}}
+                                            {{#ifCond this.weekday '==' 7}}
+                                            {{#ifCond this.start_time '==' "07:00:00" }} <div class="dropdown">
+                                                <h5 class="dropbtn">{{this.name}}</h5>
+                                                <span>{{this.trainer}}</span>
+                                            </div>
+                                            <hr>
+                                            {{/ifCond}}
                                             {{/ifCond}}
                                             {{/each}}
+                                        </div>
                                     </td>
                                     <td class="hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 8}}
-                                        {{#ifManyCond this.start_time '>=' "07:00:00" this.start_time '<=' "08:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
+                                        <div class="time-table-class">
+                                            {{#each all_class}}
+                                            {{#ifCond this.weekday '==' 8}}
+                                            {{#ifCond this.start_time '==' "07:00:00" }} <div class="dropdown">
+                                                <h5 class="dropbtn">{{this.name}}</h5>
+                                                <span>{{this.trainer}}</span>
+                                            </div>
+                                            <hr>
+                                            {{/ifCond}}
                                             {{/ifCond}}
                                             {{/each}}
+                                        </div>
                                     </td>
-
                                 </tr>
                                 <tr>
                                     <td class="class-time">8.00am - 9.00am</td>
                                     <td class="dark-bg hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 2}}
-                                        {{#ifManyCond this.start_time '>=' "08:00:00" this.start_time '<=' "09:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
+                                        <div class="time-table-class">
+                                            {{#each all_class}}
+                                            {{#ifCond this.weekday '==' 2}}
+                                            {{#ifCond this.start_time '==' "08:00:00" }} <div class="dropdown">
+                                                <h5 class="dropbtn">{{this.name}}</h5>
+                                                <span>{{this.trainer}}</span>
+                                            </div>
+                                            <hr>
+                                            {{/ifCond}}
                                             {{/ifCond}}
                                             {{/each}}
+                                        </div>
                                     </td>
                                     <td class="hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 3}}
-                                        {{#ifManyCond this.start_time '>=' "08:00:00" this.start_time '<=' "09:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
+                                        <div class="time-table-class">
+                                            {{#each all_class}}
+                                            {{#ifCond this.weekday '==' 3}}
+                                            {{#ifCond this.start_time '==' "08:00:00" }} <div class="dropdown">
+                                                <h5 class="dropbtn">{{this.name}}</h5>
+                                                <span>{{this.trainer}}</span>
+                                            </div>
+                                            <hr>
+                                            {{/ifCond}}
                                             {{/ifCond}}
                                             {{/each}}
+                                        </div>
                                     </td>
                                     <td class="dark-bg hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 4}}
-                                        {{#ifManyCond this.start_time '>=' "08:00:00" this.start_time '<=' "09:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
+                                        <div class="time-table-class">
+                                            {{#each all_class}}
+                                            {{#ifCond this.weekday '==' 4}}
+                                            {{#ifCond this.start_time '==' "08:00:00" }} <div class="dropdown">
+                                                <h5 class="dropbtn">{{this.name}}</h5>
+                                                <span>{{this.trainer}}</span>
+                                            </div>
+                                            <hr>
+                                            {{/ifCond}}
                                             {{/ifCond}}
                                             {{/each}}
+                                        </div>
                                     </td>
                                     <td class="hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 5}}
-                                        {{#ifManyCond this.start_time '>=' "08:00:00" this.start_time '<=' "09:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
+                                        <div class="time-table-class">
+                                            {{#each all_class}}
+                                            {{#ifCond this.weekday '==' 5}}
+                                            {{#ifCond this.start_time '==' "08:00:00" }} <div class="dropdown">
+                                                <h5 class="dropbtn">{{this.name}}</h5>
+                                                <span>{{this.trainer}}</span>
+                                            </div>
+                                            <hr>
+                                            {{/ifCond}}
                                             {{/ifCond}}
                                             {{/each}}
+                                        </div>
                                     </td>
                                     <td class="dark-bg hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 6}}
-                                        {{#ifManyCond this.start_time '>=' "08:00:00" this.start_time '<=' "09:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
+                                        <div class="time-table-class">
+                                            {{#each all_class}}
+                                            {{#ifCond this.weekday '==' 6}}
+                                            {{#ifCond this.start_time '==' "08:00:00" }} <div class="dropdown">
+                                                <h5 class="dropbtn">{{this.name}}</h5>
+                                                <span>{{this.trainer}}</span>
+                                            </div>
+                                            <hr>
+                                            {{/ifCond}}
                                             {{/ifCond}}
                                             {{/each}}
+                                        </div>
                                     </td>
                                     <td class="hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 7}}
-                                        {{#ifManyCond this.start_time '>=' "08:00:00" this.start_time '<=' "09:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
+                                        <div class="time-table-class">
+                                            {{#each all_class}}
+                                            {{#ifCond this.weekday '==' 7}}
+                                            {{#ifCond this.start_time '==' "08:00:00" }} <div class="dropdown">
+                                                <h5 class="dropbtn">{{this.name}}</h5>
+                                                <span>{{this.trainer}}</span>
+                                            </div>
+                                            <hr>
+                                            {{/ifCond}}
                                             {{/ifCond}}
                                             {{/each}}
+                                        </div>
                                     </td>
                                     <td class=" dark-bg hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 8}}
-                                        {{#ifManyCond this.start_time '>=' "08:00:00" this.start_time '<=' "09:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
+                                        <div class="time-table-class">
+                                            {{#each all_class}}
+                                            {{#ifCond this.weekday '==' 8}}
+                                            {{#ifCond this.start_time '==' "08:00:00" }} <div class="dropdown">
+                                                <h5 class="dropbtn">{{this.name}}</h5>
+                                                <span>{{this.trainer}}</span>
+                                            </div>
+                                            <hr>
+                                            {{/ifCond}}
                                             {{/ifCond}}
                                             {{/each}}
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
-                                    <td class="class-time">9.00am - 11.00am</td>
+                                    <td class="class-time">9.00am - 10.00am</td>
                                     <td class="hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 2}}
-                                        {{#ifManyCond this.start_time '>=' "09:00:00" this.start_time '<=' "11:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
+                                        <div class="time-table-class">
+                                            {{#each all_class}}
+                                            {{#ifCond this.weekday '==' 2}}
+                                            {{#ifCond this.start_time '==' "09:00:00" }} <div class="dropdown">
+                                                <h5 class="dropbtn">{{this.name}}</h5>
+                                                <span>{{this.trainer}}</span>
+                                            </div>
+                                            <hr>
+                                            {{/ifCond}}
                                             {{/ifCond}}
                                             {{/each}}
+                                        </div>
                                     </td>
                                     <td class="dark-bg hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 3}}
-                                        {{#ifManyCond this.start_time '>=' "09:00:00" this.start_time '<=' "11:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
+                                        <div class="time-table-class">
+                                            {{#each all_class}}
+                                            {{#ifCond this.weekday '==' 3}}
+                                            {{#ifCond this.start_time '==' "09:00:00" }} <div class="dropdown">
+                                                <h5 class="dropbtn">{{this.name}}</h5>
+                                                <span>{{this.trainer}}</span>
+                                            </div>
+                                            <hr>
+                                            {{/ifCond}}
                                             {{/ifCond}}
                                             {{/each}}
+                                        </div>
                                     </td>
                                     <td class="hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 4}}
-                                        {{#ifManyCond this.start_time '>=' "09:00:00" this.start_time '<=' "11:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
+                                        <div class="time-table-class">
+                                            {{#each all_class}}
+                                            {{#ifCond this.weekday '==' 4}}
+                                            {{#ifCond this.start_time '==' "09:00:00" }} <div class="dropdown">
+                                                <h5 class="dropbtn">{{this.name}}</h5>
+                                                <span>{{this.trainer}}</span>
+                                            </div>
+                                            <hr>
+                                            {{/ifCond}}
                                             {{/ifCond}}
                                             {{/each}}
+                                        </div>
                                     </td>
                                     <td class="dark-bg hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 5}}
-                                        {{#ifManyCond this.start_time '>=' "09:00:00" this.start_time '<=' "11:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
+                                        <div class="time-table-class">
+                                            {{#each all_class}}
+                                            {{#ifCond this.weekday '==' 5}}
+                                            {{#ifCond this.start_time '==' "09:00:00" }} <div class="dropdown">
+                                                <h5 class="dropbtn">{{this.name}}</h5>
+                                                <span>{{this.trainer}}</span>
+                                            </div>
+                                            <hr>
+                                            {{/ifCond}}
                                             {{/ifCond}}
                                             {{/each}}
+                                        </div>
                                     </td>
                                     <td class=" hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 6}}
-                                        {{#ifManyCond this.start_time '>=' "09:00:00" this.start_time '<=' "11:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
+                                        <div class="time-table-class">
+                                            {{#each all_class}}
+                                            {{#ifCond this.weekday '==' 6}}
+                                            {{#ifCond this.start_time '==' "09:00:00" }} <div class="dropdown">
+                                                <h5 class="dropbtn">{{this.name}}</h5>
+                                                <span>{{this.trainer}}</span>
+                                            </div>
+                                            <hr>
+                                            {{/ifCond}}
                                             {{/ifCond}}
                                             {{/each}}
+                                        </div>
                                     </td>
                                     <td class="dark-bg hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 7}}
-                                        {{#ifManyCond this.start_time '>=' "09:00:00" this.start_time '<=' "11:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
+                                        <div class="time-table-class">
+                                            {{#each all_class}}
+                                            {{#ifCond this.weekday '==' 7}}
+                                            {{#ifCond this.start_time '==' "09:00:00" }} <div class="dropdown">
+                                                <h5 class="dropbtn">{{this.name}}</h5>
+                                                <span>{{this.trainer}}</span>
+                                            </div>
+                                            <hr>
+                                            {{/ifCond}}
                                             {{/ifCond}}
                                             {{/each}}
+                                        </div>
                                     </td>
                                     <td class="hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 8}}
-                                        {{#ifManyCond this.start_time '>=' "09:00:00" this.start_time '<=' "11:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
+                                        <div class="time-table-class">
+                                            {{#each all_class}}
+                                            {{#ifCond this.weekday '==' 8}}
+                                            {{#ifCond this.start_time '==' "09:00:00" }} <div class="dropdown">
+                                                <h5 class="dropbtn">{{this.name}}</h5>
+                                                <span>{{this.trainer}}</span>
+                                            </div>
+                                            <hr>
+                                            {{/ifCond}}
                                             {{/ifCond}}
                                             {{/each}}
+                                        </div>
                                     </td>
                                 </tr>
-                                <hr />
                                 <tr>
-                                    <td class="class-time">11.00am - 13.00am</td>
+                                    <td class="class-time">11.00am - 14.00am</td>
                                     <td class="dark-bg blank-td"></td>
                                     <td class="blank-td"></td>
                                     <td class="dark-bg blank-td"></td>
@@ -392,863 +448,935 @@
                                     <td class="blank-td"></td>
                                     <td class="dark-bg blank-td"></td>
                                 </tr>
-                                <hr />
                                 <tr>
-                                    <td class="class-time">13.00pm - 15.00pm</td>
+                                    <td class="class-time">14.00am - 15.00am</td>
                                     <td class="hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 2}}
-                                        {{#ifManyCond this.start_time '>=' "13:00:00" this.start_time '<=' "15:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
+                                        <div class="time-table-class">
+                                            {{#each all_class}}
+                                            {{#ifCond this.weekday '==' 2}}
+                                            {{#ifCond this.start_time '==' "14:00:00" }} <div class="dropdown">
+                                                <h5 class="dropbtn">{{this.name}}</h5>
+                                                <span>{{this.trainer}}</span>
+                                            </div>
+                                            <hr>
+                                            {{/ifCond}}
                                             {{/ifCond}}
                                             {{/each}}
+                                        </div>
                                     </td>
                                     <td class="dark-bg hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 3}}
-                                        {{#ifManyCond this.start_time '>=' "13:00:00" this.start_time '<=' "15:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
+                                        <div class="time-table-class">
+                                            {{#each all_class}}
+                                            {{#ifCond this.weekday '==' 3}}
+                                            {{#ifCond this.start_time '==' "14:00:00" }} <div class="dropdown">
+                                                <h5 class="dropbtn">{{this.name}}</h5>
+                                                <span>{{this.trainer}}</span>
+                                            </div>
+                                            <hr>
+                                            {{/ifCond}}
                                             {{/ifCond}}
                                             {{/each}}
+                                        </div>
                                     </td>
                                     <td class="hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 4}}
-                                        {{#ifManyCond this.start_time '>=' "13:00:00" this.start_time '<=' "15:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
+                                        <div class="time-table-class">
+                                            {{#each all_class}}
+                                            {{#ifCond this.weekday '==' 4}}
+                                            {{#ifCond this.start_time '==' "14:00:00" }} <div class="dropdown">
+                                                <h5 class="dropbtn">{{this.name}}</h5>
+                                                <span>{{this.trainer}}</span>
+                                            </div>
+                                            <hr>
+                                            {{/ifCond}}
                                             {{/ifCond}}
                                             {{/each}}
+                                        </div>
                                     </td>
                                     <td class="dark-bg hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 5}}
-                                        {{#ifManyCond this.start_time '>=' "13:00:00" this.start_time '<=' "15:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
+                                        <div class="time-table-class">
+                                            {{#each all_class}}
+                                            {{#ifCond this.weekday '==' 5}}
+                                            {{#ifCond this.start_time '==' "14:00:00" }} <div class="dropdown">
+                                                <h5 class="dropbtn">{{this.name}}</h5>
+                                                <span>{{this.trainer}}</span>
+                                            </div>
+                                            <hr>
+                                            {{/ifCond}}
                                             {{/ifCond}}
                                             {{/each}}
+                                        </div>
                                     </td>
                                     <td class=" hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 6}}
-                                        {{#ifManyCond this.start_time '>=' "13:00:00" this.start_time '<=' "15:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
+                                        <div class="time-table-class">
+                                            {{#each all_class}}
+                                            {{#ifCond this.weekday '==' 6}}
+                                            {{#ifCond this.start_time '==' "14:00:00" }} <div class="dropdown">
+                                                <h5 class="dropbtn">{{this.name}}</h5>
+                                                <span>{{this.trainer}}</span>
+                                            </div>
+                                            <hr>
+                                            {{/ifCond}}
                                             {{/ifCond}}
                                             {{/each}}
+                                        </div>
                                     </td>
                                     <td class="dark-bg hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 7}}
-                                        {{#ifManyCond this.start_time '>=' "13:00:00" this.start_time '<=' "15:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
+                                        <div class="time-table-class">
+                                            {{#each all_class}}
+                                            {{#ifCond this.weekday '==' 7}}
+                                            {{#ifCond this.start_time '==' "14:00:00" }} <div class="dropdown">
+                                                <h5 class="dropbtn">{{this.name}}</h5>
+                                                <span>{{this.trainer}}</span>
+                                            </div>
+                                            <hr>
+                                            {{/ifCond}}
                                             {{/ifCond}}
                                             {{/each}}
+                                        </div>
                                     </td>
                                     <td class="hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 8}}
-                                        {{#ifManyCond this.start_time '>=' "13:00:00" this.start_time '<=' "15:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
+                                        <div class="time-table-class">
+                                            {{#each all_class}}
+                                            {{#ifCond this.weekday '==' 8}}
+                                            {{#ifCond this.start_time '==' "14:00:00" }} <div class="dropdown">
+                                                <h5 class="dropbtn">{{this.name}}</h5>
+                                                <span>{{this.trainer}}</span>
+                                            </div>
+                                            <hr>
+                                            {{/ifCond}}
                                             {{/ifCond}}
                                             {{/each}}
+                                        </div>
                                     </td>
                                 </tr>
                                 <tr>
                                     <td class="class-time">15.00pm - 17.00pm</td>
                                     <td class="dark-bg hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 2}}
-                                        {{#ifManyCond this.start_time '>=' "15:00:00" this.start_time '<=' "17:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
-                                            {{/ifCond}}
-                                            {{/each}}
-                                    </td>
-                                    <td class="hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 3}}
-                                        {{#ifManyCond this.start_time '>=' "15:00:00" this.start_time '<=' "17:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
-                                            {{/ifCond}}
-                                            {{/each}}
-                                    </td>
-                                    <td class="dark-bg hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 4}}
-                                        {{#ifManyCond this.start_time '>=' "15:00:00" this.start_time '<=' "17:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
-                                            {{/ifCond}}
-                                            {{/each}}
-                                    </td>
-                                    <td class="hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 5}}
-                                        {{#ifManyCond this.start_time '>=' "15:00:00" this.start_time '<=' "17:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
-                                            {{/ifCond}}
-                                            {{/each}}
-                                    </td>
-                                    <td class="dark-bg hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 6}}
-                                        {{#ifManyCond this.start_time '>=' "15:00:00" this.start_time '<=' "17:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
-                                            {{/ifCond}}
-                                            {{/each}}
-                                    </td>
-                                    <td class="hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 7}}
-                                        {{#ifManyCond this.start_time '>=' "15:00:00" this.start_time '<=' "17:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
-                                            {{/ifCond}}
-                                            {{/each}}
-                                    </td>
-                                    <td class=" dark-bg hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 8}}
-                                        {{#ifManyCond this.start_time '>=' "15:00:00" this.start_time '<=' "17:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
-                                            {{/ifCond}}
-                                            {{/each}}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="class-time">17.00pm - 18.00pm</td>
-                                    <td class="hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 2}}
-                                        {{#ifManyCond this.start_time '>=' "17:00:00" this.start_time '<=' "18:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
-                                            {{/ifCond}}
-                                            {{/each}}
-                                    </td>
-                                    <td class="dark-bg hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 3}}
-                                        {{#ifManyCond this.start_time '>=' "17:00:00" this.start_time '<=' "18:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
-                                            {{/ifCond}}
-                                            {{/each}}
-                                    </td>
-                                    <td class="hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 4}}
-                                        {{#ifManyCond this.start_time '>=' "17:00:00" this.start_time '<=' "18:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
-                                            {{/ifCond}}
-                                            {{/each}}
-                                    </td>
-                                    <td class="dark-bg hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 5}}
-                                        {{#ifManyCond this.start_time '>=' "17:00:00" this.start_time '<=' "18:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
-                                            {{/ifCond}}
-                                            {{/each}}
-                                    </td>
-                                    <td class=" hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 6}}
-                                        {{#ifManyCond this.start_time '>=' "17:00:00" this.start_time '<=' "18:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
-                                            {{/ifCond}}
-                                            {{/each}}
-                                    </td>
-                                    <td class="dark-bg hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 7}}
-                                        {{#ifManyCond this.start_time '>=' "17:00:00" this.start_time '<=' "18:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
-                                            {{/ifCond}}
-                                            {{/each}}
-                                    </td>
-                                    <td class="hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 8}}
-                                        {{#ifManyCond this.start_time '>=' "17:00:00" this.start_time '<=' "18:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
-                                            {{/ifCond}}
-                                            {{/each}}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="class-time">18.00pm - 19.00pm</td>
-                                    <td class="dark-bg hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 2}}
-                                        {{#ifManyCond this.start_time '>=' "18:00:00" this.start_time '<=' "19:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
-                                            {{/ifCond}}
-                                            {{/each}}
-                                    </td>
-                                    <td class="hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 3}}
-                                        {{#ifManyCond this.start_time '>=' "18:00:00" this.start_time '<=' "19:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
-                                            {{/ifCond}}
-                                            {{/each}}
-                                    </td>
-                                    <td class="dark-bg hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 4}}
-                                        {{#ifManyCond this.start_time '>=' "18:00:00" this.start_time '<=' "19:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
-                                            {{/ifCond}}
-                                            {{/each}}
-                                    </td>
-                                    <td class="hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 5}}
-                                        {{#ifManyCond this.start_time '>=' "18:00:00" this.start_time '<=' "19:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
-                                            {{/ifCond}}
-                                            {{/each}}
-                                    </td>
-                                    <td class="dark-bg hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 6}}
-                                        {{#ifManyCond this.start_time '>=' "18:00:00" this.start_time '<=' "19:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
-                                            {{/ifCond}}
-                                            {{/each}}
-                                    </td>
-                                    <td class="hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 7}}
-                                        {{#ifManyCond this.start_time '>=' "18:00:00" this.start_time '<=' "19:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
-                                            {{/ifCond}}
-                                            {{/each}}
-                                    </td>
-                                    <td class=" dark-bg hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 8}}
-                                        {{#ifManyCond this.start_time '>=' "18:00:00" this.start_time '<=' "19:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
-                                            {{/ifCond}}
-                                            {{/each}}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="class-time">19.00pm - 20.00pm</td>
-                                    <td class="hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 2}}
-                                        {{#ifManyCond this.start_time '>=' "19:00:00" this.start_time '<=' "20:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
-                                            {{/ifCond}}
-                                            {{/each}}
-                                    </td>
-                                    <td class="dark-bg hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 3}}
-                                        {{#ifManyCond this.start_time '>=' "19:00:00" this.start_time '<=' "20:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
-                                            {{/ifCond}}
-                                            {{/each}}
-                                    </td>
-                                    <td class="hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 4}}
-                                        {{#ifManyCond this.start_time '>=' "19:00:00" this.start_time '<=' "20:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
-                                            {{/ifCond}}
-                                            {{/each}}
-                                    </td>
-                                    <td class="dark-bg hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 5}}
-                                        {{#ifManyCond this.start_time '>=' "19:00:00" this.start_time '<=' "20:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
-                                            {{/ifCond}}
-                                            {{/each}}
-                                    </td>
-                                    <td class=" hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 6}}
-                                        {{#ifManyCond this.start_time '>=' "19:00:00" this.start_time '<=' "20:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
-                                            {{/ifCond}}
-                                            {{/each}}
-                                    </td>
-                                    <td class="dark-bg hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 7}}
-                                        {{#ifManyCond this.start_time '>=' "19:00:00" this.start_time '<=' "20:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
-                                            {{/ifCond}}
-                                            {{/each}}
-                                    </td>
-                                    <td class="hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 8}}
-                                        {{#ifManyCond this.start_time '>=' "19:00:00" this.start_time '<=' "20:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
-                                            {{/ifCond}}
-                                            {{/each}}
-                                    </td>
-                                </tr>
-                                <tr>
-                                    <td class="class-time">20.00pm - 22.00pm</td>
-                                    <td class="dark-bg hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 2}}
-                                        {{#ifManyCond this.start_time '>=' "20:00:00" this.start_time '<=' "22:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
-                                            {{/ifCond}}
-                                            {{/each}}
-                                    </td>
-                                    <td class="hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 3}}
-                                        {{#ifManyCond this.start_time '>=' "20:00:00" this.start_time '<=' "22:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
-                                            {{/ifCond}}
-                                            {{/each}}
-                                    </td>
-                                    <td class="dark-bg hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 4}}
-                                        {{#ifManyCond this.start_time '>=' "20:00:00" this.start_time '<=' "22:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
-                                            {{/ifCond}}
-                                            {{/each}}
-                                    </td>
-                                    <td class="hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 5}}
-                                        {{#ifManyCond this.start_time '>=' "20:00:00" this.start_time '<=' "22:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
-                                            {{/ifCond}}
-                                            {{/each}}
-                                    </td>
-                                    <td class="dark-bg hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 6}}
-                                        {{#ifManyCond this.start_time '>=' "20:00:00" this.start_time '<=' "22:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
-                                            {{/ifCond}}
-                                            {{/each}}
-                                    </td>
-                                    <td class="hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 7}}
-                                        {{#ifManyCond this.start_time '>=' "20:00:00" this.start_time '<=' "22:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
-                                            {{/ifCond}}
-                                            {{/each}}
-                                    </td>
-                                    <td class=" dark-bg hover-dp ts-meta" data-tsmeta="workout">
-                                        {{#each all_class}}
-                                        {{#ifCond this.weekday '==' 8}}
-                                        {{#ifManyCond this.start_time '>=' "20:00:00" this.start_time '<=' "22:00:00" }}
-                                            <h5 class="dropbtn">
-                                            {{this.name}}</h5>
-                                            <span>{{this.trainer}}</span>
-                                            <hr />
-                                            {{/ifManyCond}}
-                                            {{/ifCond}}
-                                            {{/each}}
-                                    </td>
-                                </tr>
-                            </tbody>
-                        </table>
+                                        <div class="time-table-class">
+                                            {{#each all_class}}
+                                            {{#ifCond this.weekday '==' 2}}
+                                            {{#ifManyCond this.start_time '>=' "15:00:00" this.start_time '
+                                            <=' "16:00:00" }} <div class="dropdown">
+                                                <h5 class="dropbtn">
+                                                    {{this.name}}</h5>
+                                                <span>{{this.trainer}}</span>
+                                        </div>
+                                        <hr>
+                                        {{/ifManyCond}}
+                                        {{/ifCond}}
+                                        {{/each}}
                     </div>
+                    </td>
+                    <td class="hover-dp ts-meta" data-tsmeta="workout">
+                        <div class="time-table-class">
+                            {{#each all_class}}
+                            {{#ifCond this.weekday '==' 3}}
+                            {{#ifManyCond this.start_time '>=' "15:00:00" this.start_time '<=' "16:00:00" }} <div
+                                class="dropdown">
+                                <h5 class="dropbtn">
+                                    {{this.name}}</h5>
+                                <span>{{this.trainer}}</span>
+                        </div>
+                        {{/ifManyCond}}
+                        {{/ifCond}}
+                        {{/each}}
                 </div>
+                </td>
+                <td class="dark-bg hover-dp ts-meta" data-tsmeta="workout">
+                    <div class="time-table-class">
+                        {{#each all_class}}
+                        {{#ifCond this.weekday '==' 4}}
+                        {{#ifManyCond this.start_time '>=' "15:00:00" this.start_time '<=' "16:00:00" }} <div
+                            class="dropdown">
+                            <h5 class="dropbtn">
+                                {{this.name}}</h5>
+                            <span>{{this.trainer}}</span>
+                    </div>
+                    <hr>
+                    {{/ifManyCond}}
+                    {{/ifCond}}
+                    {{/each}}
             </div>
-        </div>
-    </section>
-    <!-- Class Timetable Section End -->
-    <h2 class="tabletime">Lịch chi tiết
-    </h2>
-
-    <div class="tab-class text-center">
-        <ul class="nav nav-pills d-inline-flex justify-content-center bg-dark text-uppercase rounded-pill mb-3">
-            <li class="nav-item">
-                <a class="nav-link rounded-pill text-white active" data-bs-toggle="pill" href="#tab-1">Thứ hai</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link rounded-pill text-white" data-bs-toggle="pill" href="#tab-2">Thứ ba</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link rounded-pill text-white" data-bs-toggle="pill" href="#tab-3">Thứ tư</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link rounded-pill text-white" data-bs-toggle="pill" href="#tab-4">Thứ năm</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link rounded-pill text-white" data-bs-toggle="pill" href="#tab-5">Thứ sáu</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link rounded-pill text-white" data-bs-toggle="pill" href="#tab-6">Thứ bảy</a>
-            </li>
-            <li class="nav-item">
-                <a class="nav-link rounded-pill text-white" data-bs-toggle="pill" href="#tab-7">Chủ nhật</a>
-            </li>
-        </ul>
-
-        <div id="current-time"><i class="fas fa-clock"></i> <span id='time'></span></div>
-    </div>
-    <div class="tab-content">
-        <div id="tab-1" class="tab-pane fade show p-0 active">
-            <h4 class="datenow">Thứ hai ngày {{#component days 2}}{{/component}} </h4>
-            <div class="row g-5">
-                {{#each all_class}}
-                {{#ifCond this.weekday '==' 2}}
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="bg-dark rounded text-center py-4 px-1">
-                        <h6 class="text-uppercase text-light mb-3">{{start_time}} - {{end_time}}</h6>
-                        <h5 class="text-uppercase text-primary">{{name}} </h5>
-                        giáo viên hướng dẫn:
-                        <h5 class="text-capitalize text-primary">{{trainer}}</h5>
-                        <p class="text-secondary mb-0">{{count_hv}}/{{maximum}} học viên - phòng {{room_address}}
-                        </p>
-                        {{#if user_id}}
-                        <form method="post" action="/class">
-                            <input type="hidden" name="count_hv" value="{{count_hv}}">
-                            <input type="hidden" name="maximum" value="{{maximum}}">
-                            <input type="hidden" name="weekday" value="{{weekday}}">
-                            <input type="hidden" name="class_id" value="{{class_id}}">
-                            <input type="hidden" name="start_time" value="{{start_time}} ">
-                            <input type="hidden" name="end_time" value="{{end_time}}">
-                            {{#ifCond weekdaynow '>' 2}}
-                            <button class="btn btn--radius-2 btn--orange">Tham gia vào tuần sau</button>
-                            <h5 class="end_class">Buổi học tuần này đã kết thúc</h5>
-                            {{else ifCond count_hv '==' maximum}}
-                            <button class="btn btn--radius-2 btn--orange">Tham gia vào tuần sau</button>
-                            <h5 class="end_class">Đã đầy học viên</h5>
-                            {{else}}
-                            <button class="btn btn--radius-2 btn--orange">Tham gia buổi học</button>
-                            {{/ifCond}}
-                        </form>
-                        {{else}}
-                        <a href="/user/login/">
-                            <button class="btn btn--radius-2 btn--orange"> Đăng nhập </button>
-                        </a>
-                        {{/if}}
-                    </div>
+            </td>
+            <td class="hover-dp ts-meta" data-tsmeta="workout">
+                <div class="time-table-class">
+                    {{#each all_class}}
+                    {{#ifCond this.weekday '==' 5}}
+                    {{#ifManyCond this.start_time '>=' "15:00:00" this.start_time '<=' "16:00:00" }} <div
+                        class="dropdown">
+                        <h5 class="dropbtn">
+                            {{this.name}}</h5>
+                        <span>{{this.trainer}}</span>
                 </div>
+                <hr>
+                {{/ifManyCond}}
                 {{/ifCond}}
                 {{/each}}
-            </div>
         </div>
-        <div id="tab-2" class="tab-pane fade p-0 ">
-            <h4 class="datenow">Thứ ba ngày {{#component days 3}}{{/component}} </h4>
-            <div class="row g-5">
-                {{#each all_class}}
-                {{#ifCond this.weekday '==' 3}}
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="bg-dark rounded text-center py-4 px-1">
-                        <h6 class="text-uppercase text-light mb-3">{{start_time}} - {{end_time}}</h6>
-                        <h5 class="text-uppercase text-primary">{{name}} </h5>
-                        giáo viên hướng dẫn:
-                        <h5 class="text-capitalize text-primary">{{trainer}}</h5>
-                        <p class="text-secondary mb-0">{{count_hv}}/{{maximum}} học viên - phòng {{room_address}}
-                        </p>
-                        {{#if user_id}}
-                        <form method="post" action="/class">
-                            <input type="hidden" name="count_hv" value="{{count_hv}}">
-                            <input type="hidden" name="maximum" value="{{maximum}}">
-                            <input type="hidden" name="weekday" value="{{weekday}}">
-                            <input type="hidden" name="class_id" value="{{class_id}}">
-                            <input type="hidden" name="start_time" value="{{start_time}} ">
-                            <input type="hidden" name="end_time" value="{{end_time}}">
-                            {{#ifCond weekdaynow '>' 3}}
-                            <button class="btn btn--radius-2 btn--orange">Tham gia vào tuần sau</button>
-                            <h5 class="end_class">Buổi học tuần này đã kết thúc</h5>
-                            {{else ifCond count_hv '==' maximum}}
-                            <button class="btn btn--radius-2 btn--orange">Tham gia vào tuần sau</button>
-                            <h5 class="end_class">Đã đầy học viên</h5>
-                            {{else}}
-                            <button class="btn btn--radius-2 btn--orange">Tham gia buổi học</button>
-                            {{/ifCond}}
-                        </form>
-                        {{else}}
-                        <a href="/user/login/">
-                            <button class="btn btn--radius-2 btn--orange"> Đăng nhập </button>
-                        </a>
-                        {{/if}}
-                    </div>
-                </div>
-                {{/ifCond}}
-                {{/each}}
-            </div>
-        </div>
-        <div id="tab-3" class="tab-pane p-0 ">
-            <h4 class="datenow">Thứ tư ngày {{#component days 4}}{{/component}} </h4>
-            <div class="row g-5">
-                {{#each all_class}}
-                {{#ifCond this.weekday '==' 4}}
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="bg-dark rounded text-center py-4 px-1">
-                        <h6 class="text-uppercase text-light mb-3">{{start_time}} - {{end_time}}</h6>
-                        <h5 class="text-uppercase text-primary">{{name}} </h5>
-                        giáo viên hướng dẫn:
-                        <h5 class="text-capitalize text-primary">{{trainer}}</h5>
-                        <p class="text-secondary mb-0">{{count_hv}}/{{maximum}} học viên - phòng {{room_address}}
-                        </p>
-                        {{#if user_id}}
-                        <form method="post" action="/class">
-                            <input type="hidden" name="count_hv" value="{{count_hv}}">
-                            <input type="hidden" name="maximum" value="{{maximum}}">
-                            <input type="hidden" name="weekday" value="{{weekday}}">
-                            <input type="hidden" name="class_id" value="{{class_id}}">
-                            <input type="hidden" name="start_time" value="{{start_time}} ">
-                            <input type="hidden" name="end_time" value="{{end_time}}">
-                            {{#ifCond weekdaynow '>' 4}}
-                            <button class="btn btn--radius-2 btn--orange">Tham gia vào tuần sau</button>
-                            <h5 class="end_class">Buổi học tuần này đã kết thúc</h5>
-                            {{else ifCond count_hv '==' maximum}}
-                            <button class="btn btn--radius-2 btn--orange">Tham gia vào tuần sau</button>
-                            <h5 class="end_class">Đã đầy học viên</h5>
-                            {{else}}
-                            <button class="btn btn--radius-2 btn--orange">Tham gia buổi học</button>
-                            {{/ifCond}}
-                        </form>
-                        {{else}}
-                        <a href="/user/login/">
-                            <button class="btn btn--radius-2 btn--orange"> Đăng nhập </button>
-                        </a>
-                        {{/if}}
-                    </div>
-                </div>
-                {{/ifCond}}
-                {{/each}}
-            </div>
-        </div>
-        <div id="tab-4" class="tab-pane p-0 ">
-            <h4 class="datenow">Thứ năm ngày {{#component days 5}}{{/component}} </h4>
-            <div class="row g-5">
-                {{#each all_class}}
-                {{#ifCond this.weekday '==' 5}}
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="bg-dark rounded text-center py-4 px-1">
-                        <h6 class="text-uppercase text-light mb-3">{{start_time}} - {{end_time}}</h6>
-                        <h5 class="text-uppercase text-primary">{{name}} </h5>
-                        giáo viên hướng dẫn:
-                        <h5 class="text-capitalize text-primary">{{trainer}}</h5>
-                        <p class="text-secondary mb-0">{{count_hv}}/{{maximum}} học viên - phòng {{room_address}}
-                        </p>
-                        {{#if user_id}}
-                        <form method="post" action="/class">
-                            <input type="hidden" name="count_hv" value="{{count_hv}}">
-                            <input type="hidden" name="maximum" value="{{maximum}}">
-                            <input type="hidden" name="weekday" value="{{weekday}}">
-                            <input type="hidden" name="class_id" value="{{class_id}}">
-                            <input type="hidden" name="start_time" value="{{start_time}} ">
-                            <input type="hidden" name="end_time" value="{{end_time}}">
-                            {{#ifCond weekdaynow '>' 5}}
-                            <button class="btn btn--radius-2 btn--orange">Tham gia vào tuần sau</button>
-                            <h5 class="end_class">Buổi học tuần này đã kết thúc</h5>
-                            {{else ifCond count_hv '==' maximum}}
-                            <button class="btn btn--radius-2 btn--orange">Tham gia vào tuần sau</button>
-                            <h5 class="end_class">Đã đầy học viên</h5>
-                            {{else}}
-                            <button class="btn btn--radius-2 btn--orange">Tham gia buổi học</button>
-                            {{/ifCond}}
-                        </form>
-                        {{else}}
-                        <a href="/user/login/">
-                            <button class="btn btn--radius-2 btn--orange"> Đăng nhập </button>
-                        </a>
-                        {{/if}}
-                    </div>
-                </div>
-                {{/ifCond}}
-                {{/each}}
-            </div>
-        </div>
-        <div id="tab-5" class="tab-pane p-0 ">
-            <h4 class="datenow">Thứ sáu ngày {{#component days 6}}{{/component}} </h4>
-            <div class="row g-5">
+        </td>
+        <td class="dark-bg hover-dp ts-meta" data-tsmeta="workout">
+            <div class="time-table-class">
                 {{#each all_class}}
                 {{#ifCond this.weekday '==' 6}}
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="bg-dark rounded text-center py-4 px-1">
-                        <h6 class="text-uppercase text-light mb-3">{{start_time}} - {{end_time}}</h6>
-                        <h5 class="text-uppercase text-primary">{{name}} </h5>
-                        giáo viên hướng dẫn:
-                        <h5 class="text-capitalize text-primary">{{trainer}}</h5>
-                        <p class="text-secondary mb-0">{{count_hv}}/{{maximum}} học viên - phòng {{room_address}}
-                        </p>
-                        {{#if user_id}}
-                        <form method="post" action="/class">
-                            <input type="hidden" name="count_hv" value="{{count_hv}}">
-                            <input type="hidden" name="maximum" value="{{maximum}}">
-                            <input type="hidden" name="weekday" value="{{weekday}}">
-                            <input type="hidden" name="class_id" value="{{class_id}}">
-                            <input type="hidden" name="start_time" value="{{start_time}} ">
-                            <input type="hidden" name="end_time" value="{{end_time}}">
-                            {{#ifCond weekdaynow '>' 6}}
-                            <button class="btn btn--radius-2 btn--orange">Tham gia vào tuần sau</button>
-                            <h5 class="end_class">Buổi học tuần này đã kết thúc</h5>
-                            {{else ifCond count_hv '==' maximum}}
-                            <button class="btn btn--radius-2 btn--orange">Tham gia vào tuần sau</button>
-                            <h5 class="end_class">Đã đầy học viên</h5>
-                            {{else}}
-                            <button class="btn btn--radius-2 btn--orange">Tham gia buổi học</button>
-                            {{/ifCond}}
-                        </form>
-                        {{else}}
-                        <a href="/user/login/">
-                            <button class="btn btn--radius-2 btn--orange"> Đăng nhập </button>
-                        </a>
-                        {{/if}}
-                    </div>
-                </div>
-                {{/ifCond}}
-                {{/each}}
-            </div>
+                {{#ifManyCond this.start_time '>=' "15:00:00" this.start_time '<=' "16:00:00" }} <div class="dropdown">
+                    <h5 class="dropbtn">
+                        {{this.name}}</h5>
+                    <span>{{this.trainer}}</span>
+            </div> <hr>
+            {{/ifManyCond}}
+            {{/ifCond}}
+            {{/each}}
+</div>
+</td>
+<td class="hover-dp ts-meta" data-tsmeta="workout">
+    <div class="time-table-class">
+        {{#each all_class}}
+        {{#ifCond this.weekday '==' 7}}
+        {{#ifManyCond this.start_time '>=' "15:00:00" this.start_time '<=' "16:00:00" }} <div class="dropdown">
+            <h5 class="dropbtn">
+                {{this.name}}</h5>
+            <span>{{this.trainer}}</span>
+    </div> <hr>
+    {{/ifManyCond}}
+    {{/ifCond}}
+    {{/each}}
+    </div>
+</td>
+<td class="dark-bg hover-dp ts-meta" data-tsmeta="workout">
+    <div class="time-table-class">
+        {{#each all_class}}
+        {{#ifCond this.weekday '==' 8}}
+        {{#ifManyCond this.start_time '>=' "15:00:00" this.start_time '<=' "16:00:00" }} <div class="dropdown">
+            <h5 class="dropbtn">
+                {{this.name}}</h5>
+            <span>{{this.trainer}}</span>
+    </div> <hr>
+    {{/ifManyCond}}
+    {{/ifCond}}
+    {{/each}}
+    </div>
+</td>
+</tr>
+<tr>
+    <td class="class-time">17.00pm - 18.00pm</td>
+    <td class="hover-dp ts-meta" data-tsmeta="workout">
+        <div class="time-table-class">
+            {{#each all_class}}
+            {{#ifCond this.weekday '==' 2}}
+            {{#ifCond this.start_time '==' "17:00:00" }} <div class="dropdown">
+                <h5 class="dropbtn">{{this.name}}</h5>
+                <span>{{this.trainer}}</span>
+            </div> <hr>
+            {{/ifCond}}
+            {{/ifCond}}
+            {{/each}}
         </div>
-        <div id="tab-6" class="tab-pane p-0 ">
-            <h4 class="datenow">Thứ bảy ngày {{#component days 7}}{{/component}} </h4>
-            <div class="row g-5">
-                {{#each all_class}}
-                {{#ifCond this.weekday '==' 7}}
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="bg-dark rounded text-center py-4 px-1">
-                        <h6 class="text-uppercase text-light mb-3">{{start_time}} - {{end_time}}</h6>
-                        <h5 class="text-uppercase text-primary">{{name}} </h5>
-                        giáo viên hướng dẫn:
-                        <h5 class="text-capitalize text-primary">{{trainer}}</h5>
-                        <p class="text-secondary mb-0">{{count_hv}}/{{maximum}} học viên - phòng {{room_address}}
-                        </p>
-                        {{#if user_id}}
-                        <form method="post" action="/class">
-                            <input type="hidden" name="count_hv" value="{{count_hv}}">
-                            <input type="hidden" name="maximum" value="{{maximum}}">
-                            <input type="hidden" name="weekday" value="{{weekday}}">
-                            <input type="hidden" name="class_id" value="{{class_id}}">
-                            <input type="hidden" name="start_time" value="{{start_time}} ">
-                            <input type="hidden" name="end_time" value="{{end_time}}">
-                            {{#ifCond weekdaynow '>' 7}}
-                            <button class="btn btn--radius-2 btn--orange">Tham gia vào tuần sau</button>
-                            <h5 class="end_class">Buổi học tuần này đã kết thúc</h5>
-                            {{else ifCond count_hv '==' maximum}}
-                            <button class="btn btn--radius-2 btn--orange">Tham gia vào tuần sau</button>
-                            <h5 class="end_class">Đã đầy học viên</h5>
-                            {{else}}
-                            <button class="btn btn--radius-2 btn--orange">Tham gia buổi học</button>
-                            {{/ifCond}}
-                        </form>
-                        {{else}}
-                        <a href="/user/login/">
-                            <button class="btn btn--radius-2 btn--orange"> Đăng nhập </button>
-                        </a>
-                        {{/if}}
-                    </div>
-                </div>
-                {{/ifCond}}
-                {{/each}}
-            </div>
+    </td>
+    <td class="dark-bg hover-dp ts-meta" data-tsmeta="workout">
+        <div class="time-table-class">
+            {{#each all_class}}
+            {{#ifCond this.weekday '==' 3}}
+            {{#ifCond this.start_time '==' "17:00:00" }} <div class="dropdown">
+                <h5 class="dropbtn">{{this.name}}</h5>
+                <span>{{this.trainer}}</span>
+            </div> <hr>
+            {{/ifCond}}
+            {{/ifCond}}
+            {{/each}}
         </div>
-        <div id="tab-7" class="tab-pane p-0 ">
-            <h4 class="datenow">Chủ nhật ngày {{#component days 8}}{{/component}} </h4>
-            <div class="row g-5">
-                {{#each all_class}}
-                {{#ifCond this.weekday '==' 8}}
-                <div class="col-lg-3 col-md-4 col-sm-6">
-                    <div class="bg-dark rounded text-center py-4 px-1">
-                        <h6 class="text-uppercase text-light mb-3">{{start_time}} - {{end_time}}</h6>
-                        <h5 class="text-uppercase text-primary">{{name}} </h5>
-                        giáo viên hướng dẫn:
-                        <h5 class="text-capitalize text-primary">{{trainer}}</h5>
-                        <p class="text-secondary mb-0">{{count_hv}}/{{maximum}} học viên - phòng {{room_address}}
-                        </p>
-                        {{#if user_id}}
-                        <form method="post" action="/class">
-                            <input type="hidden" name="count_hv" value="{{count_hv}}">
-                            <input type="hidden" name="maximum" value="{{maximum}}">
-                            <input type="hidden" name="weekday" value="{{weekday}}">
-                            <input type="hidden" name="class_id" value="{{class_id}}">
-                            <input type="hidden" name="start_time" value="{{start_time}} ">
-                            <input type="hidden" name="end_time" value="{{end_time}}">
-                            {{#ifCond weekdaynow '>' 8}}
-                            <button class="btn btn--radius-2 btn--orange">Tham gia vào tuần sau</button>
-                            <h5 class="end_class">Buổi học tuần này đã kết thúc</h5>
-                            {{else ifCond count_hv '==' maximum}}
-                            <button class="btn btn--radius-2 btn--orange">Tham gia vào tuần sau</button>
-                            <h5 class="end_class">Đã đầy học viên</h5>
-                            {{else}}
-                            <button class="btn btn--radius-2 btn--orange">Tham gia buổi học</button>
-                            {{/ifCond}}
-                        </form>
+    </td>
+    <td class="hover-dp ts-meta" data-tsmeta="workout">
+        <div class="time-table-class">
+            {{#each all_class}}
+            {{#ifCond this.weekday '==' 4}}
+            {{#ifCond this.start_time '==' "17:00:00" }} <div class="dropdown">
+                <h5 class="dropbtn">{{this.name}}</h5>
+                <span>{{this.trainer}}</span>
+            </div> <hr>
+            {{/ifCond}}
+            {{/ifCond}}
+            {{/each}}
+        </div>
+    </td>
+    <td class="dark-bg hover-dp ts-meta" data-tsmeta="workout">
+        <div class="time-table-class">
+            {{#each all_class}}
+            {{#ifCond this.weekday '==' 5}}
+            {{#ifCond this.start_time '==' "17:00:00" }} <div class="dropdown">
+                <h5 class="dropbtn">{{this.name}}</h5>
+                <span>{{this.trainer}}</span>
+            </div> <hr>
+            {{/ifCond}}
+            {{/ifCond}}
+            {{/each}}
+        </div>
+    </td>
+    <td class=" hover-dp ts-meta" data-tsmeta="workout">
+        <div class="time-table-class">
+            {{#each all_class}}
+            {{#ifCond this.weekday '==' 6}}
+            {{#ifCond this.start_time '==' "17:00:00" }} <div class="dropdown">
+                <h5 class="dropbtn">{{this.name}}</h5>
+                <span>{{this.trainer}}</span>
+            </div> <hr>
+            {{/ifCond}}
+            {{/ifCond}}
+            {{/each}}
+        </div>
+    </td>
+    <td class="dark-bg hover-dp ts-meta" data-tsmeta="workout">
+        <div class="time-table-class">
+            {{#each all_class}}
+            {{#ifCond this.weekday '==' 7}}
+            {{#ifCond this.start_time '==' "17:00:00" }} <div class="dropdown">
+                <h5 class="dropbtn">{{this.name}}</h5>
+                <span>{{this.trainer}}</span>
+            </div> <hr>
+            {{/ifCond}}
+            {{/ifCond}}
+            {{/each}}
+        </div>
+    </td>
+    <td class="hover-dp ts-meta" data-tsmeta="workout">
+        <div class="time-table-class">
+            {{#each all_class}}
+            {{#ifCond this.weekday '==' 8}}
+            {{#ifCond this.start_time '==' "17:00:00" }} <div class="dropdown">
+                <h5 class="dropbtn">{{this.name}}</h5>
+                <span>{{this.trainer}}</span>
+            </div> <hr>
+            {{/ifCond}}
+            {{/ifCond}}
+            {{/each}}
+        </div>
+    </td>
+</tr>
+<tr>
+    <td class="class-time">18.00am - 19.00am</td>
+    <td class="dark-bg hover-dp ts-meta" data-tsmeta="workout">
+        <div class="time-table-class">
+            {{#each all_class}}
+            {{#ifCond this.weekday '==' 2}}
+            {{#ifCond this.start_time '==' "18:00:00" }} <div class="dropdown">
+                <h5 class="dropbtn">{{this.name}}</h5>
+                <span>{{this.trainer}}</span>
+            </div> <hr>
+            {{/ifCond}}
+            {{/ifCond}}
+            {{/each}}
+        </div>
+    </td>
+    <td class="hover-dp ts-meta" data-tsmeta="workout">
+        <div class="time-table-class">
+            {{#each all_class}}
+            {{#ifCond this.weekday '==' 3}}
+            {{#ifCond this.start_time '==' "18:00:00" }} <div class="dropdown">
+                <h5 class="dropbtn">{{this.name}}</h5>
+                <span>{{this.trainer}}</span>
+            </div> <hr>
+            {{/ifCond}}
+            {{/ifCond}}
+            {{/each}}
+        </div>
+    </td>
+    <td class="dark-bg hover-dp ts-meta" data-tsmeta="workout">
+        <div class="time-table-class">
+            {{#each all_class}}
+            {{#ifCond this.weekday '==' 4}}
+            {{#ifCond this.start_time '==' "18:00:00" }} <div class="dropdown">
+                <h5 class="dropbtn">{{this.name}}</h5>
+                <span>{{this.trainer}}</span>
+            </div> <hr>
+            {{/ifCond}}
+            {{/ifCond}}
+            {{/each}}
+        </div>
+    </td>
+    <td class="hover-dp ts-meta" data-tsmeta="workout">
+        <div class="time-table-class">
+            {{#each all_class}}
+            {{#ifCond this.weekday '==' 5}}
+            {{#ifCond this.start_time '==' "18:00:00" }} <div class="dropdown">
+                <h5 class="dropbtn">{{this.name}}</h5>
+                <span>{{this.trainer}}</span>
+            </div> <hr>
+            {{/ifCond}}
+            {{/ifCond}}
+            {{/each}}
+        </div>
+    </td>
+    <td class="dark-bg hover-dp ts-meta" data-tsmeta="workout">
+        <div class="time-table-class">
+            {{#each all_class}}
+            {{#ifCond this.weekday '==' 6}}
+            {{#ifCond this.start_time '==' "18:00:00" }} <div class="dropdown">
+                <h5 class="dropbtn">{{this.name}}</h5>
+                <span>{{this.trainer}}</span>
+            </div> <hr>
+            {{/ifCond}}
+            {{/ifCond}}
+            {{/each}}
+        </div>
+    </td>
+    <td class="hover-dp ts-meta" data-tsmeta="workout">
+        <div class="time-table-class">
+            {{#each all_class}}
+            {{#ifCond this.weekday '==' 7}}
+            {{#ifCond this.start_time '==' "18:00:00" }} <div class="dropdown">
+                <h5 class="dropbtn">{{this.name}}</h5>
+                <span>{{this.trainer}}</span>
+            </div> <hr>
+            {{/ifCond}}
+            {{/ifCond}}
+            {{/each}}
+        </div>
+    </td>
+    <td class=" dark-bg hover-dp ts-meta" data-tsmeta="workout">
+        <div class="time-table-class">
+            {{#each all_class}}
+            {{#ifCond this.weekday '==' 8}}
+            {{#ifCond this.start_time '==' "18:00:00" }} <div class="dropdown">
+                <h5 class="dropbtn">{{this.name}}</h5>
+                <span>{{this.trainer}}</span>
+            </div> <hr>
+            {{/ifCond}}
+            {{/ifCond}}
+            {{/each}}
+        </div>
+    </td>
+</tr>
+<tr>
+    <td class="class-time">19.00pm - 20.00pm</td>
+    <td class="hover-dp ts-meta" data-tsmeta="workout">
+        <div class="time-table-class">
+            {{#each all_class}}
+            {{#ifCond this.weekday '==' 2}}
+            {{#ifCond this.start_time '==' "19:00:00" }} <div class="dropdown">
+                <h5 class="dropbtn">{{this.name}}</h5>
+                <span>{{this.trainer}}</span>
+            </div> <hr>
+            {{/ifCond}}
+            {{/ifCond}}
+            {{/each}}
+        </div>
+    </td>
+    <td class="dark-bg hover-dp ts-meta" data-tsmeta="workout">
+        <div class="time-table-class">
+            {{#each all_class}}
+            {{#ifCond this.weekday '==' 3}}
+            {{#ifCond this.start_time '==' "19:00:00" }} <div class="dropdown">
+                <h5 class="dropbtn">{{this.name}}</h5>
+                <span>{{this.trainer}}</span>
+            </div> <hr>
+            {{/ifCond}}
+            {{/ifCond}}
+            {{/each}}
+        </div>
+    </td>
+    <td class="hover-dp ts-meta" data-tsmeta="workout">
+        <div class="time-table-class">
+            {{#each all_class}}
+            {{#ifCond this.weekday '==' 4}}
+            {{#ifCond this.start_time '==' "19:00:00" }} <div class="dropdown">
+                <h5 class="dropbtn">{{this.name}}</h5>
+                <span>{{this.trainer}}</span>
+            </div> <hr>
+            {{/ifCond}}
+            {{/ifCond}}
+            {{/each}}
+        </div>
+    </td>
+    <td class="dark-bg hover-dp ts-meta" data-tsmeta="workout">
+        <div class="time-table-class">
+            {{#each all_class}}
+            {{#ifCond this.weekday '==' 5}}
+            {{#ifCond this.start_time '==' "19:00:00" }} <div class="dropdown">
+                <h5 class="dropbtn">{{this.name}}</h5>
+                <span>{{this.trainer}}</span>
+            </div> <hr>
+            {{/ifCond}}
+            {{/ifCond}}
+            {{/each}}
+        </div>
+    </td>
+    <td class=" hover-dp ts-meta" data-tsmeta="workout">
+        <div class="time-table-class">
+            {{#each all_class}}
+            {{#ifCond this.weekday '==' 6}}
+            {{#ifCond this.start_time '==' "19:00:00" }} <div class="dropdown">
+                <h5 class="dropbtn">{{this.name}}</h5>
+                <span>{{this.trainer}}</span>
+            </div> <hr>
+            {{/ifCond}}
+            {{/ifCond}}
+            {{/each}}
+        </div>
+    </td>
+    <td class="dark-bg hover-dp ts-meta" data-tsmeta="workout">
+        <div class="time-table-class">
+            {{#each all_class}}
+            {{#ifCond this.weekday '==' 7}}
+            {{#ifCond this.start_time '==' "19:00:00" }} <div class="dropdown">
+                <h5 class="dropbtn">{{this.name}}</h5>
+                <span>{{this.trainer}}</span>
+            </div> <hr>
+            {{/ifCond}}
+            {{/ifCond}}
+            {{/each}}
+        </div>
+    </td>
+    <td class="hover-dp ts-meta" data-tsmeta="workout">
+        <div class="time-table-class">
+            {{#each all_class}}
+            {{#ifCond this.weekday '==' 8}}
+            {{#ifCond this.start_time '==' "19:00:00" }} <div class="dropdown">
+                <h5 class="dropbtn">{{this.name}}</h5>
+                <span>{{this.trainer}}</span>
+            </div> <hr>
+            {{/ifCond}}
+            {{/ifCond}}
+            {{/each}}
+        </div>
+    </td>
+</tr>
+<tr>
+    <td class="class-time">20.00pm - 22.00pm</td>
+    <td class="dark-bg hover-dp ts-meta" data-tsmeta="workout">
+        <div class="time-table-class">
+            {{#each all_class}}
+            {{#ifCond this.weekday '==' 2}}
+            {{#ifManyCond this.start_time '>=' "20:00:00" this.start_time '
+            <=' "21:00:00" }} <div class="dropdown">
+                <h5 class="dropbtn">
+                    {{this.name}}</h5>
+                <span>{{this.trainer}}</span>
+        </div> <hr>
+        {{/ifManyCond}}
+        {{/ifCond}}
+        {{/each}}
+        </div>
+    </td>
+    <td class=" hover-dp ts-meta" data-tsmeta="workout">
+        <div class="time-table-class">
+            {{#each all_class}}
+            {{#ifCond this.weekday '==' 3}}
+            {{#ifManyCond this.start_time '>=' "20:00:00" this.start_time '<=' "21:00:00" }} <div class="dropdown">
+                <h5 class="dropbtn">
+                    {{this.name}}</h5>
+                <span>{{this.trainer}}</span>
+        </div> <hr>
+        {{/ifManyCond}}
+        {{/ifCond}}
+        {{/each}}
+        </div>
+    </td>
+    <td class="dark-bg hover-dp ts-meta" data-tsmeta="workout">
+        <div class="time-table-class">
+            {{#each all_class}}
+            {{#ifCond this.weekday '==' 4}}
+            {{#ifManyCond this.start_time '>=' "20:00:00" this.start_time '<=' "21:00:00" }} <div class="dropdown">
+                <h5 class="dropbtn">
+                    {{this.name}}</h5>
+                <span>{{this.trainer}}</span>
+        </div> <hr>
+        {{/ifManyCond}}
+        {{/ifCond}}
+        {{/each}}
+        </div>
+    </td>
+    <td class="hover-dp ts-meta" data-tsmeta="workout">
+        <div class="time-table-class">
+            {{#each all_class}}
+            {{#ifCond this.weekday '==' 5}}
+            {{#ifManyCond this.start_time '>=' "20:00:00" this.start_time '<=' "21:00:00" }} <div class="dropdown">
+                <h5 class="dropbtn">
+                    {{this.name}}</h5>
+                <span>{{this.trainer}}</span>
+        </div> <hr>
+        {{/ifManyCond}}
+        {{/ifCond}}
+        {{/each}}
+        </div>
+    </td>
+    <td class="dark-bg hover-dp ts-meta" data-tsmeta="workout">
+        <div class="time-table-class">
+            {{#each all_class}}
+            {{#ifCond this.weekday '==' 6}}
+            {{#ifManyCond this.start_time '>=' "20:00:00" this.start_time '<=' "21:00:00" }} <div class="dropdown">
+                <h5 class="dropbtn">
+                    {{this.name}}</h5>
+                <span>{{this.trainer}}</span>
+        </div> <hr>
+        {{/ifManyCond}}
+        {{/ifCond}}
+        {{/each}}
+        </div>
+    </td>
+    <td class="hover-dp ts-meta" data-tsmeta="workout">
+        <div class="time-table-class">
+            {{#each all_class}}
+            {{#ifCond this.weekday '==' 7}}
+            {{#ifManyCond this.start_time '>=' "20:00:00" this.start_time '<=' "21:00:00" }} <div class="dropdown">
+                <h5 class="dropbtn">
+                    {{this.name}}</h5>
+                <span>{{this.trainer}}</span>
+        </div> <hr>
+        {{/ifManyCond}}
+        {{/ifCond}}
+        {{/each}}
+        </div>
+    </td>
+    <td class="dark-bg hover-dp ts-meta" data-tsmeta="workout">
+        <div class="time-table-class">
+            {{#each all_class}}
+            {{#ifCond this.weekday '==' 8}}
+            {{#ifManyCond this.start_time '>=' "20:00:00" this.start_time '<=' "21:00:00" }} <div class="dropdown">
+                <h5 class="dropbtn">
+                    {{this.name}}</h5>
+                <span>{{this.trainer}}</span>
+        </div> <hr>
+        {{/ifManyCond}}
+        {{/ifCond}}
+        {{/each}}
+        </div>
+    </td>
+</tr>
+</tbody>
+</table>
+</div>
+</div>
+</div>
+</div>
+</section>
+<!-- Class Timetable Section End -->
+<h2 class="tabletime">Lịch chi tiết
+</h2>
+
+<div class="tab-class text-center">
+    <ul class="nav nav-pills d-inline-flex justify-content-center bg-dark text-uppercase rounded-pill mb-3">
+        <li class="nav-item">
+            <a class="nav-link rounded-pill text-white active" data-bs-toggle="pill" href="#tab-1">Thứ hai</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link rounded-pill text-white" data-bs-toggle="pill" href="#tab-2">Thứ ba</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link rounded-pill text-white" data-bs-toggle="pill" href="#tab-3">Thứ tư</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link rounded-pill text-white" data-bs-toggle="pill" href="#tab-4">Thứ năm</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link rounded-pill text-white" data-bs-toggle="pill" href="#tab-5">Thứ sáu</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link rounded-pill text-white" data-bs-toggle="pill" href="#tab-6">Thứ bảy</a>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link rounded-pill text-white" data-bs-toggle="pill" href="#tab-7">Chủ nhật</a>
+        </li>
+    </ul>
+
+    <div id="current-time"><i class="fas fa-clock"></i> <span id='time'></span></div>
+</div>
+<div class="tab-content">
+    <div id="tab-1" class="tab-pane fade show p-0 active">
+        <h4 class="datenow">Thứ hai ngày {{#component days 2}}{{/component}} </h4>
+        <div class="row g-5">
+            {{#each all_class}}
+            {{#ifCond this.weekday '==' 2}}
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="bg-dark rounded text-center py-4 px-1">
+                    <h6 class="text-uppercase text-light mb-3">{{start_time}} - {{end_time}}</h6>
+                    <h5 class="text-uppercase text-primary">{{name}} </h5>
+                    giáo viên hướng dẫn:
+                    <h5 class="text-capitalize text-primary">{{trainer}}</h5>
+                    <p class="text-secondary mb-0">{{count_hv}}/{{maximum}} học viên - phòng {{room_address}}
+                    </p>
+                    {{#if user_id}}
+                    <form method="post" action="/class">
+                        <input type="hidden" name="count_hv" value="{{count_hv}}">
+                        <input type="hidden" name="maximum" value="{{maximum}}">
+                        <input type="hidden" name="weekday" value="{{weekday}}">
+                        <input type="hidden" name="class_id" value="{{class_id}}">
+                        <input type="hidden" name="start_time" value="{{start_time}} ">
+                        <input type="hidden" name="end_time" value="{{end_time}}">
+                        {{#ifCond weekdaynow '>' 2}}
+                        <button class="btn btn--radius-2 btn--orange">Tham gia vào tuần sau</button>
+                        <h5 class="end_class">Buổi học tuần này đã kết thúc</h5>
+                        {{else ifCond count_hv '==' maximum}}
+                        <button class="btn btn--radius-2 btn--orange">Tham gia vào tuần sau</button>
+                        <h5 class="end_class">Đã đầy học viên</h5>
                         {{else}}
-                        <a href="/user/login/">
-                            <button class="btn btn--radius-2 btn--orange"> Đăng nhập </button>
-                        </a>
-                        {{/if}}
-                    </div>
+                        <button class="btn btn--radius-2 btn--orange">Tham gia buổi học</button>
+                        {{/ifCond}}
+                    </form>
+                    {{else}}
+                    {{!-- <a href="/user/login/"> --}}
+                     <a href="https://www.tutorialspoint.com/javascript/index.htm" id="link">Javascript Tutorials</a>
+                     <div id="result"></div>
+                        <button id="register" class="btn btn--radius-2 btn--orange"> Đăng nhập </button>
+                    {{!-- </a> --}}
+                    {{/if}}
                 </div>
-                {{/ifCond}}
-                {{/each}}
             </div>
+            {{/ifCond}}
+            {{/each}}
         </div>
     </div>
+    <div id="tab-2" class="tab-pane fade p-0 ">
+        <h4 class="datenow">Thứ ba ngày {{#component days 3}}{{/component}} </h4>
+        <div class="row g-5">
+            {{#each all_class}}
+            {{#ifCond this.weekday '==' 3}}
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="bg-dark rounded text-center py-4 px-1">
+                    <h6 class="text-uppercase text-light mb-3">{{start_time}} - {{end_time}}</h6>
+                    <h5 class="text-uppercase text-primary">{{name}} </h5>
+                    giáo viên hướng dẫn:
+                    <h5 class="text-capitalize text-primary">{{trainer}}</h5>
+                    <p class="text-secondary mb-0">{{count_hv}}/{{maximum}} học viên - phòng {{room_address}}
+                    </p>
+                    {{#if user_id}}
+                    <form method="post" action="/class">
+                        <input type="hidden" name="count_hv" value="{{count_hv}}">
+                        <input type="hidden" name="maximum" value="{{maximum}}">
+                        <input type="hidden" name="weekday" value="{{weekday}}">
+                        <input type="hidden" name="class_id" value="{{class_id}}">
+                        <input type="hidden" name="start_time" value="{{start_time}} ">
+                        <input type="hidden" name="end_time" value="{{end_time}}">
+                        {{#ifCond weekdaynow '>' 3}}
+                        <button class="btn btn--radius-2 btn--orange">Tham gia vào tuần sau</button>
+                        <h5 class="end_class">Buổi học tuần này đã kết thúc</h5>
+                        {{else ifCond count_hv '==' maximum}}
+                        <button class="btn btn--radius-2 btn--orange">Tham gia vào tuần sau</button>
+                        <h5 class="end_class">Đã đầy học viên</h5>
+                        {{else}}
+                        <button class="btn btn--radius-2 btn--orange">Tham gia buổi học</button>
+                        {{/ifCond}}
+                    </form>
+                    {{else}}
+                    <a href="/user/login/">
+                        <button class="btn btn--radius-2 btn--orange"> Đăng nhập </button>
+                    </a>
+                    {{/if}}
+                </div>
+            </div>
+            {{/ifCond}}
+            {{/each}}
+        </div>
+    </div>
+    <div id="tab-3" class="tab-pane p-0 ">
+        <h4 class="datenow">Thứ tư ngày {{#component days 4}}{{/component}} </h4>
+        <div class="row g-5">
+            {{#each all_class}}
+            {{#ifCond this.weekday '==' 4}}
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="bg-dark rounded text-center py-4 px-1">
+                    <h6 class="text-uppercase text-light mb-3">{{start_time}} - {{end_time}}</h6>
+                    <h5 class="text-uppercase text-primary">{{name}} </h5>
+                    giáo viên hướng dẫn:
+                    <h5 class="text-capitalize text-primary">{{trainer}}</h5>
+                    <p class="text-secondary mb-0">{{count_hv}}/{{maximum}} học viên - phòng {{room_address}}
+                    </p>
+                    {{#if user_id}}
+                    <form method="post" action="/class">
+                        <input type="hidden" name="count_hv" value="{{count_hv}}">
+                        <input type="hidden" name="maximum" value="{{maximum}}">
+                        <input type="hidden" name="weekday" value="{{weekday}}">
+                        <input type="hidden" name="class_id" value="{{class_id}}">
+                        <input type="hidden" name="start_time" value="{{start_time}} ">
+                        <input type="hidden" name="end_time" value="{{end_time}}">
+                        {{#ifCond weekdaynow '>' 4}}
+                        <button class="btn btn--radius-2 btn--orange">Tham gia vào tuần sau</button>
+                        <h5 class="end_class">Buổi học tuần này đã kết thúc</h5>
+                        {{else ifCond count_hv '==' maximum}}
+                        <button class="btn btn--radius-2 btn--orange">Tham gia vào tuần sau</button>
+                        <h5 class="end_class">Đã đầy học viên</h5>
+                        {{else}}
+                        <button class="btn btn--radius-2 btn--orange">Tham gia buổi học</button>
+                        {{/ifCond}}
+                    </form>
+                    {{else}}
+                    <a href="/user/login/">
+                        <button class="btn btn--radius-2 btn--orange"> Đăng nhập </button>
+                    </a>
+                    {{/if}}
+                </div>
+            </div>
+            {{/ifCond}}
+            {{/each}}
+        </div>
+    </div>
+    <div id="tab-4" class="tab-pane p-0 ">
+        <h4 class="datenow">Thứ năm ngày {{#component days 5}}{{/component}} </h4>
+        <div class="row g-5">
+            {{#each all_class}}
+            {{#ifCond this.weekday '==' 5}}
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="bg-dark rounded text-center py-4 px-1">
+                    <h6 class="text-uppercase text-light mb-3">{{start_time}} - {{end_time}}</h6>
+                    <h5 class="text-uppercase text-primary">{{name}} </h5>
+                    giáo viên hướng dẫn:
+                    <h5 class="text-capitalize text-primary">{{trainer}}</h5>
+                    <p class="text-secondary mb-0">{{count_hv}}/{{maximum}} học viên - phòng {{room_address}}
+                    </p>
+                    {{#if user_id}}
+                    <form method="post" action="/class">
+                        <input type="hidden" name="count_hv" value="{{count_hv}}">
+                        <input type="hidden" name="maximum" value="{{maximum}}">
+                        <input type="hidden" name="weekday" value="{{weekday}}">
+                        <input type="hidden" name="class_id" value="{{class_id}}">
+                        <input type="hidden" name="start_time" value="{{start_time}} ">
+                        <input type="hidden" name="end_time" value="{{end_time}}">
+                        {{#ifCond weekdaynow '>' 5}}
+                        <button class="btn btn--radius-2 btn--orange">Tham gia vào tuần sau</button>
+                        <h5 class="end_class">Buổi học tuần này đã kết thúc</h5>
+                        {{else ifCond count_hv '==' maximum}}
+                        <button class="btn btn--radius-2 btn--orange">Tham gia vào tuần sau</button>
+                        <h5 class="end_class">Đã đầy học viên</h5>
+                        {{else}}
+                        <button class="btn btn--radius-2 btn--orange">Tham gia buổi học</button>
+                        {{/ifCond}}
+                    </form>
+                    {{else}}
+                    <a href="/user/login/">
+                        <button class="btn btn--radius-2 btn--orange"> Đăng nhập </button>
+                    </a>
+                    {{/if}}
+                </div>
+            </div>
+            {{/ifCond}}
+            {{/each}}
+        </div>
+    </div>
+    <div id="tab-5" class="tab-pane p-0 ">
+        <h4 class="datenow">Thứ sáu ngày {{#component days 6}}{{/component}} </h4>
+        <div class="row g-5">
+            {{#each all_class}}
+            {{#ifCond this.weekday '==' 6}}
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="bg-dark rounded text-center py-4 px-1">
+                    <h6 class="text-uppercase text-light mb-3">{{start_time}} - {{end_time}}</h6>
+                    <h5 class="text-uppercase text-primary">{{name}} </h5>
+                    giáo viên hướng dẫn:
+                    <h5 class="text-capitalize text-primary">{{trainer}}</h5>
+                    <p class="text-secondary mb-0">{{count_hv}}/{{maximum}} học viên - phòng {{room_address}}
+                    </p>
+                    {{#if user_id}}
+                    <form method="post" action="/class">
+                        <input type="hidden" name="count_hv" value="{{count_hv}}">
+                        <input type="hidden" name="maximum" value="{{maximum}}">
+                        <input type="hidden" name="weekday" value="{{weekday}}">
+                        <input type="hidden" name="class_id" value="{{class_id}}">
+                        <input type="hidden" name="start_time" value="{{start_time}} ">
+                        <input type="hidden" name="end_time" value="{{end_time}}">
+                        {{#ifCond weekdaynow '>' 6}}
+                        <button class="btn btn--radius-2 btn--orange">Tham gia vào tuần sau</button>
+                        <h5 class="end_class">Buổi học tuần này đã kết thúc</h5>
+                        {{else ifCond count_hv '==' maximum}}
+                        <button class="btn btn--radius-2 btn--orange">Tham gia vào tuần sau</button>
+                        <h5 class="end_class">Đã đầy học viên</h5>
+                        {{else}}
+                        <button class="btn btn--radius-2 btn--orange">Tham gia buổi học</button>
+                        {{/ifCond}}
+                    </form>
+                    {{else}}
+                    <a href="/user/login/">
+                        <button class="btn btn--radius-2 btn--orange"> Đăng nhập </button>
+                    </a>
+                    {{/if}}
+                </div>
+            </div>
+            {{/ifCond}}
+            {{/each}}
+        </div>
+    </div>
+    <div id="tab-6" class="tab-pane p-0 ">
+        <h4 class="datenow">Thứ bảy ngày {{#component days 7}}{{/component}} </h4>
+        <div class="row g-5">
+            {{#each all_class}}
+            {{#ifCond this.weekday '==' 7}}
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="bg-dark rounded text-center py-4 px-1">
+                    <h6 class="text-uppercase text-light mb-3">{{start_time}} - {{end_time}}</h6>
+                    <h5 class="text-uppercase text-primary">{{name}} </h5>
+                    giáo viên hướng dẫn:
+                    <h5 class="text-capitalize text-primary">{{trainer}}</h5>
+                    <p class="text-secondary mb-0">{{count_hv}}/{{maximum}} học viên - phòng {{room_address}}
+                    </p>
+                    {{#if user_id}}
+                    <form method="post" action="/class">
+                        <input type="hidden" name="count_hv" value="{{count_hv}}">
+                        <input type="hidden" name="maximum" value="{{maximum}}">
+                        <input type="hidden" name="weekday" value="{{weekday}}">
+                        <input type="hidden" name="class_id" value="{{class_id}}">
+                        <input type="hidden" name="start_time" value="{{start_time}} ">
+                        <input type="hidden" name="end_time" value="{{end_time}}">
+                        {{#ifCond weekdaynow '>' 7}}
+                        <button class="btn btn--radius-2 btn--orange">Tham gia vào tuần sau</button>
+                        <h5 class="end_class">Buổi học tuần này đã kết thúc</h5>
+                        {{else ifCond count_hv '==' maximum}}
+                        <button class="btn btn--radius-2 btn--orange">Tham gia vào tuần sau</button>
+                        <h5 class="end_class">Đã đầy học viên</h5>
+                        {{else}}
+                        <button class="btn btn--radius-2 btn--orange">Tham gia buổi học</button>
+                        {{/ifCond}}
+                    </form>
+                    {{else}}
+                    <a href="/user/login/">
+                        <button class="btn btn--radius-2 btn--orange"> Đăng nhập </button>
+                    </a>
+                    {{/if}}
+                </div>
+            </div>
+            {{/ifCond}}
+            {{/each}}
+        </div>
+    </div>
+    <div id="tab-7" class="tab-pane p-0 ">
+        <h4 class="datenow">Chủ nhật ngày {{#component days 8}}{{/component}} </h4>
+        <div class="row g-5">
+            {{#each all_class}}
+            {{#ifCond this.weekday '==' 8}}
+            <div class="col-lg-3 col-md-4 col-sm-6">
+                <div class="bg-dark rounded text-center py-4 px-1">
+                    <h6 class="text-uppercase text-light mb-3">{{start_time}} - {{end_time}}</h6>
+                    <h5 class="text-uppercase text-primary">{{name}} </h5>
+                    giáo viên hướng dẫn:
+                    <h5 class="text-capitalize text-primary">{{trainer}}</h5>
+                    <p class="text-secondary mb-0">{{count_hv}}/{{maximum}} học viên - phòng {{room_address}}
+                    </p>
+                    {{#if user_id}}
+                    <form method="post" action="/class">
+                        <input type="hidden" name="count_hv" value="{{count_hv}}">
+                        <input type="hidden" name="maximum" value="{{maximum}}">
+                        <input type="hidden" name="weekday" value="{{weekday}}">
+                        <input type="hidden" name="class_id" value="{{class_id}}">
+                        <input type="hidden" name="start_time" value="{{start_time}} ">
+                        <input type="hidden" name="end_time" value="{{end_time}}">
+                        {{#ifCond weekdaynow '>' 8}}
+                        <button class="btn btn--radius-2 btn--orange">Tham gia vào tuần sau</button>
+                        <h5 class="end_class">Buổi học tuần này đã kết thúc</h5>
+                        {{else ifCond count_hv '==' maximum}}
+                        <button class="btn btn--radius-2 btn--orange">Tham gia vào tuần sau</button>
+                        <h5 class="end_class">Đã đầy học viên</h5>
+                        {{else}}
+                        <button class="btn btn--radius-2 btn--orange">Tham gia buổi học</button>
+                        {{/ifCond}}
+                    </form>
+                    {{else}}
+                    <a href="/user/login/">
+                        <button class="btn btn--radius-2 btn--orange"> Đăng nhập </button>
+                    </a>
+                    {{/if}}
+                </div>
+            </div>
+            {{/ifCond}}
+            {{/each}}
+        </div>
+    </div>
+</div>
 </div>
 </div>
 <!-- Class Timetable Start -->

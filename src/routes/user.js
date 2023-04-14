@@ -13,5 +13,9 @@ router.get('/fogetpass', userController.fogetpass);
 router.post('/fogetpass', userController.resetpass);
 router.get('/changepass', userController.verify_changepass);
 router.post('/changepass', userController.changepasss);
-
+router.post('/delete_user', userController.delete_user);
+router.post('/block_user', userController.block_user);
+router.post('/unblock_user', userController.unblock_user);
+router.post('/cancel_admin', userController.cancel_admin);
+router.post('/add_admin', userController.add_admin);
 module.exports = router;

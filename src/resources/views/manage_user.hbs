@@ -135,30 +135,30 @@
                             <td>Học viên</td>
                             {{/ifCond}}
                             <td>
-                                <form method="POST" action="/admin/delete_user"
+                                <form method="POST" action="/user/delete_user"
                                     class="manage_user btn btn-sm btn-primary">
                                     <input hidden="hidden" name="user_id" value="{{user_id}}">
                                     <button class="btn-primary">Xoá</button>
                                 </form>
                                 {{#ifCond authentication "==" 1}}
-                                <form method="POST" action="/admin/block_user"
+                                <form method="POST" action="/user/block_user"
                                     class="manage_user btn btn-sm btn-primary">
                                     <input hidden="hidden" name="user_id" value="{{user_id}}">
                                     <button class="btn-primary">Chặn</button>
                                 </form>
                                 {{else}}
-                                <form method="POST" action="/admin/unblock_user" class="btn btn-sm btn-primary">
+                                <form method="POST" action="/user/unblock_user" class="btn btn-sm btn-primary">
                                     <input hidden="hidden" name="user_id" value="{{user_id}}">
                                     <button class="btn-primary">Bỏ chặn</button>
                                 </form>
                                 {{/ifCond}}
                                 {{#ifCond role "==" 3}}
-                                <form method="POST" action="/admin/cancel_admin" class="btn btn-sm btn-primary">
+                                <form method="POST" action="/user/cancel_admin" class="btn btn-sm btn-primary">
                                     <input hidden="hidden" name="user_id" value="{{user_id}}">
                                     <button class="btn-primary">Huỷ quản lý</button>
                                 </form>
                                 {{else}}
-                                <form method="POST" action="/admin/add_admin" class="btn btn-sm btn-primary">
+                                <form method="POST" action="/user/add_admin" class="btn btn-sm btn-primary">
                                     <input hidden="hidden" name="user_id" value="{{user_id}}">
                                     <button class="btn-primary">Thêm quản lý</button>
                                 </form>

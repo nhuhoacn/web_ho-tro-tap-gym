@@ -7,59 +7,105 @@ class ClassControlller {
         const all_class = `SELECT class_id,fitness_class.name, start_time, end_time, room_address, maximum, weekday, user.name as trainer
                         FROM fitness_class LEFT JOIN user ON user.user_id = fitness_class.trainer_id
                         ORDER BY start_time`;
+        //đếm số hv theo ngày trong tuần
         const mysql_count_hv = `SELECT class_id, Count(*) as count FROM user_join_fitness_class WHERE join_date >= ? GROUP BY class_id`;
         const weekdaynow = moment().isoWeekday() + 1;
         var monday = moment()
             .subtract(weekdaynow - 2, 'days')
             .format('DD/MM/YYYY');
         var days = [0, 0, monday];
+        //search all_class
         var promise_allclass = new Promise((resolve, reject) => {
             db.query(all_class, function (err, all_class) {
-                if (err) {
-                    console.log(err);
-                } else {
+                if (!err) {
+                    let day = moment(monday, 'DD/MM/YYYY').format('YYYY-MM-DD');
+                    db.query(mysql_count_hv, day, function (err, count_hv) {
+                        if (!err) {
+                            //gán count học viên cho từng lớp
+                            for (let j = 0; j < all_class.length; j++) {
+                                if (count_hv.length > 0) {
+                                    for (let i = 0; i < count_hv.length; i++) {
+                                        if (
+                                            all_class[j].class_id ==
+                                            count_hv[i].class_id
+                                        ) {
+                                            all_class[j].count_hv =
+                                                count_hv[i].count;
+                                        }
+                                        if (!all_class[j].count_hv) {
+                                            all_class[j].count_hv = 0;
+                                        }
+                                    }
+                                } else {
+                                    all_class[j].count_hv = 0;
+                                }
+                            }
+                        } else {
+                            console.log(err);
+                        }
+                    });
                     resolve(all_class);
-                }
-            });
-        });
-        var promise_search_count = new Promise((resolve, reject) => {
-            let day = moment()
-                .subtract(weekdaynow - 2, 'days')
-                .format('YYYY/MM/DD');
-            db.query(mysql_count_hv, day, function (err, hv) {
-                if (err) {
-                    console.log(err);
                 } else {
-                    resolve(hv);
+                    console.log(err);
                 }
             });
         });
-
+        //days
+        var promise_days = new Promise((resolve, reject) => {
+            for (let i = 1; i < 7; i++) {
+                let nextday = moment(days[days.length - 1], 'DD/MM/YYYY')
+                    .add(1, 'days')
+                    .format('DD/MM/YYYY');
+                days.push(nextday);
+            }
+            resolve(days);
+        });
+        //search all_class
+        var promise_allclass = new Promise((resolve, reject) => {
+            db.query(all_class, function (err, all_class) {
+                if (!err) {
+                    let day = moment(monday, 'DD/MM/YYYY').format('YYYY-MM-DD');
+                    db.query(mysql_count_hv, day, function (err, count_hv) {
+                        if (!err) {
+                            //gán count học viên cho từng lớp
+                            for (let j = 0; j < all_class.length; j++) {
+                                if (count_hv.length > 0) {
+                                    for (let i = 0; i < count_hv.length; i++) {
+                                        if (
+                                            all_class[j].class_id ==
+                                            count_hv[i].class_id
+                                        ) {
+                                            all_class[j].count_hv =
+                                                count_hv[i].count;
+                                        }
+                                        if (!all_class[j].count_hv) {
+                                            all_class[j].count_hv = 0;
+                                        }
+                                    }
+                                } else {
+                                    all_class[j].count_hv = 0;
+                                }
+                            }
+                        } else {
+                            console.log(err);
+                        }
+                    });
+                    resolve(all_class);
+                } else {
+                    console.log(err);
+                }
+            });
+        });
         const function_count_hv = async () => {
             try {
                 var all_class = await promise_allclass;
-                var count_hv = await promise_search_count;
+                await promise_days;
+                //truyền giá trị để sử dụng điều kiện trong hàm each
                 if (req.session.user) {
                     for (let i = 0; i < all_class.length; i++) {
                         all_class[i].user_id = req.session.user.user_id;
                         all_class[i].weekdaynow = weekdaynow;
                     }
-                }
-                for (let j = 0; j < all_class.length; j++) {
-                    for (let i = 0; i < count_hv.length; i++) {
-                        if (all_class[j].class_id == count_hv[i].class_id) {
-                            all_class[j].count_hv = count_hv[i].count;
-                        }
-                        if (!all_class[j].count_hv) {
-                            all_class[j].count_hv = 0;
-                        }
-                    }
-                }
-                for (let i = 1; i < 7; i++) {
-                    let nextday = moment(days[days.length - 1], 'DD/MM/YYYY')
-                        .add(1, 'days')
-                        .format('DD/MM/YYYY');
-                    days.push(nextday);
                 }
                 res.render('class', {
                     session: req.session,
@@ -80,7 +126,6 @@ class ClassControlller {
         const sql = `SELECT * FROM user_join_fitness_class LEFT JOIN fitness_class 
             ON user_join_fitness_class.class_id = fitness_class.class_id
             WHERE user_id = ?`;
-        const all_class = 'SELECT * FROM `fitness_class`';
         const insert_table =
             'INSERT INTO user_join_fitness_class(user_id,class_id, registration_time,join_date) VALUES (?)';
         var start_time = req.body.start_time;
@@ -128,19 +173,10 @@ class ClassControlller {
                     ) {
                         join = 2;
                     }
-
                     if (date == join_date) {
                         console.log(date);
 
                         console.log('Ngày tham gia buổi học:', date, join_date);
-                        console.log(
-                            'giờ bắt đầu và kết thúc:',
-                            start_time,
-                            class_user[i].start_time,
-                            ':',
-                            end_time,
-                            class_user[i].end_time,
-                        );
                     }
                 }
             }
@@ -158,7 +194,6 @@ class ClassControlller {
                         console.log('Đăng ký tham gia thành công');
                     }
                 });
-
                 res.redirect('/class');
             } else if (join == 1) {
                 res.send('Bạn đã đăng ký tham gia buổi học này rồi');
@@ -203,6 +238,100 @@ class ClassControlller {
                 }
             });
         }
+    }
+
+    //[POST] /class/delete_class
+    delete_class(req, res, next) {
+        // if (req.session.user != null && req.session.user.role == 3) {
+        if (req.body.class_id) {
+            var delete_class = `DELETE from fitness_class where class_id = ${req.body.class_id}`;
+            db.query(delete_class, function (err, data) {
+                if (!err) {
+                    res.redirect('/admin/manage_class');
+                } else {
+                    console.log(err);
+                }
+            });
+        }
+        // } else {
+        //     res.redirect('/');
+        // }
+    }
+
+    //[GET] /class/change_class
+    change_class(req, res) {
+        // if (req.session.user != null && req.session.user.role == 3) {
+        var search_class = `SELECT class_id,fitness_class.name, start_time, end_time, room_address, maximum, weekday,trainer_id, user.name as trainer
+                        FROM fitness_class
+                        LEFT JOIN user ON user.user_id = fitness_class.trainer_id
+                        where class_id = ${req.query.class_id} ORDER BY start_time`;
+        if (req.query.class_id) {
+            db.query(search_class, function (err, data) {
+                if (!err) {
+                    res.render('change_class', {
+                        class: data[0],
+                    });
+                } else {
+                    console.log(err);
+                }
+            });
+        }
+        // } else {
+        //     res.redirect('/');
+        // }
+    }
+    //[POST] class/change_class
+    save_change(req, res) {
+        // if (req.session.user != null && req.session.user.role == 3) {
+        var fitness_class = req.body;
+        var save_class = `UPDATE fitness_class SET 
+        name="${fitness_class.name}",start_time="${fitness_class.start_time}", end_time="${fitness_class.end_time}", weekday="${fitness_class.weekday}",
+        room_address="${fitness_class.room_address}",maximum="${fitness_class.maximum}", trainer_id="${fitness_class.trainer_id}" 
+        WHERE class_id = ${fitness_class.class_id};`;
+        db.query(save_class, function (err, data) {
+            if (!err) {
+                res.redirect('/admin/manage_class');
+            } else {
+                console.log(err);
+            }
+        });
+        // } else {
+        //     res.redirect('/');
+        // }
+    }
+    //[GET] /class/create
+    create(req, res) {
+        // if (req.session.user != null && req.session.user.role == 3) {
+        res.render('create_class');
+        // } else {
+        //     res.redirect('/');
+        // }
+    }
+    //[POST] class/create
+    new_class(req, res) {
+        // if (req.session.user != null && req.session.user.role == 3) {
+        const sql =
+            'INSERT INTO fitness_class(name,start_time,end_time,weekday,room_address ,maximum,trainer_id) VALUES (?)';
+        const values = [
+            req.body.name,
+            req.body.start_time,
+            req.body.end_time,
+            req.body.weekday,
+            req.body.room_address,
+            req.body.maximum,
+            req.body.trainer_id,
+        ];
+        db.query(sql, [values], function (err, data) {
+            if (err) {
+                throw err;
+            } else {
+                console.log('blog created');
+                res.render('create_blog');
+            }
+        });
+        // } else {
+        //     res.redirect('/');
+        // }
     }
 }
 

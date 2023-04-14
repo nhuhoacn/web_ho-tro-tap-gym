@@ -113,8 +113,8 @@
                     <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                         <i class="fa fa-chart-line fa-3x text-primary"></i>
                         <div class="ms-3">
-                            <p class="mb-2">Tiền giảm giá trong ngày</p>
-                            <h6 class="mb-0">$1234</h6>
+                            <p class="mb-2">Lượng đăng ký trong ngày</p>
+                            <h6 class="mb-0">{{value.count_day}}</h6>
                         </div>
                     </div>
                 </div>
@@ -122,8 +122,8 @@
                     <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                         <i class="fa fa-chart-bar fa-3x text-primary"></i>
                         <div class="ms-3">
-                            <p class="mb-2">Tổng tiền khuyến mãi đã chi</p>
-                            <h6 class="mb-0">$1234</h6>
+                            <p class="mb-2">Lượng đăng ký trong tháng</p>
+                            <h6 class="mb-0">{{value.count_month}}</h6>
                         </div>
                     </div>
                 </div>
@@ -131,8 +131,8 @@
                     <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                         <i class="fa fa-chart-area fa-3x text-primary"></i>
                         <div class="ms-3">
-                            <p class="mb-2">Doanh thu trong ngày</p>
-                            <h6 class="mb-0">$1234</h6>
+                            <p class="mb-2">Số lớp đang được tổ chức</p>
+                            <h6 class="mb-0">{{value.count_allclass}}</h6>
                         </div>
                     </div>
                 </div>
@@ -140,8 +140,8 @@
                     <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                         <i class="fa fa-chart-pie fa-3x text-primary"></i>
                         <div class="ms-3">
-                            <p class="mb-2">Tổng doanh thu</p>
-                            <h6 class="mb-0">$1234</h6>
+                            <p class="mb-2">Tổng số người đã tham gia</p>
+                            <h6 class="mb-0">{{value.all_hv}}</h6>
                         </div>
                     </div>
                 </div>
@@ -149,7 +149,7 @@
         </div>
         <!-- Sale & Revenue End -->
 
-
+{{!-- 
         <!-- Sales Chart Start -->
         <div class="container-fluid pt-4 px-4">
             <div class="row g-4">
@@ -171,53 +171,55 @@
                 </div>
             </div>
         </div>
-        <!-- Sales Chart End -->
+        <!-- Sales Chart End --> --}}
 
 
         <!-- Recent Sales Start -->
         <div class="container-fluid pt-4 px-4">
             <div class="bg-light text-center rounded p-4">
                 <div class="d-flex align-items-center justify-content-between mb-4">
-                    <h6 class="mb-0">Lượt tham gia mới</h6>
-                    <a href="">Show All</a>
+                    <h6 class="mb-0">Danh sách các lớp trong tuần( {{#component value.days 2}}{{/component}}  - {{#component value.days 7}}{{/component}}  )</h6>
+                    <a href="/class/create">Thêm lớp học</a>
                 </div>
                 <div class="table-responsive">
                     <table class="table text-start align-middle table-bordered table-hover mb-0">
                         <thead>
                             <tr class="text-dark">
                                 <th scope="col"><input class="form-check-input" type="checkbox"></th>
-                                <th scope="col">Giờ đăng ký</th>
-                                <th scope="col">Mã lớp</th>
+                                <th scope="col">STT</th>
                                 <th scope="col">Lớp</th>
-                                <th scope="col">Người tham gia</th>
-                                <th scope="col">Tham gia vào ngày</th>
+                                <th scope="col">Giờ bắt đầu</th>
+                                <th scope="col">Thứ</th>
                                 <th scope="col">Phòng</th>
-                                <th scope="col">Trạng thái</th>
+                                <th scope="col">Học viên</th>
+                                <th scope="col">Giảng viên</th>
+                                <th scope="col">Thay đổi</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {{#each value.history}}
+                            {{#each value.all_class}}
                             <tr>
                                 <td><input class="form-check-input" type="checkbox"></td>
-                                <td>{{registration_time}}</td>
-                                <td>{{class_id}}</td>
-                                <td>{{class_name}}</td>
+                                <td>{{stt}}</td>
                                 <td>{{name}}</td>
-                                <td>{{join_date}}</td>
+                                <td>{{start_time}}</td>
+                                <td>{{weekday}}</td>
                                 <td>{{room_address}}</td>
-                                <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
+                                <td>{{count_hv}}/{{maximum}}</td>
+                                <td>{{trainer}}</td>
+                                <td>
+                                     <form method="POST" action="/class/delete_class"
+                                        class="manage_user btn btn-sm btn-primary">
+                                        <input hidden="hidden" name="class_id" value="{{class_id}}">
+                                        <button class="btn-primary">Xoá</button>
+                                    </form>
+                                    <form action="/class/change_class" class="btn btn-sm btn-primary">
+                                        <input hidden="hidden" name="class_id" value="{{class_id}}">
+                                        <button class="btn-primary">Chỉnh sửa</button>
+                                    </form>
+                                    </td>
                             </tr>
                             {{/each}}
-                            <tr>
-                                <td><input class="form-check-input" type="checkbox"></td>
-                                <td>01 Jan 2045</td>
-                                <td>INV-0123</td>
-                                <td>Jhon Doe</td>
-                                <td>$123</td>
-                                <td>Paid</td>
-                                <td>Paid</td>
-                                <td><a class="btn btn-sm btn-primary" href="">Detail</a></td>
-                            </tr>
                         </tbody>
                     </table>
                 </div>
