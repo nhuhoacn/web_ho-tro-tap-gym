@@ -1,10 +1,11 @@
 const express = require('express');
-const multer = require('multer');
 const path = require('path');
 const exphbs = require('express-handlebars');
-const { deprecate } = require('util');
 const flash = require('connect-flash');
 const session = require('express-session');
+const bodyParser = require('body-parser');
+const multer = require('multer');
+
 const app = express();
 // socket
 const http = require('http');
@@ -16,7 +17,30 @@ const cookieParser = require('cookie-parser');
 const dotenv = require('dotenv').config({ path: __dirname + './util/.env' });
 const port = 3000;
 const route = require('./routes');
-
+var storage = multer.diskStorage({
+    destination: (req, file, res) => {
+        res(null, './public/img/user/');
+    },
+    filename: (req, file, res) => {
+        res(
+            null,
+            file.fieldname + '_' + Date.now() + path.extname(file.originalname),
+        );
+    },
+});
+var upload = multer({
+    storage: storage,
+    limits: {
+        fileSize: 1000000, // 1000000 Bytes = 1 MB
+    },
+    fileFilter(req, file, cb) {
+        if (!file.originalname.match(/\.(png|jpg)$/)) {
+            // upload only png and jpg format
+            return cb(new Error('Please upload a Image'));
+        }
+        cb(undefined, true);
+    },
+});
 //connect to db
 const db = require('./config/db');
 
@@ -44,13 +68,15 @@ app.use(
 );
 
 app.use(express.json());
+app.use(bodyParser.json());
+app.use(bodyParser.urlencoded({ extended: true }));
 //socket.io
 io.on('connection', (socket) => {
     console.log('a user connected');
-    socket.on('new comment', (comment) => {
-        console.log('comment: ', comment);
-        io.emit('add comment', comment);
-    });
+    // socket.on('new comment', (comment) => {
+    //     console.log('comment: ', comment);
+    //     io.emit('add comment', comment);
+    // });
     setInterval(function () {
         let date = new Date().toLocaleTimeString();
         socket.send(date);
@@ -207,17 +233,6 @@ app.engine(
 app.set('view engine', 'hbs'); //set sử dụng view là engine handlebars
 app.set('views', path.join(__dirname, 'resources', 'views'));
 
-// SET STORAGE
-var storage = multer.diskStorage({
-    destination: function (req, file, cb) {
-        cb(null, 'uploads');
-    },
-    filename: function (req, file, cb) {
-        cb(null, file.fieldname + '-' + Date.now());
-    },
-});
-
-var upload = multer({ storage: storage });
 //routes init
 route(app);
 

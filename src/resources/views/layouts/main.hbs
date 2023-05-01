@@ -83,7 +83,7 @@
             }
         });
 
-        var commentForm = document.getElementById('comment-form')
+        {{!-- var commentForm = document.getElementById('comment-form')
         var commentInput = document.getElementById('comment-new')
         var comments = document.getElementById('comments')
         if (commentForm) {
@@ -94,7 +94,7 @@
                     commentInput = " "
                 }
             });
-        }
+        } --}}
 
         socket.on('add comment', comment => {
             var item = document.createElement('li');
@@ -117,7 +117,15 @@
             }
             document.getElementById("register").innerHTML = text;
         }
+        function register_class() {
+            var check = window.confirm('Xác nhận tham gia lớp học');
+            if (check == true) {
+                return true;
+            } else {
+                document.getElementById("register").disabled=true;
+            }
 
+        };
     </script>
 </body>
 

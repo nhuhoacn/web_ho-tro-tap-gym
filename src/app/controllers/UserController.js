@@ -301,69 +301,89 @@ class UserController {
 
     //[POST] /user/delete_user
     delete_user(req, res, next) {
-        if (req.body.user_id) {
-            var delete_user = `DELETE from user where user_id = ${req.body.user_id}`;
-            db.query(delete_user, function (err, data) {
-                if (!err) {
-                    res.redirect('/admin/manage_user');
-                } else {
-                    console.log(err);
-                }
-            });
+        if (req.session.user != null && req.session.user.role == 3) {
+            if (req.body.user_id) {
+                var delete_user = `DELETE from user where user_id = ${req.body.user_id}`;
+                db.query(delete_user, function (err, data) {
+                    if (!err) {
+                        res.redirect('/admin/manage_user');
+                    } else {
+                        console.log(err);
+                    }
+                });
+            }
+        } else {
+            res.redirect('/');
         }
     }
 
     //[POST] /user/block_user
     block_user(req, res, next) {
-        if (req.body.user_id) {
-            var block_user = `UPDATE user SET authentication = 0 where user_id = ${req.body.user_id}`;
-            db.query(block_user, function (err, data) {
-                if (!err) {
-                    res.redirect('/admin/manage_user');
-                } else {
-                    console.log(err);
-                }
-            });
+        if (req.session.user != null && req.session.user.role == 3) {
+            if (req.body.user_id) {
+                var block_user = `UPDATE user SET authentication = 0 where user_id = ${req.body.user_id}`;
+                db.query(block_user, function (err, data) {
+                    if (!err) {
+                        res.redirect('/admin/manage_user');
+                    } else {
+                        console.log(err);
+                    }
+                });
+            }
+        } else {
+            res.redirect('/');
         }
     }
 
     //[POST] /user/unblock_user
     unblock_user(req, res, next) {
-        if (req.body.user_id) {
-            var unblock_user = `UPDATE user SET authentication = 1 where user_id = ${req.body.user_id}`;
-            db.query(unblock_user, function (err, data) {
-                if (!err) {
-                    res.redirect('/admin/manage_user');
-                } else {
-                    console.log(err);
-                }
-            });
+        if (req.session.user != null && req.session.user.role == 3) {
+            if (req.body.user_id) {
+                var unblock_user = `UPDATE user SET authentication = 1 where user_id = ${req.body.user_id}`;
+                db.query(unblock_user, function (err, data) {
+                    if (!err) {
+                        res.redirect('/admin/manage_user');
+                    } else {
+                        console.log(err);
+                    }
+                });
+            }
+        } else {
+            res.redirect('/');
         }
     }
     //[POST] /user/cancel_admin
     cancel_admin(req, res, next) {
-        if (req.body.user_id) {
-            var cancel_admin = `UPDATE user SET role = 1 where user_id = ${req.body.user_id}`;
-            db.query(cancel_admin, function (err, data) {
-                if (!err) {
-                    res.redirect('/admin/manage_user');
-                } else {
-                    console.log(err);
-                }
-            });
+        if (req.session.user != null && req.session.user.role == 3) {
+            if (req.body.user_id) {
+                var cancel_admin = `UPDATE user SET role = 1 where user_id = ${req.body.user_id}`;
+                db.query(cancel_admin, function (err, data) {
+                    if (!err) {
+                        res.redirect('/admin/manage_user');
+                    } else {
+                        console.log(err);
+                    }
+                });
+            }
+        } else {
+            res.redirect('/');
         }
     }
     //[POST] /user/add_admin
     add_admin(req, res, next) {
-        if (req.body.user_id) {
-            var add_admin = `UPDATE user SET role = 3 where user_id = ${req.body.user_id}`;
-            db.query(add_admin, function (err, data) {
-                if (!err) {
-                    res.redirect('/admin/manage_user');
-                } else {
-                    console.log(err);
-                }
-            });
+        if (req.session.user != null && req.session.user.role == 3) {
+            if (req.body.user_id) {
+                var add_admin = `UPDATE user SET role = 3 where user_id = ${req.body.user_id}`;
+                db.query(add_admin, function (err, data) {
+                    if (!err) {
+                        res.redirect('/admin/manage_user');
+                    } else {
+                        console.log(err);
+                    }
+                });
+            }
+        } else {
+            res.redirect('/');
         }
     }
 }

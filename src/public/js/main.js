@@ -707,15 +707,4 @@
             }
         };
     }
-    const register_class = document.getElementById('register');
-    if (register_class != null) {
-        register_class.onclick = function () {
-            var check = confirm('Are you sure you want to leave?');
-            if (check == true) {
-                return true;
-            } else {
-                return false;
-            }
-        };
-    }
 })(jQuery);

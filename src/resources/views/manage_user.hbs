@@ -112,7 +112,7 @@
                 <table class="table text-start align-middle table-bordered table-hover mb-0">
                     <thead>
                         <tr class="text-dark">
-                            <th scope="col"><input class="form-check-input" type="checkbox"></th>
+                            {{!-- <th scope="col"><input class="form-check-input" type="checkbox"></th> --}}
                             <th scope="col">STT</th>
                             <th scope="col">Tên người dùng</th>
                             <th scope="col">Email</th>
@@ -123,7 +123,7 @@
                     <tbody>
                         {{#each all_user}}
                         <tr>
-                            <td><input class="form-check-input" type="checkbox"></td>
+                            {{!-- <td><input class="form-check-input" type="checkbox"></td> --}}
                             <td>{{stt}}</td>
                             <td>{{name}}</td>
                             <td>{{email}}</td>
@@ -164,15 +164,15 @@
                                 </form>
                                 {{/ifCond}}
                             </td>
-                            <td>
+                            {{!-- <td>
                                 <form action="/info/change_info" class="btn btn-sm btn-primary">
                                     <input hidden="hidden" name="user_id" value="{{user_id}}">
                                     <button class="btn-primary">Chỉnh sửa</button>
                                 </form>
-                            </td>
+                            </td> --}}
                         </tr>
                         {{/each}}
-                    </tbody>s
+                    </tbody>
                 </table>
             </div>
         </div>

@@ -8,7 +8,7 @@ class ClassControlller {
                         FROM fitness_class LEFT JOIN user ON user.user_id = fitness_class.trainer_id
                         ORDER BY start_time`;
         //đếm số hv theo ngày trong tuần
-        const mysql_count_hv = `SELECT class_id, Count(*) as count FROM user_join_fitness_class WHERE join_date >= ? GROUP BY class_id`;
+        const mysql_count_hv = `SELECT class_id, Count(*) as count FROM user_join_fitness_class WHERE join_date >= ? and cancellation_time is NULL GROUP BY class_id`;
         const weekdaynow = moment().isoWeekday() + 1;
         var monday = moment()
             .subtract(weekdaynow - 2, 'days')
@@ -128,6 +128,8 @@ class ClassControlller {
             WHERE user_id = ?`;
         const insert_table =
             'INSERT INTO user_join_fitness_class(user_id,class_id, registration_time,join_date) VALUES (?)';
+        const sql_re_register = `update user_join_fitness_class set cancellation_time=null
+                    where class_id=? and join_date=?`;
         var start_time = req.body.start_time;
         var end_time = req.body.end_time;
         var datetime = new Date();
@@ -161,9 +163,16 @@ class ClassControlller {
                     // kiểm tra đã đăng ký tham gia lớp học chưa
                     if (
                         class_user[i].class_id == req.body.class_id &&
-                        date == join_date
+                        date == join_date &&
+                        class_user[i].cancellation_time == null
                     ) {
                         join = 1;
+                    } else if (
+                        class_user[i].class_id == req.body.class_id &&
+                        date == join_date &&
+                        class_user[i].cancellation_time != null
+                    ) {
+                        join = 5;
                     } else if (
                         date == join_date &&
                         ((start_time <= class_user[i].start_time &&
@@ -172,11 +181,6 @@ class ClassControlller {
                                 class_user[i].end_time <= end_time))
                     ) {
                         join = 2;
-                    }
-                    if (date == join_date) {
-                        console.log(date);
-
-                        console.log('Ngày tham gia buổi học:', date, join_date);
                     }
                 }
             }
@@ -207,7 +211,21 @@ class ClassControlller {
             } else if (join == 4) {
                 res.send('Đã đầy học viên');
                 console.log('Đã đầy học viên');
+            } else if (join == 5) {
+                db.query(
+                    sql_re_register,
+                    [req.body.class_id, join_date],
+                    function (err, data) {
+                        if (err) {
+                            console.log(err);
+                        } else {
+                            console.log('Đăng ký tham gia thành công');
+                        }
+                    },
+                );
+                res.redirect('/class');
             }
+            console.log(join);
         });
     }
 
@@ -242,96 +260,96 @@ class ClassControlller {
 
     //[POST] /class/delete_class
     delete_class(req, res, next) {
-        // if (req.session.user != null && req.session.user.role == 3) {
-        if (req.body.class_id) {
-            var delete_class = `DELETE from fitness_class where class_id = ${req.body.class_id}`;
-            db.query(delete_class, function (err, data) {
+        if (req.session.user != null && req.session.user.role == 3) {
+            if (req.body.class_id) {
+                var delete_class = `DELETE from fitness_class where class_id = ${req.body.class_id}`;
+                db.query(delete_class, function (err, data) {
+                    if (!err) {
+                        res.redirect('/admin/manage_class');
+                    } else {
+                        console.log(err);
+                    }
+                });
+            }
+        } else {
+            res.redirect('/');
+        }
+    }
+
+    //[GET] /class/change_class
+    change_class(req, res) {
+        if (req.session.user != null && req.session.user.role == 3) {
+            var search_class = `SELECT class_id,fitness_class.name, start_time, end_time, room_address, maximum, weekday,trainer_id, user.name as trainer
+                        FROM fitness_class
+                        LEFT JOIN user ON user.user_id = fitness_class.trainer_id
+                        where class_id = ${req.query.class_id} ORDER BY start_time`;
+            if (req.query.class_id) {
+                db.query(search_class, function (err, data) {
+                    if (!err) {
+                        res.render('change_class', {
+                            class: data[0],
+                        });
+                    } else {
+                        console.log(err);
+                    }
+                });
+            }
+        } else {
+            res.redirect('/');
+        }
+    }
+    //[POST] class/change_class
+    save_change(req, res) {
+        if (req.session.user != null && req.session.user.role == 3) {
+            var fitness_class = req.body;
+            var save_class = `UPDATE fitness_class SET 
+        name="${fitness_class.name}",start_time="${fitness_class.start_time}", end_time="${fitness_class.end_time}", weekday="${fitness_class.weekday}",
+        room_address="${fitness_class.room_address}",maximum="${fitness_class.maximum}", trainer_id="${fitness_class.trainer_id}" 
+        WHERE class_id = ${fitness_class.class_id};`;
+            db.query(save_class, function (err, data) {
                 if (!err) {
                     res.redirect('/admin/manage_class');
                 } else {
                     console.log(err);
                 }
             });
+        } else {
+            res.redirect('/');
         }
-        // } else {
-        //     res.redirect('/');
-        // }
-    }
-
-    //[GET] /class/change_class
-    change_class(req, res) {
-        // if (req.session.user != null && req.session.user.role == 3) {
-        var search_class = `SELECT class_id,fitness_class.name, start_time, end_time, room_address, maximum, weekday,trainer_id, user.name as trainer
-                        FROM fitness_class
-                        LEFT JOIN user ON user.user_id = fitness_class.trainer_id
-                        where class_id = ${req.query.class_id} ORDER BY start_time`;
-        if (req.query.class_id) {
-            db.query(search_class, function (err, data) {
-                if (!err) {
-                    res.render('change_class', {
-                        class: data[0],
-                    });
-                } else {
-                    console.log(err);
-                }
-            });
-        }
-        // } else {
-        //     res.redirect('/');
-        // }
-    }
-    //[POST] class/change_class
-    save_change(req, res) {
-        // if (req.session.user != null && req.session.user.role == 3) {
-        var fitness_class = req.body;
-        var save_class = `UPDATE fitness_class SET 
-        name="${fitness_class.name}",start_time="${fitness_class.start_time}", end_time="${fitness_class.end_time}", weekday="${fitness_class.weekday}",
-        room_address="${fitness_class.room_address}",maximum="${fitness_class.maximum}", trainer_id="${fitness_class.trainer_id}" 
-        WHERE class_id = ${fitness_class.class_id};`;
-        db.query(save_class, function (err, data) {
-            if (!err) {
-                res.redirect('/admin/manage_class');
-            } else {
-                console.log(err);
-            }
-        });
-        // } else {
-        //     res.redirect('/');
-        // }
     }
     //[GET] /class/create
     create(req, res) {
-        // if (req.session.user != null && req.session.user.role == 3) {
-        res.render('create_class');
-        // } else {
-        //     res.redirect('/');
-        // }
+        if (req.session.user != null && req.session.user.role == 3) {
+            res.render('create_class');
+        } else {
+            res.redirect('/');
+        }
     }
     //[POST] class/create
     new_class(req, res) {
-        // if (req.session.user != null && req.session.user.role == 3) {
-        const sql =
-            'INSERT INTO fitness_class(name,start_time,end_time,weekday,room_address ,maximum,trainer_id) VALUES (?)';
-        const values = [
-            req.body.name,
-            req.body.start_time,
-            req.body.end_time,
-            req.body.weekday,
-            req.body.room_address,
-            req.body.maximum,
-            req.body.trainer_id,
-        ];
-        db.query(sql, [values], function (err, data) {
-            if (err) {
-                throw err;
-            } else {
-                console.log('blog created');
-                res.render('create_blog');
-            }
-        });
-        // } else {
-        //     res.redirect('/');
-        // }
+        if (req.session.user != null && req.session.user.role == 3) {
+            const sql =
+                'INSERT INTO fitness_class(name,start_time,end_time,weekday,room_address ,maximum,trainer_id) VALUES (?)';
+            const values = [
+                req.body.name,
+                req.body.start_time,
+                req.body.end_time,
+                req.body.weekday,
+                req.body.room_address,
+                req.body.maximum,
+                req.body.trainer_id,
+            ];
+            db.query(sql, [values], function (err, data) {
+                if (err) {
+                    throw err;
+                } else {
+                    console.log('blog created');
+                    res.render('create_blog');
+                }
+            });
+        } else {
+            res.redirect('/');
+        }
     }
 }
 

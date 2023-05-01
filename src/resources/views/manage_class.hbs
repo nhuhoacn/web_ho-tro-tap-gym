@@ -131,7 +131,7 @@
                     <div class="bg-light rounded d-flex align-items-center justify-content-between p-4">
                         <i class="fa fa-chart-area fa-3x text-primary"></i>
                         <div class="ms-3">
-                            <p class="mb-2">Số lớp đang được tổ chức</p>
+                            <p class="mb-2">Số buổi đang được tổ chức</p>
                             <h6 class="mb-0">{{value.count_allclass}}</h6>
                         </div>
                     </div>
@@ -178,16 +178,16 @@
         <div class="container-fluid pt-4 px-4">
             <div class="bg-light text-center rounded p-4">
                 <div class="d-flex align-items-center justify-content-between mb-4">
-                    <h6 class="mb-0">Danh sách các lớp trong tuần( {{#component value.days 2}}{{/component}}  - {{#component value.days 7}}{{/component}}  )</h6>
-                    <a href="/class/create">Thêm lớp học</a>
+                    <h6 class="mb-0">Danh sách các buổi trong tuần( {{#component value.days 2}}{{/component}}  - {{#component value.days 7}}{{/component}}  )</h6>
+                    <a href="/class/create">Tạo buổi học</a>
                 </div>
                 <div class="table-responsive">
                     <table class="table text-start align-middle table-bordered table-hover mb-0">
                         <thead>
                             <tr class="text-dark">
-                                <th scope="col"><input class="form-check-input" type="checkbox"></th>
+                                {{!-- <th scope="col"><input class="form-check-input" type="checkbox"></th> --}}
                                 <th scope="col">STT</th>
-                                <th scope="col">Lớp</th>
+                                <th scope="col">Buổi</th>
                                 <th scope="col">Giờ bắt đầu</th>
                                 <th scope="col">Thứ</th>
                                 <th scope="col">Phòng</th>
@@ -199,7 +199,7 @@
                         <tbody>
                             {{#each value.all_class}}
                             <tr>
-                                <td><input class="form-check-input" type="checkbox"></td>
+                                {{!-- <td><input class="form-check-input" type="checkbox"></td> --}}
                                 <td>{{stt}}</td>
                                 <td>{{name}}</td>
                                 <td>{{start_time}}</td>

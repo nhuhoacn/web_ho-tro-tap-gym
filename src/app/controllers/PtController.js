@@ -5,12 +5,13 @@ class PtController {
     index(req, res) {
         var numPerPage = 9;
         var offset = 0;
+        var search = req.query.search_pt?.trim();
         const count_pt = 'select count(*)as numPt from user where role = 2';
         const all_pt = 'select *from user where role = 2 LIMIT ? OFFSET ?';
-        const search_pt = `select *from user where role = 2 AND name LIKE '%${req.query.search_pt}%'`;
+        const search_pt = `select *from user where role = 2 AND name LIKE '%${search}%'`;
 
         if (req.query.search_pt) {
-            db.query(search_pt, function (err, pt) {
+            db.query(search_pt, search, function (err, pt) {
                 res.render('pt', {
                     session: req.session,
                     pt: pt,
