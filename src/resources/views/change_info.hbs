@@ -18,7 +18,7 @@
                                     <div class="input-group-icon">
                                         <select class="form-select" aria-label="Default select example" name="role">
                                             {{#ifCond session.user.role '==' 3}}
-                                            <option value="">Quản trị viên </option>
+                                            <option value="3">Quản trị viên </option>
                                             <option value="2">Huấn luyện viên</option>
                                             <option value="1">Học viên</option>
                                             {{else ifCond session.user.role '==' 2}}
@@ -38,8 +38,7 @@
                                 <div class="date">
                                     <label class="label">Ngày tháng năm sinh</label>
                                     <div class="input-group-icon">
-                                        <input class="input--style-4 js-datepicker" type="date" name="birthday"
-                                            value="{{session.user.birthday}}">
+                                        <input class="input--style-4 js-datepicker" type="date" name="birthday" value="{{session.user.birthday}}">
                                         <i class="zmdi zmdi-calendar-note input-icon js-btn-calendar"></i>
                                     </div>
                                 </div>
@@ -104,7 +103,6 @@
                                 <div class="input-group">
                                     <label class="label">Ảnh cá nhân</label>
                                     <input type="file" name="image"  accept='image/*' value="{{session.user.image}}">
-                                    {{!-- <input class="input--style-4" type="" name="image" > --}}
                                 </div>
                             </div>
                             <div class="col-2">

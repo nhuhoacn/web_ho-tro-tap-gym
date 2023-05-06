@@ -98,110 +98,149 @@ class AdminController {
                 console.log(err);
             }
         };
-        if (req.session.user != null && req.session.user.role == 3) {
+        if (req.session.user && req.session.user.role == 3) {
             admin_index();
         } else {
             res.redirect('/');
         }
     }
-
     //[GET] /admin/manage_user
     manage_user(req, res, next) {
-        if (req.session.user != null && req.session.user.role == 3) {
-            var admin = true;
-            var all_user = 'select * from user';
+        var admin = true;
+        if (req.query.search_user) {
             var search = req.query.search_user?.trim();
-            const search_user = `select *from user where name LIKE '%${search}%'`;
-            if (req.query.search_user) {
-                db.query(search_user, function (err, all_user) {
+        } else {
+            var search = '';
+        }
+        const all_user = `select *from user where name LIKE '%${search}%'`;
+        // đếm số page
+        //tìm kiếm user sẽ hiển thị
+        var promises_user = new Promise((resolve, reject) => {
+            db.query(all_user, function (err, all_user) {
+                if (!err) {
+                    for (let i = 1; i <= all_user.length; i++) {
+                        all_user[i - 1].stt = i;
+                    }
+                } else {
+                    console.log(err);
+                }
+                resolve(all_user);
+            });
+        });
+        const showuser = async () => {
+            try {
+                var all_user = await promises_user;
+                req.session.save(function (err) {
+                    res.render('manage_user', {
+                        session: req.session,
+                        admin,
+                        all_user,
+                    });
+                });
+            } catch (err) {
+                console.log(err);
+            }
+        };
+        // if (req.session.user != null && req.session.user.role == 3) {
+        showuser();
+        // } else {
+        //     res.redirect('/')
+        // }
+    }
+    //[GET] /admin/manage_user/page/:page
+    manage_user_page(req, res, next) {
+        var admin = true;
+        var numPerPage = 50;
+        if (req.query.search_user) {
+            var search = req.query.search_user?.trim();
+        } else {
+            var search = '';
+        }
+        const all_user = `select *from user where name LIKE '%${search}%'`;
+        const search_user = `select *from user where name LIKE '%${search}%'
+        ORDER by user_id DESC LIMIT ? OFFSET ?`;
+        // đếm số page
+        var promises_num = new Promise((resolve, reject) => {
+            db.query(all_user, function (err, all_user) {
+                var numPage = Math.ceil(all_user.length / numPerPage);
+                resolve(numPage);
+            });
+        });
+        //tìm kiếm user sẽ hiển thị
+        var promises_user = new Promise((resolve, reject) => {
+            var offset = (req.params.page - 1) * numPerPage;
+            db.query(
+                search_user,
+                [numPerPage, offset],
+                function (err, all_user) {
                     if (!err) {
                         for (let i = 1; i <= all_user.length; i++) {
                             all_user[i - 1].stt = i;
                         }
-                        req.session.save(function (err) {
-                            res.render('manage_user', {
-                                session: req.session,
-                                admin,
-                                all_user,
-                            });
-                        });
                     } else {
                         console.log(err);
                     }
+                    resolve(all_user);
+                },
+            );
+        });
+        const showuser = async () => {
+            try {
+                var numPage = await promises_num;
+                var all_user = await promises_user;
+                // var offset = (req.params.page - 1) * numPerPage;
+                var pagenext = Number(req.params.page) + 1;
+                req.session.save(function (err) {
+                    res.render('manage_user', {
+                        session: req.session,
+                        admin,
+                        numPage,
+                        pagenext,
+                        all_user,
+                        number_page: req.params.page,
+                    });
                 });
-            } else {
-                db.query(all_user, function (err, all_user) {
-                    if (err) {
-                        console.log(err);
-                    } else {
-                        for (let i = 1; i <= all_user.length; i++) {
-                            all_user[i - 1].stt = i;
-                        }
-                        req.session.save(function (err) {
-                            res.render('manage_user', {
-                                session: req.session,
-                                admin,
-                                all_user,
-                            });
-                        });
-                    }
-                });
+            } catch (err) {
+                console.log(err);
             }
-        } else {
-            res.redirect('/');
-        }
+        };
+        // if (req.session.user != null && req.session.user.role == 3) {
+        showuser();
+        // } else {
+        //     res.redirect('/')
+        // }
     }
     //[GET] /admin/manage_blog
     manage_blog(req, res, next) {
         if (req.session.user != null && req.session.user.role == 3) {
             var admin = true;
-            var all_blog = 'select * from blog';
-            const search_blog = `select *from blog where name LIKE '%${req.query.search_blog}%'`;
             if (req.query.search_blog) {
-                db.query(search_blog, function (err, all_blog) {
-                    if (!err) {
-                        for (let i = 0; i < all_blog.length; i++) {
-                            all_blog[i].stt = i + 1;
-                            let date = moment().format('MMM Do, YYYY');
-                            all_blog[i].date_create_blog = date;
-                            if (all_blog[i].author == null) {
-                                all_blog[i].author = 'Admin';
-                            }
-                        }
-                        req.session.save(function (err) {
-                            res.render('manage_blog', {
-                                session: req.session,
-                                admin,
-                                all_blog,
-                            });
-                        });
-                    } else {
-                        console.log(err);
-                    }
-                });
+                var search = req.query.search_blog?.trim();
             } else {
-                db.query(all_blog, function (err, all_blog) {
-                    if (err) {
-                        console.log(err);
-                    } else {
-                        for (let i = 0; i < all_blog.length; i++) {
-                            all_blog[i].stt = i + 1;
-                            let date = moment().format('MMM Do, YYYY');
-                            all_blog[i].date_create_blog = date;
-                            if (all_blog[i].author == null) {
-                                all_blog[i].author = 'Admin';
-                            }
-                        }
-                        req.session.save(function (err) {
-                            res.render('manage_blog', {
-                                session: req.session,
-                                admin,
-                                all_blog,
-                            });
-                        });
-                    }
-                });
+                search = '';
             }
+            const search_blog = `select *from blog where name LIKE '%${search}%'`;
+            db.query(search_blog, function (err, all_blog) {
+                if (!err) {
+                    for (let i = 0; i < all_blog.length; i++) {
+                        all_blog[i].stt = i + 1;
+                        let date = moment().format('MMM Do, YYYY');
+                        all_blog[i].date_create_blog = date;
+                        if (all_blog[i].author == null) {
+                            all_blog[i].author = 'Admin';
+                        }
+                    }
+                    req.session.save(function (err) {
+                        res.render('manage_blog', {
+                            session: req.session,
+                            admin,
+                            all_blog,
+                        });
+                    });
+                } else {
+                    console.log(err);
+                }
+            });
         } else {
             res.redirect('/');
         }
@@ -216,8 +255,13 @@ class AdminController {
             const count_join_in_month = `SELECT COUNT(*) count FROM user_join_fitness_class WHERE registration_time LIKE "${month}%";`;
             const count_all_class = `SELECT COUNT(*) count FROM fitness_class;`;
             const all_hv = `SELECT COUNT(*) count FROM user_join_fitness_class`;
+            if (req.query.search_class) {
+                var search = req.query.search_class?.trim();
+            } else {
+                search = '';
+            }
             const all_class = `SELECT class_id,fitness_class.name, start_time, end_time, room_address, maximum, weekday, user.name as trainer
-        FROM fitness_class LEFT JOIN user ON user.user_id = fitness_class.trainer_id
+        FROM fitness_class LEFT JOIN user ON user.user_id = fitness_class.trainer_id  where fitness_class.name LIKE '%${search}%'
         ORDER BY weekday`;
             const mysql_count_hv = `SELECT class_id, Count(*) as count FROM user_join_fitness_class WHERE join_date >= ? GROUP BY class_id`;
             const weekdaynow = moment().isoWeekday() + 1;

@@ -29,10 +29,6 @@ class BlogControlller {
                 resolve(numPage);
             });
         });
-        var chuoi = 'hoa123';
-        bcrypt.hash(chuoi, 10, function (err, hadsh) {
-            console.log(hadsh);
-        });
         //tìm kiếm blog sẽ hiển thị
         var promises_blog = new Promise((resolve, reject) => {
             var offset = (req.params.page - 1) * numPerPage;
@@ -229,43 +225,6 @@ class BlogControlller {
         showdetailblog();
     }
 
-    //[GET] blog/create
-    create(req, res) {
-        res.render('create_blog');
-    }
-    // [POST] blog/create
-    insert_blog(req, res) {
-        const sql =
-            'INSERT INTO blog(name,author,image,description,topic,date_create_blog) VALUES (?)';
-        const values = [
-            req.body.blog_name,
-            req.body.blog_author,
-            req.body.blog_image,
-            req.body.blog_description,
-            req.body.blog_topic,
-            req.body.blog_date_create,
-        ];
-        if (
-            req.body.blog_name != '' &&
-            req.body.blog_author != '' &&
-            req.body.blog_image != '' &&
-            req.body.blog_description != '' &&
-            req.body.blog_topic != '' &&
-            req.body.blog_date_create != ''
-        ) {
-            db.query(sql, [values], function (err, data) {
-                if (err) {
-                    throw err;
-                } else {
-                    console.log('blog created');
-                }
-            });
-            res.redirect('/admin/manage_blog');
-        } else {
-            res.render('create_blog');
-        }
-    }
-
     //[GET] /blog/topic/:topic_id
     blog_topic(req, res) {
         var numPerPage = 4;
@@ -365,6 +324,51 @@ class BlogControlller {
             }
         });
         res.redirect(`/blog/id/${req.params.id}`);
+    }
+
+    //[GET] blog/create
+    create(req, res) {
+        if (req.session.user != null && req.session.user.role == 3) {
+            res.render('create_blog', { session: req.session });
+        } else {
+            res.redirect('/');
+        }
+    }
+    // [POST] blog/create
+    insert_blog(req, res) {
+        if (req.session.user != null && req.session.user.role == 3) {
+            const sql =
+                'INSERT INTO blog(name,author,image,description,topic,date_create_blog) VALUES (?)';
+            const values = [
+                req.body.blog_name,
+                req.body.blog_author,
+                req.body.blog_image,
+                req.body.blog_description,
+                req.body.blog_topic,
+                req.body.blog_date_create,
+            ];
+            if (
+                req.body.blog_name != '' &&
+                req.body.blog_author != '' &&
+                req.body.blog_image != '' &&
+                req.body.blog_description != '' &&
+                req.body.blog_topic != '' &&
+                req.body.blog_date_create != ''
+            ) {
+                db.query(sql, [values], function (err, data) {
+                    if (err) {
+                        throw err;
+                    } else {
+                        console.log('blog created');
+                    }
+                });
+                res.redirect('/admin/manage_blog');
+            } else {
+                res.render('create_blog');
+            }
+        } else {
+            res.redirect('/');
+        }
     }
     //[GET] /blog/change_blog
     change_blog(req, res) {

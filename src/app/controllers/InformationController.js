@@ -44,13 +44,6 @@ class InformationControlller {
                             moment(date, 'DD-MM-YYYY'),
                         );
                     }
-                    if (req.session.user.birthday) {
-                        let date = moment(
-                            req.session.user.birthday,
-                            'YYYY-MM-DD',
-                        ).format('DD/MM/YYYY');
-                        req.session.user.birthday = date;
-                    }
                     res.render('information', {
                         session: req.session,
                         history,
@@ -65,24 +58,12 @@ class InformationControlller {
 
     //[GET] info/change_info
     changeinfo(req, res) {
-        //Nhớ xoá sau khi sửa dữ liệu
-        if (req.query.user_id) {
-            var doi_tt = `select *from user where user_id = ${req.query.user_id}`;
-            db.query(doi_tt, function (err, data) {
-                if (!err) {
-                    console.log(data);
-                    req.session.user = data[0];
-                    res.render('change_info', {
-                        session: req.session,
-                    });
-                } else {
-                    console.log(err);
-                }
-            });
-        } else {
+        if (req.session.user) {
             res.render('change_info', {
                 session: req.session,
             });
+        } else {
+            res.redirect('/user/login');
         }
     }
 
@@ -90,56 +71,42 @@ class InformationControlller {
     savechangeinfo(req, res) {
         var user = req.body;
         user.user_id = req.session.user.user_id;
+        var image = req.session.user.image;
         const sql = `UPDATE user SET 
         name="${user.name}", role="${user.role}", birthday="${user.birthday}", gender="${user.gender}", height=${user.height},weight=${user.weight},
-        phone_number="${user.phone_number}", address="${user.address}", image="?", fb_link="${user.fb_link}",
+        phone_number="${user.phone_number}", address="${user.address}", image=?, fb_link="${user.fb_link}",
         insta_link="${user.insta_link}", yt_link="${user.yt_link}" WHERE user_id = ${user.user_id};`;
-        var storage = multer.diskStorage({
-            destination: function (req, file, callback) {
-                callback(null, './public/img');
-            },
-            filename: function (req, file, callback) {
-                var temp_file_arr = file.originalname.split('.');
-                var temp_file_name = temp_file_arr[0];
-                var temp_file_extension = temp_file_arr[1];
-                callback(
-                    null,
-                    temp_file_name +
-                        '-' +
-                        Date.now() +
-                        '.' +
-                        temp_file_extension,
-                );
-            },
-        });
-
-        var upload = multer({ storage: storage }).single('image');
-
-        upload(req, res, function (error) {
-            if (error) {
-                return res.end('Error Uploading File');
-            } else {
-                return res.end('File is uploaded successfully');
-            }
-        });
-
-        // if (file.mimetpe == "image/jpeg" || file.mimetpe == "image/png" || file.mimetpe == "image/gif") {
-        //     file.mv("public/images/" + img_name, function (err) {
-        //         if (err) {
-        //             console.log(err)
-        //         } else {
-        //             db.query(sql,img_name, function (err, data) {
-        //                 if (data) {
-        //                     console.log('thay doi thong tin thanh cong');
-        //                     req.session.user = user;
-        //                     res.render('information', { session: req.session });
-        //                 } else {
-        //                     console.log(err);
-        //                 }
-        //             });
-        //         }
-        //     })
-        // }
+        const sql_none_image = `UPDATE user SET 
+        name="${user.name}", role="${user.role}", birthday="${user.birthday}", gender="${user.gender}", height=${user.height},weight=${user.weight},
+        phone_number="${user.phone_number}", address="${user.address}", fb_link="${user.fb_link}",
+        insta_link="${user.insta_link}", yt_link="${user.yt_link}" WHERE user_id = ${user.user_id};`;
+        if (req.file && req.session.user) {
+            var img_name = req.file.filename;
+            db.query(sql, img_name, function (err, data) {
+                if (data) {
+                    console.log('thay doi thong tin thanh cong');
+                    image = img_name;
+                    user.image = image;
+                    req.session.user = user;
+                    res.redirect('/info');
+                } else {
+                    console.log(err);
+                }
+            });
+        } else if (req.session.user) {
+            db.query(sql_none_image, function (err, data) {
+                if (data) {
+                    console.log('thay doi thong tin thanh cong');
+                    user.image = image;
+                    req.session.user = user;
+                    res.redirect('/info');
+                } else {
+                    console.log(err);
+                }
+            });
+        } else {
+            res.redirect('/user/login');
+        }
     }
 }
 

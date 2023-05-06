@@ -146,7 +146,6 @@ class UserController {
 
     //[GET] user/login
     login(req, res) {
-        req.flash('message', 'Welcome to Blog');
         res.render('login', { session: req.session });
     }
 
@@ -167,6 +166,15 @@ class UserController {
                                 console.log(authentic);
                                 if (authentic) {
                                     req.session.user = data[0];
+                                    if (
+                                        req.session.user.birthday !=
+                                        '0000-00-00'
+                                    ) {
+                                        let date = moment(
+                                            req.session.user.birthday,
+                                        ).format('YYYY-MM-DD');
+                                        req.session.user.birthday = date;
+                                    }
                                     req.session.signin = true;
                                     if (data[0].role == 3) {
                                         req.session.save(function (err) {

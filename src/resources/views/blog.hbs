@@ -1,4 +1,5 @@
-{{!-- <!-- Hero Start -->
+{{!--
+<!-- Hero Start -->
 <div class="container-fluid bg-primary p-5 bg-hero mb-5">
     <div class="row py-5">
         <div class="col-12 text-center">
@@ -34,12 +35,15 @@
                     {{#list numPage number_page}}
                     {{this}}
                     {{/list}}
-                    {{#if page_topic}}
-                    <a href="/blog/topic/{{page_topic}}/{{pagenext}}">Next</a>
+                    {{#ifCond pagenext '>' numPage}}
+                    <a>Next</a>
                     {{else}}
-                    <a href="/blog/page/{{pagenext}}">Next</a>
-                    {{/if}}
-
+                        {{#if page_topic}}
+                        <a href="/blog/topic/{{page_topic}}/{{pagenext}}">Next</a>
+                        {{else}}
+                        <a href="/blog/page/{{pagenext}}">Next</a>
+                        {{/if}}
+                    {{/ifCond}}
                 </div>
             </div>
             <div class="col-lg-4 col-md-8 p-0">
@@ -49,7 +53,8 @@
                         <ul>
                             {{#each topic}}
                             {{#if active}}
-                            <li><a href="/blog/topic/{{this.topic_id}}/1" name="{{this.topic_id}}" id="active"> {{this.name}}
+                            <li><a href="/blog/topic/{{this.topic_id}}/1" name="{{this.topic_id}}" id="active">
+                                    {{this.name}}
                                     <span>{{this.count}} </span></a></li>
                             {{else}}
                             <li><a href="/blog/topic/{{this.topic_id}}/1" name="{{this.topic_id}} "> {{this.name}}

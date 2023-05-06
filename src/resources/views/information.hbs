@@ -7,7 +7,7 @@
                         <div class="cd-text">
                             <div class="cd-single-item">
                                 <div class="cd-single-item">
-                                    <h3 >{{session.user.name}}</h3>
+                                    <h3>{{session.user.name}}</h3>
                                 </div>
                             </div>
                             <div class="cd-trainer">
@@ -15,7 +15,7 @@
                                     <div class="col-md-6">
                                         <div class="cd-trainer-pic">
                                             {{#if session.user.image}}
-                                            <img src="{{session.user.image}}" alt="">
+                                            <img src="/public/img/user/{{session.user.image}}" alt="">
                                             {{else}}
                                             <img src="/public/img/Avatar-trang.png" alt="">
                                             {{/if}}
@@ -62,11 +62,11 @@
                                                 <li><span>Cân nặng</span>{{session.user.weight}}</li>
                                                 <li><span>Chiều cao</span>{{session.user.height}}</li>
                                                 <li><span>Chỉ số BMI</span>{{bmi}}</li>
-                                                {{#ifCond session.user.birthday "==" "Invalid date"}}
-                                                <li><span>Năm sinh</span>{{session.user.birthday}}</li>
-                                                {{else}}
+                                                {{!-- {{#ifCond session.user.birthday "==" ""}}
                                                 <li><span>Năm sinh</span>00/00/0000 </li>
-                                                {{/ifCond}}
+                                                {{else}} --}}
+                                                <li><span>Năm sinh</span>{{session.user.birthday}}</li>
+                                                {{!-- {{/ifCond}} --}}
                                                 <li><span>Địa chỉ</span>{{session.user.address}}</li>
                                                 <li>
                                                     <a href="info/change_info"
@@ -112,25 +112,25 @@
                     {{/ifCond}}
                     <td>phòng {{room_address}}</td>
                     <form method="POST" action="/class/cancel_class">
-                    <input hidden="hidden" name="class_id" value="{{class_id}}">
-                            <input hidden="hidden" name="join_date" value="{{join_date}}">
-                            <input hidden="hidden" name="start_time" value="{{start_time}}">
+                        <input hidden="hidden" name="class_id" value="{{class_id}}">
+                        <input hidden="hidden" name="join_date" value="{{join_date}}">
+                        <input hidden="hidden" name="start_time" value="{{start_time}}">
                         {{#ifCond cancellation_time "!=" "Invalid date" }}
                         <td class="canceled">Đã huỷ</td>
                         {{else ifCond status "==" 0 }}
-                            {{#ifCond timenow ">=" start_time}}
-                            <td class="took_place">Đã diễn ra</td>
-                            {{else ifCond timenow_add_30 ">=" start_time}}
-                            <td class="took_place">Còn 30p</td>
-                            {{else}}
-                            <td><button id="cancel_class"> Huỷ lớp</button>
-                            </td>
-                            {{/ifCond}}
-                        {{else ifCond status ">" 0}} 
-                            <td class="took_place">Đã diễn ra</td>
+                        {{#ifCond timenow ">=" start_time}}
+                        <td class="took_place">Đã diễn ra</td>
+                        {{else ifCond timenow_add_30 ">=" start_time}}
+                        <td class="took_place">Còn 30p</td>
                         {{else}}
-                            <td><button id="cancel_class">Huỷ lớp</button>
-                            </td>
+                        <td><button id="cancel_class"> Huỷ lớp</button>
+                        </td>
+                        {{/ifCond}}
+                        {{else ifCond status ">" 0}}
+                        <td class="took_place">Đã diễn ra</td>
+                        {{else}}
+                        <td><button id="cancel_class">Huỷ lớp</button>
+                        </td>
                         {{/ifCond}}
                     </form>
                 </tr>

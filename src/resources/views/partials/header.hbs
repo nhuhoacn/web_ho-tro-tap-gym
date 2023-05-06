@@ -95,12 +95,12 @@
     <div class="sidebar pe-4 pb-3">
         <nav class="navbar bg-light navbar-light">
             <a href="/admin" class="navbar-brand mx-4 mb-3">
-                <h3 class="text-primary"><i class="fa  me-2"></i>{{session.user.name}}</h3>
+                <h3 class="text-primary"><i class="fa  me-2"></i>Admin</h3>
             </a>
             <div class="d-flex align-items-center ms-4 mb-4">
                 <div class="position-relative">
                     {{#if session.user.image}}
-                    <img class="rounded-circle" src="{{session.user.image}}" alt="" style="width: 40px; height: 40px;">
+                    <img class="rounded-circle" src="/public/img/user/{{session.user.image}}" alt="" style="width: 40px; height: 40px;">
                     {{else}}
                     <img src="/public/img/Avatar-trang.png" alt="">
                     {{/if}}
@@ -110,9 +110,8 @@
                 </div>
                 <div class="ms-3">
                     <h6 class="mb-0">
-                    <img src="{{session.user.image}}">
                     </h6>
-                    <span>Admin</span>
+                    <span>{{session.user.name}}</span>
                 </div>
             </div>
             <div class="navbar-nav w-100">
@@ -122,14 +121,14 @@
                 <a href="/admin" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Trang chủ</a>
                 {{/if}}
                 {{#if all_user}}
-                <a href="/admin/manage_user" class="nav-item nav-link active"><i class="fa fa-laptop me-2"></i>Quản lý Người
+                <a href="/admin/manage_user/page/1" class="nav-item nav-link active"><i class="fa fa-laptop me-2"></i>Quản lý người
                     dùng</a>
                 {{else}}
-                <a href="/admin/manage_user" class="nav-item nav-link"><i class="fa fa-laptop me-2"></i>Quản lý Người
+                <a href="/admin/manage_user/page/1" class="nav-item nav-link"><i class="fa fa-laptop me-2"></i>Quản lý người
                     dùng</a>
                 {{/if}}
                 
-                {{#if all_class}}
+                {{#if value.all_class}}
                 <a href="/admin/manage_class" class="nav-item nav-link active"><i class="fa fa-table me-2"></i>Quản lý lớp
                     học</a>
                 {{else}}
@@ -145,7 +144,7 @@
                     blog</a>
                 {{/if}}
                 {{!-- <a href="chart.html" class="nav-item nav-link"><i class="fa fa-chart-bar me-2"></i>Charts</a> --}}
-                <a href="/" class="nav-item nav-link"><i class="fa fa-file-alt me-2"></i>Home page</a>
+                <a href="/" class="nav-item nav-link"><i class="fa fa-laptop me-2"></i>Home page</a>
             </div>
         </nav>
     </div>

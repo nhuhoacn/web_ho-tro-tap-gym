@@ -8,89 +8,18 @@
                 <i class="fa fa-bars"></i>
             </a>
             <form class="d-none d-md-flex ms-4">
-                <input class="form-control border-0" name="search_user" type="search" placeholder="Search">
+                <input class="form-control border-0" name="search_user" type="search" placeholder="Nhập tên người dùng">
             </form>
             <div class="navbar-nav align-items-center ms-auto">
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                        <i class="fa fa-envelope me-lg-2"></i>
-                        <span class="d-none d-lg-inline-flex">Message</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                        <a href="#" class="dropdown-item">
-                            <div class="d-flex align-items-center">
-                                {{#if session.user.image}}
-                                <img class="rounded-circle" src="{{session.user.image}}" alt=""
-                                    style="width: 40px; height: 40px;">
-                                {{else}}
-                                <img src="/public/img/Avatar-trang.png" alt="">
-                                {{/if}}
-                                <div class="ms-2">
-                                    <h6 class="fw-normal mb-0">Jhon send you a message</h6>
-                                    <small>15 minutes ago</small>
-                                </div>
-                            </div>
-                        </a>
-                        <hr class="dropdown-divider">
-                        <a href="#" class="dropdown-item">
-                            <div class="d-flex align-items-center">
-                                <img class="rounded-circle" src="{{session.user.image}}" alt=""
-                                    style="width: 40px; height: 40px;">
-                                <div class="ms-2">
-                                    <h6 class="fw-normal mb-0">Jhon send you a message</h6>
-                                    <small>15 minutes ago</small>
-                                </div>
-                            </div>
-                        </a>
-                        <hr class="dropdown-divider">
-                        <a href="#" class="dropdown-item">
-                            <div class="d-flex align-items-center">
-                                {{#if session.user.image}}
-                                <img class="rounded-circle" src="{{session.user.image}}" alt=""
-                                    style="width: 40px; height: 40px;">
-                                {{else}}
-                                <img src="/public/img/Avatar-trang.png" alt="">
-                                {{/if}}
-                                <div class="ms-2">
-                                    <h6 class="fw-normal mb-0">Jhon send you a message</h6>
-                                    <small>15 minutes ago</small>
-                                </div>
-                            </div>
-                        </a>
-                        <hr class="dropdown-divider">
-                        <a href="#" class="dropdown-item text-center">See all message</a>
-                    </div>
-                </div>
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                        <i class="fa fa-bell me-lg-2"></i>
-                        <span class="d-none d-lg-inline-flex">Notificatin</span>
-                    </a>
-                    <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                        <a href="#" class="dropdown-item">
-                            <h6 class="fw-normal mb-0">Profile updated</h6>
-                            <small>15 minutes ago</small>
-                        </a>
-                        <hr class="dropdown-divider">
-                        <a href="#" class="dropdown-item">
-                            <h6 class="fw-normal mb-0">New user added</h6>
-                            <small>15 minutes ago</small>
-                        </a>
-                        <hr class="dropdown-divider">
-                        <a href="#" class="dropdown-item">
-                            <h6 class="fw-normal mb-0">Password changed</h6>
-                            <small>15 minutes ago</small>
-                        </a>
-                        <hr class="dropdown-divider">
-                        <a href="#" class="dropdown-item text-center">See all notifications</a>
-                    </div>
-                </div>
-                <div class="nav-item dropdown">
-                    <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-
-                        <img class="rounded-circle me-lg-2" src="{{session.user.image}}" alt=""
-                            style="width: 40px; height: 40px;">
-                        <span class="d-none d-lg-inline-flex">John Doe</span>
+                        {{#if session.user.image}}
+                        <img class="rounded-circle me-lg-2" src="/public/img/user/{{session.user.image}}" alt="avatar"
+                            style="width: 50px; height: 50px;">
+                        {{else}}
+                        <img src="/public/img/Avatar-trang.png" alt="avatar" style="width: 40px; height: 40px;">
+                        {{/if}}
+                        <span class="d-none d-lg-inline-flex">{{session.user.name}}</span>
                     </a>
                     <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
                         <a href="#" class="dropdown-item">My Profile</a>
@@ -106,7 +35,7 @@
         <div class="bg-light text-center rounded p-4">
             <div class="d-flex align-items-center justify-content-between mb-4">
                 <h6 class="mb-0">Người dùng</h6>
-                <a href="">Show All</a>
+                <a href="/admin/manage_user">Show All</a>
             </div>
             <div class="table-responsive">
                 <table class="table text-start align-middle table-bordered table-hover mb-0">
@@ -174,6 +103,16 @@
                         {{/each}}
                     </tbody>
                 </table>
+                <div class="blog-pagination text-start">
+                    {{#list numPage number_page}}
+                    {{this}}
+                    {{/list}}
+                    {{#ifCond number_page '==' numPage}}
+                    <a >Next</a>
+                    {{else}}
+                    <a href="/admin/manage_user/page/{{pagenext}}">Next</a>
+                    {{/ifCond}}
+                </div>
             </div>
         </div>
     </div>
