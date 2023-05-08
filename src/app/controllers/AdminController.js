@@ -141,11 +141,11 @@ class AdminController {
                 console.log(err);
             }
         };
-        // if (req.session.user != null && req.session.user.role == 3) {
-        showuser();
-        // } else {
-        //     res.redirect('/')
-        // }
+        if (req.session.user != null && req.session.user.role == 3) {
+            showuser();
+        } else {
+            res.redirect('/');
+        }
     }
     //[GET] /admin/manage_user/page/:page
     manage_user_page(req, res, next) {
@@ -204,11 +204,11 @@ class AdminController {
                 console.log(err);
             }
         };
-        // if (req.session.user != null && req.session.user.role == 3) {
-        showuser();
-        // } else {
-        //     res.redirect('/')
-        // }
+        if (req.session.user != null && req.session.user.role == 3) {
+            showuser();
+        } else {
+            res.redirect('/');
+        }
     }
     //[GET] /admin/manage_blog
     manage_blog(req, res, next) {

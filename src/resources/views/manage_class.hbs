@@ -1,5 +1,5 @@
 <div class="container-xxl position-relative bg-white d-flex p-0">
-    
+
     <!-- Content Start -->
     <div class="content">
         <!-- Navbar Start -->
@@ -16,18 +16,17 @@
             <div class="navbar-nav align-items-center ms-auto">
                 <div class="nav-item dropdown">
                     <a href="#" class="nav-link dropdown-toggle" data-bs-toggle="dropdown">
-                            {{#if session.user.image}}
-                                    <img class="rounded-circle me-lg-2" src="/public/img/user/{{session.user.image}}" alt="avatar"
-                                    style="width: 50px; height: 50px;">
-                                    {{else}}
-                                    <img src="/public/img/Avatar-trang.png" alt="avatar" style="width: 40px; height: 40px;">
-                                    {{/if}}
-                            <span class="d-none d-lg-inline-flex">{{session.user.name}}</span>
-                        </a>
+                        {{#if session.user.image}}
+                        <img class="rounded-circle me-lg-2" src="/public/img/user/{{session.user.image}}" alt="avatar"
+                            style="width: 50px; height: 50px;">
+                        {{else}}
+                        <img src="/public/img/Avatar-trang.png" alt="avatar" style="width: 40px; height: 40px;">
+                        {{/if}}
+                        <span class="d-none d-lg-inline-flex">{{session.user.name}}</span>
+                    </a>
                     <div class="dropdown-menu dropdown-menu-end bg-light border-0 rounded-0 rounded-bottom m-0">
-                        <a href="#" class="dropdown-item">My Profile</a>
-                        <a href="#" class="dropdown-item">Settings</a>
-                        <a href="#" class="dropdown-item">Log Out</a>
+                        <a href="/info" class="dropdown-item">Thông tin cá nhân</a>
+                        <a href="/user/logout" class="dropdown-item">Đăng xuất</a>
                     </div>
                 </div>
             </div>
@@ -78,14 +77,14 @@
         </div>
         <!-- Sale & Revenue End -->
 
-{{!-- 
+        {{!--
         <!-- Sales Chart Start -->
         <div class="container-fluid pt-4 px-4">
             <div class="row g-4">
                 <div class="col-sm-12 col-xl-6">
                     <div class="bg-light rounded h-100 p-4">
                         <h6 class="mb-4">Biểu đồ theo ngày tham gia</h6>
-                        <canvas id="char_join_date" ></canvas>
+                        <canvas id="char_join_date"></canvas>
                         <input hidden="hidden" id="join_date" value="{{value.join_date}}">
                         <input hidden="hidden" id="sl_theongay" value="{{value.sl_theongay}}">
                     </div>
@@ -93,7 +92,7 @@
                 <div class="col-sm-12 col-xl-6">
                     <div class="bg-light rounded h-100 p-4">
                         <h6 class="mb-4">Biểu đồ theo buổi học</h6>
-                        <canvas id="myChart" ></canvas>
+                        <canvas id="myChart"></canvas>
                         <input hidden="hidden" id="so_luong_dk" value="{{value.so_luong_dk}}">
                         <input hidden="hidden" id="class_name" value="{{value.class_name}}">
                     </div>
@@ -107,8 +106,9 @@
         <div class="container-fluid pt-4 px-4">
             <div class="bg-light text-center rounded p-4">
                 <div class="d-flex align-items-center justify-content-between mb-4">
-                    <h6 class="mb-0">Danh sách các buổi trong tuần( {{#component value.days 2}}{{/component}}  - {{#component value.days 7}}{{/component}}  )</h6>
-                    <a href="/class/create">Tạo buổi học</a>
+                    <h6 class="mb-0">Danh sách các buổi trong tuần( {{#component value.days 2}}{{/component}} -
+                        {{#component value.days 7}}{{/component}} )</h6>
+                    <a class="hover_coler" href="/class/create">Tạo buổi học</a>
                 </div>
                 <div class="table-responsive">
                     <table class="table text-start align-middle table-bordered table-hover mb-0">
@@ -137,7 +137,7 @@
                                 <td>{{count_hv}}/{{maximum}}</td>
                                 <td>{{trainer}}</td>
                                 <td>
-                                     <form method="POST" action="/class/delete_class"
+                                    <form method="POST" action="/class/delete_class"
                                         class="manage_user btn btn-sm btn-primary">
                                         <input hidden="hidden" name="class_id" value="{{class_id}}">
                                         <button class="btn-primary">Xoá</button>
@@ -146,7 +146,7 @@
                                         <input hidden="hidden" name="class_id" value="{{class_id}}">
                                         <button class="btn-primary">Chỉnh sửa</button>
                                     </form>
-                                    </td>
+                                </td>
                             </tr>
                             {{/each}}
                         </tbody>

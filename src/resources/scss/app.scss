@@ -1018,7 +1018,7 @@ a:hover,
 a:focus {
     text-decoration: none;
     outline: none;
-    color: #fff;
+    // color: #fff;
 }
 
 ul,
@@ -4924,16 +4924,23 @@ ol {
 #active {
     color: var(--primary);
 }
-
 @media (max-width: 1200px) {
     .manage_user {
         margin: 5px 0px;
     }
+    // .form-select{
+    //     left: 160px;
+    //     position: absolute;
+    // }
 }
 @media (max-width: 900px) {
     .class-timetable {
         padding: 0px;
     }
+    // .form-select{
+    //     left: 160px;
+    //     position: absolute;
+    // }
 }
 .img-newblog {
     width: 105px;
@@ -4953,5 +4960,15 @@ blog-item .bi-text ul li {
 }
 .content .navbar .sidebar-toggler,
 .content .navbar .navbar-nav .nav-link i :hover {
+    color: #ff5252;
+}
+.form-select {
+    width: 150px;
+    // margin-right: 600px;
+}
+.space {
+    margin: 0 220px;
+}
+.hover_coler :hover {
     color: #ff5252;
 }
