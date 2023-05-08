@@ -17,30 +17,6 @@ const cookieParser = require('cookie-parser');
 const dotenv = require('dotenv').config({ path: __dirname + './util/.env' });
 const port = 3000;
 const route = require('./routes');
-var storage = multer.diskStorage({
-    destination: (req, file, res) => {
-        res(null, './public/img/user/');
-    },
-    filename: (req, file, res) => {
-        res(
-            null,
-            file.fieldname + '_' + Date.now() + path.extname(file.originalname),
-        );
-    },
-});
-var upload = multer({
-    storage: storage,
-    limits: {
-        fileSize: 1000000, // 1000000 Bytes = 1 MB
-    },
-    fileFilter(req, file, cb) {
-        if (!file.originalname.match(/\.(png|jpg)$/)) {
-            // upload only png and jpg format
-            return cb(new Error('Please upload a Image'));
-        }
-        cb(undefined, true);
-    },
-});
 //connect to db
 const db = require('./config/db');
 

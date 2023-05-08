@@ -219,7 +219,7 @@ class AdminController {
             } else {
                 search = '';
             }
-            const search_blog = `select *from blog where name LIKE '%${search}%'`;
+            const search_blog = `select *from blog where name LIKE '%${search}%' order BY date_create_blog DESC`;
             db.query(search_blog, function (err, all_blog) {
                 if (!err) {
                     for (let i = 0; i < all_blog.length; i++) {

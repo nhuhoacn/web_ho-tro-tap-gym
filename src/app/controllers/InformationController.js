@@ -85,8 +85,7 @@ class InformationControlller {
             db.query(sql, img_name, function (err, data) {
                 if (data) {
                     console.log('thay doi thong tin thanh cong');
-                    image = img_name;
-                    user.image = image;
+                    user.image = img_name;
                     req.session.user = user;
                     res.redirect('/info');
                 } else {

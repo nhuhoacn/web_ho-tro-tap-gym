@@ -3,15 +3,6 @@ const moment = require('moment');
 const bcrypt = require('bcrypt');
 
 class BlogControlller {
-    //[GET] blog/them_anh
-    create_image(req, res) {
-        res.render('create_image');
-    }
-    //[POST] blog/them_anh
-    async new_image(req, res) {
-        console.log(req.file.filename);
-        res.send(req.file);
-    }
     //[GET] blog/:page
     index(req, res) {
         var numPerPage = 4;
@@ -337,12 +328,13 @@ class BlogControlller {
     // [POST] blog/create
     insert_blog(req, res) {
         if (req.session.user != null && req.session.user.role == 3) {
+            console.log(req.file);
             const sql =
-                'INSERT INTO blog(name,author,image,description,topic,date_create_blog) VALUES (?)';
+                'INSERT INTO blog(name,author,image,description,topic_id,date_create_blog) VALUES (?)';
             const values = [
                 req.body.blog_name,
                 req.body.blog_author,
-                req.body.blog_image,
+                req.file.filename,
                 req.body.blog_description,
                 req.body.blog_topic,
                 req.body.blog_date_create,
@@ -350,7 +342,7 @@ class BlogControlller {
             if (
                 req.body.blog_name != '' &&
                 req.body.blog_author != '' &&
-                req.body.blog_image != '' &&
+                req.file != '' &&
                 req.body.blog_description != '' &&
                 req.body.blog_topic != '' &&
                 req.body.blog_date_create != ''
