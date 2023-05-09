@@ -6,13 +6,13 @@
                     <h2 class="title">Chỉnh sửa thông tin</h2>
                     <form method="POST" action="/info/change_info" enctype="multipart/form-data">
                         <div class="row row-space">
-                            <div class="col-2 form-group">
+                            <div class="col-2">
                                 <div class="input-group">
                                     <label class="label">Họ và tên</label>
                                     <input class="input--style-4" type="text" name="name" value="{{session.user.name}}">
                                 </div>
                             </div>
-                            <div class="col-2 form-group">
+                            <div class="col-2">
                                 <div class="date">
                                     <label class="label">Đăng ký với vai trò</label>
                                     <div class="input-group-icon">
@@ -79,7 +79,7 @@
                             </div>
                             <div class="col-2">
                                 <div class="input-group">
-                                    <label class="label">Cân nặng</label>
+                                    <label class="label">Cân nặng (kg)</label>
                                     <input class="input--style-4" type="text" name="weight"  value="{{session.user.weight}}">
                                 </div>
                             </div>
@@ -129,7 +129,7 @@
                         <div class="row row-space">
                             <div class="col-2 form-group">
                                 <div class="input-group">
-                                    <label class="label">Email(Không thể thay đổi)</label>
+                                    <label class="label">Email (Không thể thay đổi)</label>
                                     <input class="input--style-4" type="email" name="email" readonly="False" value="{{session.user.email}}">
                                 </div>
                             </div>

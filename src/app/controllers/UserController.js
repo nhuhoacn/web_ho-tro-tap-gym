@@ -123,6 +123,15 @@ class UserController {
                                     function (err, user) {
                                         req.session.user.user_id =
                                             user[0].user_id;
+                                        if (
+                                            req.session.user.birthday !=
+                                            '0000-00-00'
+                                        ) {
+                                            let date = moment(
+                                                req.session.user.birthday,
+                                            ).format('YYYY-MM-DD');
+                                            req.session.user.birthday = date;
+                                        }
                                         console.log(req.session);
                                         res.render('home', {
                                             session: req.session,

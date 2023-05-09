@@ -12,7 +12,8 @@ class AdminController {
         const history = `
                     SELECT user.name, fitness_class.name as class_name, fitness_class.class_id,registration_time, cancellation_time, join_date,room_address 
                     FROM user_join_fitness_class LEFT JOIN fitness_class ON user_join_fitness_class.class_id = fitness_class.class_id 
-                    LEFT JOIN user on user.user_id = user_join_fitness_class.user_id ORDER BY registration_time DESC`;
+                    LEFT JOIN user on user.user_id = user_join_fitness_class.user_id WHERE fitness_class.class_id != ""
+                    ORDER BY registration_time DESC`;
         var class_name = [];
         var so_luong_dk = [];
         var join_date = [];
@@ -42,6 +43,8 @@ class AdminController {
                         join_date.push(date);
                         sl_theongay.push(i.sl_theongay);
                     }
+                    join_date.reverse();
+                    sl_theongay.reverse();
                     resolve(count_join_date);
                 } else {
                     console.log(err);
@@ -112,7 +115,7 @@ class AdminController {
         } else {
             var search = '';
         }
-        const all_user = `select *from user where name LIKE '%${search}%'`;
+        const all_user = `select *from user where name LIKE '%${search}%' order by user_id DESC`;
         // đếm số page
         //tìm kiếm user sẽ hiển thị
         var promises_user = new Promise((resolve, reject) => {
@@ -224,7 +227,12 @@ class AdminController {
                 if (!err) {
                     for (let i = 0; i < all_blog.length; i++) {
                         all_blog[i].stt = i + 1;
-                        let date = moment().format('MMM Do, YYYY');
+                        let date = moment(all_blog[i].date_create_blog).format(
+                            'MMM Do, YYYY',
+                        );
+                        // let date = moment(
+                        //     all_blog[i].date_create_blog,
+                        // ).format('YYYY-MM-DD');
                         all_blog[i].date_create_blog = date;
                         if (all_blog[i].author == null) {
                             all_blog[i].author = 'Admin';
@@ -249,7 +257,7 @@ class AdminController {
     manage_class(req, res, next) {
         if (req.session.user != null && req.session.user.role == 3) {
             var admin = true;
-            var now = moment('2023-03-13').format('YYYY-MM-DD');
+            var now = moment().format('YYYY-MM-DD');
             var month = moment().format('YYYY-MM');
             const count_join_in_day = `SELECT COUNT(*) count FROM user_join_fitness_class WHERE registration_time LIKE "${now}%";`;
             const count_join_in_month = `SELECT COUNT(*) count FROM user_join_fitness_class WHERE registration_time LIKE "${month}%";`;

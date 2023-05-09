@@ -1,6 +1,4 @@
 const user = require('../models/user');
-const { mutipleMongooseToObject } = require('../../util/mongoose');
-const { mongooseToObject } = require('../../util/mongoose');
 const db = require('../../config/db');
 const { render } = require('ejs');
 const moment = require('moment');

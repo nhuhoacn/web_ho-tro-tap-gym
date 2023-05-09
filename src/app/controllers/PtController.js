@@ -33,7 +33,7 @@ class PtController {
                             });
                         } else {
                             console.log('error: ', err);
-                            result(err, null);
+                            // result(err, null);
                         }
                     });
                 } else {

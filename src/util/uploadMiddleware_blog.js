@@ -15,9 +15,9 @@ var storage = multer.diskStorage({
 });
 var upload = multer({
     storage: storage,
-    limits: {
-        fileSize: 1000000, // 1000000 Bytes = 1 MB
-    },
+    // limits: {
+    //     fileSize: 1000000, // 1000000 Bytes = 1 MB
+    // },
 });
 
 module.exports = upload;

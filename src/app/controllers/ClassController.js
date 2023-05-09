@@ -288,6 +288,7 @@ class ClassControlller {
                     if (!err) {
                         res.render('change_class', {
                             class: data[0],
+                            session: req.session,
                         });
                     } else {
                         console.log(err);
@@ -320,7 +321,9 @@ class ClassControlller {
     //[GET] /class/create
     create(req, res) {
         if (req.session.user != null && req.session.user.role == 3) {
-            res.render('create_class');
+            res.render('create_class', {
+                session: req.session,
+            });
         } else {
             res.redirect('/');
         }
@@ -343,8 +346,7 @@ class ClassControlller {
                 if (err) {
                     throw err;
                 } else {
-                    console.log('blog created');
-                    res.render('create_blog');
+                    res.redirect('/admin/manage_class');
                 }
             });
         } else {

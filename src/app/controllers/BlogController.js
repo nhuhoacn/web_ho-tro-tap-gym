@@ -7,7 +7,7 @@ class BlogControlller {
     index(req, res) {
         var numPerPage = 4;
         const all_blog = 'select *from blog';
-        const search_blog = `select *, topic.name name_topic from blog left JOIN topic
+        const search_blog = `select *, topic.name name_topic, blog.name name_blog from blog left JOIN topic
             ON blog.topic_id = topic.topic_id order BY blog_id DESC LIMIT ? OFFSET ?`;
         const all_topic = `SELECT topic.topic_id,topic.name, COUNT(*) as count FROM topic right JOIN blog ON blog.topic_id = topic.topic_id GROUP BY topic.topic_id`;
         const sql_new_blogs = `SELECT *from blog order BY date_create_blog DESC LIMIT 4 OFFSET 1`;
@@ -25,15 +25,17 @@ class BlogControlller {
             var offset = (req.params.page - 1) * numPerPage;
             var date;
             db.query(search_blog, [numPerPage, offset], function (err, blog) {
-                for (let i = 0; i < blog.length; i++) {
-                    date = moment
-                        .utc(blog[i].date_create_blog)
-                        .format('MMM Do, YYYY');
-                    blog[i].date_create_blog = date;
-                    if (blog[i].author == null) {
-                        blog[i].author = 'Admin';
+                if (blog) {
+                    for (let i = 0; i < blog.length; i++) {
+                        date = moment
+                            .utc(blog[i].date_create_blog)
+                            .format('MMM Do, YYYY');
+                        blog[i].date_create_blog = date;
+                        if (blog[i].author == null) {
+                            blog[i].author = 'Admin';
+                        }
+                        blog[i].name_topic = blog[i].name_topic.toLowerCase();
                     }
-                    blog[i].name_topic = blog[i].name_topic.toLowerCase();
                 }
                 resolve(blog);
             });
@@ -114,9 +116,9 @@ class BlogControlller {
     }
     //[GET] /blog/id/:blog_id
     detail(req, res) {
-        const search_blog = `select *, topic.name name_topic from blog RIGHT JOIN topic ON blog.topic_id = topic.topic_id where blog_id= ? `;
+        const search_blog = `select *, topic.name name_topic,blog.name name_blog from blog RIGHT JOIN topic ON blog.topic_id = topic.topic_id where blog_id= ? `;
         const all_topic = `SELECT topic.topic_id,topic.name, COUNT(*) as count FROM topic right JOIN blog ON blog.topic_id = topic.topic_id GROUP BY topic.topic_id`;
-        const search_comment = `SELECT comment.comment_id, comment.description, user.name, user.image, comment.date, comment.id_rep_comment
+        const search_comment = `SELECT comment.comment_id, comment.description, user.name, user.image as image, comment.date, comment.id_rep_comment
                         FROM comment LEFT JOIN user ON comment.user_id = user.user_id
                         WHERE blog_id = ?`;
         const sql_new_blogs = `SELECT *from blog order BY date_create_blog DESC LIMIT 4 OFFSET 1`;
@@ -221,8 +223,9 @@ class BlogControlller {
         var numPerPage = 4;
         var topic_id = Number(req.params.topic);
         const all_blog_topic = 'select *from blog where topic_id = ?';
-        const search_blog = `select *from blog  where topic_id= ? LIMIT ? OFFSET ?`;
-        const all_topic = `SELECT topic.topic_id,topic.name, COUNT(*) as count FROM topic right JOIN blog ON blog.topic_id = topic.topic_id GROUP BY topic.topic_id`;
+        const search_blog = `SELECT blog_id, blog.name name_blog, author,image, description, blog.topic_id, date_create_blog, topic.name from blog 
+        LEFT JOIN topic ON blog.topic_id = topic.topic_id where blog.topic_id= ? LIMIT ? OFFSET ?`;
+        const all_topic = `SELECT topic.topic_id,topic.name,blog.name name_blog, COUNT(*) as count FROM topic right JOIN blog ON blog.topic_id = topic.topic_id GROUP BY topic.topic_id`;
 
         // đếm số page
         var promises_num = new Promise((resolve, reject) => {
@@ -254,6 +257,7 @@ class BlogControlller {
                             if (blog[i].author == null) {
                                 blog[i].author = 'Admin';
                             }
+                            blog[i].name = blog[i].name.toLowerCase();
                         }
                     } else {
                         console.log(err);
@@ -268,6 +272,10 @@ class BlogControlller {
             db.query(all_topic, function (err, all_topic) {
                 if (err) {
                     console.log(err);
+                } else {
+                    for (let i = 0; i < all_topic.length; i++) {
+                        all_topic[i].active = req.params.topic;
+                    }
                 }
                 resolve(all_topic);
             });
@@ -277,7 +285,6 @@ class BlogControlller {
                 var numPage = await promises_num;
                 var blog = await promises_blog;
                 var topic = await promises_all_topic;
-                topic[topic_id - 1].active = 1;
                 var offset = (req.params.page - 1) * numPerPage;
                 var pagenext = Number(req.params.page) + 1;
                 console.log('hiển thị từ hàng thứ : ', offset);
@@ -370,8 +377,13 @@ class BlogControlller {
                 var now = moment().format();
                 db.query(search_blog, function (err, data) {
                     if (!err) {
+                        let date = moment(data[0].date_create_blog).format(
+                            'YYYY-MM-DD',
+                        );
+                        data[0].date_create_blog = date;
                         res.render('change_blog', {
                             blog: data[0],
+                            session: req.session,
                         });
                     } else {
                         console.log(err);
@@ -386,9 +398,14 @@ class BlogControlller {
     save_change(req, res) {
         if (req.session.user != null && req.session.user.role == 3) {
             var blog = req.body;
+            if (req.file) {
+                blog.image_blog = req.file.filename;
+            } else {
+                blog.image_blog = req.image;
+            }
             var save_blog = `UPDATE blog SET 
-        name="${blog.name}", author="${blog.author}", image="${blog.image}", description="${blog.description}",
-        topic_id="${blog.topic_id}", date_create_blog="${blog.date_create_blog}" WHERE blog_id = ${blog.blog_id};`;
+        name="${blog.blog_name}", author="${blog.blog_author}", image="${blog.image_blog}", description="${blog.blog_description}",
+        topic_id="${blog.blog_topic}", date_create_blog="${blog.blog_date_create}" WHERE blog_id = ${blog.blog_id};`;
             db.query(save_blog, function (err, data) {
                 if (!err) {
                     console.log(blog.date_create_blog);

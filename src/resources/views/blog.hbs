@@ -22,12 +22,16 @@
                         <img src="/public/img/blog/{{this.image}}" alt="">
                     </div>
                     <div class="bi-text">
-                        <h5><a href="/blog/id/{{this.blog_id}}">{{this.name}}</a></h5>
+                        <h5><a href="/blog/id/{{this.blog_id}}">{{this.name_blog}}</a></h5>
                         <ul>
                             <li>{{this.author}}</li>
                             <li>{{this.date_create_blog}}</li>
                         </ul>
-                        <p>Bài viết chia sẻ kiến thức về {{this.name_topic}}</p>
+                        {{#if name_topic}}
+                        <p>Bài viết chia sẻ kiến thức về {{this.name_topic}}...</p>
+                        {{else}}
+                        <p>Bài viết chia sẻ kiến thức về {{this.name}}...</p>
+                        {{/if}}
                     </div>
                 </div>
                 {{/each}}
@@ -52,21 +56,21 @@
                         <h5 class="title">Danh mục</h5>
                         <ul>
                             {{#each topic}}
-                            {{#if active}}
+                            {{#ifCond active '==' topic_id}}
                             <li><a href="/blog/topic/{{this.topic_id}}/1" name="{{this.topic_id}}" id="active">
                                     {{this.name}}
                                     <span>{{this.count}} </span></a></li>
                             {{else}}
                             <li><a href="/blog/topic/{{this.topic_id}}/1" name="{{this.topic_id}} "> {{this.name}}
                                     <span>{{this.count}} </span></a></li>
-                            {{/if}}
+                            {{/ifCond}}
                             {{/each}}
                         </ul>
                     </div>
                     <div class="so-latest">
                         <h5 class="title">Những bài viết mới</h5>
                         {{#each new_blog}}
-                        <div class="latest-large set-bg" data-setbg="{{image}}">
+                        <div class="latest-large set-bg" data-setbg="/public/img/blog/{{image}}">
                             <div class="ll-text">
                                 <h5><a href="/blog/{{blog_id}}">{{name}}</a></h5>
                                 <ul>
@@ -78,7 +82,7 @@
                         {{#each new_blogs}}
                         <div class="latest-item">
                             <div class="li-pic">
-                                <img class="img-newblog" src="{{image}}" alt="">
+                                <img class="img-newblog" src="/public/img/blog/{{image}}" alt="">
                             </div>
                             <div class="li-text">
                                 <h6><a href="/blog/{{blog_id}}">{{name}}</a></h6>
