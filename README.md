@@ -6,4 +6,5 @@ Các chức năng chính của website:
 - Xem lịch sử luyện tập: Ở trang thông tin cá nhân, người dùng có thể xem và có thể hủy buổi học nếu sau 30p buổi học vẫn chưa diễn ra.
 - Quản lý: Bên trung tâm sẽ có trang quản lý riêng để quản lý người dùng, quản lý blog, quản lý lớp học theo dõi hoạt động của trung tâm và báo cáo, thống kê.
 
-![image](https://github.com/nhuhoacn/web_ho-tro-tap-gym/assets/108846833/902e493c-8401-4855-8677-7e50b4b6c300)
+![image](https://github.com/nhuhoacn/web_ho-tro-tap-gym/assets/108846833/646399b8-add8-4b11-bb24-6f5d05261dd5)
+# Biểu đồ ca sử dụng của hệ thống
